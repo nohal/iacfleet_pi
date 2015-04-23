@@ -5,24 +5,24 @@ msgstr ""
 "POT-Creation-Date: 2015-04-22 22:39-0500\n"
 "PO-Revision-Date: 2015-04-22 23:45-0400\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
-"Language-Team: German\n"
-"Language: de_DE\n"
+"Language-Team: Galician\n"
+"Language: gl_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: crowdin.com\n"
 "X-Crowdin-Project: opencpn\n"
-"X-Crowdin-Language: de\n"
+"X-Crowdin-Language: gl\n"
 "X-Crowdin-File: /plugins/iacfleet_pi/po/iacfleet_pi.pot\n"
 
 #: src/iacfile.cpp:193
 msgid "Day "
-msgstr "Tag "
+msgstr ""
 
 #: src/iacfile.cpp:194
 msgid " Hour "
-msgstr " Stunde "
+msgstr ""
 
 #: src/iacfleet_pi.cpp:102 src/iacfleet_pi.cpp:149
 msgid "IACFleet"
@@ -30,31 +30,31 @@ msgstr ""
 
 #: src/iacfleet_pi.cpp:154
 msgid "IACFleet PlugIn for OpenCPN"
-msgstr "IACFleet PlugIn für OpenCPN"
+msgstr ""
 
 #: src/iacfleet_pi.cpp:160
 msgid "IACFleet PlugIn for OpenCPN\nDisplay IAC Fleet Code information provided by NADI.\nInformation can be received by email by sending an email with the contents\n\"Send fleet.nadi\" to \"query@saildocs.com\"\nSave the EMail you get as response and open it with this\nPlugin to see the decoded text and a graphic overlay\n"
-msgstr "IACFleet PlugIn für OpenCPN\nZeigt IAC Fleet Code Information von NADI.\nInformation kann per Email erhalten werden mit Senden des Mail-Inhalts\n“Send fleet.nadi“ an “query@saildocs.com“\nSpeichern der erhaltenen Antwort-Mail und sie mit diesem Plugin öffnen,\num den dekodierten Text und die grafische Anzeige zu sehen.\n"
+msgstr ""
 
 #: src/iacfleet_pi.cpp:170
 msgid "IACFleet Preferences"
-msgstr "IACFleet Einstellungen"
+msgstr ""
 
 #: src/iacfleet_pi.cpp:191 src/iacfleet.h:68
 msgid "IACFleet Display Control"
-msgstr "IACFleet Anzeige-Kontrolle"
+msgstr ""
 
 #: src/iacfleet.cpp:187
 msgid "Select IACFleet Directory"
-msgstr "Wähle IACFleet Verzeichnis"
+msgstr ""
 
 #: src/iacfleet.cpp:211
 msgid "IACFleet File Directory"
-msgstr "IACFleet Datei-Verzeichnis"
+msgstr ""
 
 #: src/iacfleet.cpp:231
 msgid "Files"
-msgstr "Dateien"
+msgstr ""
 
 #: src/iacfleet.cpp:246
 msgid "Text"
@@ -62,13 +62,13 @@ msgstr ""
 
 #: src/iacfleet.cpp:261
 msgid "Raw"
-msgstr "Roh"
+msgstr ""
 
 #: src/iacfleet.cpp:278
 msgid "IssueDate:"
-msgstr "Ausgabedatum:"
+msgstr ""
 
 #: src/iacfleet.cpp:295
 msgid "&Close"
-msgstr "Schließen"
+msgstr ""
 
