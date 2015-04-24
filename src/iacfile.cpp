@@ -138,26 +138,26 @@ wxString IACFile::ToString( void )
     t.Append(_T("IAC Fleet Code issued at ") + m_issueDate + _T("\n"));
 
     // Pressure Systems
-    t.Append(wxT("\n\nPressure systems:"));
+    t.Append(_("\n\nPressure systems:"));
     t.Append(wxT(  "\n================="));
     for( i=0; i<m_pressure.Count(); i++ )
     {
         t.Append(wxT("\n\n") + m_pressure[i].ToString());
     }
-    t.Append(wxT("\n\nFrontal systems:"));
+    t.Append(_("\n\nFrontal systems:"));
     t.Append(wxT(  "\n================"));
     for(i=0; i<m_frontal.Count(); i++)
     {
         t.Append(wxT("\n\n") + m_frontal[i].ToString());
     }
-    t.Append(wxT("\n\nTropical systems:"));
+    t.Append(_("\n\nTropical systems:"));
     t.Append(wxT(  "\n================="));
     for(i=0; i<m_tropical.Count(); i++)
     {
         t.Append(wxT("\n\n") + m_tropical[i].ToString());
     }
 
-    t.Append(wxT("\n\nIsobars:"));
+    t.Append(_("\n\nIsobars:"));
     t.Append(wxT(  "\n================="));
     for(i=0; i<m_isobars.Count(); i++)
     {
@@ -871,27 +871,27 @@ wxString IACSystem::GetMovement( void ) const
 {
     static const wxChar* (tab[])=
     {
-        wxT("-"),wxT("stationary"),wxT("little change"),wxT("stopping"),wxT("retarding"),
-        wxT("curving to left"),wxT("recurving"),wxT("accelerating"),
-        wxT("curving to right"),wxT("expected to recurve")
+        wxT("-"), _("stationary"), _("little change"), _("stopping"), _("retarding"),
+        _("curving to left"), _("recurving"), _("accelerating"),
+        _("curving to right"), _("expected to recurve")
     };
     wxString t;
     if( m_movement < 10 )
     {
         // valid movement
-        t = wxT("Movement: ") + GetTab(tab,m_movement);
+        t = _("Movement: ") + GetTab(tab,m_movement);
         if( m_movement != 1 )  // not stationary, add dir and speed
         {
             wxString hlp;
-            hlp.Printf(wxT(", %uDeg "),m_direction);
+            hlp.Printf(wxT(", %u\u00B0 "),m_direction);
             t.Append(hlp);
             if(m_speed >= 99)
             {
-                t.Append(wxT("with unknown speed"));
+                t.Append(_("with unknown speed"));
             }
             else
             {
-                hlp.Printf(wxT("with %uknots"),m_speed);
+                hlp.Printf(_("with %uknots"),m_speed);
                 t.Append(hlp);
             }
         }
@@ -980,8 +980,8 @@ wxString IACPressureSystem::GetType( size_t index ) const
 {
     static const wxChar* (tab[])=
     {
-        wxT("Complex Low"),wxT("Low"),wxT("Secondary Low"),wxT("Trough"),wxT("Wave"),
-        wxT("High"),wxT("Uniform pressure"),wxT("Ridge"),wxT("Col"),wxT("Tropical Storm")
+        _("Complex Low"), _("Low"), _("Secondary Low"), _("Trough"), _("Wave"),
+        _("High"), _("Uniform pressure"), _("Ridge"), _("Col"), _("Tropical Storm")
     };
     return(wxString(tab[index]));
 }
@@ -990,8 +990,8 @@ wxString IACPressureSystem::GetShortType( size_t index ) const
 {
     static const wxChar* (tab[])=
     {
-        wxT("L"),wxT("L"),wxT("L"),wxT("T"),wxT("W"),
-        wxT("H"),wxT("U"),wxT("R"),wxT("C"),wxT("TS")
+        wxT("L"), wxT("L"), wxT("L"), wxT("T"), wxT("W"),
+        wxT("H"), wxT("U"), wxT("R"), wxT("C"), wxT("TS")
     };
     return(wxString(tab[index]));
 }
@@ -1000,9 +1000,9 @@ wxString IACPressureSystem::GetCharacteristic( size_t index ) const
 {
     static const wxChar* (tab[])=
     {
-        wxT(""),wxT("weakening"),wxT("little change"),wxT("intensifying"),wxT("complex"),
-        wxT("forming"),wxT("weakening but not disappearing"),wxT("general rise"),
-        wxT("general fall"),wxT("position doubtful")
+        wxEmptyString, _("weakening"), _("little change"), _("intensifying"), _("complex"),
+        _("forming"), _("weakening but not disappearing"), _("general rise"),
+        _("general fall"), _("position doubtful")
     };
     return(wxString(tab[index]));
 }
@@ -1011,10 +1011,10 @@ wxString IACFrontalSystem::GetType( size_t index ) const
 {
     static const wxChar* (tab[])=
     {
-        wxT("Quasistationary at surface"),wxT("Quasistationary above surface"),
-        wxT("Warm surface"),wxT("Warm above surface"),
-        wxT("Cold surface"),wxT("Cold above surface"),wxT("Occlusion"),
-        wxT("Instability line"),wxT("Intertropical"),wxT("Convergence line")
+        _("Quasistationary at surface"), _("Quasistationary above surface"),
+        _("Warm surface"), _("Warm above surface"),
+        _("Cold surface"), _("Cold above surface"), _("Occlusion"),
+        _("Instability line"), _("Intertropical"), _("Convergence line")
     };
     return(wxString(tab[index]));
 }
@@ -1023,9 +1023,9 @@ wxString IACFrontalSystem::GetCharacteristic( size_t index ) const
 {
     static const wxChar* (tab[])=
     {
-        wxT(""),wxT("frontal area decreasing"),wxT("little change"),wxT("frontal area increasing"),
-        wxT("intertropical"),wxT("forming"),wxT("quasistationary"),
-        wxT("with waves"),wxT("diffuse"),wxT("strong, increasing")
+        wxEmptyString, _("frontal area decreasing"), _("little change"), _("frontal area increasing"),
+        _("intertropical"), _("forming"), _("quasistationary"),
+        _("with waves"), _("diffuse"), _("strong, increasing")
     };
     return(wxString(tab[index]));
 }
@@ -1034,10 +1034,10 @@ wxString IACFrontalSystem::GetIntensity( void ) const
 {
     static const wxChar* (tab[])=
     {
-        wxT(""),
-        wxT("weak, decreasing"),wxT("weak, no change"),wxT("weak, increasing"),
-        wxT("moderate, decreasing"),wxT("moderate, no change"),wxT("moderate, increasing"),
-        wxT("strong, decreasing"),wxT("strong, no change"),wxT("strong, increasing")
+        wxEmptyString,
+        _("weak, decreasing"), _("weak, no change"), _("weak, increasing"),
+        _("moderate, decreasing"), _("moderate, no change"), _("moderate, increasing"),
+        _("strong, decreasing"), _("strong, no change"), _("strong, increasing")
     };
     if( m_int > 0 )
     {
@@ -1074,10 +1074,10 @@ wxString IACTropicalSystem::GetType( size_t index ) const
 {
     static const wxChar* (tab[])=
     {
-        wxT("Intertropical convergence zone"),wxT("Shear line"),
-        wxT("Line or Zone of convergence"),wxT("Axis of doldrum belt"),
-        wxT("Through in westerlies"),wxT("Through in easterlies"),wxT("LOW area"),
-        wxT("Surge line"),wxT("Divergence zone"),wxT("Tropical cyclone")
+        _("Intertropical convergence zone"), _("Shear line"),
+        _("Line or Zone of convergence"), _("Axis of doldrum belt"),
+        _("Through in westerlies"), _("Through in easterlies"), _("LOW area"),
+        _("Surge line"), _("Divergence zone"), _("Tropical cyclone")
     };
     return(GetTab(tab,index));
 }
@@ -1086,8 +1086,8 @@ wxString IACTropicalSystem::GetShortType( size_t index ) const
 {
     static const wxChar* (tab[])=
     {
-        wxT(""),wxT("SL"),wxT(""),wxT(""),wxT(""),
-        wxT(""),wxT("TL"),wxT(""),wxT(""),wxT("TC")
+        wxEmptyString, wxT("SL"), wxEmptyString, wxEmptyString, wxEmptyString,
+        wxEmptyString, wxT("TL"), wxEmptyString, wxEmptyString, wxT("TC")
     };
     return(wxString(tab[index]));
 }
@@ -1096,9 +1096,9 @@ wxString IACTropicalSystem::GetCharacteristic( size_t index ) const
 {
     static const wxChar* (tab[])=
     {
-        wxT(""),wxT("diffuse"),wxT("sharply defines"),wxT("quasistationary"),
-        wxT("existance certain"),wxT("existance uncertain"),wxT("firmation expected"),
-        wxT("position certain"),wxT("position uncertain"),wxT("monement doubtful")
+        wxEmptyString, _("diffuse"), _("sharply defines"), _("quasistationary"),
+        _("existance certain"), _("existance uncertain"), _("firmation expected"),
+        _("position certain"), _("position uncertain"), _("monement doubtful")
     };
     return(GetTab(tab, index));
 }
@@ -1107,9 +1107,9 @@ wxString IACTropicalSystem::GetIntensity( void ) const
 {
     static const wxChar* (tab[])=
     {
-        wxT("-"),wxT("weak, decreasing"),wxT("weak, no change"),wxT("weak, increasing"),
-        wxT("moderate, decreasing"),wxT("moderate, no change"),wxT("moderate, increasing"),
-        wxT("strong, decreasing"),wxT("strong, no change"),wxT("strong, increasing")
+        wxT("-"), _("weak, decreasing"), _("weak, no change"), _("weak, increasing"),
+        _("moderate, decreasing"), _("moderate, no change"), _("moderate, increasing"),
+        _("strong, decreasing"), _("strong, no change"), _("strong, increasing")
     };
     if( m_int > 0 )
     {
@@ -1156,7 +1156,7 @@ bool IACTropicalSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp )
 wxString IACIsobarSystem::ToString( bool includePosition ) const
 {
     wxString t;
-    t.Printf( wxT("Isobar (%4uhPa):\n"), m_val );
+    t.Printf( _("Isobar (%4uhPa):\n"), m_val );
     if( includePosition )
     {
         t.Append(PositionsToString());
