@@ -40,32 +40,36 @@
 #include <wx/object.h>
 #include <wx/gdicmn.h>
 
+#include "TexFont.h"
+
 #include "ocpn_plugin.h"
 
 #define ISOBAR_WIDTH 1
 #define FRONT_WIDTH 3
 #define GL_MIN_LINE_WIDTH 1.5
+#define NUMBERS_FONT_SIZE 9
+#define SYSTEMS_FONT_SIZE 15
 
 class GeoPoint:public wxRealPoint
 {
 public:
     static const double INVALID_KOORD;
-    GeoPoint(double lon=INVALID_KOORD, double lat=INVALID_KOORD)
+    GeoPoint( double lon = INVALID_KOORD, double lat = INVALID_KOORD )
     {
         Set(lon,lat);
     }
-    GeoPoint(wxString &token)
+    GeoPoint( wxString &token )
     {
         Set(token);
     }
-    void Set(wxString &token);
-    void Set(double lon=INVALID_KOORD, double lat=INVALID_KOORD)
+    void Set( wxString &token );
+    void Set( double lon = INVALID_KOORD, double lat = INVALID_KOORD )
     {
-        x=lon;
-        y=lat;
+        x = lon;
+        y = lat;
     }
-    wxString ToString(void);
-    bool MatchPosition(GeoPoint &refPos,double deviation);
+    wxString ToString( void );
+    bool MatchPosition( GeoPoint &refPos, double deviation );
 };
 
 WX_DECLARE_OBJARRAY(GeoPoint,GeoPoints);
@@ -76,7 +80,7 @@ public:
     IACSystem( void );
     //void SetMovement(unsigned int m, unsigned int d, unsigned int s);
     virtual wxString ToString( bool includePosition = true ) const;
-    virtual bool Draw( wxDC *dc, PlugIn_ViewPort *vp );
+    virtual bool Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &sysfont );
     wxString GetTab( const wxChar*(tab[]), size_t index ) const;
     wxString PositionsToString( void ) const;
     bool DrawPositions( wxDC *dc, PlugIn_ViewPort *vp );
@@ -125,14 +129,14 @@ private:
     wxString GetType( size_t index ) const;
     wxString GetCharacteristic( size_t index ) const;
     wxString GetIntensity( void ) const;
-    bool Draw( wxDC *dc, PlugIn_ViewPort *vp );
+    bool Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &sysfont );
 };
 
 class IACIsobarSystem : public IACSystem
 {
 public:
     wxString ToString( bool includePosition = true ) const;
-    bool Draw( wxDC *dc, PlugIn_ViewPort *vp );
+    bool Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &sysfont );
 };
 
 class IACTropicalSystem : public IACSystem
@@ -144,7 +148,7 @@ private:
     wxString GetIntensity( void ) const;
     wxString GetCharacteristic( size_t index ) const;
     wxString GetValue( void ) const;
-    bool Draw( wxDC *dc, PlugIn_ViewPort *vp );
+    bool Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &sysfont );
 };
 
 
@@ -213,6 +217,7 @@ private:
     IACFrontalSystems  m_frontal;
     IACIsobarSystems   m_isobars;
     IACTropicalSystems m_tropical;
-
+    TexFont m_TexFontNumbers;
+    TexFont m_TexFontSystems;
 };
 #endif

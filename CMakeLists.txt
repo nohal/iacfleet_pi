@@ -39,6 +39,8 @@ src/iacfleet.cpp
 src/iacfleet.h
 src/iacfleet_pi.cpp
 src/iacfleet_pi.h
+src/TexFont.h
+src/TexFont.cpp
 src/icon.png
 src/icons.cpp
 src/icons.h

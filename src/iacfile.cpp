@@ -599,6 +599,13 @@ bool IACFile::Draw( wxDC *dc, PlugIn_ViewPort *vp )
     // draw only if file was successfully read and decoded
     if( IsOk() )
     {
+        if( !dc )
+        {
+            wxFont font_numbers( NUMBERS_FONT_SIZE, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL );
+            m_TexFontNumbers.Build(font_numbers);
+            wxFont font_systems( SYSTEMS_FONT_SIZE, wxFONTFAMILY_ROMAN, wxFONTSTYLE_ITALIC, wxFONTWEIGHT_BOLD );
+            m_TexFontSystems.Build(font_systems);
+        }
         // This magic initialisation to the random numer generator
         // ensures that the (random) positions where some text
         // is written does not change between several calls to "Draw"
@@ -619,7 +626,7 @@ bool IACFile::DrawSystems( wxDC *dc, PlugIn_ViewPort *vp, IACSystems &iacsystem 
     // loop over all systems
     for( size_t Index = 0; Index < iacsystem.GetCount(); Index++ )
     {
-        retval |= iacsystem[Index].Draw( dc, vp );
+        retval |= iacsystem[Index].Draw( dc, vp, m_TexFontNumbers, m_TexFontSystems );
     }
     return retval;
 }
@@ -752,7 +759,7 @@ IACSystem::IACSystem( void ):
     m_isoLineColor = *wxBLACK;
 }
 
-bool IACSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp )
+bool IACSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &sysfont )
 {
     bool hasDrawn=false;
     if( dc )
@@ -765,31 +772,31 @@ bool IACSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp )
                 wxPoint p;
                 GetCanvasPixLL(vp, &p, Pos.y, Pos.x);
                 wxColour colour;
-                wxString msg1=GetShortType(m_type);
-                if(!msg1.IsEmpty())
+                wxString msg1 = GetShortType(m_type);
+                if( !msg1.IsEmpty() )
                 {
-                    hasDrawn=true;
+                    hasDrawn = true;
                     GetGlobalColor ( _T ( "UBLCK" ), &colour );
                     dc->SetTextForeground( colour );
                     wxFont sfont = dc->GetFont();
 
-                    wxFont *font1 = wxTheFontList->FindOrCreateFont ( 15,
-                            wxFONTFAMILY_SWISS,wxNORMAL,  wxFONTWEIGHT_BOLD,
+                    wxFont *font1 = wxTheFontList->FindOrCreateFont ( SYSTEMS_FONT_SIZE,
+                            wxFONTFAMILY_ROMAN,wxNORMAL, wxFONTWEIGHT_BOLD,
                             FALSE, wxString ( _T ( "Arial" ) ) );
                     dc->SetFont(*font1);
                     wxSize s1 = dc->GetTextExtent(msg1);
-                    dc->DrawText(msg1, p.x - (s1.GetWidth()/2), p.y - (s1.GetHeight()/2));
-                    wxFont *font2 = wxTheFontList->FindOrCreateFont ( 8,
-                            wxFONTFAMILY_SWISS,wxITALIC,  wxFONTWEIGHT_NORMAL,
+                    dc->DrawText(msg1, p.x - (s1.GetWidth() / 2), p.y - (s1.GetHeight() / 2));
+                    wxFont *font2 = wxTheFontList->FindOrCreateFont ( NUMBERS_FONT_SIZE,
+                            wxFONTFAMILY_SWISS, wxITALIC, wxFONTWEIGHT_NORMAL,
                             FALSE, wxString ( _T ( "Arial" ) ) );
                     dc->SetFont(*font2);
-                    wxString msg2=GetValue();
+                    wxString msg2 = GetValue();
                     if( !msg2.IsEmpty() )
                     {
                         wxSize s2 = dc->GetTextExtent(msg2);
                         dc->DrawText(msg2,
-                                p.x - (s2.GetWidth()/2),
-                                p.y + (s1.GetHeight()/2) + (s2.GetHeight()/2));
+                                p.x - (s2.GetWidth() / 2),
+                                p.y + (s1.GetHeight() / 2) + (s2.GetHeight() / 2));
 
                         dc->SetFont(sfont);
                     }
@@ -799,7 +806,46 @@ bool IACSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp )
     }
     else
     {
-        //TODO:GL
+        if( m_positions.GetCount() > 0 )
+        {
+            GeoPoint &Pos = m_positions[0];
+            if( PointInLLBox(vp, Pos.x, Pos.y) )
+            {
+                wxPoint p;
+                GetCanvasPixLL(vp, &p, Pos.y, Pos.x);
+                wxColour colour;
+                wxString msg1 = GetShortType(m_type);
+                if( !msg1.IsEmpty() )
+                {
+                    hasDrawn = true;
+                    glEnable( GL_BLEND );
+                    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+                    
+                    wxPoint p;
+                    GetCanvasPixLL(vp, &p, Pos.y, Pos.x);
+                    int w, h;
+                    sysfont.GetTextExtent(msg1, &w, &h);
+                    
+                    int xd = p.x - (w / 2);
+                    int yd = p.y - (h / 2);
+                    
+                    GetGlobalColor ( _T ( "UBLCK" ), &colour );
+                    glColor3ub(colour.Red() , colour.Green(), colour.Blue());
+
+                    glEnable( GL_TEXTURE_2D );
+                    sysfont.RenderString(msg1, xd, yd);
+                    wxString msg2 = GetValue();
+                    if( !msg2.IsEmpty() )
+                    {
+                        int w1, h1;
+                        numfont.GetTextExtent(msg2, &w1, &h1);
+                        numfont.RenderString(msg2, p.x - (w1 / 2), p.y + (h / 2) + (h1 / 2));
+                    }
+                    glDisable( GL_TEXTURE_2D );
+                    glDisable( GL_BLEND );
+                }
+            }
+        }
     }
     return hasDrawn;
 }
@@ -847,6 +893,7 @@ bool IACSystem::DrawPositions( wxDC *dc, PlugIn_ViewPort *vp )
                 GetCanvasPixLL(vp, &endpl, endP.y, endP.x);
                 glVertex2d(startpl.x, startpl.y);
                 glVertex2d(endpl.x, endpl.y);
+                hasDrawn = true;
             }
         }
         glEnd();
@@ -1049,7 +1096,7 @@ wxString IACFrontalSystem::GetIntensity( void ) const
     }
 }
 
-bool IACFrontalSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp )
+bool IACFrontalSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &sysfont )
 {
     bool hasDrawn = false;
     if( dc )
@@ -1131,7 +1178,7 @@ wxString IACTropicalSystem::GetValue( void ) const
     return t;
 }
 
-bool IACTropicalSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp )
+bool IACTropicalSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &sysfont )
 {
     bool hasDrawn = false;
     if( dc )
@@ -1149,7 +1196,7 @@ bool IACTropicalSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp )
         hasDrawn = DrawPositions( dc, vp );
     }
     hasDrawn = DrawPositions( dc, vp );
-    hasDrawn |= IACSystem::Draw( dc, vp );
+    hasDrawn |= IACSystem::Draw( dc, vp, numfont, sysfont );
     return hasDrawn;
 }
 
@@ -1164,7 +1211,7 @@ wxString IACIsobarSystem::ToString( bool includePosition ) const
     return t;
 }
 
-bool IACIsobarSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp )
+bool IACIsobarSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &sysfont )
 {
     bool hasDrawn = false;
     // draw isobar text at a random position of the isoline to prevent
@@ -1189,7 +1236,7 @@ bool IACIsobarSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp )
                 wxPoint p;
                 GetCanvasPixLL( vp, &p, Pos.y, Pos.x );
                 dc->SetTextForeground( colour );
-                wxFont *font = wxTheFontList->FindOrCreateFont ( 8,
+                wxFont *font = wxTheFontList->FindOrCreateFont ( NUMBERS_FONT_SIZE,
                         wxFONTFAMILY_SWISS,wxNORMAL,  wxFONTWEIGHT_NORMAL,
                         FALSE, wxString ( _T ( "Arial" ) ) );
                 dc->SetFont(*font);
@@ -1204,11 +1251,25 @@ bool IACIsobarSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp )
     {
         GetGlobalColor ( _T ( "CHBLK" ), &m_isoLineColor );
         m_isoLineWidth = wxMax(ISOBAR_WIDTH, GL_MIN_LINE_WIDTH);
-
         hasDrawn = DrawPositions( dc, vp );
         if( hasDrawn )
         {
-            //TODO:Labels
+            wxColour colour;
+            GetGlobalColor ( _T ( "CHBLK" ), &colour );
+            GeoPoint &Pos = m_positions[randomPositionIndex];
+            wxPoint p;
+            GetCanvasPixLL( vp, &p, Pos.y, Pos.x );
+            wxString msg;
+            msg.Printf(wxT("%u"), m_val);
+            int w, h;
+            glEnable( GL_BLEND );
+            glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+            glEnable( GL_TEXTURE_2D );
+            glColor3ub(colour.Red() , colour.Green(), colour.Blue());
+            numfont.GetTextExtent(msg, &w, &h);
+            numfont.RenderString(msg, p.x - (w / 2), p.y - (h / 2));
+            glDisable( GL_TEXTURE_2D );
+            glDisable( GL_BLEND );
         }
     }
     return hasDrawn;
