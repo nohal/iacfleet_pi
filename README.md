@@ -67,7 +67,7 @@ License
 The plugin code is licensed under the terms of the GPL v2 or, at your will, later.
 
 ## TODO
-* Finish the OpenGL rendering implementation
+* ~~Finish the OpenGL rendering implementation~~
 * Support all the available datasources:
   * fleet.nadi to query@saildocs.com
   * http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm
