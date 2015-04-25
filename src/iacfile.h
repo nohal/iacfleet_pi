@@ -50,6 +50,17 @@
 #define NUMBERS_FONT_SIZE 9
 #define SYSTEMS_FONT_SIZE 15
 
+#define QUASISTATIONARY_SURFACE           0
+#define QUASISTATIONARY_ABOVE_SURFACE     1
+#define WARM_SURFACE                      2
+#define WARM_ABOVE_SURFACE                3
+#define COLD_SURFACE                      4
+#define COLD_ABOVE_SURFACE                5
+#define OCCLUSION                         6
+#define INSTABILITY_LINE                  7
+#define INTERTROPICAL                     8
+#define CONVERGENCE_LINE                  9
+
 class GeoPoint:public wxRealPoint
 {
 public:

@@ -1102,10 +1102,18 @@ wxString IACFrontalSystem::GetIntensity( void ) const
 bool IACFrontalSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &sysfont )
 {
     bool hasDrawn = false;
+    wxColour colour;
+    if( m_type == WARM_SURFACE || m_type == WARM_ABOVE_SURFACE )
+        GetGlobalColor ( _T ( "URED" ), &colour );
+    else if ( m_type == COLD_SURFACE || m_type == COLD_ABOVE_SURFACE )
+        GetGlobalColor ( _T ( "BLUE3" ), &colour );
+    else if ( m_type == OCCLUSION )
+        GetGlobalColor ( _T ( "CHMGD" ), &colour );
+    else
+        GetGlobalColor ( _T ( "DASHN" ), &colour );
+
     if( dc )
     {
-        wxColour colour;
-        GetGlobalColor ( _T ( "BLUE3" ), &colour );
         wxPen pen( colour, FRONT_WIDTH);
         dc->SetPen(pen);
         dc->SetBrush(*wxTRANSPARENT_BRUSH);
@@ -1113,7 +1121,7 @@ bool IACFrontalSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, Te
     }
     else
     {
-        GetGlobalColor ( _T ( "BLUE3" ), &m_isoLineColor );
+        m_isoLineColor = colour;
         m_isoLineWidth = wxMax(FRONT_WIDTH, GL_MIN_LINE_WIDTH);
         hasDrawn = DrawPositions( dc, vp );
     }
