@@ -103,7 +103,7 @@ wxFileInputStream* IACFile::GetStream( wxString &filename )
 
 bool IACFile::Read( wxInputStream &stream )
 {
-    bool isok = false; //true if minimum one token was read frim file
+    bool isok = false; //true if minimum one token was read from file
     Invalidate();
     wxString token;
     if( stream.IsOk() )
@@ -181,20 +181,17 @@ bool IACFile::Decode( void )
 
 bool IACFile::ReadHeader( void )
 {
-    if( !tokenFind(_T("10001"),true).IsEmpty() )
+    if( !tokenFind(_T("10001"),true).IsEmpty() && !tokenFind(_T("33388")).IsEmpty() )
     {
-        if( !tokenFind(_T("33388")).IsEmpty() )
+        // header found, read time
+        wxString timestr = tokenFind(_T("0????"));
+        if( !timestr.IsEmpty() )
         {
-            // header found, read time
-            wxString timestr = tokenFind(_T("0????"));
-            if( !timestr.IsEmpty() )
-            {
-                // parse time, format 0DDHH, DD=date, HH=UTC hours
-                m_issueDate = _("Day ") + timestr.Mid(1,2) +
-                        _(" Hour ")+ timestr.Mid(3,2) +
-                        _T(" UTC");
-                return true;
-            }
+            // parse time, format 0DDHH, DD=date, HH=UTC hours
+            m_issueDate = _("Day ") + timestr.Mid(1,2) +
+                    _(" Hour ")+ timestr.Mid(3,2) +
+                    _T(" UTC");
+            return true;
         }
     }
     return false;
@@ -214,23 +211,29 @@ bool IACFile::ParsePositions( IACSystem &sys )
         // heuristic about when the last postion is read
         // either on illegal octant "4" or by a step of more than 1
         // in octant
-        int lastoct = TokenNumber(lasttoken,0,1);
-        int oct     = TokenNumber(token,0,1);
+        int lastoct = TokenNumber(lasttoken, 0, 1);
+        int oct     = TokenNumber(token, 0, 1);
+        int diff = abs(lastoct - oct);
+        
         if( oct == 4 )
         {
-            morepos=false;
+            morepos = false;
         }
-        int diff = abs(lastoct-oct);
-        if( (diff > 1) && (diff < 8) )
+        else if( (diff > 1) && (diff < 8) )
         {
-            morepos=false;
+            morepos = false;
+        }
+        else if( token.StartsWith(_T("66")) )
+        {
+            morepos = false;
         }
 
+/*
         // lets be even more strict and limit positions to
         // SW-Pacific
-        if( !((oct==6) || (oct==7)))
+        if( !((oct == 6) || (oct == 7)))
         {
-            morepos=false;
+            morepos = false;
         }
 
         GeoPoint pos(token); // decode position
@@ -240,9 +243,9 @@ bool IACFile::ParsePositions( IACSystem &sys )
                 ((pos.x > -120.0) && (pos.x < 150))
           )
         {
-            morepos=false;
+            morepos = false;
         }
-
+*/
         if( !token.IsEmpty() && (firsttime || morepos ) )
         {
             // ignore double entries following eachother
@@ -257,7 +260,7 @@ bool IACFile::ParsePositions( IACSystem &sys )
                 // meaning "no more"
                 // stop parsing positions, but read one
                 // more token to stay in sync
-                token=tokenFind();
+                token = tokenFind();
                 break;
             }
         }
@@ -317,14 +320,14 @@ bool IACFile::ParseSections( void )
     wxString token;
     do
     {
-        token=tokenFind(_T("999??"), true);
+        token = tokenFind(_T("999??"), true);
         if( !token.IsEmpty() )
         {
             //?? 00=>Pressure Systems
             //   11=>Frontal Systems
             //   22=>Isobars
             //   55=>Tropical Section
-            int section = TokenNumber(token,3,2);
+            int section = TokenNumber(token, 3, 2);
             switch(section)
             {
             case 0:
@@ -448,7 +451,7 @@ bool IACFile::ParseTropicalSection( void )
     wxString token;
     for(;;)
     {
-        token=tokenFind(_T("55???"));
+        token = tokenFind(_T("55???"));
         if( !token.IsEmpty() )
         {
             // parse pressure system token
@@ -471,7 +474,7 @@ bool IACFile::ParseTropicalSection( void )
                 // guess pressure offset
                 if( sys.m_val > 50 )
                 {
-                    sys.m_val+=900;
+                    sys.m_val += 900;
                 }
                 else
                 {
