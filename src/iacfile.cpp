@@ -188,8 +188,8 @@ bool IACFile::ReadHeader( void )
         if( !timestr.IsEmpty() )
         {
             // parse time, format 0DDHH, DD=date, HH=UTC hours
-            m_issueDate = _("Day ") + timestr.Mid(1,2) +
-                    _(" Hour ")+ timestr.Mid(3,2) +
+            m_issueDate = _("Day ") + timestr.Mid(1, 2) +
+                    _(" Hour ") + timestr.Mid(3, 2) +
                     _T(" UTC");
             return true;
         }
@@ -367,7 +367,7 @@ bool IACFile::ParsePressureSection(void)
             // guess pressure offset
             if( sys.m_val > 50 )
             {
-                sys.m_val+=900;
+                sys.m_val += 900;
             }
             else
             {
@@ -429,7 +429,7 @@ bool IACFile::ParseIsobarSection( void )
             sys.m_val =TokenNumber(token, 2, 3);
             if( sys.m_val < 500 )
             {
-                sys.m_val+=1000;
+                sys.m_val += 1000;
             }
 
             // Position
@@ -615,10 +615,10 @@ bool IACFile::Draw( wxDC *dc, PlugIn_ViewPort *vp )
         // I love this kind of crazy code - it is like in the good
         // old days of programming where everything was allowed.
         srand(77);
-        retval |= DrawSystems( dc, vp,(IACSystems &)m_pressure );
-        retval |= DrawSystems( dc, vp,(IACSystems &)m_frontal );
-        retval |= DrawSystems( dc, vp,(IACSystems &)m_isobars );
-        retval |= DrawSystems( dc, vp,(IACSystems &)m_tropical );
+        retval |= DrawSystems( dc, vp, (IACSystems &)m_pressure );
+        retval |= DrawSystems( dc, vp, (IACSystems &)m_frontal );
+        retval |= DrawSystems( dc, vp, (IACSystems &)m_isobars );
+        retval |= DrawSystems( dc, vp, (IACSystems &)m_tropical );
     }
     return retval;
 }
@@ -652,12 +652,12 @@ IACSystem * IACFile::FindSystem( GeoPoint &pos,double deviation )
 IACSystem * IACFile::FindSystem( IACSystems &systems, GeoPoint &pos, double deviation )
 {
     IACSystem * pSystem = NULL;
-    for( size_t i=systems.GetCount(); i!=0; i-- )
+    for( size_t i = systems.GetCount(); i != 0; i-- )
     {
-        if( systems[i-1].FindAtPos(pos,deviation) )
+        if( systems[i - 1].FindAtPos(pos, deviation) )
         {
             // found system
-            pSystem = &(systems[i-1]);
+            pSystem = &(systems[i - 1]);
         }
     }
     return pSystem;
@@ -675,10 +675,10 @@ void GeoPoint::Set( wxString &token )
 {
     if( token.Len() == 5 )
     {
-        int oct=IACFile::TokenNumber(token,0,1);
-        int lat=IACFile::TokenNumber(token,1,2);
-        int lon=IACFile::TokenNumber(token,3,2);
-        int ns=(oct>3)?-1:+1; // sign for south(-1) or north(+1)
+        int oct=IACFile::TokenNumber(token, 0, 1);
+        int lat=IACFile::TokenNumber(token, 1, 2);
+        int lon=IACFile::TokenNumber(token, 3, 2);
+        int ns = (oct > 3) ? -1 : +1; // sign for south(-1) or north(+1)
         lat *= ns;            // lat is now in degrees
 
 
@@ -711,7 +711,7 @@ void GeoPoint::Set( wxString &token )
         case 3: // East 0..90
             break;
         }
-        Set(double(lon),double(lat));
+        Set(double(lon), double(lat));
     }
     else
     {
@@ -724,16 +724,16 @@ wxString GeoPoint::ToString( void )
     wxString t;
     // latitude
     unsigned int latdeg = floor(fabs(y));
-    wxChar       lats   = (y<0)?'S':'N';
+    wxChar       lats   = (y < 0) ? 'S' : 'N';
     unsigned int londeg = floor(fabs(x));
-    wxChar       lons   = (x<0)?'W':'E';
-    t.Printf(wxT("%02u%c %03u%c"),latdeg,lats,londeg,lons);
+    wxChar       lons   = (x < 0) ? 'W' : 'E';
+    t.Printf(wxT("%02u%c %03u%c"), latdeg, lats, londeg, lons);
     return t;
 }
 
 bool GeoPoint::MatchPosition( GeoPoint &refPos, double deviation )
 {
-    if( (fabs(x-refPos.x) <= deviation) && (fabs(y-refPos.y) <= deviation) )
+    if( (fabs(x - refPos.x) <= deviation) && (fabs(y - refPos.y) <= deviation) )
     {
         return true;
     }
@@ -784,7 +784,7 @@ bool IACSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &
                     wxFont sfont = dc->GetFont();
 
                     wxFont *font1 = wxTheFontList->FindOrCreateFont ( SYSTEMS_FONT_SIZE,
-                            wxFONTFAMILY_ROMAN,wxNORMAL, wxFONTWEIGHT_BOLD,
+                            wxFONTFAMILY_ROMAN, wxNORMAL, wxFONTWEIGHT_BOLD,
                             FALSE, wxString ( _T ( "Arial" ) ) );
                     dc->SetFont(*font1);
                     wxSize s1 = dc->GetTextExtent(msg1);
@@ -974,9 +974,9 @@ bool IACSystem::FindAtPos( GeoPoint &pos, double deviation )
 {
     bool found=false;
     // loop over positions and see if it matches
-    for( size_t i = m_positions.GetCount(); i!=0; i-- )
+    for( size_t i = m_positions.GetCount(); i != 0; i-- )
     {
-        if( m_positions[i-1].MatchPosition(pos,deviation) )
+        if( m_positions[i - 1].MatchPosition(pos, deviation) )
         {
             found=true;
             break;
@@ -1005,7 +1005,7 @@ wxString IACSystem::GetCharacteristic( size_t index ) const
 wxString IACSystem::PositionsToString( void ) const
 {
     wxString t;
-    for( size_t i=0; i < m_positions.Count(); i++ )
+    for( size_t i = 0; i < m_positions.Count(); i++ )
     {
         if( i != 0)
         {
@@ -1021,7 +1021,7 @@ wxString IACPressureSystem::GetValue( void ) const
     wxString t;
     if( m_val >= 0 )
     {
-        t.Printf(wxT("%4u hPa"),m_val);
+        t.Printf(wxT("%4u hPa"), m_val);
     }
     return t;
 }
@@ -1091,7 +1091,7 @@ wxString IACFrontalSystem::GetIntensity( void ) const
     };
     if( m_int > 0 )
     {
-        return(GetTab(tab,m_int));
+        return(GetTab(tab, m_int));
     }
     else
     {
@@ -1171,7 +1171,7 @@ wxString IACTropicalSystem::GetIntensity( void ) const
     };
     if( m_int > 0 )
     {
-        return(GetTab(tab,m_int));
+        return(GetTab(tab, m_int));
     }
     else
     {
@@ -1248,13 +1248,13 @@ bool IACIsobarSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, Tex
                 GetCanvasPixLL( vp, &p, Pos.y, Pos.x );
                 dc->SetTextForeground( colour );
                 wxFont *font = wxTheFontList->FindOrCreateFont ( NUMBERS_FONT_SIZE,
-                        wxFONTFAMILY_SWISS,wxNORMAL,  wxFONTWEIGHT_NORMAL,
+                        wxFONTFAMILY_SWISS, wxNORMAL,  wxFONTWEIGHT_NORMAL,
                         FALSE, wxString ( _T ( "Arial" ) ) );
                 dc->SetFont(*font);
                 wxString msg;
                 msg.Printf(wxT("%u"), m_val);
                 wxSize s1 = dc->GetTextExtent(msg);
-                dc->DrawText( msg, p.x - (s1.GetWidth()/2),p.y - (s1.GetHeight()) );
+                dc->DrawText( msg, p.x - (s1.GetWidth() / 2),p.y - (s1.GetHeight()) );
             }
         }
     }
