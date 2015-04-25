@@ -1144,8 +1144,8 @@ wxString IACTropicalSystem::GetCharacteristic( size_t index ) const
     static const wxChar* (tab[])=
     {
         wxEmptyString, _("diffuse"), _("sharply defines"), _("quasistationary"),
-        _("existance certain"), _("existance uncertain"), _("firmation expected"),
-        _("position certain"), _("position uncertain"), _("monement doubtful")
+        _("existance certain"), _("existance uncertain"), _("formation expected"),
+        _("position certain"), _("position uncertain"), _("movement doubtful")
     };
     return(GetTab(tab, index));
 }
