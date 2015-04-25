@@ -181,7 +181,7 @@ bool IACFile::Decode( void )
 
 bool IACFile::ReadHeader( void )
 {
-    if( !tokenFind(_T("10001"),true).IsEmpty() && !tokenFind(_T("33388")).IsEmpty() )
+    if( !tokenFind(_T("10001"), true).IsEmpty() && !tokenFind(_T("33388")).IsEmpty() )
     {
         // header found, read time
         wxString timestr = tokenFind(_T("0????"));
@@ -509,11 +509,11 @@ int IACFile::TokenNumber( wxString &token, size_t start, size_t end )
     }
 }
 
-wxString IACFile::tokenFind( const wxChar* match,bool skip )
+wxString IACFile::tokenFind( const wxChar* match, bool skip )
 {
     while( m_tokensI < m_tokens.GetCount() )
     {
-        wxString token=m_tokens[m_tokensI++];
+        wxString token = m_tokens[m_tokensI++];
         if( token.Matches(match) )
         {
             // found
