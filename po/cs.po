@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-22 22:39-0500\n"
-"PO-Revision-Date: 2015-04-22 23:45-0400\n"
+"POT-Creation-Date: 2015-04-24 20:01-0500\n"
+"PO-Revision-Date: 2015-04-25 10:44-0400\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
@@ -16,59 +16,369 @@ msgstr ""
 "X-Crowdin-Language: cs\n"
 "X-Crowdin-File: /plugins/iacfleet_pi/po/iacfleet_pi.pot\n"
 
+#: src/iacfile.cpp:141
+msgid "\n\nPressure systems:"
+msgstr "\n\nTlakové systémy:"
+
+#: src/iacfile.cpp:147
+msgid "\n\nFrontal systems:"
+msgstr "\n\nFrontální systémy:"
+
+#: src/iacfile.cpp:153
+msgid "\n\nTropical systems:"
+msgstr "\n\nTropické systémy:"
+
+#: src/iacfile.cpp:160
+msgid "\n\nIsobars:"
+msgstr "\n\nIsobary:"
+
 #: src/iacfile.cpp:193
 msgid "Day "
-msgstr ""
+msgstr "Den "
 
 #: src/iacfile.cpp:194
 msgid " Hour "
+msgstr " Hodina "
+
+#: src/iacfile.cpp:921
+msgid "stationary"
+msgstr "stacionární"
+
+#: src/iacfile.cpp:921 src/iacfile.cpp:1050 src/iacfile.cpp:1073
+msgid "little change"
+msgstr "malá změna"
+
+#: src/iacfile.cpp:921
+msgid "stopping"
+msgstr "zastavující"
+
+#: src/iacfile.cpp:921
+msgid "retarding"
+msgstr "zpomalující"
+
+#: src/iacfile.cpp:922
+msgid "curving to left"
+msgstr "stáčející se doleva"
+
+#: src/iacfile.cpp:922
+msgid "recurving"
+msgstr "stáčející se"
+
+#: src/iacfile.cpp:922
+msgid "accelerating"
+msgstr "zrychlující"
+
+#: src/iacfile.cpp:923
+msgid "curving to right"
+msgstr "stáčející se doprava"
+
+#: src/iacfile.cpp:923
+msgid "expected to recurve"
+msgstr "očekává se stáčení"
+
+#: src/iacfile.cpp:929
+msgid "Movement: "
+msgstr "Pohyb: "
+
+#: src/iacfile.cpp:937
+msgid "with unknown speed"
+msgstr "s neznámou rychlostí"
+
+#: src/iacfile.cpp:941
+#, c-format
+msgid "with %uknots"
+msgstr "s %uuzly"
+
+#: src/iacfile.cpp:1030
+msgid "Complex Low"
+msgstr "Komplexní níže"
+
+#: src/iacfile.cpp:1030
+msgid "Low"
+msgstr "Níže"
+
+#: src/iacfile.cpp:1030
+msgid "Secondary Low"
+msgstr "Sekundární níže"
+
+#: src/iacfile.cpp:1030
+msgid "Trough"
+msgstr "brázda"
+
+#: src/iacfile.cpp:1030
+msgid "Wave"
+msgstr "Vlna"
+
+#: src/iacfile.cpp:1031
+msgid "High"
+msgstr "Výše"
+
+#: src/iacfile.cpp:1031
+msgid "Uniform pressure"
+msgstr "Rovnoměrný tlak"
+
+#: src/iacfile.cpp:1031
+msgid "Ridge"
+msgstr "Hřeben"
+
+#: src/iacfile.cpp:1031
+msgid "Col"
 msgstr ""
+
+#: src/iacfile.cpp:1031
+msgid "Tropical Storm"
+msgstr "Tropická bouře"
+
+#: src/iacfile.cpp:1050
+msgid "weakening"
+msgstr "slábnoucí"
+
+#: src/iacfile.cpp:1050
+msgid "intensifying"
+msgstr "zesilující"
+
+#: src/iacfile.cpp:1050
+msgid "complex"
+msgstr "komplexní"
+
+#: src/iacfile.cpp:1051 src/iacfile.cpp:1074
+msgid "forming"
+msgstr "tvořící se"
+
+#: src/iacfile.cpp:1051
+msgid "weakening but not disappearing"
+msgstr "slábnoucí ale nemizící"
+
+#: src/iacfile.cpp:1051
+msgid "general rise"
+msgstr "obecný vzestup"
+
+#: src/iacfile.cpp:1052
+msgid "general fall"
+msgstr "obecný pokles"
+
+#: src/iacfile.cpp:1052
+msgid "position doubtful"
+msgstr "pozice nejasná"
+
+#: src/iacfile.cpp:1061
+msgid "Quasistationary at surface"
+msgstr "Kvazistacionární na povrchu"
+
+#: src/iacfile.cpp:1061
+msgid "Quasistationary above surface"
+msgstr "Kvazistacionární nad povrchem"
+
+#: src/iacfile.cpp:1062
+msgid "Warm surface"
+msgstr "Teplý povrch"
+
+#: src/iacfile.cpp:1062
+msgid "Warm above surface"
+msgstr "Teplý nad povrchem"
+
+#: src/iacfile.cpp:1063
+msgid "Cold surface"
+msgstr "Studený povrch"
+
+#: src/iacfile.cpp:1063
+msgid "Cold above surface"
+msgstr "Studený nad povrchem"
+
+#: src/iacfile.cpp:1063
+msgid "Occlusion"
+msgstr "Okluze"
+
+#: src/iacfile.cpp:1064
+msgid "Instability line"
+msgstr "Linie nestability"
+
+#: src/iacfile.cpp:1064
+msgid "Intertropical"
+msgstr "Intertropický"
+
+#: src/iacfile.cpp:1064
+msgid "Convergence line"
+msgstr "Linie konvergence"
+
+#: src/iacfile.cpp:1073
+msgid "frontal area decreasing"
+msgstr "frontální plocha se snižuje"
+
+#: src/iacfile.cpp:1073
+msgid "frontal area increasing"
+msgstr "frontální plocha se zvětšuje"
+
+#: src/iacfile.cpp:1074
+msgid "intertropical"
+msgstr "intertropický"
+
+#: src/iacfile.cpp:1074 src/iacfile.cpp:1146
+msgid "quasistationary"
+msgstr "kvazistacionární"
+
+#: src/iacfile.cpp:1075
+msgid "with waves"
+msgstr "s vlnami"
+
+#: src/iacfile.cpp:1075 src/iacfile.cpp:1146
+msgid "diffuse"
+msgstr "difuzní"
+
+#: src/iacfile.cpp:1075 src/iacfile.cpp:1087 src/iacfile.cpp:1159
+msgid "strong, increasing"
+msgstr "silný, zesilující"
+
+#: src/iacfile.cpp:1085 src/iacfile.cpp:1157
+msgid "weak, decreasing"
+msgstr "slabý, slábnoucí"
+
+#: src/iacfile.cpp:1085 src/iacfile.cpp:1157
+msgid "weak, no change"
+msgstr "slabý, žádná změna"
+
+#: src/iacfile.cpp:1085 src/iacfile.cpp:1157
+msgid "weak, increasing"
+msgstr "slabý, rostoucí"
+
+#: src/iacfile.cpp:1086 src/iacfile.cpp:1158
+msgid "moderate, decreasing"
+msgstr "mírný, klesající"
+
+#: src/iacfile.cpp:1086 src/iacfile.cpp:1158
+msgid "moderate, no change"
+msgstr "mírný, žádná změna"
+
+#: src/iacfile.cpp:1086 src/iacfile.cpp:1158
+msgid "moderate, increasing"
+msgstr "mírný, rostoucí"
+
+#: src/iacfile.cpp:1087 src/iacfile.cpp:1159
+msgid "strong, decreasing"
+msgstr "silný, slábnoucí"
+
+#: src/iacfile.cpp:1087 src/iacfile.cpp:1159
+msgid "strong, no change"
+msgstr "silný, beze změny"
+
+#: src/iacfile.cpp:1124
+msgid "Intertropical convergence zone"
+msgstr "Intertropická konvergenční zóna"
+
+#: src/iacfile.cpp:1124
+msgid "Shear line"
+msgstr "Linie střihu"
+
+#: src/iacfile.cpp:1125
+msgid "Line or Zone of convergence"
+msgstr "Linie nebo zóna konvergence"
+
+#: src/iacfile.cpp:1125
+msgid "Axis of doldrum belt"
+msgstr "Osa pásu doldrums"
+
+#: src/iacfile.cpp:1126
+msgid "Through in westerlies"
+msgstr "Brázda v západních větrech"
+
+#: src/iacfile.cpp:1126
+msgid "Through in easterlies"
+msgstr "Brázda ve východních větrech"
+
+#: src/iacfile.cpp:1126
+msgid "LOW area"
+msgstr "Oblast níže"
+
+#: src/iacfile.cpp:1127
+msgid "Surge line"
+msgstr "Linie vzdutí"
+
+#: src/iacfile.cpp:1127
+msgid "Divergence zone"
+msgstr "Zóna divergence"
+
+#: src/iacfile.cpp:1127
+msgid "Tropical cyclone"
+msgstr "Tropická cyklóna"
+
+#: src/iacfile.cpp:1146
+msgid "sharply defines"
+msgstr "ostře vymezený"
+
+#: src/iacfile.cpp:1147
+msgid "existance certain"
+msgstr "existence jistá"
+
+#: src/iacfile.cpp:1147
+msgid "existance uncertain"
+msgstr "existence nejistá"
+
+#: src/iacfile.cpp:1147
+msgid "firmation expected"
+msgstr "očekávaný vznik"
+
+#: src/iacfile.cpp:1148
+msgid "position certain"
+msgstr "pozice jistá"
+
+#: src/iacfile.cpp:1148
+msgid "position uncertain"
+msgstr "pozice nejistá"
+
+#: src/iacfile.cpp:1148
+msgid "monement doubtful"
+msgstr "pohyb nejistý"
+
+#: src/iacfile.cpp:1206
+#, c-format
+msgid "Isobar (%4uhPa):\n"
+msgstr "Isobara (%4uhPa): \n"
 
 #: src/iacfleet_pi.cpp:102 src/iacfleet_pi.cpp:149
 msgid "IACFleet"
-msgstr ""
+msgstr "IACFleet"
 
 #: src/iacfleet_pi.cpp:154
 msgid "IACFleet PlugIn for OpenCPN"
-msgstr ""
+msgstr "Doplněk IACFleet pro OpenCPN"
 
 #: src/iacfleet_pi.cpp:160
 msgid "IACFleet PlugIn for OpenCPN\nDisplay IAC Fleet Code information provided by NADI.\nInformation can be received by email by sending an email with the contents\n\"Send fleet.nadi\" to \"query@saildocs.com\"\nSave the EMail you get as response and open it with this\nPlugin to see the decoded text and a graphic overlay\n"
-msgstr ""
+msgstr "Doplněk IACFleet pro OpenCPN\nZobrazuje IAC Fleet kódované informace o předpovědi počasí poskytované NADI.\nPro získání předpovědi zašli e-mail s textem\n, \"send fleet.nadi\" \nna adresu \"query@saildocs.com\" Ulož obdržený e-mail a otevři ho tímto doplňkem\nkterý ho dekóduje do textové podoby a zobrazí graficky na mapě\n"
 
 #: src/iacfleet_pi.cpp:170
 msgid "IACFleet Preferences"
-msgstr ""
+msgstr "IACFleet předvolby"
 
 #: src/iacfleet_pi.cpp:191 src/iacfleet.h:68
 msgid "IACFleet Display Control"
-msgstr ""
+msgstr "IACFleet nastavení zobrazení"
 
 #: src/iacfleet.cpp:187
 msgid "Select IACFleet Directory"
-msgstr ""
+msgstr "Vyber adresář IACFleet"
 
 #: src/iacfleet.cpp:211
 msgid "IACFleet File Directory"
-msgstr ""
+msgstr "Adresář se souborem IACFleet"
 
 #: src/iacfleet.cpp:231
 msgid "Files"
-msgstr ""
+msgstr "Soubory"
 
 #: src/iacfleet.cpp:246
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #: src/iacfleet.cpp:261
 msgid "Raw"
-msgstr ""
+msgstr "Zdrojová data"
 
 #: src/iacfleet.cpp:278
 msgid "IssueDate:"
-msgstr ""
+msgstr "Datum vydání:"
 
 #: src/iacfleet.cpp:295
 msgid "&Close"
-msgstr ""
+msgstr "&Zavřít"
 
