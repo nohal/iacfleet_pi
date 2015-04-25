@@ -44,7 +44,7 @@
 #include "iacfile.h"
 IMPLEMENT_CLASS ( IACFleetUIDialog, wxDialog )
 
-wxBEGIN_EVENT_TABLE ( IACFleetUIDialog, wxDialog )
+BEGIN_EVENT_TABLE ( IACFleetUIDialog, wxDialog )
 
     EVT_CLOSE ( IACFleetUIDialog::OnClose )
     EVT_BUTTON ( ID_OK, IACFleetUIDialog::OnIdOKClick )
@@ -54,7 +54,7 @@ wxBEGIN_EVENT_TABLE ( IACFleetUIDialog, wxDialog )
     EVT_LISTBOX ( ID_FILESELECTED,IACFleetUIDialog::OnFileSelect)
     EVT_TEXT(ID_RAWTEXT, IACFleetUIDialog::OnRawTextChanged)
     EVT_TIMER(ID_TIP_TIMER, IACFleetUIDialog::OnTipTimer)
-wxEND_EVENT_TABLE()
+END_EVENT_TABLE()
 
 IACFleetUIDialog::IACFleetUIDialog(void):
     m_lastViewPortValid(false),
