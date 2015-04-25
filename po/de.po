@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-22 22:39-0500\n"
-"PO-Revision-Date: 2015-04-22 23:45-0400\n"
+"POT-Creation-Date: 2015-04-24 20:01-0500\n"
+"PO-Revision-Date: 2015-04-25 10:44-0400\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -16,6 +16,22 @@ msgstr ""
 "X-Crowdin-Language: de\n"
 "X-Crowdin-File: /plugins/iacfleet_pi/po/iacfleet_pi.pot\n"
 
+#: src/iacfile.cpp:141
+msgid "\n\nPressure systems:"
+msgstr ""
+
+#: src/iacfile.cpp:147
+msgid "\n\nFrontal systems:"
+msgstr ""
+
+#: src/iacfile.cpp:153
+msgid "\n\nTropical systems:"
+msgstr ""
+
+#: src/iacfile.cpp:160
+msgid "\n\nIsobars:"
+msgstr ""
+
 #: src/iacfile.cpp:193
 msgid "Day "
 msgstr "Tag "
@@ -23,6 +39,300 @@ msgstr "Tag "
 #: src/iacfile.cpp:194
 msgid " Hour "
 msgstr " Stunde "
+
+#: src/iacfile.cpp:921
+msgid "stationary"
+msgstr ""
+
+#: src/iacfile.cpp:921 src/iacfile.cpp:1050 src/iacfile.cpp:1073
+msgid "little change"
+msgstr ""
+
+#: src/iacfile.cpp:921
+msgid "stopping"
+msgstr ""
+
+#: src/iacfile.cpp:921
+msgid "retarding"
+msgstr ""
+
+#: src/iacfile.cpp:922
+msgid "curving to left"
+msgstr ""
+
+#: src/iacfile.cpp:922
+msgid "recurving"
+msgstr ""
+
+#: src/iacfile.cpp:922
+msgid "accelerating"
+msgstr ""
+
+#: src/iacfile.cpp:923
+msgid "curving to right"
+msgstr ""
+
+#: src/iacfile.cpp:923
+msgid "expected to recurve"
+msgstr ""
+
+#: src/iacfile.cpp:929
+msgid "Movement: "
+msgstr ""
+
+#: src/iacfile.cpp:937
+msgid "with unknown speed"
+msgstr ""
+
+#: src/iacfile.cpp:941
+#, c-format
+msgid "with %uknots"
+msgstr ""
+
+#: src/iacfile.cpp:1030
+msgid "Complex Low"
+msgstr ""
+
+#: src/iacfile.cpp:1030
+msgid "Low"
+msgstr ""
+
+#: src/iacfile.cpp:1030
+msgid "Secondary Low"
+msgstr ""
+
+#: src/iacfile.cpp:1030
+msgid "Trough"
+msgstr ""
+
+#: src/iacfile.cpp:1030
+msgid "Wave"
+msgstr ""
+
+#: src/iacfile.cpp:1031
+msgid "High"
+msgstr ""
+
+#: src/iacfile.cpp:1031
+msgid "Uniform pressure"
+msgstr ""
+
+#: src/iacfile.cpp:1031
+msgid "Ridge"
+msgstr ""
+
+#: src/iacfile.cpp:1031
+msgid "Col"
+msgstr ""
+
+#: src/iacfile.cpp:1031
+msgid "Tropical Storm"
+msgstr ""
+
+#: src/iacfile.cpp:1050
+msgid "weakening"
+msgstr ""
+
+#: src/iacfile.cpp:1050
+msgid "intensifying"
+msgstr ""
+
+#: src/iacfile.cpp:1050
+msgid "complex"
+msgstr ""
+
+#: src/iacfile.cpp:1051 src/iacfile.cpp:1074
+msgid "forming"
+msgstr ""
+
+#: src/iacfile.cpp:1051
+msgid "weakening but not disappearing"
+msgstr ""
+
+#: src/iacfile.cpp:1051
+msgid "general rise"
+msgstr ""
+
+#: src/iacfile.cpp:1052
+msgid "general fall"
+msgstr ""
+
+#: src/iacfile.cpp:1052
+msgid "position doubtful"
+msgstr ""
+
+#: src/iacfile.cpp:1061
+msgid "Quasistationary at surface"
+msgstr ""
+
+#: src/iacfile.cpp:1061
+msgid "Quasistationary above surface"
+msgstr ""
+
+#: src/iacfile.cpp:1062
+msgid "Warm surface"
+msgstr ""
+
+#: src/iacfile.cpp:1062
+msgid "Warm above surface"
+msgstr ""
+
+#: src/iacfile.cpp:1063
+msgid "Cold surface"
+msgstr ""
+
+#: src/iacfile.cpp:1063
+msgid "Cold above surface"
+msgstr ""
+
+#: src/iacfile.cpp:1063
+msgid "Occlusion"
+msgstr ""
+
+#: src/iacfile.cpp:1064
+msgid "Instability line"
+msgstr ""
+
+#: src/iacfile.cpp:1064
+msgid "Intertropical"
+msgstr ""
+
+#: src/iacfile.cpp:1064
+msgid "Convergence line"
+msgstr ""
+
+#: src/iacfile.cpp:1073
+msgid "frontal area decreasing"
+msgstr ""
+
+#: src/iacfile.cpp:1073
+msgid "frontal area increasing"
+msgstr ""
+
+#: src/iacfile.cpp:1074
+msgid "intertropical"
+msgstr ""
+
+#: src/iacfile.cpp:1074 src/iacfile.cpp:1146
+msgid "quasistationary"
+msgstr ""
+
+#: src/iacfile.cpp:1075
+msgid "with waves"
+msgstr ""
+
+#: src/iacfile.cpp:1075 src/iacfile.cpp:1146
+msgid "diffuse"
+msgstr ""
+
+#: src/iacfile.cpp:1075 src/iacfile.cpp:1087 src/iacfile.cpp:1159
+msgid "strong, increasing"
+msgstr ""
+
+#: src/iacfile.cpp:1085 src/iacfile.cpp:1157
+msgid "weak, decreasing"
+msgstr ""
+
+#: src/iacfile.cpp:1085 src/iacfile.cpp:1157
+msgid "weak, no change"
+msgstr ""
+
+#: src/iacfile.cpp:1085 src/iacfile.cpp:1157
+msgid "weak, increasing"
+msgstr ""
+
+#: src/iacfile.cpp:1086 src/iacfile.cpp:1158
+msgid "moderate, decreasing"
+msgstr ""
+
+#: src/iacfile.cpp:1086 src/iacfile.cpp:1158
+msgid "moderate, no change"
+msgstr ""
+
+#: src/iacfile.cpp:1086 src/iacfile.cpp:1158
+msgid "moderate, increasing"
+msgstr ""
+
+#: src/iacfile.cpp:1087 src/iacfile.cpp:1159
+msgid "strong, decreasing"
+msgstr ""
+
+#: src/iacfile.cpp:1087 src/iacfile.cpp:1159
+msgid "strong, no change"
+msgstr ""
+
+#: src/iacfile.cpp:1124
+msgid "Intertropical convergence zone"
+msgstr ""
+
+#: src/iacfile.cpp:1124
+msgid "Shear line"
+msgstr ""
+
+#: src/iacfile.cpp:1125
+msgid "Line or Zone of convergence"
+msgstr ""
+
+#: src/iacfile.cpp:1125
+msgid "Axis of doldrum belt"
+msgstr ""
+
+#: src/iacfile.cpp:1126
+msgid "Through in westerlies"
+msgstr ""
+
+#: src/iacfile.cpp:1126
+msgid "Through in easterlies"
+msgstr ""
+
+#: src/iacfile.cpp:1126
+msgid "LOW area"
+msgstr ""
+
+#: src/iacfile.cpp:1127
+msgid "Surge line"
+msgstr ""
+
+#: src/iacfile.cpp:1127
+msgid "Divergence zone"
+msgstr ""
+
+#: src/iacfile.cpp:1127
+msgid "Tropical cyclone"
+msgstr ""
+
+#: src/iacfile.cpp:1146
+msgid "sharply defines"
+msgstr ""
+
+#: src/iacfile.cpp:1147
+msgid "existance certain"
+msgstr ""
+
+#: src/iacfile.cpp:1147
+msgid "existance uncertain"
+msgstr ""
+
+#: src/iacfile.cpp:1147
+msgid "firmation expected"
+msgstr ""
+
+#: src/iacfile.cpp:1148
+msgid "position certain"
+msgstr ""
+
+#: src/iacfile.cpp:1148
+msgid "position uncertain"
+msgstr ""
+
+#: src/iacfile.cpp:1148
+msgid "monement doubtful"
+msgstr ""
+
+#: src/iacfile.cpp:1206
+#, c-format
+msgid "Isobar (%4uhPa):\n"
+msgstr ""
 
 #: src/iacfleet_pi.cpp:102 src/iacfleet_pi.cpp:149
 msgid "IACFleet"
