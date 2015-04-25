@@ -57,7 +57,15 @@ BEGIN_EVENT_TABLE ( IACFleetUIDialog, wxDialog )
 END_EVENT_TABLE()
 
 IACFleetUIDialog::IACFleetUIDialog(void):
+    pParent(NULL),
+    pPlugIn(NULL),
+    m_pfolder_bitmap(NULL),
     m_lastViewPortValid(false),
+    m_pitemCurrentDirectoryCtrl(NULL),
+    m_pFileListCtrl(NULL),    
+    m_pTextCtrl(NULL),
+    m_pRawCtrl(NULL),
+    m_pFileTime(NULL),
     m_pTipWindow(NULL)
 {
     //      Init(); privat member of "wxDialog" in dialog.h
@@ -303,7 +311,7 @@ void IACFleetUIDialog::CreateControls()
 void IACFleetUIDialog::updateFileList( void )
 {
     m_FilenameArray.Empty();
-    size_t res = wxDir::GetAllFiles(m_currentDir,
+    wxDir::GetAllFiles(m_currentDir,
             &m_FilenameArray,
             wxEmptyString,
             wxDIR_FILES);

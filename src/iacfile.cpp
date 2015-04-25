@@ -66,7 +66,7 @@ IACFile::IACFile( void )
 
 IACFile::IACFile( wxInputStream &stream )
 {
-    IACFile();
+    Invalidate();
     m_isok = Read(stream);
 }
 
@@ -168,10 +168,9 @@ wxString IACFile::ToString( void )
 
 bool IACFile::Decode( void )
 {
-    bool res=true;
     // init
     m_tokensI = 0;
-    res = ReadHeader();
+    bool res = ReadHeader();
     if( res )
     {
         res = ParseSections();
@@ -542,13 +541,12 @@ wxString IACFile::ReadToken( wxInputStream &file )
     // 1 = read digits until no digit
     // 2 = token found
     wxString token = wxEmptyString;
-    int c;
 
     int mode = 0;
 
     while( file.IsOk() && mode != 2 )
     {
-        c = file.GetC();
+        int c = file.GetC();
 
         if( c != wxEOF)
         {

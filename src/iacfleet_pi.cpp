@@ -76,6 +76,9 @@ iacfleet_pi::iacfleet_pi( void *ppimgr ) : opencpn_plugin_17( ppimgr )
     m_dir = wxT("");
     m_pDialog = NULL;
     m_pdc = NULL;
+    m_bShowIcon = false;
+    m_leftclick_tool_id = -1;
+
 
     // Get a pointer to the opencpn display canvas, to use as a parent for the GRIB dialog
     m_parent_window = GetOCPNCanvasWindow();
