@@ -45,7 +45,7 @@
 #include "ocpn_plugin.h"
 
 #define ISOBAR_WIDTH 1
-#define FRONT_WIDTH 3
+#define FRONT_WIDTH 5
 #define GL_MIN_LINE_WIDTH 1.5
 #define NUMBERS_FONT_SIZE 9
 #define SYSTEMS_FONT_SIZE 15
@@ -194,7 +194,7 @@ public:
     {
         return m_RawData;
     }
-    static const size_t IACMaxSize=10000;
+    static const size_t IACMaxSize = 10000;
 
     void Invalidate( void );
     IACSystem * FindSystem( GeoPoint &pos, double deviation );
