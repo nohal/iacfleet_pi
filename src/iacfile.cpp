@@ -77,15 +77,20 @@ IACFile::~IACFile( void )
 void IACFile::Invalidate( void )
 {
     m_tokens.Clear();
-    m_tokensI=0;
-    m_isok=false;
+    m_tokensI = 0;
+    m_isok = false;
     m_RawData.Clear();
     m_pressure.Clear();
     m_frontal.Clear();
     m_isobars.Clear();
     m_tropical.Clear();
 
-
+    m_minlat = 999.9;
+    m_maxlat = -999.9;
+    m_minlone = 999.9;
+    m_maxlone = -999.9;
+    m_minlonw = 999.9;
+    m_maxlonw = -999.9;
 }
 
 wxFileInputStream* IACFile::GetStream( wxString &filename )
@@ -252,6 +257,26 @@ bool IACFile::ParsePositions( IACSystem &sys )
             {
                 GeoPoint pos(token);
                 sys.m_positions.Add(pos);
+                if( pos.x >= 0.0)
+                {
+                    if( pos.x < m_minlone )
+                        m_minlone = pos.x;
+                    if( pos.x > m_maxlone )
+                        m_maxlone = pos.x;
+                }
+                else
+                {
+                    if( pos.x < m_minlonw )
+                        m_minlonw = pos.x;
+                    if( pos.x > m_maxlonw )
+                        m_maxlonw = pos.x;
+                }
+                if( pos.y < m_minlat )
+                    m_minlat = pos.y;
+                if( pos.y > m_maxlat )
+                    m_maxlat = pos.y;
+                if( pos.x < 0.1 && pos.x > -0.1 )
+                    wxMessageBox( token );
             }
             else
             {
@@ -600,12 +625,48 @@ bool IACFile::Draw( wxDC *dc, PlugIn_ViewPort *vp )
     // draw only if file was successfully read and decoded
     if( IsOk() )
     {
-        if( !dc )
+        wxColor colour;
+        GetGlobalColor ( _T ( "SNDG1" ), &colour );
+        wxPoint p1, p2, p3, p4;
+        double minlon, maxlon;
+        if( m_minlone < 999 )
+            minlon = m_minlone;
+        else
+            minlon = m_minlonw;
+        if( m_maxlonw > -999 )
+            maxlon = m_maxlonw;
+        else
+            maxlon = m_maxlone;
+        GetCanvasPixLL(vp, &p1, m_minlat, minlon);
+        GetCanvasPixLL(vp, &p2, m_maxlat, minlon);
+        GetCanvasPixLL(vp, &p3, m_maxlat, maxlon);
+        GetCanvasPixLL(vp, &p4, m_minlat, maxlon);
+        if( dc )
+        {
+            if( p3.x > 0 && p1.x < vp->pix_width )
+            {
+                dc->SetPen( wxPen( colour, ISOBAR_WIDTH ) );
+                wxPoint points[] = { p1, p2, p3, p4, p1 };
+                dc->DrawLines( 5, points );
+            }
+        }
+        else
         {
             wxFont font_numbers( NUMBERS_FONT_SIZE, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL );
             m_TexFontNumbers.Build(font_numbers);
             wxFont font_systems( SYSTEMS_FONT_SIZE, wxFONTFAMILY_ROMAN, wxFONTSTYLE_ITALIC, wxFONTWEIGHT_BOLD );
             m_TexFontSystems.Build(font_systems);
+
+            if( p3.x > 0 && p1.x < vp->pix_width )
+            {
+                glColor3ub(colour.Red() , colour.Green(), colour.Blue());
+                glBegin(GL_LINE_LOOP);
+                glVertex2i(p1.x, p1.y);
+                glVertex2i(p2.x, p2.y);
+                glVertex2i(p3.x, p3.y);
+                glVertex2i(p4.x, p4.y);
+                glEnd();
+            }
         }
         // This magic initialisation to the random numer generator
         // ensures that the (random) positions where some text

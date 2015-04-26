@@ -67,7 +67,7 @@ public:
     static const double INVALID_KOORD;
     GeoPoint( double lon = INVALID_KOORD, double lat = INVALID_KOORD )
     {
-        Set(lon,lat);
+        Set(lon, lat);
     }
     GeoPoint( wxString &token )
     {
@@ -230,5 +230,11 @@ private:
     IACTropicalSystems m_tropical;
     TexFont m_TexFontNumbers;
     TexFont m_TexFontSystems;
+    double m_minlat;
+    double m_maxlat;
+    double m_minlone;
+    double m_maxlone;
+    double m_minlonw;
+    double m_maxlonw;
 };
 #endif
