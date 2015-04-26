@@ -74,16 +74,20 @@ IACFleetUIDialog::IACFleetUIDialog(void):
 IACFleetUIDialog::~IACFleetUIDialog( void )
 {
     m_bBrDownload->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( IACFleetUIDialog::OnBrDownload ), NULL, this );
+    m_rbSortName->Disconnect( wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler( IACFleetUIDialog::OnSortChange ), NULL, this );
+	m_rbSortTime->Disconnect( wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler( IACFleetUIDialog::OnSortChange ), NULL, this );
+	
 }
 
 bool IACFleetUIDialog::Create ( wxWindow *parent, iacfleet_pi *ppi, wxWindowID id,
-        const wxString& caption, const wxString initial_dir,
+        const wxString& caption, const wxString initial_dir, int sort_type,
         const wxPoint& pos, const wxSize& size, long style )
 {
     pParent = parent;
     pPlugIn = ppi;
 
     m_currentDir = initial_dir;
+    m_sortType = sort_type;
     long wstyle = wxDEFAULT_FRAME_STYLE;
 
     if( !wxDialog::Create( parent, id, caption, pos, size, wstyle ) )
@@ -154,6 +158,7 @@ void IACFleetUIDialog::OnTipTimer( wxTimerEvent& event )
 void IACFleetUIDialog::OnClose ( wxCloseEvent& event )
 {
     pPlugIn->SetDir(m_currentDir);
+    pPlugIn->SetSortType(m_sortType);
     RequestRefresh(pParent);
     Destroy();
     pPlugIn->OnDialogClose();
@@ -240,6 +245,27 @@ void IACFleetUIDialog::CreateControls()
 
     wxBoxSizer* fpsizer = new wxBoxSizer(wxVERTICAL);
     filepanel->SetSizer(fpsizer);
+      
+	wxBoxSizer* bSizerSort;
+	bSizerSort = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_stSort = new wxStaticText( filepanel, wxID_ANY, _("Sort by"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_stSort->Wrap( -1 );
+	bSizerSort->Add( m_stSort, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+	
+	m_rbSortName = new wxRadioButton( filepanel, wxID_ANY, _("Name"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizerSort->Add( m_rbSortName, 0, wxALL, 5 );
+	
+	m_rbSortTime = new wxRadioButton( filepanel, wxID_ANY, _("File timestamp"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizerSort->Add( m_rbSortTime, 0, wxALL, 5 );
+	
+	if( m_sortType == SORT_NAME )
+        m_rbSortName->SetValue( true );
+    else
+        m_rbSortTime->SetValue( true );
+	
+	fpsizer->Add( bSizerSort, 0, wxEXPAND, 5 );
+    
     m_pFileListCtrl = new wxListBox(filepanel,ID_FILESELECTED,
             wxDefaultPosition,wxDefaultSize,0,
             NULL,
@@ -332,6 +358,9 @@ void IACFleetUIDialog::CreateControls()
 	
 	// Connect Events
 	m_bBrDownload->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( IACFleetUIDialog::OnBrDownload ), NULL, this );
+    m_rbSortName->Connect( wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler( IACFleetUIDialog::OnSortChange ), NULL, this );
+	m_rbSortTime->Connect( wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler( IACFleetUIDialog::OnSortChange ), NULL, this );
+
 
     // the text control that shows the Date and Time
     // of the Fleetcode
@@ -377,19 +406,29 @@ void IACFleetUIDialog::updateFileList( void )
         wxDateTime access;
         wxDateTime modified;
         wxDateTime created;
-        file.GetTimes(&access,&modified,&created);
-        wxString dates=modified.FormatISODate() + modified.FormatISOTime() + wxT(";");
-        m_FilenameArray[i]=dates+file.GetFullName();
+        file.GetTimes(&access, &modified, &created);
+        if( m_sortType == SORT_TIME )
+        {
+            wxString dates = modified.FormatISODate() + modified.FormatISOTime() + wxT(";");
+            m_FilenameArray[i] = dates + file.GetFullName();
+        }
+        else
+            m_FilenameArray[i] = file.GetFullName();
     }
-    // sort the filenames according to dates
-    m_FilenameArray.Sort(true);
-    for( int i = m_FilenameArray.GetCount() - 1; i >= 0; i-- )
+    if( m_sortType != SORT_NAME ) // sort the filenames according to dates, newest first
     {
-        // throw away time info
-        // Yes i know this is bad code!
-        wxString str = m_FilenameArray[i].AfterFirst(';');
-        m_FilenameArray[i] = str;
+        m_FilenameArray.Sort(true);
+        for( int i = m_FilenameArray.GetCount() - 1; i >= 0; i-- )
+        {
+            // throw away time info
+            // Yes i know this is bad code!
+            wxString str = m_FilenameArray[i].AfterFirst(';');
+            m_FilenameArray[i] = str;
+        }
     }
+    else // sort the filenames alphabetically
+        m_FilenameArray.Sort();
+
     m_pFileListCtrl->Set(m_FilenameArray);
     m_currentFileName = wxEmptyString;
 }
@@ -555,4 +594,13 @@ void IACFleetUIDialog::OnBrDownload( wxCommandEvent& event )
             wxASSERT( false );  // This should never happen because we handle all possible cases of ret
     }
     wxRemoveFile ( tfn.GetFullPath() );
+}
+
+void IACFleetUIDialog::OnSortChange( wxCommandEvent& event )
+{
+    if( m_rbSortName->GetValue() )
+        m_sortType = SORT_NAME;
+    else if( m_rbSortTime->GetValue() )
+        m_sortType = SORT_TIME;
+    updateFileList();
 }

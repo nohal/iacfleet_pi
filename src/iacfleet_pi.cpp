@@ -73,7 +73,8 @@ iacfleet_pi::iacfleet_pi( void *ppimgr ) : opencpn_plugin_17( ppimgr )
     m_dialog_y = 0;
     m_dialog_sx = 200;
     m_dialog_sy = 200;
-    m_dir = wxT("");
+    m_sort_type = SORT_NAME;
+    m_dir = wxEmptyString;
     m_pDialog = NULL;
     m_pdc = NULL;
     m_bShowIcon = false;
@@ -195,6 +196,7 @@ void iacfleet_pi::OnToolbarToolCallback( int id )
                 -1,
                 _("IACFleet Display Control"),
                 m_dir,
+                m_sort_type,
                 wxPoint( m_dialog_x, m_dialog_y),
                 wxSize( m_dialog_sx, m_dialog_sy) );
     }
@@ -235,6 +237,8 @@ bool iacfleet_pi::LoadConfig( void )
         m_dialog_sy = pConf->Read ( _T ( "IACFleetDialogSizeY" ), 540L );
         m_dialog_x =  pConf->Read ( _T ( "IACFleetDialogPosX" ), 20L );
         m_dialog_y =  pConf->Read ( _T ( "IACFleetDialogPosY" ), 170L );
+        
+        m_sort_type =  pConf->Read ( _T ( "IACFleetSortType" ), SORT_NAME );
 
         pConf->SetPath ( _T ( "/Directories" ) );
         pConf->Read ( _T ( "IACFleetDirectory" ), &m_dir );
@@ -256,6 +260,8 @@ bool iacfleet_pi::SaveConfig( void )
         pConf->Write ( _T ( "IACFleetDialogSizeY" ),  m_dialog_sy );
         pConf->Write ( _T ( "IACFleetDialogPosX" ),   m_dialog_x );
         pConf->Write ( _T ( "IACFleetDialogPosY" ),   m_dialog_y );
+        
+        pConf->Write ( _T ( "IACFleetSortType" ),   m_sort_type );
 
         pConf->SetPath ( _T ( "/Directories" ) );
         pConf->Write ( _T ( "IACFleetDirectory" ), m_dir );

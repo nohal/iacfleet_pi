@@ -91,17 +91,19 @@ public:
     {
         m_dialog_sy = x;
     }
-
     void OnDialogClose();
     void SetDir( wxString dir )
     {
         m_dir = dir;
     };
+    void SetSortType( int sort_type )
+    {
+        m_sort_type = sort_type;
+    };
+    
 private:
     bool LoadConfig( void );
     bool SaveConfig( void );
-
-
 
 private:
     wxWindow         *m_parent_window;
@@ -109,6 +111,7 @@ private:
     int               m_leftclick_tool_id;
     int               m_dialog_x, m_dialog_y;
     int               m_dialog_sx, m_dialog_sy;
+    int               m_sort_type;
     wxString          m_dir;
     IACFleetUIDialog *m_pDialog;
     wxDC             *m_pdc;

@@ -51,6 +51,8 @@
 #include "ocpn_plugin.h"
 #include "iacfile.h"
 
+#define SORT_NAME 1
+#define SORT_TIME 2
 
 enum
 {
@@ -71,7 +73,8 @@ public:
     IACFleetUIDialog( void );
     ~IACFleetUIDialog( void );
     bool Create( wxWindow *parent, iacfleet_pi *ppi, wxWindowID id = wxID_ANY,
-            const wxString& caption = _("IACFleet Display Control"), const wxString initial_dir = wxT(""),
+            const wxString& caption = _("IACFleet Display Control"),
+            const wxString initial_dir = wxEmptyString, int sort_type = SORT_NAME,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             long style = wxCAPTION|wxRESIZE_BORDER|wxSYSTEM_MENU );
@@ -87,6 +90,7 @@ public:
     void SetCursorLatLon( double lat, double lon );
     bool RenderOverlay( wxDC *dc, PlugIn_ViewPort *vp );
     void OnBrDownload( wxCommandEvent& event );
+    void OnSortChange( wxCommandEvent& event );
     
 private:
     void Invalidate( void );
@@ -107,6 +111,7 @@ private:
     GeoPoint           m_cursorpos;
     PlugIn_ViewPort    m_lastViewPort;
     bool               m_lastViewPortValid;
+    int                m_sortType;
 
     // the Contols that will get updated
     wxTextCtrl        *m_pitemCurrentDirectoryCtrl;
@@ -124,6 +129,9 @@ private:
     wxButton* m_bBrDownload;
     wxStaticText* m_stBrDesc;
     wxHyperlinkCtrl* m_hlBr;
+    wxStaticText* m_stSort;
+    wxRadioButton* m_rbSortName;
+    wxRadioButton* m_rbSortTime;
 };
 
 #endif
