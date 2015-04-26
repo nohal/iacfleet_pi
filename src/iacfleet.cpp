@@ -221,22 +221,22 @@ void IACFleetUIDialog::CreateControls()
 
 
 //    The Fleetode directory
-    wxStaticBox* itemStaticBoxSizer11Static = new wxStaticBox( this, wxID_ANY,_ ( "IACFleet File Directory" ) );
-    wxStaticBoxSizer *itemStaticBoxSizer11 = new wxStaticBoxSizer ( itemStaticBoxSizer11Static, wxHORIZONTAL );
-    topSizer->Add ( itemStaticBoxSizer11, 0, wxEXPAND );
+    wxStaticBoxSizer* itemStaticBoxSizer11Static = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _ ( "IACFleet File Directory" ) ), wxHORIZONTAL );
 
     m_pitemCurrentDirectoryCtrl = new wxTextCtrl( this, -1, _T(""), wxDefaultPosition, wxSize(-1, -1), wxTE_READONLY );
-    itemStaticBoxSizer11->Add( m_pitemCurrentDirectoryCtrl, 1, wxALIGN_LEFT);
+    itemStaticBoxSizer11Static->Add( m_pitemCurrentDirectoryCtrl, 1, wxALIGN_CENTER_VERTICAL|wxALIGN_LEFT);
 
     m_pitemCurrentDirectoryCtrl->AppendText( m_currentDir );
 
     wxButton* bChooseDir = new wxBitmapButton( this, ID_CHOOSEIACFLEETDIR, *m_pfolder_bitmap );
-    itemStaticBoxSizer11->Add( bChooseDir, 0, wxALIGN_RIGHT|wxALL, 5 );
+    itemStaticBoxSizer11Static->Add( bChooseDir, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
 
+    topSizer->Add( itemStaticBoxSizer11Static, 0, wxALL|wxEXPAND, 5 );
+    
     // panels
     wxNotebook *itemNotebook = new wxNotebook( this, ID_NOTEBOOK, wxDefaultPosition,
             wxDefaultSize, wxNB_TOP );
-    topSizer->Add(itemNotebook,1,wxGROW);
+    topSizer->Add(itemNotebook, 1, wxEXPAND|wxALL, 5);
     itemNotebook->SetMinSize(wxSize(wxDefaultCoord,0));
     // file panel
     wxPanel *filepanel = new wxPanel( itemNotebook, wxID_ANY,
@@ -367,17 +367,17 @@ void IACFleetUIDialog::CreateControls()
     wxBoxSizer* tmsizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxStaticText *pIssueDate = new wxStaticText( this,
-            wxID_ANY, _("IssueDate:"),
+            wxID_ANY, _("Issue Date: "),
             wxDefaultPosition,wxDefaultSize,
             wxALIGN_LEFT
                                                );
-    tmsizer->Add(pIssueDate,0);
+    tmsizer->Add(pIssueDate, 0, wxALL, 5);
     m_pFileTime = new wxStaticText( this,
             wxID_ANY, wxEmptyString,
-            wxDefaultPosition,wxDefaultSize,
+            wxDefaultPosition, wxDefaultSize,
             wxALIGN_LEFT);
-    tmsizer->Add(m_pFileTime,1,wxGROW);
-    topSizer->Add(tmsizer,0,wxGROW);
+    tmsizer->Add(m_pFileTime, 1, wxALL|wxEXPAND, 5);
+    topSizer->Add(tmsizer, 0, wxGROW);
 
     // A horizontal box sizer to contain OK
     wxBoxSizer* AckBox = new wxBoxSizer ( wxHORIZONTAL );
