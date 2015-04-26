@@ -227,7 +227,7 @@ bool IACFile::ParsePositions( IACSystem &sys )
         {
             morepos = false;
         }
-        else if( token.StartsWith(_T("66")) )
+        else if( token.StartsWith(_T("66")) || token == _T("19191") )
         {
             morepos = false;
         }
@@ -693,7 +693,7 @@ bool IACFile::DrawSystems( wxDC *dc, PlugIn_ViewPort *vp, IACSystems &iacsystem 
     return retval;
 }
 
-IACSystem * IACFile::FindSystem( GeoPoint &pos,double deviation )
+IACSystem * IACFile::FindSystem( GeoPoint &pos, double deviation )
 {
     IACSystem *pIACSystem = NULL;
     pIACSystem = FindSystem( (IACSystems&)m_pressure, pos, deviation );
