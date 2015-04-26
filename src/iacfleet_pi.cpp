@@ -85,10 +85,12 @@ iacfleet_pi::iacfleet_pi( void *ppimgr ) : opencpn_plugin_17( ppimgr )
 
     // Create the PlugIn icons
     initialize_images();
+    wxCurlBase::Init();
 }
 
 iacfleet_pi::~iacfleet_pi()
 {
+    wxCurlBase::Shutdown();
     deinitialize_images();
 }
 

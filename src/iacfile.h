@@ -83,7 +83,7 @@ public:
     bool MatchPosition( GeoPoint &refPos, double deviation );
 };
 
-WX_DECLARE_OBJARRAY(GeoPoint,GeoPoints);
+WX_DECLARE_OBJARRAY(GeoPoint, GeoPoints);
 
 class IACSystem
 {

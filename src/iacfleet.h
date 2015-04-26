@@ -42,6 +42,12 @@
 #include <wx/timer.h>
 #include <wx/dirctrl.h>
 #include <wx/tipwin.h>
+#include <wx/datectrl.h>
+#include <wx/dateevt.h>
+#include <wx/choice.h>
+#include <wx/button.h>
+#include <wx/hyperlink.h>
+
 #include "ocpn_plugin.h"
 #include "iacfile.h"
 
@@ -80,6 +86,8 @@ public:
     void OnTipTimer( wxTimerEvent& event );
     void SetCursorLatLon( double lat, double lon );
     bool RenderOverlay( wxDC *dc, PlugIn_ViewPort *vp );
+    void OnBrDownload( wxCommandEvent& event );
+    
 private:
     void Invalidate( void );
     void updateFileList( void );
@@ -107,6 +115,15 @@ private:
     wxTextCtrl        *m_pRawCtrl;
     wxStaticText      *m_pFileTime;
     wxTipWindow       *m_pTipWindow;
+    
+    //Download panel
+    wxStaticText* m_stDate;
+    wxDatePickerCtrl* m_dpBrazil;
+    wxStaticText* m_stHour;
+    wxChoice* m_chHour;
+    wxButton* m_bBrDownload;
+    wxStaticText* m_stBrDesc;
+    wxHyperlinkCtrl* m_hlBr;
 };
 
 #endif

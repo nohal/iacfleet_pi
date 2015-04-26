@@ -34,6 +34,8 @@
 #include "wx/wx.h"
 #endif //precompiled headers
 
+#include "wx/curl/dialog.h"
+
 #include "version.h"
 
 #define     MY_API_VERSION_MAJOR    1
