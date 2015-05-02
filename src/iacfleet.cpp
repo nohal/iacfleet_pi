@@ -601,24 +601,27 @@ void IACFleetUIDialog::updateIACFleet( void )
     bool ok = false;
     ::wxBeginBusyCursor();
 
-    wxFileInputStream *pStream = m_iacfile.GetStream(m_currentFileName);
-    if( NULL != pStream && pStream->IsOk() )
+    if( m_currentFileName != wxEmptyString )
     {
-        if( m_iacfile.Read(*pStream) )
+        wxFileInputStream *pStream = m_iacfile.GetStream(m_currentFileName);
+        if( NULL != pStream && pStream->IsOk() )
         {
-            updateTextPanel();
-            updateRawPanel(m_iacfile.GetRawData());
-            ok = true;
+            if( m_iacfile.Read(*pStream) )
+            {
+                updateTextPanel();
+                updateRawPanel(m_iacfile.GetRawData());
+                ok = true;
+            }
         }
+        else if( !m_timer->IsRunning() ) //Show error just if we are not running the animation
+            wxMessageBox( wxString::Format(_("Error opening: %s"), m_currentFileName.c_str()), _T("IACFleet") );
+        if( !ok )
+        {
+            Invalidate();
+        }
+        RequestRefresh(pParent);
+        delete(pStream);
     }
-    else if( !m_timer->IsRunning() ) //Show error just if we are not running the animation
-        wxMessageBox( wxString::Format(_("Error opening: %s"), m_currentFileName.c_str()), _T("IACFleet") );
-    if( !ok )
-    {
-        Invalidate();
-    }
-    RequestRefresh(pParent);
-    delete(pStream);
     ::wxEndBusyCursor();
 }
 
