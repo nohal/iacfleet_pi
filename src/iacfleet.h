@@ -92,6 +92,7 @@ public:
     bool RenderOverlay( wxDC *dc, PlugIn_ViewPort *vp );
     void OnBrDownload( wxCommandEvent& event );
     void OnSortChange( wxCommandEvent& event );
+    void OnNoaaDownload( wxCommandEvent& event );
     
 private:
     void Invalidate( void );
@@ -136,6 +137,10 @@ private:
     wxStaticText      *m_stHist;
     wxSpinCtrl        *m_spHist;
     wxStaticText      *m_stForecasts;
+    
+    wxRadioButton     *m_rbAnalysis;
+    wxRadioButton     *m_rbForecast;
+    wxButton          *m_bNoaaDownload;
 };
 
 #endif
