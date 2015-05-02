@@ -113,6 +113,7 @@ bool IACFile::Read( wxInputStream &stream )
     bool isok = false; //true if minimum one token was read from file
     Invalidate();
     wxString token;
+    m_tokensI = 0;
     if( stream.IsOk() )
     {
         for(;;)
@@ -121,6 +122,7 @@ bool IACFile::Read( wxInputStream &stream )
             if( !token.IsEmpty() )
             {
                 m_tokens.Add(token);
+                m_tokensI++;
                 isok = true;
             }
             else
@@ -129,13 +131,19 @@ bool IACFile::Read( wxInputStream &stream )
             }
         }
     }
+    m_tokensI = 0;
+
+//    for (std::vector<size_t>::iterator it = m_newlineTokens.begin(); it != m_newlineTokens.end(); ++it)
+//    {
+//        wxMessageBox( wxString::Format( _T("ID: %i :"), *it ) + m_tokens[*it] );
+//    }
+    
     if( isok )
     {
         // decode tokens if some were found
         isok = Decode();
     }
     m_isok = isok;
-    wxMessageBox(m_tokens[0]);
     return isok;
 }
 
@@ -241,11 +249,15 @@ bool IACFile::ParsePositions( IACSystem &sys, int section )
         {
             morepos = false;
         }
-        else if( section == SECTION_FRONTAL && token.Matches(_T("66??0")) )
+        else if( section == SECTION_FRONTAL && token.Matches(_T("66??0")) 
+                && ( m_positionsType == 88 || m_newlineTokens.size() < 10 //In case the file seems formatted with new lines, we take advantage of it and say that new system must start on new line 
+                    || std::find(m_newlineTokens.begin(), m_newlineTokens.end(), m_tokensI - 1 ) != m_newlineTokens.end() ) )
         {
             morepos = false;
         }
-        else if( section == SECTION_PRESSURE && token.StartsWith(_T("8")) )
+        else if( section == SECTION_PRESSURE && token.StartsWith(_T("8"))
+                && ( m_positionsType == 88 || m_newlineTokens.size() < 10 //In case the file seems formatted with new lines, we take advantage of it and say that new system must start on new line 
+                    || std::find(m_newlineTokens.begin(), m_newlineTokens.end(), m_tokensI - 1 ) != m_newlineTokens.end() ) )
         {
             morepos = false;
         }
@@ -314,7 +326,8 @@ bool IACFile::ParsePositions( IACSystem &sys, int section )
                 // meaning "no more"
                 // stop parsing positions, but read one
                 // more token to stay in sync
-                token = tokenFind();
+                if( m_positionsType == 88 )
+                    token = tokenFind();
                 //break;
             }
         }
@@ -411,9 +424,9 @@ bool IACFile::ParsePressureSection(void)
     {
         token = tokenFind(_T("8????"));
         if( !token.IsEmpty( ) )
-        {
-            wxMessageBox(token);
-            // parse pressure system token
+        {            // parse pressure system token
+//            if( std::find(m_newlineTokens.begin(), m_newlineTokens.end(), m_tokensI) == m_newlineTokens.end() )
+//                wxMessageBox(_T("FP: ") + token);
             IACPressureSystem sys;
             sys.m_type = TokenNumber(token, 1, 1);
             sys.m_char = TokenNumber(token, 2, 1);
@@ -615,9 +628,9 @@ wxString IACFile::ReadToken( wxInputStream &file )
 
         if( c != wxEOF)
         {
-            if( c == '\n')
+            if( c == '\n' && m_tokensI > 0)
             {
-                m_newlineTokens.push_back( m_tokens.Count() );
+                m_newlineTokens.push_back( m_tokensI + 1 );
             }
             m_RawData.Append( (char)c );
             switch( mode )
