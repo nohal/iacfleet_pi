@@ -417,7 +417,15 @@ bool IACFile::ParsePressureSection(void)
             sys.m_val  = TokenNumber(token, 3, 2);
             sys.m_int  = -1;
             // guess pressure offset
-            if( sys.m_val > 50 )
+            if( sys.m_type == 1 && sys.m_val > 30 )
+            {
+                sys.m_val += 900;
+            }
+            else if( sys.m_type == 5 && sys.m_val < 70 )
+            {
+                sys.m_val += 1000;
+            }
+            else if( sys.m_val > 50 )
             {
                 sys.m_val += 900;
             }
