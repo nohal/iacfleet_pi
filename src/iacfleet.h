@@ -52,8 +52,10 @@
 #include "ocpn_plugin.h"
 #include "iacfile.h"
 
-#define SORT_NAME 1
-#define SORT_TIME 2
+#define SORT_NAME           1
+#define SORT_TIME           2
+
+#define ANIMATION_FRAME_MS  1000
 
 enum
 {
@@ -62,7 +64,9 @@ enum
     ID_FILESELECTED,
     ID_NOTEBOOK,
     ID_RAWTEXT,
-    ID_TIP_TIMER
+    ID_TIP_TIMER,
+    ID_ANIMATE,
+    ID_ANIMATION_TIMER
 };
 
 class iacfleet_pi;
@@ -82,6 +86,8 @@ public:
     void CreateControls();
     void OnClose( wxCloseEvent& event );
     void OnIdOKClick( wxCommandEvent& event );
+    void OnIdAnimateClick( wxCommandEvent& event );
+    void OnTimerAnimation( wxTimerEvent& event );
     void OnMove( wxMoveEvent& event );
     void OnSize( wxSizeEvent& event );
     void OnChooseDirClick( wxCommandEvent& event );
@@ -114,6 +120,8 @@ private:
     PlugIn_ViewPort    m_lastViewPort;
     bool               m_lastViewPortValid;
     int                m_sortType;
+    wxArrayString      m_filesToAnimate;
+    size_t             m_animationCurrentFile;
 
     // the Contols that will get updated
     wxTextCtrl        *m_pitemCurrentDirectoryCtrl;
@@ -124,6 +132,8 @@ private:
     wxTipWindow       *m_pTipWindow;
     wxRadioButton     *m_rbSortName;
     wxRadioButton     *m_rbSortTime;
+    
+    wxButton          *m_bAnimation;
     
     //Download panel
     wxStaticText      *m_stDate;
@@ -141,6 +151,8 @@ private:
     wxRadioButton     *m_rbAnalysis;
     wxRadioButton     *m_rbForecast;
     wxButton          *m_bNoaaDownload;
+    
+    wxTimer           *m_timer;
 };
 
 #endif
