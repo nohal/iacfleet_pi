@@ -1335,8 +1335,8 @@ wxString IACTropicalSystem::GetShortType( size_t index ) const
 {
     static const wxChar* (tab[])=
     {
-        wxEmptyString, wxT("SL"), wxEmptyString, wxEmptyString, wxEmptyString,
-        wxEmptyString, wxT("TL"), wxEmptyString, wxEmptyString, wxT("TC")
+        _T("ICZ"), _T("SL"), _T("LC"), _T("ADB"), _T("TW"),
+        _T("TE"), _T("TL"), _T("SU"), _T("LD"), _T("TC")
     };
     return(wxString(tab[index]));
 }
@@ -1398,7 +1398,72 @@ bool IACTropicalSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, T
         hasDrawn = DrawPositions( dc, vp );
     }
     hasDrawn = DrawPositions( dc, vp );
-    hasDrawn |= IACSystem::Draw( dc, vp, numfont, sysfont );
+    if( dc )
+    {
+        if( m_positions.Count() > 0 )
+        {
+            GeoPoint &Pos = m_positions[0];
+            if( PointInLLBox(vp, Pos.x, Pos.y) )
+            {
+                wxPoint p;
+                GetCanvasPixLL(vp, &p, Pos.y, Pos.x);
+                wxColour colour;
+                wxString msg1 = GetShortType(m_type);
+                if( !msg1.IsEmpty() )
+                {
+                    hasDrawn = true;
+                    GetGlobalColor ( _T ( "SNDG1" ), &colour );
+                    dc->SetTextForeground( colour );
+                    wxFont sfont = dc->GetFont();
+
+                    wxFont *font1 = wxTheFontList->FindOrCreateFont ( SYSTEMS_FONT_SIZE,
+                            wxFONTFAMILY_ROMAN, wxNORMAL, wxFONTWEIGHT_BOLD,
+                            FALSE, wxString ( _T ( "Arial" ) ) );
+                    dc->SetFont(*font1);
+                    wxSize s1 = dc->GetTextExtent(msg1);
+                    dc->DrawText(msg1, p.x - (s1.GetWidth() / 2), p.y - (s1.GetHeight() / 2));
+                    dc->SetFont(sfont);
+                }
+            }
+        }
+    }
+    else
+    {
+        if( m_positions.GetCount() > 0 )
+        {
+            GeoPoint &Pos = m_positions[0];
+            if( PointInLLBox(vp, Pos.x, Pos.y) )
+            {
+                wxPoint p;
+                GetCanvasPixLL(vp, &p, Pos.y, Pos.x);
+                wxColour colour;
+                wxString msg1 = GetShortType(m_type);
+                if( !msg1.IsEmpty() )
+                {
+                    hasDrawn = true;
+                    glEnable( GL_BLEND );
+                    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+                    
+                    wxPoint p;
+                    GetCanvasPixLL(vp, &p, Pos.y, Pos.x);
+                    int w, h;
+                    sysfont.GetTextExtent(msg1, &w, &h);
+                    
+                    int xd = p.x - (w / 2);
+                    int yd = p.y - (h / 2);
+                    
+                    GetGlobalColor ( _T ( "SNDG1" ), &colour );
+                    glColor3ub(colour.Red() , colour.Green(), colour.Blue());
+
+                    glEnable( GL_TEXTURE_2D );
+                    sysfont.RenderString(msg1, xd, yd);
+                    glDisable( GL_TEXTURE_2D );
+                    glDisable( GL_BLEND );
+                }
+            }
+        }
+    }
+
     return hasDrawn;
 }
 
