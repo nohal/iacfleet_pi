@@ -249,7 +249,7 @@ bool IACFile::ParsePositions( IACSystem &sys, int section )
         {
             morepos = false;
         }
-        else if( section == SECTION_FRONTAL && token.Matches(_T("66??0")) 
+        else if( section == SECTION_FRONTAL && token.Matches(_T("66???")) 
                 && ( m_positionsType == 88 || m_newlineTokens.size() < 10 //In case the file seems formatted with new lines, we take advantage of it and say that new system must start on new line 
                     || std::find(m_newlineTokens.begin(), m_newlineTokens.end(), m_tokensI - 1 ) != m_newlineTokens.end() ) )
         {
