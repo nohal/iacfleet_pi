@@ -1112,7 +1112,10 @@ wxString IACSystem::ToString( bool includePosition ) const
     {
         t.Append(wxT(" ") + GetIntensity() + wxT(" "));
     }
-    t.Append(GetCharacteristic(m_char) + wxT("\n"));
+    if( m_char >= 0 )
+    {
+        t.Append(GetCharacteristic(m_char) + wxT("\n"));
+    }
     if(includePosition)
     {
         t.Append(PositionsToString() + wxT("\n"));
