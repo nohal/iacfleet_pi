@@ -311,7 +311,7 @@ void IACFleetUIDialog::CreateControls()
     m_pFileListCtrl = new wxListBox(filepanel,ID_FILESELECTED,
             wxDefaultPosition,wxDefaultSize,0,
             NULL,
-            wxLB_MULTIPLE|wxLB_HSCROLL|wxLB_NEEDED_SB,
+            wxLB_EXTENDED|wxLB_HSCROLL|wxLB_NEEDED_SB,
             wxDefaultValidator,wxListBoxNameStr);
 
     fpsizer->Add(m_pFileListCtrl, 1, wxGROW);
