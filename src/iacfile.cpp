@@ -92,6 +92,7 @@ void IACFile::Invalidate( void )
     m_minlonw = 999.9;
     m_maxlonw = -999.9;
     m_positionsType = -1;
+    m_newlineTokens.clear();
 }
 
 wxFileInputStream* IACFile::GetStream( wxString &filename )
@@ -134,6 +135,7 @@ bool IACFile::Read( wxInputStream &stream )
         isok = Decode();
     }
     m_isok = isok;
+    wxMessageBox(m_tokens[0]);
     return isok;
 }
 
@@ -408,8 +410,9 @@ bool IACFile::ParsePressureSection(void)
     for(;;)
     {
         token = tokenFind(_T("8????"));
-        if( !token.IsEmpty( ))
+        if( !token.IsEmpty( ) )
         {
+            wxMessageBox(token);
             // parse pressure system token
             IACPressureSystem sys;
             sys.m_type = TokenNumber(token, 1, 1);
@@ -483,7 +486,7 @@ bool IACFile::ParseIsobarSection( void )
     wxString token;
     for(;;)
     {
-        token=tokenFind(_T("44???"));
+        token = tokenFind(_T("44???"));
         if( !token.IsEmpty() )
         {
             IACIsobarSystem sys;
@@ -612,6 +615,10 @@ wxString IACFile::ReadToken( wxInputStream &file )
 
         if( c != wxEOF)
         {
+            if( c == '\n')
+            {
+                m_newlineTokens.push_back( m_tokens.Count() );
+            }
             m_RawData.Append( (char)c );
             switch( mode )
             {
@@ -918,7 +925,7 @@ bool IACSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &
     bool hasDrawn=false;
     if( dc )
     {
-        if( m_positions.GetCount() > 0 )
+        if( m_positions.GetCount() == 1 )
         {
             GeoPoint &Pos = m_positions[0];
             if( PointInLLBox(vp, Pos.x, Pos.y) )
@@ -957,10 +964,20 @@ bool IACSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &
                 }
             }
         }
+        else
+        {
+            wxColour colour;
+            wxPen pen;
+            pen = dc->GetPen();
+            GetGlobalColor ( _T ( "GREEN2" ), &colour );
+            dc->SetPen(wxPen( colour, m_isoLineWidth ));
+            DrawPositions( dc, vp );
+            dc->SetPen(pen);
+        }
     }
     else
     {
-        if( m_positions.GetCount() > 0 )
+        if( m_positions.GetCount() == 1 )
         {
             GeoPoint &Pos = m_positions[0];
             if( PointInLLBox(vp, Pos.x, Pos.y) )
@@ -999,6 +1016,13 @@ bool IACSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &
                     glDisable( GL_BLEND );
                 }
             }
+        }
+        else
+        {
+            wxColour colour = m_isoLineColor;
+            GetGlobalColor ( _T ( "GREEN2" ), &m_isoLineColor );
+            DrawPositions( dc, vp );
+            m_isoLineColor = colour;
         }
     }
     return hasDrawn;

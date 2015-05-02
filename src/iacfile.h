@@ -44,7 +44,10 @@
 
 #include "ocpn_plugin.h"
 
-#define ISOBAR_WIDTH 1
+#include <vector>
+#include <algorithm>
+
+#define ISOBAR_WIDTH 2
 #define FRONT_WIDTH 5
 #define GL_MIN_LINE_WIDTH 1.5
 #define NUMBERS_FONT_SIZE 9
@@ -245,5 +248,6 @@ private:
     double m_minlonw;
     double m_maxlonw;
     int m_positionsType;
+    std::vector<size_t> m_newlineTokens;
 };
 #endif
