@@ -91,6 +91,7 @@ void IACFile::Invalidate( void )
     m_maxlone = -999.9;
     m_minlonw = 999.9;
     m_maxlonw = -999.9;
+    m_positionsType = -1;
 }
 
 wxFileInputStream* IACFile::GetStream( wxString &filename )
@@ -185,27 +186,32 @@ bool IACFile::Decode( void )
 
 bool IACFile::ReadHeader( void )
 {
-    if( !tokenFind(_T("10001"), true).IsEmpty() && !tokenFind(_T("33388")).IsEmpty() )
+    if( !tokenFind(_T("10001"), true).IsEmpty() ) //TODO: We also want to match 65556 in the 24h NOAA forecast
     {
-        // header found, read time
-        wxString timestr = tokenFind(_T("0????"));
-        if( !timestr.IsEmpty() )
+        wxString datasetstr = tokenFind(_T("333??"));
+        if( !datasetstr.IsEmpty() )
         {
-            // parse time, format 0DDHH, DD=date, HH=UTC hours
-            m_issueDate = _("Day ") + timestr.Mid(1, 2) +
-                    _(" Hour ") + timestr.Mid(3, 2) +
-                    _T(" UTC");
-            return true;
+            m_positionsType = IACFile::TokenNumber(datasetstr, 3, 2);
+            // header found, read time
+            wxString timestr = tokenFind(_T("0????"));
+            if( !timestr.IsEmpty() )
+            {
+                // parse time, format 0DDHH, DD=date, HH=UTC hours
+                m_issueDate = _("Day ") + timestr.Mid(1, 2) +
+                        _(" Hour ") + timestr.Mid(3, 2) +
+                        _T(" UTC");
+                return true;
+            }
         }
     }
     return false;
 }
 
-bool IACFile::ParsePositions( IACSystem &sys )
+bool IACFile::ParsePositions( IACSystem &sys, int section )
 {
     wxString token;
     wxString lasttoken;
-    bool firsttime=true;
+    bool firsttime = true;
 
     for(;;)
     {
@@ -219,15 +225,31 @@ bool IACFile::ParsePositions( IACSystem &sys )
         int oct     = TokenNumber(token, 0, 1);
         int diff = abs(lastoct - oct);
         
-        if( oct == 4 )
+        if( m_positionsType == POS_OCTANTS && oct == 4 )
         {
             morepos = false;
         }
-        else if( (diff > 1) && (diff < 8) )
+        else if( m_positionsType == POS_OCTANTS && (diff > 1) && (diff < 8) )
         {
             morepos = false;
         }
-        else if( token.StartsWith(_T("66")) || token == _T("19191") )
+        else if( section == SECTION_FRONTAL && token.Matches(_T("66??0")) )
+        {
+            morepos = false;
+        }
+        else if( section == SECTION_PRESSURE && token.StartsWith(_T("8")) )
+        {
+            morepos = false;
+        }
+        else if( token.Matches( _T("999??") ) )
+        {
+            morepos = false;
+        }
+        else if( section == SECTION_ISOBAR && ( token.Matches(_T("440??")) || token.Matches(_T("449??")) ) )
+        {
+            morepos = false;
+        }
+        else if( token == _T("19191"))
         {
             morepos = false;
         }
@@ -255,7 +277,7 @@ bool IACFile::ParsePositions( IACSystem &sys )
             // ignore double entries following eachother
             if( token != lasttoken )
             {
-                GeoPoint pos(token);
+                GeoPoint pos( token, m_positionsType );
                 sys.m_positions.Add(pos);
                 if( pos.x >= 0.0)
                 {
@@ -275,8 +297,8 @@ bool IACFile::ParsePositions( IACSystem &sys )
                     m_minlat = pos.y;
                 if( pos.y > m_maxlat )
                     m_maxlat = pos.y;
-                if( pos.x < 0.1 && pos.x > -0.1 )
-                    wxMessageBox( token );
+//                if( pos.x < 0.1 && pos.x > -0.1 )
+//                    wxMessageBox( token );
             }
             else
             {
@@ -312,7 +334,7 @@ bool IACFile::ParseMovement( IACSystem &sys )
 {
     wxString token;
 
-    token=tokenFind();
+    token = tokenFind();
     if( !token.IsEmpty() )
     {
         // if invalid movement, ignore, push back
@@ -354,16 +376,16 @@ bool IACFile::ParseSections( void )
             int section = TokenNumber(token, 3, 2);
             switch(section)
             {
-            case 0:
+            case SECTION_PRESSURE:
                 ParsePressureSection();
                 break;
-            case 11:
+            case SECTION_FRONTAL:
                 ParseFrontalSection();
                 break;
-            case 22:
+            case SECTION_ISOBAR:
                 ParseIsobarSection();
                 break;
-            case 55:
+            case SECTION_TROPICAL:
                 ParseTropicalSection();
                 break;
             default:
@@ -398,8 +420,9 @@ bool IACFile::ParsePressureSection(void)
                 sys.m_val += 1000;
             }
 
-            ParsePositions(sys);
-            ParseMovement(sys);
+            ParsePositions(sys, SECTION_PRESSURE);
+            if( !m_tokens[m_tokensI].StartsWith(_T("8")) )
+                ParseMovement(sys);
             m_pressure.Add(sys);
         }
         else
@@ -427,7 +450,7 @@ bool IACFile::ParseFrontalSection( void )
             sys.m_char = TokenNumber(token, 4, 1);
 
 
-            ParsePositions(sys);
+            ParsePositions(sys, SECTION_FRONTAL);
             ParseMovement(sys);
             m_frontal.Add(sys);
         }
@@ -450,14 +473,14 @@ bool IACFile::ParseIsobarSection( void )
         if( !token.IsEmpty() )
         {
             IACIsobarSystem sys;
-            sys.m_val =TokenNumber(token, 2, 3);
+            sys.m_val = TokenNumber(token, 2, 3);
             if( sys.m_val < 500 )
             {
                 sys.m_val += 1000;
             }
 
             // Position
-            ParsePositions(sys);
+            ParsePositions(sys, SECTION_ISOBAR);
             m_isobars.Add(sys);
         }
         else
@@ -480,9 +503,9 @@ bool IACFile::ParseTropicalSection( void )
         {
             // parse pressure system token
             IACTropicalSystem sys;
-            sys.m_type=TokenNumber(token, 2, 1);
-            sys.m_int =TokenNumber(token, 3, 1);
-            sys.m_char=TokenNumber(token, 4, 1);
+            sys.m_type = TokenNumber(token, 2, 1);
+            sys.m_int  = TokenNumber(token, 3, 1);
+            sys.m_char = TokenNumber(token, 4, 1);
 
             // tropical system token MAY be followed by 555PP pressure token
             // in this case it is a tropical LOW or cyclone
@@ -505,7 +528,7 @@ bool IACFile::ParseTropicalSection( void )
                     sys.m_val += 1000;
                 }
             }
-            ParsePositions(sys);
+            ParsePositions(sys, SECTION_TROPICAL);
             ParseMovement(sys);
             m_tropical.Add(sys);
         }
@@ -586,7 +609,7 @@ wxString IACFile::ReadToken( wxInputStream &file )
                 }
                 break;
             case 1:
-                if( isdigit(c) )
+                if( isdigit(c) || c == '/' )
                 {
                     token.Append( (char)c );
                 }
@@ -637,6 +660,12 @@ bool IACFile::Draw( wxDC *dc, PlugIn_ViewPort *vp )
             maxlon = m_maxlonw;
         else
             maxlon = m_maxlone;
+        if( -179.0 < m_minlonw && m_minlonw < 0 && 179.0 > m_maxlone && m_maxlone > 0 )
+        {
+            minlon = m_minlonw;
+            maxlon = m_maxlone;
+        }
+
         GetCanvasPixLL(vp, &p1, m_minlat, minlon);
         GetCanvasPixLL(vp, &p2, m_maxlat, minlon);
         GetCanvasPixLL(vp, &p3, m_maxlat, maxlon);
@@ -730,47 +759,96 @@ const double GeoPoint::INVALID_KOORD = 9999.9;
 
 
 // initialize from IAC lat/lon token
-void GeoPoint::Set( wxString &token )
+void GeoPoint::Set( wxString &token, int coordsys )
 {
     if( token.Len() == 5 )
     {
-        int oct=IACFile::TokenNumber(token, 0, 1);
-        int lat=IACFile::TokenNumber(token, 1, 2);
-        int lon=IACFile::TokenNumber(token, 3, 2);
-        int ns = (oct > 3) ? -1 : +1; // sign for south(-1) or north(+1)
-        lat *= ns;            // lat is now in degrees
-
-
-        // eliminate north/south
-        if( oct > 4 )
+        if( coordsys == POS_OCTANTS )
         {
-            oct -= 5;
-        }
-        switch( oct )
-        {
-        case 0: // West 0..90
-            lon = - lon;
-            break;
-        case 1: // West 90..180
-            if ( lon < 90 )
+            int oct = IACFile::TokenNumber(token, 0, 1);
+            int lat = IACFile::TokenNumber(token, 1, 2);
+            int lon = IACFile::TokenNumber(token, 3, 2);
+            int ns = (oct > 3) ? -1 : +1; // sign for south(-1) or north(+1)
+            lat *= ns;            // lat is now in degrees
+
+            // eliminate north/south
+            if( oct > 4 )
             {
-                lon = - (100 + lon);
+                oct -= 5;
             }
-            else
+            switch( oct )
             {
+            case 0: // West 0..90
                 lon = - lon;
+                break;
+            case 1: // West 90..180
+                if ( lon < 90 )
+                {
+                    lon = - (100 + lon);
+                }
+                else
+                {
+                    lon = - lon;
+                }
+                break;
+            case 2: // East 90 .. 180
+                if( lon < 90 )
+                {
+                    lon = 100 + lon;
+                }
+                break;
+            case 3: // East 0..90
+                break;
             }
-            break;
-        case 2: // East 90 .. 180
-            if( lon < 90 )
-            {
-                lon = 100 + lon;
-            }
-            break;
-        case 3: // East 0..90
-            break;
+            Set( double(lon), double(lat) );
         }
-        Set(double(lon), double(lat));
+        else if( coordsys == POS_NH_HALF_DEG )
+        {
+            int k = IACFile::TokenNumber(token, 4, 1);
+            double lat = IACFile::TokenNumber(token, 0, 2);
+            double lon = IACFile::TokenNumber(token, 2, 2);
+            switch( k )
+            {
+            //East longitudes 0-99, west longitudes 100-180
+            case 0: //As sent
+                break;
+            case 1: //Add 1/2 deg to lat
+                lat += 0.5;
+                break;
+            case 2: //Add 1/2 deg to lon
+                lon += 0.5;
+                break;
+            case 3: //Add 1/2 deg to lat and lon
+                lat += 0.5;
+                lon += 0.5;
+                break;
+            case 4: //Whole degrees
+                break;
+            case 5: //As sent
+                lon = -lon;
+                break;
+            //East longitudes 10-180, west longitudes 0-99
+            case 6: //Add 1/2 deg to lat
+                lat += 0.5;
+                lon = -lon;
+                break;
+            case 7: //Add 1/2 deg to lon
+                lon += 0.5;
+                lon = -lon;
+                break;
+            case 8: //Add 1/2 deg to lat and lon
+                lat += 0.5;
+                lon += 0.5;
+                lon = -lon;
+                break;
+            case 9: //Whole degrees
+                lon = -lon;
+                break;
+            }
+            Set( lon, lat );
+        }
+        else
+            Set();
     }
     else
     {

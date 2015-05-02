@@ -61,6 +61,14 @@
 #define INTERTROPICAL                     8
 #define CONVERGENCE_LINE                  9
 
+#define SECTION_PRESSURE                  0
+#define SECTION_FRONTAL                   11
+#define SECTION_ISOBAR                    22
+#define SECTION_TROPICAL                  55
+
+#define POS_NH_HALF_DEG                   0
+#define POS_OCTANTS                       88
+
 class GeoPoint:public wxRealPoint
 {
 public:
@@ -69,11 +77,11 @@ public:
     {
         Set(lon, lat);
     }
-    GeoPoint( wxString &token )
+    GeoPoint( wxString &token, int coordsys )
     {
-        Set(token);
+        Set( token, coordsys );
     }
-    void Set( wxString &token );
+    void Set( wxString &token, int coordsys );
     void Set( double lon = INVALID_KOORD, double lat = INVALID_KOORD )
     {
         x = lon;
@@ -208,7 +216,7 @@ private:
 
     bool Parse( void );
     bool ReadHeader( void );
-    bool ParsePositions( IACSystem &sys );
+    bool ParsePositions( IACSystem &sys, int section );
     bool ParseMovement( IACSystem &sys );
     bool ParseSections( void );
     bool ParsePressureSection( void );
@@ -236,5 +244,6 @@ private:
     double m_maxlone;
     double m_minlonw;
     double m_maxlonw;
+    int m_positionsType;
 };
 #endif
