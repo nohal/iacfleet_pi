@@ -186,7 +186,13 @@ bool IACFile::Decode( void )
 
 bool IACFile::ReadHeader( void )
 {
-    if( !tokenFind(_T("10001"), true).IsEmpty() ) //TODO: We also want to match 65556 in the 24h NOAA forecast
+    bool data = !tokenFind(_T("10001"), true).IsEmpty();
+    if( !data ) //If it is not analysis, lets check for NOAA 24 hour forecast
+    {
+        m_tokensI = 0;
+        data = !tokenFind(_T("65556"), true).IsEmpty();
+    }
+    if( data )
     {
         wxString datasetstr = tokenFind(_T("333??"));
         if( !datasetstr.IsEmpty() )
@@ -307,7 +313,7 @@ bool IACFile::ParsePositions( IACSystem &sys, int section )
                 // stop parsing positions, but read one
                 // more token to stay in sync
                 token = tokenFind();
-                break;
+                //break;
             }
         }
         else
