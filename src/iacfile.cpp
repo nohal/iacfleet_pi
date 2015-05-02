@@ -245,7 +245,7 @@ bool IACFile::ParsePositions( IACSystem &sys, int section )
         {
             morepos = false;
         }
-        else if( section == SECTION_ISOBAR && ( token.Matches(_T("440??")) || token.Matches(_T("449??")) ) )
+        else if( section == SECTION_ISOBAR && ( token.Matches(_T("440??")) || token.Matches(_T("449??")) || token.Matches(_T("448??")) ) )
         {
             morepos = false;
         }
