@@ -72,6 +72,8 @@
 #define POS_NH_HALF_DEG                   0
 #define POS_OCTANTS                       88
 
+#define MAX_FILESIZE                      20000
+
 class GeoPoint:public wxRealPoint
 {
 public:
@@ -205,7 +207,7 @@ public:
     {
         return m_RawData;
     }
-    static const size_t IACMaxSize = 10000;
+    static const size_t IACMaxSize = MAX_FILESIZE;
 
     void Invalidate( void );
     IACSystem * FindSystem( GeoPoint &pos, double deviation );
