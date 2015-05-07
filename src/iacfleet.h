@@ -152,6 +152,8 @@ private:
     wxRadioButton     *m_rbForecast;
     wxButton          *m_bNoaaDownload;
     
+    wxStaticText      *m_stNadi;
+    
     wxTimer           *m_timer;
 };
 

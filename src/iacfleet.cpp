@@ -256,11 +256,9 @@ void IACFleetUIDialog::OnChooseDirClick( wxCommandEvent& event )
 
 void IACFleetUIDialog::CreateControls()
 {
-
 // A top-level sizer
     wxBoxSizer* topSizer = new wxBoxSizer( wxVERTICAL );
     SetSizer( topSizer );
-
 
 //    The Fleetode directory
     wxStaticBoxSizer* itemStaticBoxSizer11Static = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _ ( "IACFleet File Directory" ) ), wxHORIZONTAL );
@@ -347,8 +345,9 @@ void IACFleetUIDialog::CreateControls()
     rpsizer->Add(m_pRawCtrl, 1, wxGROW);
     
     // Downloads panel
-    wxPanel *dnldpanel = new wxPanel( itemNotebook, wxID_ANY,
-            wxDefaultPosition, wxSize(-1, -1));
+    wxScrolledWindow *dnldpanel = new wxScrolledWindow( itemNotebook, wxID_ANY,
+            wxDefaultPosition, wxDefaultSize, wxHSCROLL|wxVSCROLL);
+    dnldpanel->SetScrollRate(5, 5);
     itemNotebook->AddPage(dnldpanel, _("Downloads"));
     //Generated mostly from wxFormBuilder
     wxBoxSizer* bSizerMain;
@@ -434,8 +433,18 @@ void IACFleetUIDialog::CreateControls()
 	
 	sbSizerNOAA->Add( bsNOAA, 1, wxEXPAND, 5 );
 	
-	
 	bSizerMain->Add( sbSizerNOAA, 0, wxALL|wxEXPAND, 5 );
+	
+	//NADI
+	wxStaticBoxSizer* sbSizerNadi;
+	sbSizerNadi = new wxStaticBoxSizer( new wxStaticBox( dnldpanel, wxID_ANY, _("South Pacific (from Fiji Meteorological Service, Nadi)") ), wxVERTICAL );
+	
+	m_stNadi = new wxStaticText( dnldpanel, wxID_ANY, _("The dataset is available from Saildocs\nSend an e-mail with the text\nfleet.nadi\nand any subject to query@saildocs.com\nWhen you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."), wxDefaultPosition, wxDefaultSize, 0 );
+	m_stNadi->Wrap( 300 );
+	sbSizerNadi->Add( m_stNadi, 0, wxALL, 5 );
+	
+	
+	bSizerMain->Add( sbSizerNadi, 0, wxALL|wxEXPAND, 5 );
 	    
     // Connect Events
     m_bBrDownload->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( IACFleetUIDialog::OnBrDownload ), NULL, this );
