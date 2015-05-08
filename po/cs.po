@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 14:50-0500\n"
-"PO-Revision-Date: 2015-05-02 15:51-0400\n"
+"POT-Creation-Date: 2015-05-06 20:15-0500\n"
+"PO-Revision-Date: 2015-05-08 11:24-0400\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
@@ -315,7 +315,7 @@ msgstr "existence nejistá"
 
 #: src/iacfile.cpp:1349
 msgid "formation expected"
-msgstr ""
+msgstr "očekávaný vznik"
 
 #: src/iacfile.cpp:1350
 msgid "position certain"
@@ -327,7 +327,7 @@ msgstr "pozice nejistá"
 
 #: src/iacfile.cpp:1350
 msgid "movement doubtful"
-msgstr ""
+msgstr "pohyb nejistý"
 
 #: src/iacfile.cpp:1473
 #, c-format
@@ -354,140 +354,148 @@ msgstr "IACFleet předvolby"
 msgid "IACFleet Display Control"
 msgstr "IACFleet nastavení zobrazení"
 
-#: src/iacfleet.cpp:190 src/iacfleet.cpp:474 src/iacfleet.cpp:530
+#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:539
 msgid "Run as &animation"
-msgstr ""
+msgstr "Spustit jako &animaci"
 
 #: src/iacfleet.cpp:206
 msgid "Stop &animation"
-msgstr ""
+msgstr "Zastavit &animaci"
 
 #: src/iacfleet.cpp:242
 msgid "Select IACFleet Directory"
 msgstr "Vyber adresář IACFleet"
 
-#: src/iacfleet.cpp:266
+#: src/iacfleet.cpp:264
 msgid "IACFleet File Directory"
 msgstr "Adresář se souborem IACFleet"
 
-#: src/iacfleet.cpp:286
+#: src/iacfleet.cpp:284
 msgid "Files"
 msgstr "Soubory"
 
-#: src/iacfleet.cpp:294
+#: src/iacfleet.cpp:292
 msgid "Sort by"
-msgstr ""
+msgstr "Seřadit podle"
 
-#: src/iacfleet.cpp:298
+#: src/iacfleet.cpp:296
 msgid "Name"
-msgstr ""
+msgstr "Jméno"
 
-#: src/iacfleet.cpp:301
+#: src/iacfleet.cpp:299
 msgid "File timestamp"
-msgstr ""
+msgstr "Čas souboru"
 
-#: src/iacfleet.cpp:322
+#: src/iacfleet.cpp:320
 msgid "Text"
 msgstr "Text"
 
-#: src/iacfleet.cpp:337
+#: src/iacfleet.cpp:335
 msgid "Raw"
 msgstr "Zdrojová data"
 
-#: src/iacfleet.cpp:352
+#: src/iacfleet.cpp:351
 msgid "Downloads"
-msgstr ""
+msgstr "Ke stažení"
 
-#: src/iacfleet.cpp:359
+#: src/iacfleet.cpp:358
 msgid "Brazil"
-msgstr ""
+msgstr "Brazílie"
 
-#: src/iacfleet.cpp:364
+#: src/iacfleet.cpp:363
 msgid "Final date"
-msgstr ""
+msgstr "Konečné datum"
 
-#: src/iacfleet.cpp:372
+#: src/iacfleet.cpp:371
 msgid "Hour"
-msgstr ""
+msgstr "Hodina"
 
-#: src/iacfleet.cpp:376
+#: src/iacfleet.cpp:375
 msgid "00"
 msgstr ""
 
-#: src/iacfleet.cpp:376
+#: src/iacfleet.cpp:375
 msgid "12"
 msgstr ""
 
-#: src/iacfleet.cpp:384 src/iacfleet.cpp:392 src/iacfleet.cpp:431
+#: src/iacfleet.cpp:383 src/iacfleet.cpp:391 src/iacfleet.cpp:430
 msgid "Download"
-msgstr ""
+msgstr "Stáhnout"
 
-#: src/iacfleet.cpp:399
+#: src/iacfleet.cpp:398
 msgid "dataset(s)"
-msgstr ""
+msgstr "soubor(y) dat"
 
-#: src/iacfleet.cpp:405
+#: src/iacfleet.cpp:404
 msgid "The data is available since 2006 and accesible manually from"
-msgstr ""
+msgstr "Data jsou k dispozici od roku 2006 a přístupná také ručně z"
 
-#: src/iacfleet.cpp:409
+#: src/iacfleet.cpp:408
 msgid "http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"
 msgstr ""
 
-#: src/iacfleet.cpp:417
+#: src/iacfleet.cpp:416
 msgid "NOAA North Atlantic and Europe"
-msgstr ""
+msgstr "NOAA severní Atlantik a Evropa"
 
-#: src/iacfleet.cpp:422
+#: src/iacfleet.cpp:421
 msgid "Analysis"
-msgstr ""
+msgstr "Analýza"
 
-#: src/iacfleet.cpp:425
+#: src/iacfleet.cpp:424
 msgid "24h forecast"
-msgstr ""
+msgstr "24h předpověď"
 
-#: src/iacfleet.cpp:452
+#: src/iacfleet.cpp:440
+msgid "South Pacific (from Fiji Meteorological Service, Nadi)"
+msgstr "Jižní Pacifik (od meteorologické služby Fidži v Nadi)"
+
+#: src/iacfleet.cpp:442
+msgid "The dataset is available from Saildocs\nSend an e-mail with the text\nfleet.nadi\nand any subject to query@saildocs.com\nWhen you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."
+msgstr "Dataset je k dispozici od Saildocs\nPošli e-mail s textem\nfleet.nadi\na jakýmkoli předmětem na query@saildocs.com \naž dostaneš odpověď, zkopíruj ji na záložku Zdrojová data nebo ulož jako text a otevři na záložce Soubory."
+
+#: src/iacfleet.cpp:461
 msgid "Issue Date: "
-msgstr ""
+msgstr "Datum vydání: "
 
-#: src/iacfleet.cpp:469
+#: src/iacfleet.cpp:478
 msgid "&Close"
 msgstr "&Zavřít"
 
-#: src/iacfleet.cpp:615
+#: src/iacfleet.cpp:626
 #, c-format
 msgid "Error opening: %s"
-msgstr ""
+msgstr "Chyba při otevírání: %s"
 
-#: src/iacfleet.cpp:651
+#: src/iacfleet.cpp:663
 msgid "Sorry, you can't download data from the future - they don't exist..."
-msgstr ""
+msgstr "Promiň, nemůžeš stahovat data z budoucnosti - zatím neexistují..."
 
-#: src/iacfleet.cpp:656
+#: src/iacfleet.cpp:668
 msgid "Sorry, the data is not available before September 1, 2006..."
-msgstr ""
+msgstr "Promiňte data nejsou k dispozici před 1. září 2006..."
 
-#: src/iacfleet.cpp:674 src/iacfleet.cpp:754
+#: src/iacfleet.cpp:686 src/iacfleet.cpp:766
 msgid "Downloading file"
-msgstr ""
+msgstr "Stahování"
 
-#: src/iacfleet.cpp:675 src/iacfleet.cpp:755
+#: src/iacfleet.cpp:687 src/iacfleet.cpp:767
 msgid "Reading Headers: "
-msgstr ""
+msgstr "Čtení hlaviček: "
 
-#: src/iacfleet.cpp:690 src/iacfleet.cpp:770
+#: src/iacfleet.cpp:702 src/iacfleet.cpp:782
 #, c-format
 msgid "Failed to save: %s "
-msgstr ""
+msgstr "Uložení se nezdařilo: %s "
 
-#: src/iacfleet.cpp:696 src/iacfleet.cpp:776
+#: src/iacfleet.cpp:708 src/iacfleet.cpp:788
 #, c-format
 msgid "Failed to download: %s \nVerify there is a working Internet connection."
-msgstr ""
+msgstr "Stahování se nezdařilo: %s \nOvěř jestli je funkční připojení k Internetu."
 
 #: src/wxcurl/dialog.cpp:137
 msgid "Not available"
-msgstr ""
+msgstr "Není k dispozici"
 
 #: src/wxcurl/dialog.cpp:168
 msgid "URL:"
@@ -495,101 +503,101 @@ msgstr ""
 
 #: src/wxcurl/dialog.cpp:187
 msgid "Speed:"
-msgstr ""
+msgstr "Rychlost:"
 
 #: src/wxcurl/dialog.cpp:196
 msgid "Elapsed time:"
-msgstr ""
+msgstr "Uplynulý čas:"
 
 #: src/wxcurl/dialog.cpp:198
 msgid "Estimated total time:"
-msgstr ""
+msgstr "Odhadovaný celkový čas:"
 
 #: src/wxcurl/dialog.cpp:200
 msgid "Estimated remaining time:"
-msgstr ""
+msgstr "Odhad zbývajícího času:"
 
 #: src/wxcurl/dialog.cpp:243 src/wxcurl/dialog.cpp:395
 msgid "Abort"
-msgstr ""
+msgstr "Přerušit"
 
 #: src/wxcurl/dialog.cpp:245
 msgid "Settings"
-msgstr ""
+msgstr "Nastavení"
 
 #: src/wxcurl/dialog.cpp:250 src/wxcurl/dialog.cpp:416
 msgid "Pause"
-msgstr ""
+msgstr "Pozastavit"
 
 #: src/wxcurl/dialog.cpp:252
 msgid "Start"
-msgstr ""
+msgstr "Spustit"
 
 #: src/wxcurl/dialog.cpp:395
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 #: src/wxcurl/dialog.cpp:406
 msgid "Resume"
-msgstr ""
+msgstr "Pokračovat"
 
 #: src/wxcurl/dialog.cpp:409
 msgid "0 (transfer paused)"
-msgstr ""
+msgstr "0 (přenos pozastaven)"
 
 #: src/wxcurl/dialog.cpp:457
 msgid "Connection settings"
-msgstr ""
+msgstr "Nastavení připojení"
 
 #: src/wxcurl/dialog.cpp:457
 msgid "Connection settings used for the transfer:"
-msgstr ""
+msgstr "Nastavení připojení pro přenos:"
 
 #: src/wxcurl/dialog.cpp:512
 msgid "0 (transfer completed)"
-msgstr ""
+msgstr "0 (přenos dokončen)"
 
 #: src/wxcurl/dialog.cpp:533
 msgid "Downloaded:"
-msgstr ""
+msgstr "Staženo:"
 
 #: src/wxcurl/dialog.cpp:581
 msgid "Uploaded:"
-msgstr ""
+msgstr "Odesláno:"
 
 #: src/wxcurl/panel.cpp:111
 msgid "Username:"
-msgstr ""
+msgstr "Uživatelské jméno:"
 
 #: src/wxcurl/panel.cpp:112
 msgid "Password:"
-msgstr ""
+msgstr "Heslo:"
 
 #: src/wxcurl/panel.cpp:120
 msgid "Port:"
-msgstr ""
+msgstr "Port:"
 
 #: src/wxcurl/panel.cpp:134
 msgid "Proxy settings"
-msgstr ""
+msgstr "Nastavení proxy"
 
 #: src/wxcurl/panel.cpp:136
 msgid "Use proxy"
-msgstr ""
+msgstr "Použít server proxy"
 
 #: src/wxcurl/panel.cpp:141
 msgid "Proxy host:"
-msgstr ""
+msgstr "Proxy server:"
 
 #: src/wxcurl/panel.cpp:142
 msgid "Proxy username:"
-msgstr ""
+msgstr "Proxy uživatelské jméno:"
 
 #: src/wxcurl/panel.cpp:143
 msgid "Proxy password:"
-msgstr ""
+msgstr "Proxy heslo:"
 
 #: src/wxcurl/panel.cpp:144
 msgid "Proxy port:"
-msgstr ""
+msgstr "Proxy port:"
 

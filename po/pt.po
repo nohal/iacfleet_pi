@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 14:50-0500\n"
-"PO-Revision-Date: 2015-05-02 15:52-0400\n"
+"POT-Creation-Date: 2015-05-06 20:15-0500\n"
+"PO-Revision-Date: 2015-05-08 11:25-0400\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
@@ -354,133 +354,141 @@ msgstr "Preferências do IACFleet"
 msgid "IACFleet Display Control"
 msgstr "Controle de exibição do IACFleet"
 
-#: src/iacfleet.cpp:190 src/iacfleet.cpp:474 src/iacfleet.cpp:530
+#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:539
 msgid "Run as &animation"
-msgstr ""
+msgstr "Executar como &animação"
 
 #: src/iacfleet.cpp:206
 msgid "Stop &animation"
-msgstr ""
+msgstr "Parar &animação"
 
 #: src/iacfleet.cpp:242
 msgid "Select IACFleet Directory"
 msgstr "Selecione o diretório IACFleet"
 
-#: src/iacfleet.cpp:266
+#: src/iacfleet.cpp:264
 msgid "IACFleet File Directory"
 msgstr "Diretório de arquivos de IACFleet"
 
-#: src/iacfleet.cpp:286
+#: src/iacfleet.cpp:284
 msgid "Files"
 msgstr "Arquivos"
 
-#: src/iacfleet.cpp:294
+#: src/iacfleet.cpp:292
 msgid "Sort by"
 msgstr "Ordenar por"
 
-#: src/iacfleet.cpp:298
+#: src/iacfleet.cpp:296
 msgid "Name"
 msgstr "Nome"
 
-#: src/iacfleet.cpp:301
+#: src/iacfleet.cpp:299
 msgid "File timestamp"
 msgstr "Arquivo timestamp"
 
-#: src/iacfleet.cpp:322
+#: src/iacfleet.cpp:320
 msgid "Text"
 msgstr "Texto"
 
-#: src/iacfleet.cpp:337
+#: src/iacfleet.cpp:335
 msgid "Raw"
 msgstr ""
 
-#: src/iacfleet.cpp:352
+#: src/iacfleet.cpp:351
 msgid "Downloads"
 msgstr "Baixar"
 
-#: src/iacfleet.cpp:359
+#: src/iacfleet.cpp:358
 msgid "Brazil"
 msgstr "Brasil"
 
-#: src/iacfleet.cpp:364
+#: src/iacfleet.cpp:363
 msgid "Final date"
 msgstr "Data final"
 
-#: src/iacfleet.cpp:372
+#: src/iacfleet.cpp:371
 msgid "Hour"
 msgstr "Hora"
 
-#: src/iacfleet.cpp:376
+#: src/iacfleet.cpp:375
 msgid "00"
 msgstr "00"
 
-#: src/iacfleet.cpp:376
+#: src/iacfleet.cpp:375
 msgid "12"
 msgstr "12"
 
-#: src/iacfleet.cpp:384 src/iacfleet.cpp:392 src/iacfleet.cpp:431
+#: src/iacfleet.cpp:383 src/iacfleet.cpp:391 src/iacfleet.cpp:430
 msgid "Download"
 msgstr "Baixar"
 
-#: src/iacfleet.cpp:399
+#: src/iacfleet.cpp:398
 msgid "dataset(s)"
 msgstr "conjunto(s)"
 
-#: src/iacfleet.cpp:405
+#: src/iacfleet.cpp:404
 msgid "The data is available since 2006 and accesible manually from"
 msgstr "Os dados estão disponíveis desde 2006 e accesivel manualmente a partir"
 
-#: src/iacfleet.cpp:409
+#: src/iacfleet.cpp:408
 msgid "http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"
 msgstr "http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"
 
-#: src/iacfleet.cpp:417
+#: src/iacfleet.cpp:416
 msgid "NOAA North Atlantic and Europe"
-msgstr ""
+msgstr "NOAA Atlântico Norte e Europa"
 
-#: src/iacfleet.cpp:422
+#: src/iacfleet.cpp:421
 msgid "Analysis"
-msgstr ""
+msgstr "Análise"
 
-#: src/iacfleet.cpp:425
+#: src/iacfleet.cpp:424
 msgid "24h forecast"
+msgstr "24h previsão"
+
+#: src/iacfleet.cpp:440
+msgid "South Pacific (from Fiji Meteorological Service, Nadi)"
 msgstr ""
 
-#: src/iacfleet.cpp:452
+#: src/iacfleet.cpp:442
+msgid "The dataset is available from Saildocs\nSend an e-mail with the text\nfleet.nadi\nand any subject to query@saildocs.com\nWhen you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."
+msgstr ""
+
+#: src/iacfleet.cpp:461
 msgid "Issue Date: "
 msgstr "Data de emissão: "
 
-#: src/iacfleet.cpp:469
+#: src/iacfleet.cpp:478
 msgid "&Close"
 msgstr "& Fechar"
 
-#: src/iacfleet.cpp:615
+#: src/iacfleet.cpp:626
 #, c-format
 msgid "Error opening: %s"
 msgstr "Erro ao abrir: %s"
 
-#: src/iacfleet.cpp:651
+#: src/iacfleet.cpp:663
 msgid "Sorry, you can't download data from the future - they don't exist..."
 msgstr "Desculpa, você não pode fazer o download de dados do futuro - eles não existem..."
 
-#: src/iacfleet.cpp:656
+#: src/iacfleet.cpp:668
 msgid "Sorry, the data is not available before September 1, 2006..."
 msgstr "Desculpa, os dados não estão disponíveis antes de 1 de setembro de 2006..."
 
-#: src/iacfleet.cpp:674 src/iacfleet.cpp:754
+#: src/iacfleet.cpp:686 src/iacfleet.cpp:766
 msgid "Downloading file"
 msgstr "Baixando arquivo"
 
-#: src/iacfleet.cpp:675 src/iacfleet.cpp:755
+#: src/iacfleet.cpp:687 src/iacfleet.cpp:767
 msgid "Reading Headers: "
 msgstr "Leitura de cabeçalhos: "
 
-#: src/iacfleet.cpp:690 src/iacfleet.cpp:770
+#: src/iacfleet.cpp:702 src/iacfleet.cpp:782
 #, c-format
 msgid "Failed to save: %s "
 msgstr "Falha ao salvar: %s "
 
-#: src/iacfleet.cpp:696 src/iacfleet.cpp:776
+#: src/iacfleet.cpp:708 src/iacfleet.cpp:788
 #, c-format
 msgid "Failed to download: %s \nVerify there is a working Internet connection."
 msgstr "Falha no descarregamento: %s \nVerifique se existe uma conexão com a Internet a trabalhar."
