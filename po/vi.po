@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-06 20:15-0500\n"
-"PO-Revision-Date: 2015-05-08 11:25-0400\n"
+"PO-Revision-Date: 2015-06-02 20:34-0400\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
@@ -17,19 +17,23 @@ msgstr ""
 "X-Crowdin-File: /plugins/iacfleet_pi/po/iacfleet_pi.pot\n"
 
 #: src/iacfile.cpp:157
-msgid "\n\nPressure systems:"
+msgid "\n\n"
+"Pressure systems:"
 msgstr ""
 
 #: src/iacfile.cpp:163
-msgid "\n\nFrontal systems:"
+msgid "\n\n"
+"Frontal systems:"
 msgstr ""
 
 #: src/iacfile.cpp:169
-msgid "\n\nTropical systems:"
+msgid "\n\n"
+"Tropical systems:"
 msgstr ""
 
 #: src/iacfile.cpp:176
-msgid "\n\nIsobars:"
+msgid "\n\n"
+"Isobars:"
 msgstr ""
 
 #: src/iacfile.cpp:216
@@ -343,7 +347,12 @@ msgid "IACFleet PlugIn for OpenCPN"
 msgstr ""
 
 #: src/iacfleet_pi.cpp:166
-msgid "IACFleet PlugIn for OpenCPN\nDisplay IAC Fleet Code information provided by NADI.\nInformation can be received by email by sending an email with the contents\n\"Send fleet.nadi\" to \"query@saildocs.com\"\nSave the EMail you get as response and open it with this\nPlugin to see the decoded text and a graphic overlay\n"
+msgid "IACFleet PlugIn for OpenCPN\n"
+"Display IAC Fleet Code information provided by NADI.\n"
+"Information can be received by email by sending an email with the contents\n"
+"\"Send fleet.nadi\" to \"query@saildocs.com\"\n"
+"Save the EMail you get as response and open it with this\n"
+"Plugin to see the decoded text and a graphic overlay\n"
 msgstr ""
 
 #: src/iacfleet_pi.cpp:176
@@ -451,7 +460,11 @@ msgid "South Pacific (from Fiji Meteorological Service, Nadi)"
 msgstr ""
 
 #: src/iacfleet.cpp:442
-msgid "The dataset is available from Saildocs\nSend an e-mail with the text\nfleet.nadi\nand any subject to query@saildocs.com\nWhen you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."
+msgid "The dataset is available from Saildocs\n"
+"Send an e-mail with the text\n"
+"fleet.nadi\n"
+"and any subject to query@saildocs.com\n"
+"When you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."
 msgstr ""
 
 #: src/iacfleet.cpp:461
@@ -490,7 +503,8 @@ msgstr ""
 
 #: src/iacfleet.cpp:708 src/iacfleet.cpp:788
 #, c-format
-msgid "Failed to download: %s \nVerify there is a working Internet connection."
+msgid "Failed to download: %s \n"
+"Verify there is a working Internet connection."
 msgstr ""
 
 #: src/wxcurl/dialog.cpp:137

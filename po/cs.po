@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-06 20:15-0500\n"
-"PO-Revision-Date: 2015-05-08 11:24-0400\n"
+"PO-Revision-Date: 2015-05-23 05:01-0400\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
@@ -17,20 +17,28 @@ msgstr ""
 "X-Crowdin-File: /plugins/iacfleet_pi/po/iacfleet_pi.pot\n"
 
 #: src/iacfile.cpp:157
-msgid "\n\nPressure systems:"
-msgstr "\n\nTlakové systémy:"
+msgid "\n\n"
+"Pressure systems:"
+msgstr "\n\n"
+"Tlakové systémy:"
 
 #: src/iacfile.cpp:163
-msgid "\n\nFrontal systems:"
-msgstr "\n\nFrontální systémy:"
+msgid "\n\n"
+"Frontal systems:"
+msgstr "\n\n"
+"Frontální systémy:"
 
 #: src/iacfile.cpp:169
-msgid "\n\nTropical systems:"
-msgstr "\n\nTropické systémy:"
+msgid "\n\n"
+"Tropical systems:"
+msgstr "\n\n"
+"Tropické systémy:"
 
 #: src/iacfile.cpp:176
-msgid "\n\nIsobars:"
-msgstr "\n\nIsobary:"
+msgid "\n\n"
+"Isobars:"
+msgstr "\n\n"
+"Isobary:"
 
 #: src/iacfile.cpp:216
 msgid "Day "
@@ -343,8 +351,18 @@ msgid "IACFleet PlugIn for OpenCPN"
 msgstr "Doplněk IACFleet pro OpenCPN"
 
 #: src/iacfleet_pi.cpp:166
-msgid "IACFleet PlugIn for OpenCPN\nDisplay IAC Fleet Code information provided by NADI.\nInformation can be received by email by sending an email with the contents\n\"Send fleet.nadi\" to \"query@saildocs.com\"\nSave the EMail you get as response and open it with this\nPlugin to see the decoded text and a graphic overlay\n"
-msgstr "Doplněk IACFleet pro OpenCPN\nZobrazuje IAC Fleet kódované informace o předpovědi počasí poskytované NADI.\nPro získání předpovědi zašli e-mail s textem\n, \"send fleet.nadi\" \nna adresu \"query@saildocs.com\" Ulož obdržený e-mail a otevři ho tímto doplňkem\nkterý ho dekóduje do textové podoby a zobrazí graficky na mapě\n"
+msgid "IACFleet PlugIn for OpenCPN\n"
+"Display IAC Fleet Code information provided by NADI.\n"
+"Information can be received by email by sending an email with the contents\n"
+"\"Send fleet.nadi\" to \"query@saildocs.com\"\n"
+"Save the EMail you get as response and open it with this\n"
+"Plugin to see the decoded text and a graphic overlay\n"
+msgstr "Doplněk IACFleet pro OpenCPN\n"
+"Zobrazuje IAC Fleet kódované informace o předpovědi počasí poskytované NADI.\n"
+"Pro získání předpovědi zašli e-mail s textem\n"
+", \"send fleet.nadi\" \n"
+"na adresu \"query@saildocs.com\" Ulož obdržený e-mail a otevři ho tímto doplňkem\n"
+"který ho dekóduje do textové podoby a zobrazí graficky na mapě\n"
 
 #: src/iacfleet_pi.cpp:176
 msgid "IACFleet Preferences"
@@ -451,8 +469,16 @@ msgid "South Pacific (from Fiji Meteorological Service, Nadi)"
 msgstr "Jižní Pacifik (od meteorologické služby Fidži v Nadi)"
 
 #: src/iacfleet.cpp:442
-msgid "The dataset is available from Saildocs\nSend an e-mail with the text\nfleet.nadi\nand any subject to query@saildocs.com\nWhen you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."
-msgstr "Dataset je k dispozici od Saildocs\nPošli e-mail s textem\nfleet.nadi\na jakýmkoli předmětem na query@saildocs.com \naž dostaneš odpověď, zkopíruj ji na záložku Zdrojová data nebo ulož jako text a otevři na záložce Soubory."
+msgid "The dataset is available from Saildocs\n"
+"Send an e-mail with the text\n"
+"fleet.nadi\n"
+"and any subject to query@saildocs.com\n"
+"When you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."
+msgstr "Dataset je k dispozici od Saildocs\n"
+"Pošli e-mail s textem\n"
+"fleet.nadi\n"
+"a jakýmkoli předmětem na query@saildocs.com \n"
+"až dostaneš odpověď, zkopíruj ji na záložku Zdrojová data nebo ulož jako text a otevři na záložce Soubory."
 
 #: src/iacfleet.cpp:461
 msgid "Issue Date: "
@@ -490,8 +516,10 @@ msgstr "Uložení se nezdařilo: %s "
 
 #: src/iacfleet.cpp:708 src/iacfleet.cpp:788
 #, c-format
-msgid "Failed to download: %s \nVerify there is a working Internet connection."
-msgstr "Stahování se nezdařilo: %s \nOvěř jestli je funkční připojení k Internetu."
+msgid "Failed to download: %s \n"
+"Verify there is a working Internet connection."
+msgstr "Stahování se nezdařilo: %s \n"
+"Ověř jestli je funkční připojení k Internetu."
 
 #: src/wxcurl/dialog.cpp:137
 msgid "Not available"
