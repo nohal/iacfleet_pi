@@ -64,7 +64,7 @@ IACFleetUIDialog::IACFleetUIDialog(void):
     m_pfolder_bitmap(NULL),
     m_lastViewPortValid(false),
     m_pitemCurrentDirectoryCtrl(NULL),
-    m_pFileListCtrl(NULL),    
+    m_pFileListCtrl(NULL),
     m_pTextCtrl(NULL),
     m_pRawCtrl(NULL),
     m_pFileTime(NULL),
@@ -202,7 +202,7 @@ void IACFleetUIDialog::OnIdAnimateClick( wxCommandEvent& event )
                 wxFileName fn(m_currentDir, m_FilenameArray[selectedFiles[i]]);
                 m_filesToAnimate.Add(fn.GetFullPath());
             }
-            
+
             m_bAnimation->SetLabel(_("Stop &animation"));
             m_timer->Start( ANIMATION_FRAME_MS );
         }
@@ -272,7 +272,7 @@ void IACFleetUIDialog::CreateControls()
     itemStaticBoxSizer11Static->Add( bChooseDir, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
 
     topSizer->Add( itemStaticBoxSizer11Static, 0, wxALL|wxEXPAND, 5 );
-    
+
     // panels
     wxNotebook *itemNotebook = new wxNotebook( this, ID_NOTEBOOK, wxDefaultPosition,
             wxDefaultSize, wxNB_TOP );
@@ -285,27 +285,27 @@ void IACFleetUIDialog::CreateControls()
 
     wxBoxSizer* fpsizer = new wxBoxSizer(wxVERTICAL);
     filepanel->SetSizer(fpsizer);
-      
+
     wxBoxSizer* bSizerSort;
     bSizerSort = new wxBoxSizer( wxHORIZONTAL );
-    
+
     m_stSort = new wxStaticText( filepanel, wxID_ANY, _("Sort by"), wxDefaultPosition, wxDefaultSize, 0 );
     m_stSort->Wrap( -1 );
     bSizerSort->Add( m_stSort, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
-    
+
     m_rbSortName = new wxRadioButton( filepanel, wxID_ANY, _("Name"), wxDefaultPosition, wxDefaultSize, 0 );
     bSizerSort->Add( m_rbSortName, 0, wxALL, 5 );
-    
+
     m_rbSortTime = new wxRadioButton( filepanel, wxID_ANY, _("File timestamp"), wxDefaultPosition, wxDefaultSize, 0 );
     bSizerSort->Add( m_rbSortTime, 0, wxALL, 5 );
-    
+
     if( m_sortType == SORT_NAME )
         m_rbSortName->SetValue( true );
     else
         m_rbSortTime->SetValue( true );
-    
+
     fpsizer->Add( bSizerSort, 0, wxEXPAND, 5 );
-    
+
     m_pFileListCtrl = new wxListBox(filepanel,ID_FILESELECTED,
             wxDefaultPosition,wxDefaultSize,0,
             NULL,
@@ -343,7 +343,7 @@ void IACFleetUIDialog::CreateControls()
             wxTE_MULTILINE|wxHSCROLL
                                );
     rpsizer->Add(m_pRawCtrl, 1, wxGROW);
-    
+
     // Downloads panel
     wxScrolledWindow *dnldpanel = new wxScrolledWindow( itemNotebook, wxID_ANY,
             wxDefaultPosition, wxDefaultSize, wxHSCROLL|wxVSCROLL);
@@ -353,25 +353,25 @@ void IACFleetUIDialog::CreateControls()
     wxBoxSizer* bSizerMain;
     bSizerMain = new wxBoxSizer( wxVERTICAL );
     dnldpanel->SetSizer(bSizerMain);
-    
+
     wxStaticBoxSizer* sbSizerBrazil;
     sbSizerBrazil = new wxStaticBoxSizer( new wxStaticBox( dnldpanel, wxID_ANY, _("Brazil") ), wxVERTICAL );
-    
+
     wxBoxSizer* bsBRazil;
     bsBRazil = new wxBoxSizer( wxHORIZONTAL );
-    
+
     m_stDate = new wxStaticText( dnldpanel, wxID_ANY, _("Final date"), wxDefaultPosition, wxDefaultSize, 0 );
     m_stDate->Wrap( -1 );
     bsBRazil->Add( m_stDate, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
-    
+
     m_dpBrazil = new wxDatePickerCtrl( dnldpanel, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT );
     bsBRazil->Add( m_dpBrazil, 0, wxALL, 5 );
     m_dpBrazil->SetValue(wxDateTime::Today());
-    
+
     m_stHour = new wxStaticText( dnldpanel, wxID_ANY, _("Hour"), wxDefaultPosition, wxDefaultSize, 0 );
     m_stHour->Wrap( -1 );
     bsBRazil->Add( m_stHour, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
-    
+
     wxString m_chHourChoices[] = { _("00"), _("12") };
     int m_chHourNChoices = sizeof( m_chHourChoices ) / sizeof( wxString );
     m_chHour = new wxChoice( dnldpanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_chHourNChoices, m_chHourChoices, 0 );
@@ -382,7 +382,7 @@ void IACFleetUIDialog::CreateControls()
 
     m_bBrDownload = new wxButton( dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0 );
     bsBRazil->Add( m_bBrDownload, 0, wxALL, 5 );
-    
+
     sbSizerBrazil->Add( bsBRazil, 0, wxEXPAND, 5 );
 
     wxBoxSizer* bSizerHistory;
@@ -400,52 +400,52 @@ void IACFleetUIDialog::CreateControls()
     bSizerHistory->Add( m_stForecasts, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
 
     sbSizerBrazil->Add( bSizerHistory, 1, wxEXPAND, 5 );
-    
+
     m_stBrDesc = new wxStaticText( dnldpanel, wxID_ANY, _("The data is available since 2006 and accesible manually from"), wxDefaultPosition, wxDefaultSize, 0 );
     m_stBrDesc->Wrap( -1 );
     sbSizerBrazil->Add( m_stBrDesc, 0, wxALL, 5 );
-    
+
     m_hlBr = new wxHyperlinkCtrl( dnldpanel, wxID_ANY, _("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"), wxT("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"), wxDefaultPosition, wxDefaultSize, wxHL_DEFAULT_STYLE );
     sbSizerBrazil->Add( m_hlBr, 0, wxALL, 5 );
-    
-    
+
+
     bSizerMain->Add( sbSizerBrazil, 0, wxALL|wxEXPAND, 5 );
-    
+
     //NOAA
 	wxStaticBoxSizer* sbSizerNOAA;
 	sbSizerNOAA = new wxStaticBoxSizer( new wxStaticBox( dnldpanel, wxID_ANY, _("NOAA North Atlantic and Europe") ), wxVERTICAL );
-	
+
 	wxBoxSizer* bsNOAA;
 	bsNOAA = new wxBoxSizer( wxHORIZONTAL );
-	
+
 	m_rbAnalysis = new wxRadioButton( dnldpanel, wxID_ANY, _("Analysis"), wxDefaultPosition, wxDefaultSize, 0 );
 	bsNOAA->Add( m_rbAnalysis, 0, wxALL, 5 );
-	
+
 	m_rbForecast = new wxRadioButton( dnldpanel, wxID_ANY, _("24h forecast"), wxDefaultPosition, wxDefaultSize, 0 );
 	bsNOAA->Add( m_rbForecast, 0, wxALL, 5 );
-	
-	
+
+
 	bsNOAA->Add( 0, 0, 1, wxEXPAND, 5 );
-	
+
 	m_bNoaaDownload = new wxButton( dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0 );
 	bsNOAA->Add( m_bNoaaDownload, 0, wxALL, 5 );
-	
-	
+
+
 	sbSizerNOAA->Add( bsNOAA, 1, wxEXPAND, 5 );
-	
+
 	bSizerMain->Add( sbSizerNOAA, 0, wxALL|wxEXPAND, 5 );
-	
+
 	//NADI
 	wxStaticBoxSizer* sbSizerNadi;
 	sbSizerNadi = new wxStaticBoxSizer( new wxStaticBox( dnldpanel, wxID_ANY, _("South Pacific (from Fiji Meteorological Service, Nadi)") ), wxVERTICAL );
-	
+
 	m_stNadi = new wxStaticText( dnldpanel, wxID_ANY, _("The dataset is available from Saildocs\nSend an e-mail with the text\nfleet.nadi\nand any subject to query@saildocs.com\nWhen you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."), wxDefaultPosition, wxDefaultSize, 0 );
 	m_stNadi->Wrap( 300 );
 	sbSizerNadi->Add( m_stNadi, 0, wxALL, 5 );
-	
-	
+
+
 	bSizerMain->Add( sbSizerNadi, 0, wxALL|wxEXPAND, 5 );
-	    
+
     // Connect Events
     m_bBrDownload->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( IACFleetUIDialog::OnBrDownload ), NULL, this );
     m_bNoaaDownload->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( IACFleetUIDialog::OnNoaaDownload ), NULL, this );
@@ -478,7 +478,7 @@ void IACFleetUIDialog::CreateControls()
     wxButton* bOK = new wxButton( this, ID_OK, _( "&Close" ),
             wxDefaultPosition, wxDefaultSize, 0 );
     AckBox->Add( bOK, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
-    
+
     // The Animate button
     m_bAnimation = new wxButton( this, ID_ANIMATE, _( "Run as &animation" ),
             wxDefaultPosition, wxDefaultSize, 0 );
@@ -492,6 +492,8 @@ void IACFleetUIDialog::CreateControls()
 void IACFleetUIDialog::updateFileList( void )
 {
     m_FilenameArray.Empty();
+    if( m_currentDir == wxEmptyString || !wxDirExists( m_currentDir ) )
+        return;
     wxDir::GetAllFiles(m_currentDir,
             &m_FilenameArray,
             wxEmptyString,
@@ -668,18 +670,18 @@ void IACFleetUIDialog::OnBrDownload( wxCommandEvent& event )
         wxMessageBox(_("Sorry, the data is not available before September 1, 2006..."));
         return;
     }
-    
+
     wxString showfile = wxEmptyString;
     wxString showfilename = wxEmptyString;
-    
+
     for( int i = 0; i < m_spHist->GetValue(); i++ )
     {
-        wxString filename = wxString::Format(_T("P%u%02u%02u%02u.iac"), 
-                                       dt.GetYear() - 2000, dt.GetMonth() + 1, dt.GetDay(), 
+        wxString filename = wxString::Format(_T("P%u%02u%02u%02u.iac"),
+                                       dt.GetYear() - 2000, dt.GetMonth() + 1, dt.GetDay(),
                                        dt.GetHour() );
         dt.Subtract( wxTimeSpan( 12) );
         wxString url = _T("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/") + filename;
-        
+
         wxFileName tfn = wxFileName::CreateTempFileName( _T("iacfleet") );
         wxFileName fn(m_currentDir, filename);
         wxFileOutputStream output( tfn.GetFullPath() );
@@ -742,10 +744,10 @@ void IACFleetUIDialog::OnNoaaDownload( wxCommandEvent& event )
 
     wxString showfile = wxEmptyString;
     wxString showfilename = wxEmptyString;
-    
+
     wxString url;
     wxString prefix;
-    
+
     if( m_rbAnalysis->GetValue() )
     {
         prefix = _T("IAC_NOAA_A");
@@ -758,7 +760,7 @@ void IACFleetUIDialog::OnNoaaDownload( wxCommandEvent& event )
     }
 
     wxString filename = wxString::Format(_T("%s_%i-%i-%i_%i-%i.txt"), prefix.c_str(),
-                                       dt.GetYear(), dt.GetMonth() + 1, dt.GetDay(), 
+                                       dt.GetYear(), dt.GetMonth() + 1, dt.GetDay(),
                                        dt.GetHour(), dt.GetMinute() );
     wxFileName tfn = wxFileName::CreateTempFileName( _T("iacfleet") );
     wxFileName fn(m_currentDir, filename);
