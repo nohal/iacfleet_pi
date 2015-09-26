@@ -684,16 +684,16 @@ void IACFleetUIDialog::OnBrDownload( wxCommandEvent& event )
 
         wxFileName tfn = wxFileName::CreateTempFileName( _T("iacfleet") );
         wxFileName fn(m_currentDir, filename);
-        wxFileOutputStream output( tfn.GetFullPath() );
-        wxCurlDownloadDialog ddlg(url, &output, _("Downloading file"),
-                _("Reading Headers: ") + url, wxNullBitmap, this,
-                wxCTDS_ELAPSED_TIME|wxCTDS_ESTIMATED_TIME|wxCTDS_REMAINING_TIME|wxCTDS_SPEED|wxCTDS_SIZE|wxCTDS_URL|wxCTDS_CAN_PAUSE|wxCTDS_CAN_ABORT|wxCTDS_AUTO_CLOSE);
-        ddlg.SetSize(this->GetSize().GetWidth(), ddlg.GetSize().GetHeight());
-        wxCurlDialogReturnFlag ret = ddlg.RunModal();
-        output.Close();
+        
+        _OCPN_DLStatus ret = OCPN_downloadFile( url, tfn.GetFullPath(),
+                                 _("Downloading file"),
+                                 _("Reading Headers: ") + url, wxNullBitmap, this,
+                                 OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|OCPN_DLDS_AUTO_CLOSE,
+                                 10);
+
         switch( ret )
         {
-            case wxCDRF_SUCCESS:
+            case OCPN_DL_NO_ERROR:
             {
                 if ( wxCopyFile( tfn.GetFullPath(), fn.GetFullPath() ) )
                 {
@@ -705,20 +705,29 @@ void IACFleetUIDialog::OnBrDownload( wxCommandEvent& event )
                             _T("IACFleet"), wxOK | wxICON_ERROR);
                 break;
             }
-            case wxCDRF_FAILED:
+            case OCPN_DL_FAILED:
             {
                 wxMessageBox(wxString::Format( _("Failed to download: %s \nVerify there is a working Internet connection."), url.c_str() ),
                         _T("IACFleet"), wxOK | wxICON_ERROR);
                 break;
             }
-            case wxCDRF_USER_ABORTED:
+            case OCPN_DL_USER_TIMEOUT:
+            case OCPN_DL_ABORTED:
             {
                 break;
             }
+            case OCPN_DL_UNKNOWN:
+            case OCPN_DL_STARTED:
+            {
+                break;
+            }
+            
             default:
                 wxASSERT( false );  // This should never happen because we handle all possible cases of ret
+
         }
-        wxRemoveFile ( tfn.GetFullPath() );
+        if( wxFileExists( tfn.GetFullPath() ) )
+            wxRemoveFile ( tfn.GetFullPath() );
     }
     if( showfile != wxEmptyString )
     {
@@ -764,16 +773,15 @@ void IACFleetUIDialog::OnNoaaDownload( wxCommandEvent& event )
                                        dt.GetHour(), dt.GetMinute() );
     wxFileName tfn = wxFileName::CreateTempFileName( _T("iacfleet") );
     wxFileName fn(m_currentDir, filename);
-    wxFileOutputStream output( tfn.GetFullPath() );
-    wxCurlDownloadDialog ddlg(url, &output, _("Downloading file"),
-                _("Reading Headers: ") + url, wxNullBitmap, this,
-                wxCTDS_ELAPSED_TIME|wxCTDS_ESTIMATED_TIME|wxCTDS_REMAINING_TIME|wxCTDS_SPEED|wxCTDS_SIZE|wxCTDS_URL|wxCTDS_CAN_PAUSE|wxCTDS_CAN_ABORT|wxCTDS_AUTO_CLOSE);
-    ddlg.SetSize(this->GetSize().GetWidth(), ddlg.GetSize().GetHeight());
-    wxCurlDialogReturnFlag ret = ddlg.RunModal();
-    output.Close();
+
+    _OCPN_DLStatus ret = OCPN_downloadFile( url, tfn.GetFullPath(),
+                             _("Downloading file"),
+                             _("Reading Headers: ") + url, wxNullBitmap, this,
+                             OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|OCPN_DLDS_AUTO_CLOSE,
+                             10);
     switch( ret )
     {
-        case wxCDRF_SUCCESS:
+        case OCPN_DL_NO_ERROR:
         {
             if ( wxCopyFile( tfn.GetFullPath(), fn.GetFullPath() ) )
             {
@@ -785,20 +793,28 @@ void IACFleetUIDialog::OnNoaaDownload( wxCommandEvent& event )
                         _T("IACFleet"), wxOK | wxICON_ERROR);
             break;
         }
-        case wxCDRF_FAILED:
+        case OCPN_DL_FAILED:
         {
             wxMessageBox(wxString::Format( _("Failed to download: %s \nVerify there is a working Internet connection."), url.c_str() ),
                     _T("IACFleet"), wxOK | wxICON_ERROR);
             break;
         }
-        case wxCDRF_USER_ABORTED:
+        case OCPN_DL_USER_TIMEOUT:
+        case OCPN_DL_ABORTED:
         {
             break;
         }
+        case OCPN_DL_UNKNOWN:
+        case OCPN_DL_STARTED:
+        {
+            break;
+        }
+        
         default:
             wxASSERT( false );  // This should never happen because we handle all possible cases of ret
-        wxRemoveFile ( tfn.GetFullPath() );
     }
+    if( wxFileExists( tfn.GetFullPath() ) )
+        wxRemoveFile ( tfn.GetFullPath() );
     if( showfile != wxEmptyString )
     {
         updateFileList();

@@ -34,12 +34,10 @@
 #include "wx/wx.h"
 #endif //precompiled headers
 
-#include "wx/curl/dialog.h"
-
 #include "version.h"
 
 #define     MY_API_VERSION_MAJOR    1
-#define     MY_API_VERSION_MINOR    7
+#define     MY_API_VERSION_MINOR    13
 
 #include "ocpn_plugin.h"
 
@@ -49,7 +47,7 @@
 //    The PlugIn Class Definition
 //----------------------------------------------------------------------------------------------------------
 class IACFleetUIDialog;
-class iacfleet_pi : public opencpn_plugin_17
+class iacfleet_pi : public opencpn_plugin_113
 {
 public:
     iacfleet_pi( void *ppimgr );

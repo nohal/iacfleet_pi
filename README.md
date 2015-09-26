@@ -27,14 +27,6 @@ Windows Specific Libraries
 
 Under windows, you must find the file "opencpn.lib" (Visual Studio) or "libopencpn.dll.a" (mingw) which is built in the build directory after compiling opencpn
 
-There are also some libraries and an external program needed:
-http://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/cURL-vc12.7z/download
-
-On Windows, also the CA certificates bundle must be part of the package. Get it from http://sourceforge.net/projects/opencpnplugins/files/chartdldr_pi/curl-ca-bundle.crt/download and place into the buildwin directory
-
-For Mingw, only a single file "libcurl.dll" is needed for libcurl, for visual studio, several files.
-
-
 ###Build on Mac OS X:
 Tools: Can be installed either manually or from Homebrew (http://brew.sh)
 ```
@@ -77,8 +69,8 @@ The plugin code is licensed under the terms of the GPL v2 or, at your will, late
 ## TODO
 * ~~Finish the OpenGL rendering implementation~~
 * Support all the available datasources:
-  * fleet.nadi to query@saildocs.com
-  * http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm
-  * http://weather.noaa.gov/pub/data/raw/as/asxx21.egrr..txt
-* Automatic download from NOAA and BR
+  * ~~fleet.nadi to query@saildocs.com~~
+  * ~~http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm~~
+  * ~~http://weather.noaa.gov/pub/data/raw/as/asxx21.egrr..txt~~
+* ~~Automatic download from NOAA and BR~~
 * Refine the GUI to save space

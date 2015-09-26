@@ -65,7 +65,7 @@ extern "C" DECL_EXP void destroy_pi( opencpn_plugin* p )
 //
 //---------------------------------------------------------------------------------------------------------
 
-iacfleet_pi::iacfleet_pi( void *ppimgr ) : opencpn_plugin_17( ppimgr )
+iacfleet_pi::iacfleet_pi( void *ppimgr ) : opencpn_plugin_113( ppimgr )
 {
 
     // Set some default private member parameters
@@ -86,12 +86,10 @@ iacfleet_pi::iacfleet_pi( void *ppimgr ) : opencpn_plugin_17( ppimgr )
 
     // Create the PlugIn icons
     initialize_images();
-    wxCurlBase::Init();
 }
 
 iacfleet_pi::~iacfleet_pi()
 {
-    wxCurlBase::Shutdown();
     deinitialize_images();
 }
 

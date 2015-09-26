@@ -15,7 +15,7 @@ SET(TITLE_NAME IACFleet)
 SET(CPACK_PACKAGE_CONTACT "Pavel Kalian")
 
 SET(VERSION_MAJOR "0")
-SET(VERSION_MINOR "7")
+SET(VERSION_MINOR "8")
 
 #SET(CMAKE_BUILD_TYPE Debug)
 
@@ -45,25 +45,11 @@ src/icon.png
 src/icons.cpp
 src/icons.h
 src/ocpn_plugin.h
-
-src/wxcurl/base.cpp
-src/wxcurl/dav.cpp
-src/wxcurl/davtool.cpp
-src/wxcurl/dialog.cpp
-src/wxcurl/ftp.cpp
-src/wxcurl/ftpparse.cpp
-src/wxcurl/ftptool.cpp
-src/wxcurl/http.cpp
-src/wxcurl/panel.cpp
-src/wxcurl/telnet.cpp
-src/wxcurl/thread.cpp
-src/wxcurl/utils.cpp
         )
 
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_IACFLEET})
 
 
 INCLUDE("cmake/PluginInstall.cmake")
-INCLUDE("cmake/PluginCurl.cmake")
 INCLUDE("cmake/PluginLocalization.cmake")
 INCLUDE("cmake/PluginPackage.cmake")
