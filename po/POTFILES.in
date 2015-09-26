@@ -4,5 +4,3 @@ src/iacfleet_pi.cpp
 src/iacfleet_pi.h
 src/iacfleet.cpp
 src/iacfleet.h
-src/wxcurl/dialog.cpp
-src/wxcurl/panel.cpp
