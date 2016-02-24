@@ -29,7 +29,13 @@ add_definitions (
 -DSILENT
 )
 
+OPTION(IACFLEET_USE_SVG "Use SVG graphics" ON)
+
 INCLUDE("cmake/PluginConfigure.cmake")
+
+IF(IACFLEET_USE_SVG)
+  ADD_DEFINITIONS(-DIACFLEET_USE_SVG)
+ENDIF(IACFLEET_USE_SVG)
 
 SET(SRC_IACFLEET
 src/folder.xpm
