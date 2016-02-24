@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-06 20:15-0500\n"
-"PO-Revision-Date: 2015-05-23 05:01-0400\n"
+"POT-Creation-Date: 2016-02-24 13:01-0300\n"
+"PO-Revision-Date: 2016-02-24 11:04-0500\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
@@ -342,15 +342,15 @@ msgstr "pohyb nejistý"
 msgid "Isobar (%4uhPa):\n"
 msgstr "Isobara (%4uhPa): \n"
 
-#: src/iacfleet_pi.cpp:108 src/iacfleet_pi.cpp:155
+#: src/iacfleet_pi.cpp:106 src/iacfleet_pi.cpp:109 src/iacfleet_pi.cpp:157
 msgid "IACFleet"
 msgstr "IACFleet"
 
-#: src/iacfleet_pi.cpp:160
+#: src/iacfleet_pi.cpp:162
 msgid "IACFleet PlugIn for OpenCPN"
 msgstr "Doplněk IACFleet pro OpenCPN"
 
-#: src/iacfleet_pi.cpp:166
+#: src/iacfleet_pi.cpp:168
 msgid "IACFleet PlugIn for OpenCPN\n"
 "Display IAC Fleet Code information provided by NADI.\n"
 "Information can be received by email by sending an email with the contents\n"
@@ -364,15 +364,15 @@ msgstr "Doplněk IACFleet pro OpenCPN\n"
 "na adresu \"query@saildocs.com\" Ulož obdržený e-mail a otevři ho tímto doplňkem\n"
 "který ho dekóduje do textové podoby a zobrazí graficky na mapě\n"
 
-#: src/iacfleet_pi.cpp:176
+#: src/iacfleet_pi.cpp:178
 msgid "IACFleet Preferences"
 msgstr "IACFleet předvolby"
 
-#: src/iacfleet_pi.cpp:197 src/iacfleet.h:81
+#: src/iacfleet_pi.cpp:199 src/iacfleet.h:81
 msgid "IACFleet Display Control"
 msgstr "IACFleet nastavení zobrazení"
 
-#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:539
+#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:541
 msgid "Run as &animation"
 msgstr "Spustit jako &animaci"
 
@@ -488,144 +488,36 @@ msgstr "Datum vydání: "
 msgid "&Close"
 msgstr "&Zavřít"
 
-#: src/iacfleet.cpp:626
+#: src/iacfleet.cpp:628
 #, c-format
 msgid "Error opening: %s"
 msgstr "Chyba při otevírání: %s"
 
-#: src/iacfleet.cpp:663
+#: src/iacfleet.cpp:665
 msgid "Sorry, you can't download data from the future - they don't exist..."
 msgstr "Promiň, nemůžeš stahovat data z budoucnosti - zatím neexistují..."
 
-#: src/iacfleet.cpp:668
+#: src/iacfleet.cpp:670
 msgid "Sorry, the data is not available before September 1, 2006..."
 msgstr "Promiňte data nejsou k dispozici před 1. září 2006..."
 
-#: src/iacfleet.cpp:686 src/iacfleet.cpp:766
+#: src/iacfleet.cpp:689 src/iacfleet.cpp:778
 msgid "Downloading file"
 msgstr "Stahování"
 
-#: src/iacfleet.cpp:687 src/iacfleet.cpp:767
+#: src/iacfleet.cpp:690 src/iacfleet.cpp:779
 msgid "Reading Headers: "
 msgstr "Čtení hlaviček: "
 
-#: src/iacfleet.cpp:702 src/iacfleet.cpp:782
+#: src/iacfleet.cpp:704 src/iacfleet.cpp:792
 #, c-format
 msgid "Failed to save: %s "
 msgstr "Uložení se nezdařilo: %s "
 
-#: src/iacfleet.cpp:708 src/iacfleet.cpp:788
+#: src/iacfleet.cpp:710 src/iacfleet.cpp:798
 #, c-format
 msgid "Failed to download: %s \n"
 "Verify there is a working Internet connection."
 msgstr "Stahování se nezdařilo: %s \n"
 "Ověř jestli je funkční připojení k Internetu."
-
-#: src/wxcurl/dialog.cpp:137
-msgid "Not available"
-msgstr "Není k dispozici"
-
-#: src/wxcurl/dialog.cpp:168
-msgid "URL:"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:187
-msgid "Speed:"
-msgstr "Rychlost:"
-
-#: src/wxcurl/dialog.cpp:196
-msgid "Elapsed time:"
-msgstr "Uplynulý čas:"
-
-#: src/wxcurl/dialog.cpp:198
-msgid "Estimated total time:"
-msgstr "Odhadovaný celkový čas:"
-
-#: src/wxcurl/dialog.cpp:200
-msgid "Estimated remaining time:"
-msgstr "Odhad zbývajícího času:"
-
-#: src/wxcurl/dialog.cpp:243 src/wxcurl/dialog.cpp:395
-msgid "Abort"
-msgstr "Přerušit"
-
-#: src/wxcurl/dialog.cpp:245
-msgid "Settings"
-msgstr "Nastavení"
-
-#: src/wxcurl/dialog.cpp:250 src/wxcurl/dialog.cpp:416
-msgid "Pause"
-msgstr "Pozastavit"
-
-#: src/wxcurl/dialog.cpp:252
-msgid "Start"
-msgstr "Spustit"
-
-#: src/wxcurl/dialog.cpp:395
-msgid "Close"
-msgstr "Zavřít"
-
-#: src/wxcurl/dialog.cpp:406
-msgid "Resume"
-msgstr "Pokračovat"
-
-#: src/wxcurl/dialog.cpp:409
-msgid "0 (transfer paused)"
-msgstr "0 (přenos pozastaven)"
-
-#: src/wxcurl/dialog.cpp:457
-msgid "Connection settings"
-msgstr "Nastavení připojení"
-
-#: src/wxcurl/dialog.cpp:457
-msgid "Connection settings used for the transfer:"
-msgstr "Nastavení připojení pro přenos:"
-
-#: src/wxcurl/dialog.cpp:512
-msgid "0 (transfer completed)"
-msgstr "0 (přenos dokončen)"
-
-#: src/wxcurl/dialog.cpp:533
-msgid "Downloaded:"
-msgstr "Staženo:"
-
-#: src/wxcurl/dialog.cpp:581
-msgid "Uploaded:"
-msgstr "Odesláno:"
-
-#: src/wxcurl/panel.cpp:111
-msgid "Username:"
-msgstr "Uživatelské jméno:"
-
-#: src/wxcurl/panel.cpp:112
-msgid "Password:"
-msgstr "Heslo:"
-
-#: src/wxcurl/panel.cpp:120
-msgid "Port:"
-msgstr "Port:"
-
-#: src/wxcurl/panel.cpp:134
-msgid "Proxy settings"
-msgstr "Nastavení proxy"
-
-#: src/wxcurl/panel.cpp:136
-msgid "Use proxy"
-msgstr "Použít server proxy"
-
-#: src/wxcurl/panel.cpp:141
-msgid "Proxy host:"
-msgstr "Proxy server:"
-
-#: src/wxcurl/panel.cpp:142
-msgid "Proxy username:"
-msgstr "Proxy uživatelské jméno:"
-
-#: src/wxcurl/panel.cpp:143
-msgid "Proxy password:"
-msgstr "Proxy heslo:"
-
-#: src/wxcurl/panel.cpp:144
-msgid "Proxy port:"
-msgstr "Proxy port:"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: iacfleet_pi 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-26 13:17-0500\n"
+"POT-Creation-Date: 2016-02-24 13:01-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -347,15 +347,15 @@ msgstr ""
 msgid "Isobar (%4uhPa):\n"
 msgstr ""
 
-#: src/iacfleet_pi.cpp:106 src/iacfleet_pi.cpp:153
+#: src/iacfleet_pi.cpp:106 src/iacfleet_pi.cpp:109 src/iacfleet_pi.cpp:157
 msgid "IACFleet"
 msgstr ""
 
-#: src/iacfleet_pi.cpp:158
+#: src/iacfleet_pi.cpp:162
 msgid "IACFleet PlugIn for OpenCPN"
 msgstr ""
 
-#: src/iacfleet_pi.cpp:164
+#: src/iacfleet_pi.cpp:168
 msgid ""
 "IACFleet PlugIn for OpenCPN\n"
 "Display IAC Fleet Code information provided by NADI.\n"
@@ -365,11 +365,11 @@ msgid ""
 "Plugin to see the decoded text and a graphic overlay\n"
 msgstr ""
 
-#: src/iacfleet_pi.cpp:174
+#: src/iacfleet_pi.cpp:178
 msgid "IACFleet Preferences"
 msgstr ""
 
-#: src/iacfleet_pi.cpp:195 src/iacfleet.h:81
+#: src/iacfleet_pi.cpp:199 src/iacfleet.h:81
 msgid "IACFleet Display Control"
 msgstr ""
 

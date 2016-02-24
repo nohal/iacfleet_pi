@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-06 20:15-0500\n"
-"PO-Revision-Date: 2015-05-23 05:01-0400\n"
+"POT-Creation-Date: 2016-02-24 13:01-0300\n"
+"PO-Revision-Date: 2016-02-24 11:04-0500\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
@@ -70,7 +70,7 @@ msgstr "corba a l'esquerra"
 
 #: src/iacfile.cpp:1113
 msgid "recurving"
-msgstr ""
+msgstr "recorbant"
 
 #: src/iacfile.cpp:1113
 msgid "accelerating"
@@ -78,11 +78,11 @@ msgstr "accelerant"
 
 #: src/iacfile.cpp:1114
 msgid "curving to right"
-msgstr ""
+msgstr "corbant a la dreta"
 
 #: src/iacfile.cpp:1114
 msgid "expected to recurve"
-msgstr ""
+msgstr "espera per recorbar"
 
 #: src/iacfile.cpp:1120
 msgid "Movement: "
@@ -99,7 +99,7 @@ msgstr "amb %u nusos"
 
 #: src/iacfile.cpp:1224
 msgid "Complex Low"
-msgstr ""
+msgstr "Baixa complexa"
 
 #: src/iacfile.cpp:1224
 msgid "Low"
@@ -283,7 +283,7 @@ msgstr "Línia o zona de convergència"
 
 #: src/iacfile.cpp:1327
 msgid "Axis of doldrum belt"
-msgstr ""
+msgstr "Eix de la franja doldrum"
 
 #: src/iacfile.cpp:1328
 msgid "Through in westerlies"
@@ -342,15 +342,15 @@ msgstr "moviment dubtós"
 msgid "Isobar (%4uhPa):\n"
 msgstr "Isòbara (%4uhPa): \n"
 
-#: src/iacfleet_pi.cpp:108 src/iacfleet_pi.cpp:155
+#: src/iacfleet_pi.cpp:106 src/iacfleet_pi.cpp:109 src/iacfleet_pi.cpp:157
 msgid "IACFleet"
 msgstr "IACFleet"
 
-#: src/iacfleet_pi.cpp:160
+#: src/iacfleet_pi.cpp:162
 msgid "IACFleet PlugIn for OpenCPN"
 msgstr "Connector IACFleet  per a OpenCPN"
 
-#: src/iacfleet_pi.cpp:166
+#: src/iacfleet_pi.cpp:168
 msgid "IACFleet PlugIn for OpenCPN\n"
 "Display IAC Fleet Code information provided by NADI.\n"
 "Information can be received by email by sending an email with the contents\n"
@@ -364,15 +364,15 @@ msgstr "El Connector IACFleet a OpenCPN\n"
 "Guardar el correu electrònic que s'obté com a resposta i obrir-lo amb aquest\n"
 "Connector per veure el text descodificat i una superposició gràfica\n"
 
-#: src/iacfleet_pi.cpp:176
+#: src/iacfleet_pi.cpp:178
 msgid "IACFleet Preferences"
 msgstr "Preferències d' IACFleet"
 
-#: src/iacfleet_pi.cpp:197 src/iacfleet.h:81
+#: src/iacfleet_pi.cpp:199 src/iacfleet.h:81
 msgid "IACFleet Display Control"
 msgstr "Control visualització d'IACFleet"
 
-#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:539
+#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:541
 msgid "Run as &animation"
 msgstr "Engegueu &animació"
 
@@ -488,144 +488,36 @@ msgstr "Data d'emissió: "
 msgid "&Close"
 msgstr "&Tanca"
 
-#: src/iacfleet.cpp:626
+#: src/iacfleet.cpp:628
 #, c-format
 msgid "Error opening: %s"
 msgstr "Error obrint:%s"
 
-#: src/iacfleet.cpp:663
+#: src/iacfleet.cpp:665
 msgid "Sorry, you can't download data from the future - they don't exist..."
 msgstr "Ho sentim, no pot descarregar dades del futur - no existeixen..."
 
-#: src/iacfleet.cpp:668
+#: src/iacfleet.cpp:670
 msgid "Sorry, the data is not available before September 1, 2006..."
 msgstr "Ho sentim, no hi ha dades disponibles d'abans de l'1 de setembre de 2006..."
 
-#: src/iacfleet.cpp:686 src/iacfleet.cpp:766
+#: src/iacfleet.cpp:689 src/iacfleet.cpp:778
 msgid "Downloading file"
 msgstr "Descarregant fitxer"
 
-#: src/iacfleet.cpp:687 src/iacfleet.cpp:767
+#: src/iacfleet.cpp:690 src/iacfleet.cpp:779
 msgid "Reading Headers: "
 msgstr "Llegint les capçaleres: "
 
-#: src/iacfleet.cpp:702 src/iacfleet.cpp:782
+#: src/iacfleet.cpp:704 src/iacfleet.cpp:792
 #, c-format
 msgid "Failed to save: %s "
 msgstr "No ha pogut salvar: %s "
 
-#: src/iacfleet.cpp:708 src/iacfleet.cpp:788
+#: src/iacfleet.cpp:710 src/iacfleet.cpp:798
 #, c-format
 msgid "Failed to download: %s \n"
 "Verify there is a working Internet connection."
 msgstr "No s'ha pogut descarregar: %s \n"
 "Verifiqueu que hi hagi una connexió activa a Internet."
-
-#: src/wxcurl/dialog.cpp:137
-msgid "Not available"
-msgstr "No està disponible"
-
-#: src/wxcurl/dialog.cpp:168
-msgid "URL:"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:187
-msgid "Speed:"
-msgstr "Velocitat:"
-
-#: src/wxcurl/dialog.cpp:196
-msgid "Elapsed time:"
-msgstr "Temps transcorregut:"
-
-#: src/wxcurl/dialog.cpp:198
-msgid "Estimated total time:"
-msgstr "Temps total estimat:"
-
-#: src/wxcurl/dialog.cpp:200
-msgid "Estimated remaining time:"
-msgstr "Temps restant estimat:"
-
-#: src/wxcurl/dialog.cpp:243 src/wxcurl/dialog.cpp:395
-msgid "Abort"
-msgstr "Avorta"
-
-#: src/wxcurl/dialog.cpp:245
-msgid "Settings"
-msgstr "Configuració"
-
-#: src/wxcurl/dialog.cpp:250 src/wxcurl/dialog.cpp:416
-msgid "Pause"
-msgstr "Pausa"
-
-#: src/wxcurl/dialog.cpp:252
-msgid "Start"
-msgstr "Inici"
-
-#: src/wxcurl/dialog.cpp:395
-msgid "Close"
-msgstr "Tancar"
-
-#: src/wxcurl/dialog.cpp:406
-msgid "Resume"
-msgstr "Continua"
-
-#: src/wxcurl/dialog.cpp:409
-msgid "0 (transfer paused)"
-msgstr "0 (transferència en pausa)"
-
-#: src/wxcurl/dialog.cpp:457
-msgid "Connection settings"
-msgstr "Paràmetres de connexió"
-
-#: src/wxcurl/dialog.cpp:457
-msgid "Connection settings used for the transfer:"
-msgstr "Ajustos de connexió utilitzats per a la transferència:"
-
-#: src/wxcurl/dialog.cpp:512
-msgid "0 (transfer completed)"
-msgstr "0 (transferència completada)"
-
-#: src/wxcurl/dialog.cpp:533
-msgid "Downloaded:"
-msgstr "Descarregat:"
-
-#: src/wxcurl/dialog.cpp:581
-msgid "Uploaded:"
-msgstr "Pujat:"
-
-#: src/wxcurl/panel.cpp:111
-msgid "Username:"
-msgstr "Nom d'usuari:"
-
-#: src/wxcurl/panel.cpp:112
-msgid "Password:"
-msgstr "contrasenya:"
-
-#: src/wxcurl/panel.cpp:120
-msgid "Port:"
-msgstr "Port:"
-
-#: src/wxcurl/panel.cpp:134
-msgid "Proxy settings"
-msgstr "Configuració del proxy"
-
-#: src/wxcurl/panel.cpp:136
-msgid "Use proxy"
-msgstr "Utilitzar el proxy"
-
-#: src/wxcurl/panel.cpp:141
-msgid "Proxy host:"
-msgstr "Servidor proxy:"
-
-#: src/wxcurl/panel.cpp:142
-msgid "Proxy username:"
-msgstr "Nom d'usuari proxy:"
-
-#: src/wxcurl/panel.cpp:143
-msgid "Proxy password:"
-msgstr "Contrasenya de proxy:"
-
-#: src/wxcurl/panel.cpp:144
-msgid "Proxy port:"
-msgstr "Port del servidor intermediari:"
 

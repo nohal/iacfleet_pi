@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-06 20:15-0500\n"
-"PO-Revision-Date: 2015-06-06 13:27-0400\n"
+"POT-Creation-Date: 2016-02-24 13:01-0300\n"
+"PO-Revision-Date: 2016-02-24 11:04-0500\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
@@ -342,15 +342,15 @@ msgstr "mouvement incertain"
 msgid "Isobar (%4uhPa):\n"
 msgstr "Isobarre (%4u hPa) :\n"
 
-#: src/iacfleet_pi.cpp:108 src/iacfleet_pi.cpp:155
+#: src/iacfleet_pi.cpp:106 src/iacfleet_pi.cpp:109 src/iacfleet_pi.cpp:157
 msgid "IACFleet"
 msgstr "IACFleet"
 
-#: src/iacfleet_pi.cpp:160
+#: src/iacfleet_pi.cpp:162
 msgid "IACFleet PlugIn for OpenCPN"
 msgstr "Complément IACFleet pour OpenCPN"
 
-#: src/iacfleet_pi.cpp:166
+#: src/iacfleet_pi.cpp:168
 msgid "IACFleet PlugIn for OpenCPN\n"
 "Display IAC Fleet Code information provided by NADI.\n"
 "Information can be received by email by sending an email with the contents\n"
@@ -359,20 +359,20 @@ msgid "IACFleet PlugIn for OpenCPN\n"
 "Plugin to see the decoded text and a graphic overlay\n"
 msgstr "Le complément IACFleet pour OpenCPN\n"
 "affiche les fichiers écrits en IAC code, produit par NADI.\n"
-"des information similiares peuvent être obtenues en envoyant un amil avec le contenu\n"
+"des information similaires peuvent être obtenues en envoyant un mail avec le contenu\n"
 "\"Send fleet.nadi\" à \"query@saildocs.com\"\n"
 "Sauvez le contenu du mail, reçu en réponse, sous forme d'un fichier texte (\".txt\"). Ouvrez ce fichier texte avec le complément IACFleet.\n"
 "pour avoir accès aux informations qu'il contient et obtenir une carte superposée sur la zone de carte.\n"
 
-#: src/iacfleet_pi.cpp:176
+#: src/iacfleet_pi.cpp:178
 msgid "IACFleet Preferences"
 msgstr "Préférences de IACFleet"
 
-#: src/iacfleet_pi.cpp:197 src/iacfleet.h:81
+#: src/iacfleet_pi.cpp:199 src/iacfleet.h:81
 msgid "IACFleet Display Control"
 msgstr "Gestionnaire de IACFleet"
 
-#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:539
+#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:541
 msgid "Run as &animation"
 msgstr "Lancer l'animation"
 
@@ -476,8 +476,7 @@ msgid "The dataset is available from Saildocs\n"
 "When you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."
 msgstr "L'ensemble des données est accessible par Saildocs\n"
 "Envoyez un mail avec le texte suivant :\n"
-"fleet.nadi\n"
-"et n'importe quel sujet à query@saildocs.com\n"
+"fleet.nadi  et n'importe quel sujet à query@saildocs.com\n"
 "Lorsque vous recevez une réponse, copiez le contenu du mail dans l'onglet \"Raw\" et sauvez le comme du texte. Puis ouvrez l'onglet \"Fichiers\"."
 
 #: src/iacfleet.cpp:461
@@ -488,144 +487,36 @@ msgstr "Date des données"
 msgid "&Close"
 msgstr "Fermer"
 
-#: src/iacfleet.cpp:626
+#: src/iacfleet.cpp:628
 #, c-format
 msgid "Error opening: %s"
 msgstr "Erreur à l'ouverture : %s"
 
-#: src/iacfleet.cpp:663
+#: src/iacfleet.cpp:665
 msgid "Sorry, you can't download data from the future - they don't exist..."
 msgstr "Désolé, vous ne pouvez pas télécharger des données provenant du futur. ....."
 
-#: src/iacfleet.cpp:668
+#: src/iacfleet.cpp:670
 msgid "Sorry, the data is not available before September 1, 2006..."
 msgstr "Désolé, les données ne sont disponibles qu'à partir du 1er septembre 2006 ..."
 
-#: src/iacfleet.cpp:686 src/iacfleet.cpp:766
+#: src/iacfleet.cpp:689 src/iacfleet.cpp:778
 msgid "Downloading file"
 msgstr "Téléchargement du fichier"
 
-#: src/iacfleet.cpp:687 src/iacfleet.cpp:767
+#: src/iacfleet.cpp:690 src/iacfleet.cpp:779
 msgid "Reading Headers: "
 msgstr "Lecture de l'entête : "
 
-#: src/iacfleet.cpp:702 src/iacfleet.cpp:782
+#: src/iacfleet.cpp:704 src/iacfleet.cpp:792
 #, c-format
 msgid "Failed to save: %s "
 msgstr "Echec de la sauvegarde : %s "
 
-#: src/iacfleet.cpp:708 src/iacfleet.cpp:788
+#: src/iacfleet.cpp:710 src/iacfleet.cpp:798
 #, c-format
 msgid "Failed to download: %s \n"
 "Verify there is a working Internet connection."
 msgstr "Echec du téléchargement : %s \n"
 "Vérifier que la connexion internet est active."
-
-#: src/wxcurl/dialog.cpp:137
-msgid "Not available"
-msgstr "Non disponible"
-
-#: src/wxcurl/dialog.cpp:168
-msgid "URL:"
-msgstr "URL :"
-
-#: src/wxcurl/dialog.cpp:187
-msgid "Speed:"
-msgstr "Vitesse :"
-
-#: src/wxcurl/dialog.cpp:196
-msgid "Elapsed time:"
-msgstr "Durée écoulée :"
-
-#: src/wxcurl/dialog.cpp:198
-msgid "Estimated total time:"
-msgstr "Durée totale estimée :"
-
-#: src/wxcurl/dialog.cpp:200
-msgid "Estimated remaining time:"
-msgstr "Durée restante estimée :"
-
-#: src/wxcurl/dialog.cpp:243 src/wxcurl/dialog.cpp:395
-msgid "Abort"
-msgstr "Abandonner"
-
-#: src/wxcurl/dialog.cpp:245
-msgid "Settings"
-msgstr "Réglages"
-
-#: src/wxcurl/dialog.cpp:250 src/wxcurl/dialog.cpp:416
-msgid "Pause"
-msgstr "Pause"
-
-#: src/wxcurl/dialog.cpp:252
-msgid "Start"
-msgstr "Démarrer"
-
-#: src/wxcurl/dialog.cpp:395
-msgid "Close"
-msgstr "Fermer"
-
-#: src/wxcurl/dialog.cpp:406
-msgid "Resume"
-msgstr "Reprendre"
-
-#: src/wxcurl/dialog.cpp:409
-msgid "0 (transfer paused)"
-msgstr "0 (transfert en pause)"
-
-#: src/wxcurl/dialog.cpp:457
-msgid "Connection settings"
-msgstr "Réglages de la connexion"
-
-#: src/wxcurl/dialog.cpp:457
-msgid "Connection settings used for the transfer:"
-msgstr "Réglages de la connexion utilisée pour le transfert :"
-
-#: src/wxcurl/dialog.cpp:512
-msgid "0 (transfer completed)"
-msgstr "0 (transfert terminé)"
-
-#: src/wxcurl/dialog.cpp:533
-msgid "Downloaded:"
-msgstr "Téléchargé :"
-
-#: src/wxcurl/dialog.cpp:581
-msgid "Uploaded:"
-msgstr "chargement :"
-
-#: src/wxcurl/panel.cpp:111
-msgid "Username:"
-msgstr "Pseudo :"
-
-#: src/wxcurl/panel.cpp:112
-msgid "Password:"
-msgstr "Mot de passe :"
-
-#: src/wxcurl/panel.cpp:120
-msgid "Port:"
-msgstr "Port :"
-
-#: src/wxcurl/panel.cpp:134
-msgid "Proxy settings"
-msgstr "Réglages du proxy"
-
-#: src/wxcurl/panel.cpp:136
-msgid "Use proxy"
-msgstr "Utiliser un proxy"
-
-#: src/wxcurl/panel.cpp:141
-msgid "Proxy host:"
-msgstr "Hôte du proxy :"
-
-#: src/wxcurl/panel.cpp:142
-msgid "Proxy username:"
-msgstr "Pseudo du proxy :"
-
-#: src/wxcurl/panel.cpp:143
-msgid "Proxy password:"
-msgstr "Mot de passe du proxy :"
-
-#: src/wxcurl/panel.cpp:144
-msgid "Proxy port:"
-msgstr "Port du proxy :"
 

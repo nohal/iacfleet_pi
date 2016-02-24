@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-06 20:15-0500\n"
-"PO-Revision-Date: 2015-05-08 11:24-0400\n"
+"POT-Creation-Date: 2016-02-24 13:01-0300\n"
+"PO-Revision-Date: 2016-02-24 11:04-0500\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
@@ -17,398 +17,416 @@ msgstr ""
 "X-Crowdin-File: /plugins/iacfleet_pi/po/iacfleet_pi.pot\n"
 
 #: src/iacfile.cpp:157
-msgid "\n\nPressure systems:"
-msgstr ""
+msgid "\n\n"
+"Pressure systems:"
+msgstr "\n\n"
+"Sistemas presiones:"
 
 #: src/iacfile.cpp:163
-msgid "\n\nFrontal systems:"
-msgstr ""
+msgid "\n\n"
+"Frontal systems:"
+msgstr "\n\n"
+"Sistemas frontales:"
 
 #: src/iacfile.cpp:169
-msgid "\n\nTropical systems:"
-msgstr ""
+msgid "\n\n"
+"Tropical systems:"
+msgstr "\n\n"
+"Sistemas tropicales:"
 
 #: src/iacfile.cpp:176
-msgid "\n\nIsobars:"
-msgstr ""
+msgid "\n\n"
+"Isobars:"
+msgstr "\n\n"
+"Isobaras:"
 
 #: src/iacfile.cpp:216
 msgid "Day "
-msgstr ""
+msgstr "Día "
 
 #: src/iacfile.cpp:217
 msgid " Hour "
-msgstr ""
+msgstr " Hora "
 
 #: src/iacfile.cpp:1112
 msgid "stationary"
-msgstr ""
+msgstr "estacionaria"
 
 #: src/iacfile.cpp:1112 src/iacfile.cpp:1244 src/iacfile.cpp:1267
 msgid "little change"
-msgstr ""
+msgstr "cambio pequeño"
 
 #: src/iacfile.cpp:1112
 msgid "stopping"
-msgstr ""
+msgstr "parada"
 
 #: src/iacfile.cpp:1112
 msgid "retarding"
-msgstr ""
+msgstr "retardando"
 
 #: src/iacfile.cpp:1113
 msgid "curving to left"
-msgstr ""
+msgstr "curvando a izquierdas"
 
 #: src/iacfile.cpp:1113
 msgid "recurving"
-msgstr ""
+msgstr "recurvando"
 
 #: src/iacfile.cpp:1113
 msgid "accelerating"
-msgstr ""
+msgstr "acelerando"
 
 #: src/iacfile.cpp:1114
 msgid "curving to right"
-msgstr ""
+msgstr "curvando a derechas"
 
 #: src/iacfile.cpp:1114
 msgid "expected to recurve"
-msgstr ""
+msgstr "espera para recurvado"
 
 #: src/iacfile.cpp:1120
 msgid "Movement: "
-msgstr ""
+msgstr "Movimiento: "
 
 #: src/iacfile.cpp:1128
 msgid "with unknown speed"
-msgstr ""
+msgstr "con velocidad desconocida"
 
 #: src/iacfile.cpp:1132
 #, c-format
 msgid "with %uknots"
-msgstr ""
+msgstr "con %unudos"
 
 #: src/iacfile.cpp:1224
 msgid "Complex Low"
-msgstr ""
+msgstr "Baja compleja"
 
 #: src/iacfile.cpp:1224
 msgid "Low"
-msgstr ""
+msgstr "Baja"
 
 #: src/iacfile.cpp:1224
 msgid "Secondary Low"
-msgstr ""
+msgstr "Baja secundaria"
 
 #: src/iacfile.cpp:1224
 msgid "Trough"
-msgstr ""
+msgstr "A través de"
 
 #: src/iacfile.cpp:1224
 msgid "Wave"
-msgstr ""
+msgstr "Onda"
 
 #: src/iacfile.cpp:1225
 msgid "High"
-msgstr ""
+msgstr "Alta"
 
 #: src/iacfile.cpp:1225
 msgid "Uniform pressure"
-msgstr ""
+msgstr "Presión uniforme"
 
 #: src/iacfile.cpp:1225
 msgid "Ridge"
-msgstr ""
+msgstr "Cresta"
 
 #: src/iacfile.cpp:1225
 msgid "Col"
-msgstr ""
+msgstr "Col"
 
 #: src/iacfile.cpp:1225
 msgid "Tropical Storm"
-msgstr ""
+msgstr "Tormenta tropical"
 
 #: src/iacfile.cpp:1244
 msgid "weakening"
-msgstr ""
+msgstr "debilitamiento"
 
 #: src/iacfile.cpp:1244
 msgid "intensifying"
-msgstr ""
+msgstr "intensificación"
 
 #: src/iacfile.cpp:1244
 msgid "complex"
-msgstr ""
+msgstr "complejo"
 
 #: src/iacfile.cpp:1245 src/iacfile.cpp:1268
 msgid "forming"
-msgstr ""
+msgstr "formando"
 
 #: src/iacfile.cpp:1245
 msgid "weakening but not disappearing"
-msgstr ""
+msgstr "debilitandose pero no desapareciendo"
 
 #: src/iacfile.cpp:1245
 msgid "general rise"
-msgstr ""
+msgstr "aumento general"
 
 #: src/iacfile.cpp:1246
 msgid "general fall"
-msgstr ""
+msgstr "bajada general"
 
 #: src/iacfile.cpp:1246
 msgid "position doubtful"
-msgstr ""
+msgstr "posición dudosa"
 
 #: src/iacfile.cpp:1255
 msgid "Quasistationary at surface"
-msgstr ""
+msgstr "Cuasiestacionaria en superficie"
 
 #: src/iacfile.cpp:1255
 msgid "Quasistationary above surface"
-msgstr ""
+msgstr "Cuasiestacionaria bajo superficie"
 
 #: src/iacfile.cpp:1256
 msgid "Warm surface"
-msgstr ""
+msgstr "Superficie caliente"
 
 #: src/iacfile.cpp:1256
 msgid "Warm above surface"
-msgstr ""
+msgstr "Caliente bajo la superficie"
 
 #: src/iacfile.cpp:1257
 msgid "Cold surface"
-msgstr ""
+msgstr "Superficie fría"
 
 #: src/iacfile.cpp:1257
 msgid "Cold above surface"
-msgstr ""
+msgstr "Frío bajo la superficie"
 
 #: src/iacfile.cpp:1257
 msgid "Occlusion"
-msgstr ""
+msgstr "Oclusión"
 
 #: src/iacfile.cpp:1258
 msgid "Instability line"
-msgstr ""
+msgstr "Línea de inestabilidad"
 
 #: src/iacfile.cpp:1258
 msgid "Intertropical"
-msgstr ""
+msgstr "Intertropical"
 
 #: src/iacfile.cpp:1258
 msgid "Convergence line"
-msgstr ""
+msgstr "Línea de convergencia"
 
 #: src/iacfile.cpp:1267
 msgid "frontal area decreasing"
-msgstr ""
+msgstr "disminución de área frontal"
 
 #: src/iacfile.cpp:1267
 msgid "frontal area increasing"
-msgstr ""
+msgstr "aumento de área frontal"
 
 #: src/iacfile.cpp:1268
 msgid "intertropical"
-msgstr ""
+msgstr "intertropical"
 
 #: src/iacfile.cpp:1268 src/iacfile.cpp:1348
 msgid "quasistationary"
-msgstr ""
+msgstr "cuasiestacionaria"
 
 #: src/iacfile.cpp:1269
 msgid "with waves"
-msgstr ""
+msgstr "con olas"
 
 #: src/iacfile.cpp:1269 src/iacfile.cpp:1348
 msgid "diffuse"
-msgstr ""
+msgstr "difuso"
 
 #: src/iacfile.cpp:1269 src/iacfile.cpp:1281 src/iacfile.cpp:1361
 msgid "strong, increasing"
-msgstr ""
+msgstr "fuerte, creciendo"
 
 #: src/iacfile.cpp:1279 src/iacfile.cpp:1359
 msgid "weak, decreasing"
-msgstr ""
+msgstr "débil, disminuyendo"
 
 #: src/iacfile.cpp:1279 src/iacfile.cpp:1359
 msgid "weak, no change"
-msgstr ""
+msgstr "débil, sin cambios"
 
 #: src/iacfile.cpp:1279 src/iacfile.cpp:1359
 msgid "weak, increasing"
-msgstr ""
+msgstr "débil, aumentando"
 
 #: src/iacfile.cpp:1280 src/iacfile.cpp:1360
 msgid "moderate, decreasing"
-msgstr ""
+msgstr "moderado, disminuyendo"
 
 #: src/iacfile.cpp:1280 src/iacfile.cpp:1360
 msgid "moderate, no change"
-msgstr ""
+msgstr "moderado, sin cambios"
 
 #: src/iacfile.cpp:1280 src/iacfile.cpp:1360
 msgid "moderate, increasing"
-msgstr ""
+msgstr "moderado, aumentando"
 
 #: src/iacfile.cpp:1281 src/iacfile.cpp:1361
 msgid "strong, decreasing"
-msgstr ""
+msgstr "fuerte, disminuyendo"
 
 #: src/iacfile.cpp:1281 src/iacfile.cpp:1361
 msgid "strong, no change"
-msgstr ""
+msgstr "fuerte, sin cambios"
 
 #: src/iacfile.cpp:1326
 msgid "Intertropical convergence zone"
-msgstr ""
+msgstr "Zona de convergencia intertropical"
 
 #: src/iacfile.cpp:1326
 msgid "Shear line"
-msgstr ""
+msgstr "línea del frente"
 
 #: src/iacfile.cpp:1327
 msgid "Line or Zone of convergence"
-msgstr ""
+msgstr "Línea o zona de convergencia"
 
 #: src/iacfile.cpp:1327
 msgid "Axis of doldrum belt"
-msgstr ""
+msgstr "Eje del paso de doldrum"
 
 #: src/iacfile.cpp:1328
 msgid "Through in westerlies"
-msgstr ""
+msgstr "A través de vientos del oeste"
 
 #: src/iacfile.cpp:1328
 msgid "Through in easterlies"
-msgstr ""
+msgstr "A través de vientos del este"
 
 #: src/iacfile.cpp:1328
 msgid "LOW area"
-msgstr ""
+msgstr "Área de Baja"
 
 #: src/iacfile.cpp:1329
 msgid "Surge line"
-msgstr ""
+msgstr "Línea de expansión"
 
 #: src/iacfile.cpp:1329
 msgid "Divergence zone"
-msgstr ""
+msgstr "Zona de divergencia"
 
 #: src/iacfile.cpp:1329
 msgid "Tropical cyclone"
-msgstr ""
+msgstr "Ciclón tropical"
 
 #: src/iacfile.cpp:1348
 msgid "sharply defines"
-msgstr ""
+msgstr "marcadamente definido"
 
 #: src/iacfile.cpp:1349
 msgid "existance certain"
-msgstr ""
+msgstr "existencia cierta"
 
 #: src/iacfile.cpp:1349
 msgid "existance uncertain"
-msgstr ""
+msgstr "existencia incierta"
 
 #: src/iacfile.cpp:1349
 msgid "formation expected"
-msgstr ""
+msgstr "formación esperada"
 
 #: src/iacfile.cpp:1350
 msgid "position certain"
-msgstr ""
+msgstr "posición determinada"
 
 #: src/iacfile.cpp:1350
 msgid "position uncertain"
-msgstr ""
+msgstr "posición incierta"
 
 #: src/iacfile.cpp:1350
 msgid "movement doubtful"
-msgstr ""
+msgstr "movimiento dudoso"
 
 #: src/iacfile.cpp:1473
 #, c-format
 msgid "Isobar (%4uhPa):\n"
-msgstr ""
+msgstr "Isobara (%4uhPa):\n"
 
-#: src/iacfleet_pi.cpp:108 src/iacfleet_pi.cpp:155
+#: src/iacfleet_pi.cpp:106 src/iacfleet_pi.cpp:109 src/iacfleet_pi.cpp:157
 msgid "IACFleet"
-msgstr ""
+msgstr "IACFleet"
 
-#: src/iacfleet_pi.cpp:160
+#: src/iacfleet_pi.cpp:162
 msgid "IACFleet PlugIn for OpenCPN"
-msgstr ""
+msgstr "PlugIn IACFleet  para OpenCPN"
 
-#: src/iacfleet_pi.cpp:166
-msgid "IACFleet PlugIn for OpenCPN\nDisplay IAC Fleet Code information provided by NADI.\nInformation can be received by email by sending an email with the contents\n\"Send fleet.nadi\" to \"query@saildocs.com\"\nSave the EMail you get as response and open it with this\nPlugin to see the decoded text and a graphic overlay\n"
-msgstr ""
+#: src/iacfleet_pi.cpp:168
+msgid "IACFleet PlugIn for OpenCPN\n"
+"Display IAC Fleet Code information provided by NADI.\n"
+"Information can be received by email by sending an email with the contents\n"
+"\"Send fleet.nadi\" to \"query@saildocs.com\"\n"
+"Save the EMail you get as response and open it with this\n"
+"Plugin to see the decoded text and a graphic overlay\n"
+msgstr "El plugin IACFleet para OpenCPN\n"
+"Muestra los ficheros escritos en código IAC, producidos por NADI.\n"
+"La información puede ser recibida vía correo electrónico enviándo uno con el contenido\n"
+"\"Send fleet.nadi\" a \"query@saildocs.com\"\n"
+"Guarde el correo electrónico recibido como respuesta y ábralo con este\n"
+"Plugin para ver el texto e imágenes decodificados superpuestos sobre la carta\n"
 
-#: src/iacfleet_pi.cpp:176
+#: src/iacfleet_pi.cpp:178
 msgid "IACFleet Preferences"
-msgstr ""
+msgstr "Preferencias de IACFleet"
 
-#: src/iacfleet_pi.cpp:197 src/iacfleet.h:81
+#: src/iacfleet_pi.cpp:199 src/iacfleet.h:81
 msgid "IACFleet Display Control"
-msgstr ""
+msgstr "Control de visualización de IACFleet"
 
-#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:539
+#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:541
 msgid "Run as &animation"
-msgstr ""
+msgstr "Ejecutar como &animación"
 
 #: src/iacfleet.cpp:206
 msgid "Stop &animation"
-msgstr ""
+msgstr "Parar &animación"
 
 #: src/iacfleet.cpp:242
 msgid "Select IACFleet Directory"
-msgstr ""
+msgstr "Seleccionar directorio IACFleet"
 
 #: src/iacfleet.cpp:264
 msgid "IACFleet File Directory"
-msgstr ""
+msgstr "Directorio archivos IACFleet"
 
 #: src/iacfleet.cpp:284
 msgid "Files"
-msgstr ""
+msgstr "Archivos"
 
 #: src/iacfleet.cpp:292
 msgid "Sort by"
-msgstr ""
+msgstr "Ordenar por"
 
 #: src/iacfleet.cpp:296
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: src/iacfleet.cpp:299
 msgid "File timestamp"
-msgstr ""
+msgstr "Fecha del archivo"
 
 #: src/iacfleet.cpp:320
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #: src/iacfleet.cpp:335
 msgid "Raw"
-msgstr ""
+msgstr "En crudo"
 
 #: src/iacfleet.cpp:351
 msgid "Downloads"
-msgstr ""
+msgstr "Descargas"
 
 #: src/iacfleet.cpp:358
 msgid "Brazil"
-msgstr ""
+msgstr "Brasil"
 
 #: src/iacfleet.cpp:363
 msgid "Final date"
-msgstr ""
+msgstr "Fecha final"
 
 #: src/iacfleet.cpp:371
 msgid "Hour"
-msgstr ""
+msgstr "Hora"
 
 #: src/iacfleet.cpp:375
 msgid "00"
@@ -420,15 +438,15 @@ msgstr ""
 
 #: src/iacfleet.cpp:383 src/iacfleet.cpp:391 src/iacfleet.cpp:430
 msgid "Download"
-msgstr ""
+msgstr "Descargar"
 
 #: src/iacfleet.cpp:398
 msgid "dataset(s)"
-msgstr ""
+msgstr "Conjunto de dato(s)"
 
 #: src/iacfleet.cpp:404
 msgid "The data is available since 2006 and accesible manually from"
-msgstr ""
+msgstr "Los datos están disponibles desde 2006 y accesibles manualmente desde"
 
 #: src/iacfleet.cpp:408
 msgid "http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"
@@ -436,168 +454,70 @@ msgstr ""
 
 #: src/iacfleet.cpp:416
 msgid "NOAA North Atlantic and Europe"
-msgstr ""
+msgstr "Europa y Atlántico Norte NOAA"
 
 #: src/iacfleet.cpp:421
 msgid "Analysis"
-msgstr ""
+msgstr "Análisis"
 
 #: src/iacfleet.cpp:424
 msgid "24h forecast"
-msgstr ""
+msgstr "pronóstico a 24h"
 
 #: src/iacfleet.cpp:440
 msgid "South Pacific (from Fiji Meteorological Service, Nadi)"
-msgstr ""
+msgstr "Pacífico Sur (desde el servicio meteorológico de Fiji, Nadi)"
 
 #: src/iacfleet.cpp:442
-msgid "The dataset is available from Saildocs\nSend an e-mail with the text\nfleet.nadi\nand any subject to query@saildocs.com\nWhen you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."
-msgstr ""
+msgid "The dataset is available from Saildocs\n"
+"Send an e-mail with the text\n"
+"fleet.nadi\n"
+"and any subject to query@saildocs.com\n"
+"When you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."
+msgstr "El conjunto de datos está disponible en Saildocs\n"
+"Enviar un correo electrónico con el texto\n"
+"fleet.nadi\n"
+"y con cualquier asunto query@saildocs.com \n"
+"Una vez reciba la respuesta, copie y pegue en la pestaña En crudo o guárdelo como texto y abrirlo en la pestaña Archivos."
 
 #: src/iacfleet.cpp:461
 msgid "Issue Date: "
-msgstr ""
+msgstr "Fecha de emisión: "
 
 #: src/iacfleet.cpp:478
 msgid "&Close"
-msgstr ""
+msgstr "&Cerrar"
 
-#: src/iacfleet.cpp:626
+#: src/iacfleet.cpp:628
 #, c-format
 msgid "Error opening: %s"
-msgstr ""
+msgstr "Error al abrir: %s"
 
-#: src/iacfleet.cpp:663
+#: src/iacfleet.cpp:665
 msgid "Sorry, you can't download data from the future - they don't exist..."
-msgstr ""
+msgstr "Lo sentimos, no se pueden descargar datos del futuro - no existen..."
 
-#: src/iacfleet.cpp:668
+#: src/iacfleet.cpp:670
 msgid "Sorry, the data is not available before September 1, 2006..."
-msgstr ""
+msgstr "Lo sentimos, no hay datos disponibles antes de 1 de septiembre de 2006..."
 
-#: src/iacfleet.cpp:686 src/iacfleet.cpp:766
+#: src/iacfleet.cpp:689 src/iacfleet.cpp:778
 msgid "Downloading file"
-msgstr ""
+msgstr "Descargando archivo"
 
-#: src/iacfleet.cpp:687 src/iacfleet.cpp:767
+#: src/iacfleet.cpp:690 src/iacfleet.cpp:779
 msgid "Reading Headers: "
-msgstr ""
+msgstr "Leyendo cabeceras: "
 
-#: src/iacfleet.cpp:702 src/iacfleet.cpp:782
+#: src/iacfleet.cpp:704 src/iacfleet.cpp:792
 #, c-format
 msgid "Failed to save: %s "
-msgstr ""
+msgstr "No se pudo guardar: %s "
 
-#: src/iacfleet.cpp:708 src/iacfleet.cpp:788
+#: src/iacfleet.cpp:710 src/iacfleet.cpp:798
 #, c-format
-msgid "Failed to download: %s \nVerify there is a working Internet connection."
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:137
-msgid "Not available"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:168
-msgid "URL:"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:187
-msgid "Speed:"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:196
-msgid "Elapsed time:"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:198
-msgid "Estimated total time:"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:200
-msgid "Estimated remaining time:"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:243 src/wxcurl/dialog.cpp:395
-msgid "Abort"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:245
-msgid "Settings"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:250 src/wxcurl/dialog.cpp:416
-msgid "Pause"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:252
-msgid "Start"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:395
-msgid "Close"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:406
-msgid "Resume"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:409
-msgid "0 (transfer paused)"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:457
-msgid "Connection settings"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:457
-msgid "Connection settings used for the transfer:"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:512
-msgid "0 (transfer completed)"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:533
-msgid "Downloaded:"
-msgstr ""
-
-#: src/wxcurl/dialog.cpp:581
-msgid "Uploaded:"
-msgstr ""
-
-#: src/wxcurl/panel.cpp:111
-msgid "Username:"
-msgstr ""
-
-#: src/wxcurl/panel.cpp:112
-msgid "Password:"
-msgstr ""
-
-#: src/wxcurl/panel.cpp:120
-msgid "Port:"
-msgstr ""
-
-#: src/wxcurl/panel.cpp:134
-msgid "Proxy settings"
-msgstr ""
-
-#: src/wxcurl/panel.cpp:136
-msgid "Use proxy"
-msgstr ""
-
-#: src/wxcurl/panel.cpp:141
-msgid "Proxy host:"
-msgstr ""
-
-#: src/wxcurl/panel.cpp:142
-msgid "Proxy username:"
-msgstr ""
-
-#: src/wxcurl/panel.cpp:143
-msgid "Proxy password:"
-msgstr ""
-
-#: src/wxcurl/panel.cpp:144
-msgid "Proxy port:"
-msgstr ""
+msgid "Failed to download: %s \n"
+"Verify there is a working Internet connection."
+msgstr "Error al descargar: %s \n"
+"Verifique que dispone de conexión activa con Internet."
 

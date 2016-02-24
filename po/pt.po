@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-06 20:15-0500\n"
-"PO-Revision-Date: 2015-05-23 05:02-0400\n"
+"POT-Creation-Date: 2016-02-24 13:01-0300\n"
+"PO-Revision-Date: 2016-02-24 11:05-0500\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
@@ -342,15 +342,15 @@ msgstr "movimento duvidoso"
 msgid "Isobar (%4uhPa):\n"
 msgstr "Isobara (%4uhPa): \n"
 
-#: src/iacfleet_pi.cpp:108 src/iacfleet_pi.cpp:155
+#: src/iacfleet_pi.cpp:106 src/iacfleet_pi.cpp:109 src/iacfleet_pi.cpp:157
 msgid "IACFleet"
 msgstr "IACFleet"
 
-#: src/iacfleet_pi.cpp:160
+#: src/iacfleet_pi.cpp:162
 msgid "IACFleet PlugIn for OpenCPN"
 msgstr "IACFleet PlugIn para OpenCPN"
 
-#: src/iacfleet_pi.cpp:166
+#: src/iacfleet_pi.cpp:168
 msgid "IACFleet PlugIn for OpenCPN\n"
 "Display IAC Fleet Code information provided by NADI.\n"
 "Information can be received by email by sending an email with the contents\n"
@@ -364,15 +364,15 @@ msgstr "IACFleet PlugIn para obter informações OpenCPN\n"
 "Salve o E-mail que você obteve como resposta e abra-o com este\n"
 "Plugin para ver o texto decodificado e um gráfico overlay\n"
 
-#: src/iacfleet_pi.cpp:176
+#: src/iacfleet_pi.cpp:178
 msgid "IACFleet Preferences"
 msgstr "Preferências do IACFleet"
 
-#: src/iacfleet_pi.cpp:197 src/iacfleet.h:81
+#: src/iacfleet_pi.cpp:199 src/iacfleet.h:81
 msgid "IACFleet Display Control"
 msgstr "Controle de exibição do IACFleet"
 
-#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:539
+#: src/iacfleet.cpp:190 src/iacfleet.cpp:483 src/iacfleet.cpp:541
 msgid "Run as &animation"
 msgstr "Executar como &animação"
 
@@ -488,144 +488,36 @@ msgstr "Data de emissão: "
 msgid "&Close"
 msgstr "& Fechar"
 
-#: src/iacfleet.cpp:626
+#: src/iacfleet.cpp:628
 #, c-format
 msgid "Error opening: %s"
 msgstr "Erro ao abrir: %s"
 
-#: src/iacfleet.cpp:663
+#: src/iacfleet.cpp:665
 msgid "Sorry, you can't download data from the future - they don't exist..."
 msgstr "Desculpa, você não pode fazer o download de dados do futuro - eles não existem..."
 
-#: src/iacfleet.cpp:668
+#: src/iacfleet.cpp:670
 msgid "Sorry, the data is not available before September 1, 2006..."
 msgstr "Desculpa, os dados não estão disponíveis antes de 1 de setembro de 2006..."
 
-#: src/iacfleet.cpp:686 src/iacfleet.cpp:766
+#: src/iacfleet.cpp:689 src/iacfleet.cpp:778
 msgid "Downloading file"
 msgstr "Baixando arquivo"
 
-#: src/iacfleet.cpp:687 src/iacfleet.cpp:767
+#: src/iacfleet.cpp:690 src/iacfleet.cpp:779
 msgid "Reading Headers: "
 msgstr "Leitura de cabeçalhos: "
 
-#: src/iacfleet.cpp:702 src/iacfleet.cpp:782
+#: src/iacfleet.cpp:704 src/iacfleet.cpp:792
 #, c-format
 msgid "Failed to save: %s "
 msgstr "Falha ao salvar: %s "
 
-#: src/iacfleet.cpp:708 src/iacfleet.cpp:788
+#: src/iacfleet.cpp:710 src/iacfleet.cpp:798
 #, c-format
 msgid "Failed to download: %s \n"
 "Verify there is a working Internet connection."
 msgstr "Falha no descarregamento: %s \n"
 "Verifique se existe uma conexão com a Internet a trabalhar."
-
-#: src/wxcurl/dialog.cpp:137
-msgid "Not available"
-msgstr "Não disponível"
-
-#: src/wxcurl/dialog.cpp:168
-msgid "URL:"
-msgstr "URL:"
-
-#: src/wxcurl/dialog.cpp:187
-msgid "Speed:"
-msgstr "Velocidade:"
-
-#: src/wxcurl/dialog.cpp:196
-msgid "Elapsed time:"
-msgstr "Tempo decorrido:"
-
-#: src/wxcurl/dialog.cpp:198
-msgid "Estimated total time:"
-msgstr "Tempo total estimado:"
-
-#: src/wxcurl/dialog.cpp:200
-msgid "Estimated remaining time:"
-msgstr "Tempo restante estimado:"
-
-#: src/wxcurl/dialog.cpp:243 src/wxcurl/dialog.cpp:395
-msgid "Abort"
-msgstr "Abortar"
-
-#: src/wxcurl/dialog.cpp:245
-msgid "Settings"
-msgstr "Configurações"
-
-#: src/wxcurl/dialog.cpp:250 src/wxcurl/dialog.cpp:416
-msgid "Pause"
-msgstr "Pausa"
-
-#: src/wxcurl/dialog.cpp:252
-msgid "Start"
-msgstr "Iniciar"
-
-#: src/wxcurl/dialog.cpp:395
-msgid "Close"
-msgstr "Fechar"
-
-#: src/wxcurl/dialog.cpp:406
-msgid "Resume"
-msgstr "Retomar"
-
-#: src/wxcurl/dialog.cpp:409
-msgid "0 (transfer paused)"
-msgstr "0 (transferência interrompida)"
-
-#: src/wxcurl/dialog.cpp:457
-msgid "Connection settings"
-msgstr "Configurações de conexão"
-
-#: src/wxcurl/dialog.cpp:457
-msgid "Connection settings used for the transfer:"
-msgstr "Configurações de conexão utilizadas para a transferência:"
-
-#: src/wxcurl/dialog.cpp:512
-msgid "0 (transfer completed)"
-msgstr "0 (transferência concluída)"
-
-#: src/wxcurl/dialog.cpp:533
-msgid "Downloaded:"
-msgstr "Baixado:"
-
-#: src/wxcurl/dialog.cpp:581
-msgid "Uploaded:"
-msgstr "Carregado:"
-
-#: src/wxcurl/panel.cpp:111
-msgid "Username:"
-msgstr "Nome de usuário:"
-
-#: src/wxcurl/panel.cpp:112
-msgid "Password:"
-msgstr "Senha:"
-
-#: src/wxcurl/panel.cpp:120
-msgid "Port:"
-msgstr "Port:"
-
-#: src/wxcurl/panel.cpp:134
-msgid "Proxy settings"
-msgstr "Configurações de proxy"
-
-#: src/wxcurl/panel.cpp:136
-msgid "Use proxy"
-msgstr "Usar proxy"
-
-#: src/wxcurl/panel.cpp:141
-msgid "Proxy host:"
-msgstr "Host proxy:"
-
-#: src/wxcurl/panel.cpp:142
-msgid "Proxy username:"
-msgstr "Nome de usuário proxy:"
-
-#: src/wxcurl/panel.cpp:143
-msgid "Proxy password:"
-msgstr "Senha do proxy:"
-
-#: src/wxcurl/panel.cpp:144
-msgid "Proxy port:"
-msgstr "Porta do proxy:"
 
