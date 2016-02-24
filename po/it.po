@@ -363,7 +363,7 @@ msgstr "IACFleet PlugIn per OpenCPN\n"
 "\"Send fleet.nadi\" all'indirizzo \"query@saildocs.com\" \n"
 "Salvare l'EMail di risposta e aprirla con questo\n"
 "Plugin per vedere il testo decodificato e un overlay\n"
-" grafico"
+" grafico\n"
 
 #: src/iacfleet_pi.cpp:178
 msgid "IACFleet Preferences"
