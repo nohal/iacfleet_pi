@@ -34,6 +34,7 @@
 
 #include <wx/treectrl.h>
 #include <wx/fileconf.h>
+#include <wx/stdpaths.h>
 
 #include <typeinfo>
 #include "iacfleet.h"
@@ -243,7 +244,7 @@ bool iacfleet_pi::LoadConfig( void )
         m_sort_type =  pConf->Read ( _T ( "IACFleetSortType" ), SORT_NAME );
 
         pConf->SetPath ( _T ( "/Directories" ) );
-        pConf->Read ( _T ( "IACFleetDirectory" ), &m_dir );
+        pConf->Read ( _T ( "IACFleetDirectory" ), &m_dir, wxStandardPaths::Get().GetDocumentsDir() );
 
         return true;
     }
