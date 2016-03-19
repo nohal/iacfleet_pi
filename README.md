@@ -1,6 +1,9 @@
 IAC Fleetcode plugin Plugin for OpenCPN
 =======================================
 
+[![Build Status](https://travis-ci.org/nohal/iacfleet_pi.svg?branch=master)](https://travis-ci.org/nohal/iacfleet_pi)
+
+
 Compiling
 =========
 You have to be able to compile OpenCPN itself - Get the info at http://opencpn.org/ocpn/developers_manual
