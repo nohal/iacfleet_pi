@@ -760,12 +760,12 @@ void IACFleetUIDialog::OnNoaaDownload( wxCommandEvent& event )
     if( m_rbAnalysis->GetValue() )
     {
         prefix = _T("IAC_NOAA_A");
-        url = _T("http://weather.noaa.gov/pub/data/raw/as/asxx21.egrr..txt");
+        url = _T("http://tgftp.nws.noaa.gov/data/raw/as/asxx21.egrr..txt");
     }
     else
     {
         prefix = _T("IAC_NOAA_F");
-        url = _T("http://weather.noaa.gov/pub/data/raw/fs/fsxx21.egrr..txt");
+        url = _T("http://tgftp.nws.noaa.gov/data/raw/fs/fsxx21.egrr..txt");
     }
 
     wxString filename = wxString::Format(_T("%s_%i-%i-%i_%i-%i.txt"), prefix.c_str(),
