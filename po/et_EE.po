@@ -3,17 +3,17 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-24 13:01-0300\n"
-"PO-Revision-Date: 2016-02-24 11:05-0500\n"
+"PO-Revision-Date: 2016-09-21 16:33-0400\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
-"Language-Team: Japanese\n"
-"Language: ja_JP\n"
+"Language-Team: Estonian\n"
+"Language: et_EE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: crowdin.com\n"
 "X-Crowdin-Project: opencpn\n"
-"X-Crowdin-Language: ja\n"
+"X-Crowdin-Language: et\n"
 "X-Crowdin-File: /plugins/iacfleet_pi/po/iacfleet_pi.pot\n"
 
 #: src/iacfile.cpp:157
@@ -38,11 +38,11 @@ msgstr ""
 
 #: src/iacfile.cpp:216
 msgid "Day "
-msgstr "日 "
+msgstr ""
 
 #: src/iacfile.cpp:217
 msgid " Hour "
-msgstr " 時間 "
+msgstr ""
 
 #: src/iacfile.cpp:1112
 msgid "stationary"
@@ -340,7 +340,7 @@ msgstr ""
 
 #: src/iacfleet_pi.cpp:106 src/iacfleet_pi.cpp:109 src/iacfleet_pi.cpp:157
 msgid "IACFleet"
-msgstr "IACFleet"
+msgstr ""
 
 #: src/iacfleet_pi.cpp:162
 msgid "IACFleet PlugIn for OpenCPN"
@@ -385,7 +385,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:292
 msgid "Sort by"
-msgstr "並べ替え:"
+msgstr ""
 
 #: src/iacfleet.cpp:296
 msgid "Name"
@@ -397,7 +397,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:320
 msgid "Text"
-msgstr "テキスト"
+msgstr ""
 
 #: src/iacfleet.cpp:335
 msgid "Raw"
@@ -409,7 +409,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:358
 msgid "Brazil"
-msgstr "ブラジル"
+msgstr ""
 
 #: src/iacfleet.cpp:363
 msgid "Final date"
@@ -417,7 +417,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:371
 msgid "Hour"
-msgstr "時間"
+msgstr ""
 
 #: src/iacfleet.cpp:375
 msgid "00"
@@ -429,7 +429,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:383 src/iacfleet.cpp:391 src/iacfleet.cpp:430
 msgid "Download"
-msgstr "ダウンロード"
+msgstr ""
 
 #: src/iacfleet.cpp:398
 msgid "dataset(s)"
@@ -473,7 +473,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:478
 msgid "&Close"
-msgstr "&閉じる"
+msgstr ""
 
 #: src/iacfleet.cpp:628
 #, c-format
@@ -499,7 +499,7 @@ msgstr ""
 #: src/iacfleet.cpp:704 src/iacfleet.cpp:792
 #, c-format
 msgid "Failed to save: %s "
-msgstr "保存に失敗しました: %s "
+msgstr ""
 
 #: src/iacfleet.cpp:710 src/iacfleet.cpp:798
 #, c-format
