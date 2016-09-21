@@ -95,9 +95,9 @@ bool IACFleetUIDialog::Create ( wxWindow *parent, iacfleet_pi *ppi, wxWindowID i
     m_currentDir = initial_dir;
     m_sortType = sort_type;
 #ifdef __WXMAC__
-    long wstyle = wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP;
+    long wstyle = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxSTAY_ON_TOP;
 #else
-    long wstyle = wxDEFAULT_DIALOG_STYLE;
+    long wstyle = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER;
 #endif
     if( !wxDialog::Create( parent, id, caption, pos, size, wstyle ) )
         return false;

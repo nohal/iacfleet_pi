@@ -83,9 +83,9 @@ public:
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
 #ifdef __WXMAC__
-            long style = wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP );
+            long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxSTAY_ON_TOP );
 #else
-            long style = wxDEFAULT_DIALOG_STYLE );
+            long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER );
 #endif
     void CreateControls();
     void OnClose( wxCloseEvent& event );

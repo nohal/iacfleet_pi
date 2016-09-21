@@ -194,7 +194,7 @@ void iacfleet_pi::OnToolbarToolCallback( int id )
     if( NULL == m_pDialog )
     {
         m_pDialog = new IACFleetUIDialog();
-        long style = wxDEFAULT_DIALOG_STYLE;
+        long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER;
 #ifdef __WXMAC__
         style |= wxSTAY_ON_TOP;
 #endif
