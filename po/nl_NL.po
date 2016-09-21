@@ -361,7 +361,7 @@ msgstr "IACFleet PlugIn voor OpenCPN\n"
 "Toont IAC Fleet Code informatie verstrekt door NADI. De informatie kan worden ontvangen door\n"
 "het sturen van een e-mail met de inhoud \"Send fleet.nadi\"  naar \"query@saildocs.com\".Bewaar\n"
 "de e-mail die u als antwoord krijgt en open die met deze PlugIn om de gedecodeerde tekst en\n"
-"een grafische overlay te zien."
+"een grafische overlay te zien.\n"
 
 #: src/iacfleet_pi.cpp:178
 msgid "IACFleet Preferences"
