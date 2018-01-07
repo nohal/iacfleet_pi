@@ -28,7 +28,7 @@ addons:
       name: "nohal/iacfleet_pi"
       description: "Build submitted via Travis CI"
     notification_email: pavel@kalian.cz
-    build_command_prepend: "mkdir -p build; cd build; cmake .."
-    build_command:   "make -j 4"
+    build_command_prepend: "mkdir -p build; cd build; cmake ..; make clean"
+    build_command:   "make"
     branch_pattern: coverity_scan
     build_script_url: "https://raw.githubusercontent.com/nohal/iacfleet_pi/master/scan_script.sh"
