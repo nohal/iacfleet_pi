@@ -1,15 +1,23 @@
 language: cpp
-compiler:
-  - gcc
+
+os:
+  - linux
+  - osx
+
+#compiler:
+#  - gcc
+#  - clang
 
 #branches:
 #  only:
 #    - master
 
 before_install:
-  - sudo apt-get update
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
+
 install:
-  - sudo apt-get install build-essential cmake gettext git-core gpsd gpsd-clients libgps-dev wx-common libwxgtk3.0-dev libglu1-mesa-dev libgtk2.0-dev wx3.0-headers libbz2-dev libtinyxml-dev libportaudio2 portaudio19-dev libcurl4-openssl-dev libexpat1-dev libcairo2-dev
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install build-essential cmake gettext git-core gpsd gpsd-clients libgps-dev wx-common libwxgtk3.0-dev libglu1-mesa-dev libgtk2.0-dev wx3.0-headers libbz2-dev libtinyxml-dev libportaudio2 portaudio19-dev libcurl4-openssl-dev libexpat1-dev libcairo2-dev libarchive-dev liblzma-dev libexif-dev; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cairo libexif libarchive cmake gettext wxmac; fi
 script:
   - mkdir -p build
   - cd build
@@ -31,4 +39,4 @@ addons:
     build_command_prepend: "mkdir -p build; cd build; cmake ..; make clean"
     build_command:   "make"
     branch_pattern: coverity_scan
-    build_script_url: "https://raw.githubusercontent.com/nohal/iacfleet_pi/master/scan_script.sh"
+#    build_script_url: "https://raw.githubusercontent.com/nohal/iacfleet_pi/master/scan_script.sh"
