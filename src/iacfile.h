@@ -43,7 +43,6 @@
 #include "TexFont.h"
 
 #include "ocpn_plugin.h"
-
 #ifdef ocpnUSE_GL
 #ifdef __WXMSW__
 #include "GL/gl.h"            // local copy for Windows
