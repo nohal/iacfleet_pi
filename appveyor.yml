@@ -15,6 +15,7 @@ install:
   - '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x86'
 
   # sent environment variables for wxWidgets
+  - set WXPARENT=C:\
   - set WXWIN=C:\wxWidgets-3.0.2
   - set wxWidgets_ROOT_DIR=%WXWIN%
   - set wxWidgets_LIB_DIR=%WXWIN%\lib\vc_dll
@@ -24,17 +25,18 @@ install:
   - choco install poedit nsis -x86
 
   # Download and unzip wxwidgets
-  - ps: Start-FileDownload http://downloads.sourceforge.net/project/wxwindows/3.0.2/wxWidgets-3.0.2.zip
-  - cmd: 7z x wxwidgets-3.0.2.zip -o%WXWIN% > null
+#  - ps: Start-FileDownload http://downloads.sourceforge.net/project/wxwindows/3.0.2/wxWidgets-3.0.2.zip
+  - ps: Start-FileDownload http://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/wxWidgets-3.0.2.7z
+  - cmd: 7z x wxwidgets-3.0.2.7z -o%WXPARENT% > null
 
   # some debugging information
   - set
   # - cmake --help
 
   # build wxWidgets
-  - cmd: cd %WXWIN%\build\msw\
-  - cmd: nmake -f makefile.vc BUILD=release SHARED=1 CFLAGS=/D_USING_V120_SDK71_ CXXFLAGS=/D_USING_V120_SDK71_
-  - cmd: nmake -f makefile.vc BUILD=debug SHARED=1 CFLAGS=/D_USING_V120_SDK71_ CXXFLAGS=/D_USING_V120_SDK71_
+#  - cmd: cd %WXWIN%\build\msw\
+#  - cmd: nmake -f makefile.vc BUILD=release SHARED=1 CFLAGS=/D_USING_V120_SDK71_ CXXFLAGS=/D_USING_V120_SDK71_
+#  - cmd: nmake -f makefile.vc BUILD=debug SHARED=1 CFLAGS=/D_USING_V120_SDK71_ CXXFLAGS=/D_USING_V120_SDK71_
 
 before_build:
   - cd c:\projects\iacfleet_pi
