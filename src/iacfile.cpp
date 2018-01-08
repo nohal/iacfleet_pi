@@ -933,6 +933,9 @@ IACSystem::IACSystem( void ):
     m_isoLineColor = *wxBLACK;
 }
 
+IACSystem::~IACSystem() {
+}
+
 bool IACSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &sysfont )
 {
     bool hasDrawn=false;

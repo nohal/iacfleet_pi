@@ -118,6 +118,7 @@ class IACSystem
 {
 public:
     IACSystem( void );
+    virtual ~IACSystem();
     //void SetMovement(unsigned int m, unsigned int d, unsigned int s);
     virtual wxString ToString( bool includePosition = true ) const;
     virtual bool Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, TexFont &sysfont );
