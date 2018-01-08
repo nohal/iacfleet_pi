@@ -1398,7 +1398,6 @@ bool IACTropicalSystem::Draw( wxDC *dc, PlugIn_ViewPort *vp, TexFont &numfont, T
     {
         GetGlobalColor ( _T ( "YELO1" ), &m_isoLineColor );
         m_isoLineWidth = wxMax(FRONT_WIDTH, GL_MIN_LINE_WIDTH);
-        hasDrawn = DrawPositions( dc, vp );
     }
     hasDrawn = DrawPositions( dc, vp );
     if( dc )
