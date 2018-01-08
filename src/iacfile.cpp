@@ -660,9 +660,11 @@ wxString IACFile::ReadToken( wxInputStream &file )
                     }
                 }
                 break;
+/* this is dead code
             case 2:
                 mode = 0;
                 break;
+*/
             }// case
         }
     }// while
