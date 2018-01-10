@@ -58,6 +58,7 @@ BEGIN_EVENT_TABLE ( IACFleetUIDialog, wxDialog )
     EVT_TIMER(ID_ANIMATION_TIMER, IACFleetUIDialog::OnTimerAnimation)
 END_EVENT_TABLE()
 
+/*
 IACFleetUIDialog::IACFleetUIDialog(void):
     pParent(NULL),
     pPlugIn(NULL),
@@ -72,6 +73,7 @@ IACFleetUIDialog::IACFleetUIDialog(void):
 {
     //      Init(); privat member of "wxDialog" in dialog.h
 }
+*/
 
 IACFleetUIDialog::~IACFleetUIDialog( void )
 {
@@ -84,7 +86,7 @@ IACFleetUIDialog::~IACFleetUIDialog( void )
     m_rbSortTime->Disconnect( wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler( IACFleetUIDialog::OnSortChange ), NULL, this );
 }
 
-bool IACFleetUIDialog::Create ( wxWindow *parent, iacfleet_pi *ppi, wxWindowID id,
+IACFleetUIDialog::IACFleetUIDialog ( wxWindow *parent, iacfleet_pi *ppi, wxWindowID id,
         const wxString& caption, const wxString initial_dir, int sort_type,
         const wxPoint& pos, const wxSize& size, long style )
 {
@@ -99,14 +101,14 @@ bool IACFleetUIDialog::Create ( wxWindow *parent, iacfleet_pi *ppi, wxWindowID i
 #else
     long wstyle = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER;
 #endif
-    if( !wxDialog::Create( parent, id, caption, pos, size, wstyle ) )
-        return false;
+    wxDialog::Create( parent, id, caption, pos, size, wstyle );
+    //    return false;
 #include "folder.xpm"
     m_pfolder_bitmap = new wxBitmap ( folder );   // comes from XPM include
 
     CreateControls();
     SetMinSize(GetBestSize());
-    return true;
+    //return true;
 }
 
 

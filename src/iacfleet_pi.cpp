@@ -193,7 +193,7 @@ void iacfleet_pi::OnToolbarToolCallback( int id )
     // show the IACFleet dialog
     if( NULL == m_pDialog )
     {
-        m_pDialog = new IACFleetUIDialog();
+        //m_pDialog = new IACFleetUIDialog();
         long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER;
 #ifdef __WXMAC__
         style |= wxSTAY_ON_TOP;
@@ -201,7 +201,7 @@ void iacfleet_pi::OnToolbarToolCallback( int id )
         wxPoint pos = wxPoint( m_dialog_x, m_dialog_y);
         if( !m_parent_window->GetRect().Contains( pos ) )
             pos = wxDefaultPosition; // If it seems we are off position, move to the default position
-        m_pDialog->Create( m_parent_window,
+        m_pDialog = new IACFleetUIDialog( m_parent_window,
                 this,
                 -1,
                 _("IACFleet Display Control"),

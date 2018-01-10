@@ -75,9 +75,9 @@ class IACFleetUIDialog: public wxDialog
     DECLARE_CLASS( IACFleetUIDialog )
     DECLARE_EVENT_TABLE()
 public:
-    IACFleetUIDialog( void );
+    //IACFleetUIDialog( void );
     ~IACFleetUIDialog( void );
-    bool Create( wxWindow *parent, iacfleet_pi *ppi, wxWindowID id = wxID_ANY,
+    IACFleetUIDialog( wxWindow *parent = NULL, iacfleet_pi *ppi = NULL, wxWindowID id = wxID_ANY,
             const wxString& caption = _("IACFleet Display Control"),
             const wxString initial_dir = wxEmptyString, int sort_type = SORT_NAME,
             const wxPoint& pos = wxDefaultPosition,
