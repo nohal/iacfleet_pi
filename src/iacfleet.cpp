@@ -31,6 +31,7 @@
 #include "wx/wx.h"
 #endif //precompiled headers
 
+#include <wx/collpane.h>
 #include <wx/textctrl.h>
 #include <wx/listbox.h>
 #include <wx/dir.h>
@@ -265,24 +266,31 @@ void IACFleetUIDialog::CreateControls()
     wxBoxSizer* topSizer = new wxBoxSizer( wxVERTICAL );
     SetSizer( topSizer );
 
-//    The Fleetode directory
-    wxStaticBoxSizer* itemStaticBoxSizer11Static = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _ ( "IACFleet File Directory" ) ), wxHORIZONTAL );
+    wxCollapsiblePane *collpane = new wxCollapsiblePane(this, wxID_ANY, "IACFLeet:");
+    // add the pane with a zero proportion value to the 'sz' sizer which contains it
+    topSizer->Add(collpane, 1, wxGROW|wxALL, 5);
+    // now add a test label in the collapsible pane using a sizer to layout it:
+    wxWindow *win = collpane->GetPane();
+    wxSizer *paneSz = new wxBoxSizer(wxVERTICAL);
 
-    m_pitemCurrentDirectoryCtrl = new wxTextCtrl( this, -1, _T(""), wxDefaultPosition, wxSize(-1, -1), wxTE_READONLY );
+//    The Fleetode directory
+    wxStaticBoxSizer* itemStaticBoxSizer11Static = new wxStaticBoxSizer( new wxStaticBox(win, wxID_ANY, _ ( "IACFleet File Directory" ) ), wxHORIZONTAL );
+
+    m_pitemCurrentDirectoryCtrl = new wxTextCtrl( win, -1, _T(""), wxDefaultPosition, wxSize(-1, -1), wxTE_READONLY );
     itemStaticBoxSizer11Static->Add( m_pitemCurrentDirectoryCtrl, 1, wxALIGN_CENTER_VERTICAL|wxALIGN_LEFT);
 
     m_pitemCurrentDirectoryCtrl->AppendText( m_currentDir );
 
-    wxButton* bChooseDir = new wxBitmapButton( this, ID_CHOOSEIACFLEETDIR, *m_pfolder_bitmap );
+    wxButton* bChooseDir = new wxBitmapButton( win, ID_CHOOSEIACFLEETDIR, *m_pfolder_bitmap );
     itemStaticBoxSizer11Static->Add( bChooseDir, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
 
-    topSizer->Add( itemStaticBoxSizer11Static, 0, wxALL|wxEXPAND, 5 );
+    paneSz->Add( itemStaticBoxSizer11Static, 0, wxALL|wxEXPAND, 5 );
 
     // panels
-    wxNotebook *itemNotebook = new wxNotebook( this, ID_NOTEBOOK, wxDefaultPosition,
+    wxNotebook *itemNotebook = new wxNotebook( win, ID_NOTEBOOK, wxDefaultPosition,
             wxDefaultSize, wxNB_TOP );
-    topSizer->Add(itemNotebook, 1, wxEXPAND|wxALL, 5);
-    itemNotebook->SetMinSize(wxSize(wxDefaultCoord,0));
+    paneSz->Add(itemNotebook, 1, wxEXPAND|wxALL|wxGROW, 5);
+    itemNotebook->SetMinSize(wxSize(500,200));
     // file panel
     wxPanel *filepanel = new wxPanel( itemNotebook, wxID_ANY,
             wxDefaultPosition, wxDefaultSize);
@@ -462,35 +470,40 @@ void IACFleetUIDialog::CreateControls()
     // of the Fleetcode
     wxBoxSizer* tmsizer = new wxBoxSizer(wxHORIZONTAL);
 
-    wxStaticText *pIssueDate = new wxStaticText( this,
+    wxStaticText *pIssueDate = new wxStaticText( win,
             wxID_ANY, _("Issue Date: "),
             wxDefaultPosition,wxDefaultSize,
             wxALIGN_LEFT
                                                );
     tmsizer->Add(pIssueDate, 0, wxALL, 5);
-    m_pFileTime = new wxStaticText( this,
+    m_pFileTime = new wxStaticText( win,
             wxID_ANY, wxEmptyString,
             wxDefaultPosition, wxDefaultSize,
             wxALIGN_LEFT);
     tmsizer->Add(m_pFileTime, 1, wxALL|wxEXPAND, 5);
-    topSizer->Add(tmsizer, 0, wxGROW);
+    paneSz->Add(tmsizer, 0, wxGROW);
 
     // A horizontal box sizer to contain OK
     wxBoxSizer* AckBox = new wxBoxSizer ( wxHORIZONTAL );
-    topSizer->Add( AckBox, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+    paneSz->Add( AckBox, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 
     // The OK button
-    wxButton* bOK = new wxButton( this, ID_OK, _( "&Close" ),
+    wxButton* bOK = new wxButton( win, ID_OK, _( "&Close" ),
             wxDefaultPosition, wxDefaultSize, 0 );
     AckBox->Add( bOK, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
 
     // The Animate button
-    m_bAnimation = new wxButton( this, ID_ANIMATE, _( "Run as &animation" ),
+    m_bAnimation = new wxButton( win, ID_ANIMATE, _( "Run as &animation" ),
             wxDefaultPosition, wxDefaultSize, 0 );
     AckBox->Add( m_bAnimation, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
     m_bAnimation->Disable();
 
+    win->SetSizer(paneSz);                                                                                    
+    paneSz->SetSizeHints(win);
+
     updateFileList();
+
+    collpane->Expand();
 }
 
 //---------------------------------------------------------
