@@ -27,36 +27,36 @@
 
 #include "wx/wxprec.h"
 
-#ifndef  WX_PRECOMP
+#ifndef WX_PRECOMP
 #include "wx/wx.h"
-#endif //precompiled headers
+#endif  // precompiled headers
 
 #include <wx/collpane.h>
-#include <wx/textctrl.h>
-#include <wx/listbox.h>
+#include <wx/datetime.h>
 #include <wx/dir.h>
 #include <wx/filename.h>
+#include <wx/listbox.h>
 #include <wx/mstream.h>
-#include <wx/datetime.h>
+#include <wx/textctrl.h>
 #include <typeinfo>
 
-#include "iacfleet_pi.h"
-#include "iacfleet.h"
 #include "iacfile.h"
-IMPLEMENT_CLASS ( IACFleetUIDialog, wxDialog )
+#include "iacfleet.h"
+#include "iacfleet_pi.h"
+IMPLEMENT_CLASS(IACFleetUIDialog, wxDialog)
 
-BEGIN_EVENT_TABLE ( IACFleetUIDialog, wxDialog )
+BEGIN_EVENT_TABLE(IACFleetUIDialog, wxDialog)
 
-    EVT_CLOSE ( IACFleetUIDialog::OnClose )
-    EVT_BUTTON ( ID_OK, IACFleetUIDialog::OnIdOKClick )
-    EVT_BUTTON ( ID_ANIMATE, IACFleetUIDialog::OnIdAnimateClick )
-    EVT_MOVE ( IACFleetUIDialog::OnMove )
-    EVT_SIZE ( IACFleetUIDialog::OnSize )
-    EVT_BUTTON ( ID_CHOOSEIACFLEETDIR, IACFleetUIDialog::OnChooseDirClick )
-    EVT_LISTBOX ( ID_FILESELECTED,IACFleetUIDialog::OnFileSelect)
-    EVT_TEXT(ID_RAWTEXT, IACFleetUIDialog::OnRawTextChanged)
-    EVT_TIMER(ID_TIP_TIMER, IACFleetUIDialog::OnTipTimer)
-    EVT_TIMER(ID_ANIMATION_TIMER, IACFleetUIDialog::OnTimerAnimation)
+EVT_CLOSE(IACFleetUIDialog::OnClose)
+EVT_BUTTON(ID_OK, IACFleetUIDialog::OnIdOKClick)
+EVT_BUTTON(ID_ANIMATE, IACFleetUIDialog::OnIdAnimateClick)
+EVT_MOVE(IACFleetUIDialog::OnMove)
+EVT_SIZE(IACFleetUIDialog::OnSize)
+EVT_BUTTON(ID_CHOOSEIACFLEETDIR, IACFleetUIDialog::OnChooseDirClick)
+EVT_LISTBOX(ID_FILESELECTED, IACFleetUIDialog::OnFileSelect)
+EVT_TEXT(ID_RAWTEXT, IACFleetUIDialog::OnRawTextChanged)
+EVT_TIMER(ID_TIP_TIMER, IACFleetUIDialog::OnTipTimer)
+EVT_TIMER(ID_ANIMATION_TIMER, IACFleetUIDialog::OnTimerAnimation)
 END_EVENT_TABLE()
 
 /*
@@ -76,21 +76,17 @@ IACFleetUIDialog::IACFleetUIDialog(void):
 }
 */
 
-IACFleetUIDialog::~IACFleetUIDialog( void )
-{
-    if( m_timer->IsRunning() )
-        m_timer->Stop();
+IACFleetUIDialog::~IACFleetUIDialog(void) {
+    if (m_timer->IsRunning()) m_timer->Stop();
     delete m_timer;
-    m_bBrDownload->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( IACFleetUIDialog::OnBrDownload ), NULL, this );
-    m_bNoaaDownload->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( IACFleetUIDialog::OnNoaaDownload ), NULL, this );
-    m_rbSortName->Disconnect( wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler( IACFleetUIDialog::OnSortChange ), NULL, this );
-    m_rbSortTime->Disconnect( wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler( IACFleetUIDialog::OnSortChange ), NULL, this );
+    m_bBrDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
+    m_bNoaaDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnNoaaDownload), NULL, this);
+    m_rbSortName->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
+    m_rbSortTime->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
 }
 
-IACFleetUIDialog::IACFleetUIDialog ( wxWindow *parent, iacfleet_pi *ppi, wxWindowID id,
-        const wxString& caption, const wxString initial_dir, int sort_type,
-        const wxPoint& pos, const wxSize& size, long style )
-{
+IACFleetUIDialog::IACFleetUIDialog(wxWindow* parent, iacfleet_pi* ppi, wxWindowID id, const wxString& caption,
+                                   const wxString initial_dir, int sort_type, const wxPoint& pos, const wxSize& size, long style) {
     pParent = parent;
     pPlugIn = ppi;
     m_timer = new wxTimer(this, ID_ANIMATION_TIMER);
@@ -98,26 +94,24 @@ IACFleetUIDialog::IACFleetUIDialog ( wxWindow *parent, iacfleet_pi *ppi, wxWindo
     m_currentDir = initial_dir;
     m_sortType = sort_type;
 #ifdef __WXMAC__
-    long wstyle = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxSTAY_ON_TOP;
+    long wstyle = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxSTAY_ON_TOP;
 #else
-    long wstyle = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER;
+    long wstyle = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER;
 #endif
-    wxDialog::Create( parent, id, caption, pos, size, wstyle );
+    wxDialog::Create(parent, id, caption, pos, size, wstyle);
     //    return false;
 #include "folder.xpm"
-    m_pfolder_bitmap = new wxBitmap ( folder );   // comes from XPM include
+    m_pfolder_bitmap = new wxBitmap(folder);  // comes from XPM include
 
     CreateControls();
     SetMinSize(GetBestSize());
-    //return true;
+    // return true;
 }
 
-
 // get called if the mouse is moved on the chart
-void IACFleetUIDialog::SetCursorLatLon( double lat, double lon )
-{
-    m_cursorpos.x=lon;
-    m_cursorpos.y=lat;
+void IACFleetUIDialog::SetCursorLatLon(double lat, double lon) {
+    m_cursorpos.x = lon;
+    m_cursorpos.y = lat;
     // Display Tip Window with details of system near the cursor.
     // Do this by starting and restarting a timer.
     // If no movement of the cursor occures, the
@@ -131,33 +125,26 @@ void IACFleetUIDialog::SetCursorLatLon( double lat, double lon )
 }
 
 //
-void IACFleetUIDialog::OnTipTimer( wxTimerEvent& event )
-{
+void IACFleetUIDialog::OnTipTimer(wxTimerEvent& event) {
     wxString tip;
     // try to display the tooltip only if
     // - our vioewpoert is valid
     // - no "old" tooltip is displayed
-    if( m_lastViewPortValid && NULL == m_pTipWindow )
-    {
-        IACSystem *pSystem;
+    if (m_lastViewPortValid && NULL == m_pTipWindow) {
+        IACSystem* pSystem;
         int sel_rad_pix = 8;
         double view_scale_ppm = m_lastViewPort.view_scale_ppm;
-        double SelectRadius = sel_rad_pix/ ( view_scale_ppm * 1852 * 60 );  // Degrees, approximately
-        if( NULL != (pSystem = m_iacfile.FindSystem(m_cursorpos,SelectRadius)) )
-        {
+        double SelectRadius = sel_rad_pix / (view_scale_ppm * 1852 * 60);  // Degrees, approximately
+        if (NULL != (pSystem = m_iacfile.FindSystem(m_cursorpos, SelectRadius))) {
             // found
-            tip = pSystem->ToString(false); // get Detail-String of system near cursor
-            m_pTipWindow = new wxTipWindow(m_parent,tip,150);
-            if( NULL != m_pTipWindow )
-            {
+            tip = pSystem->ToString(false);  // get Detail-String of system near cursor
+            m_pTipWindow = new wxTipWindow(m_parent, tip, 150);
+            if (NULL != m_pTipWindow) {
                 // hurray - we have a tip window
                 // define area beyond the tip gets deleted
                 wxPoint pos;
                 GetCanvasPixLL(&m_lastViewPort, &pos, m_cursorpos.y, m_cursorpos.x);
-                wxRect bRect(pos.x - sel_rad_pix,
-                        pos.y - sel_rad_pix,
-                        pos.x + sel_rad_pix,
-                        pos.y + sel_rad_pix);
+                wxRect bRect(pos.x - sel_rad_pix, pos.y - sel_rad_pix, pos.x + sel_rad_pix, pos.y + sel_rad_pix);
                 m_pTipWindow->SetBoundingRect(bRect);
                 // tell tip window to NULL this pointer when it deletes itself
                 // this means we can tell if the tip window is active or not
@@ -167,8 +154,7 @@ void IACFleetUIDialog::OnTipTimer( wxTimerEvent& event )
     }
 }
 
-void IACFleetUIDialog::OnClose ( wxCloseEvent& event )
-{
+void IACFleetUIDialog::OnClose(wxCloseEvent& event) {
     pPlugIn->SetDir(m_currentDir);
     pPlugIn->SetSortType(m_sortType);
     RequestRefresh(pParent);
@@ -176,56 +162,45 @@ void IACFleetUIDialog::OnClose ( wxCloseEvent& event )
     pPlugIn->OnDialogClose();
 }
 
-void IACFleetUIDialog::Invalidate( void )
-{
+void IACFleetUIDialog::Invalidate(void) {
     m_iacfile.Invalidate();
     m_pRawCtrl->Clear();
     m_pTextCtrl->Clear();
 }
 
-void IACFleetUIDialog::OnIdOKClick( wxCommandEvent& event )
-{
-    Close(); // this will call OnClose() later...
+void IACFleetUIDialog::OnIdOKClick(wxCommandEvent& event) {
+    Close();  // this will call OnClose() later...
 }
 
-void IACFleetUIDialog::OnIdAnimateClick( wxCommandEvent& event )
-{
-    if( m_timer->IsRunning() )
-    {
+void IACFleetUIDialog::OnIdAnimateClick(wxCommandEvent& event) {
+    if (m_timer->IsRunning()) {
         m_timer->Stop();
         m_bAnimation->SetLabel(_("Run as &animation"));
-    }
-    else
-    {
+    } else {
         m_filesToAnimate.Clear();
         m_animationCurrentFile = 0;
         wxArrayInt selectedFiles;
         int numberOfSelectedFiles = m_pFileListCtrl->GetSelections(selectedFiles);
-        if( numberOfSelectedFiles > 0 )
-        {
-            for( int i = 0; i < numberOfSelectedFiles; i++ )
-            {
+        if (numberOfSelectedFiles > 0) {
+            for (int i = 0; i < numberOfSelectedFiles; i++) {
                 wxFileName fn(m_currentDir, m_FilenameArray[selectedFiles[i]]);
                 m_filesToAnimate.Add(fn.GetFullPath());
             }
 
             m_bAnimation->SetLabel(_("Stop &animation"));
-            m_timer->Start( ANIMATION_FRAME_MS );
+            m_timer->Start(ANIMATION_FRAME_MS);
         }
     }
 }
 
-void IACFleetUIDialog::OnTimerAnimation( wxTimerEvent& event )
-{
+void IACFleetUIDialog::OnTimerAnimation(wxTimerEvent& event) {
     m_currentFileName = m_filesToAnimate[m_animationCurrentFile];
     updateIACFleet();
     m_animationCurrentFile++;
-    if( m_animationCurrentFile > m_filesToAnimate.Count() - 1 )
-        m_animationCurrentFile = 0;
+    if (m_animationCurrentFile > m_filesToAnimate.Count() - 1) m_animationCurrentFile = 0;
 }
 
-void IACFleetUIDialog::OnMove( wxMoveEvent& event )
-{
+void IACFleetUIDialog::OnMove(wxMoveEvent& event) {
     //    Record the dialog position
     wxPoint p = event.GetPosition();
     pPlugIn->SetDialogX(p.x);
@@ -234,8 +209,7 @@ void IACFleetUIDialog::OnMove( wxMoveEvent& event )
     event.Skip();
 }
 
-void IACFleetUIDialog::OnSize( wxSizeEvent& event )
-{
+void IACFleetUIDialog::OnSize(wxSizeEvent& event) {
     wxSize p = event.GetSize();
     pPlugIn->SetDialogSizeX(p.x);
     pPlugIn->SetDialogSizeY(p.y);
@@ -243,262 +217,238 @@ void IACFleetUIDialog::OnSize( wxSizeEvent& event )
     event.Skip();
 }
 
-void IACFleetUIDialog::OnChooseDirClick( wxCommandEvent& event )
-{
-    wxString new_dir  = ::wxDirSelector( _( "Select IACFleet Directory" ), m_currentDir );
-    if( !new_dir.empty() )
-    {
+void IACFleetUIDialog::OnChooseDirClick(wxCommandEvent& event) {
+    wxString new_dir = ::wxDirSelector(_("Select IACFleet Directory"), m_currentDir);
+    if (!new_dir.empty()) {
         m_currentDir = new_dir;
-        m_pitemCurrentDirectoryCtrl->ChangeValue( m_currentDir );
+        m_pitemCurrentDirectoryCtrl->ChangeValue(m_currentDir);
         m_pitemCurrentDirectoryCtrl->SetInsertionPoint(0);
         updateFileList();
 
         Refresh();
 
-        pPlugIn->SetDir( m_currentDir );
-
+        pPlugIn->SetDir(m_currentDir);
     }
 }
 
-void IACFleetUIDialog::CreateControls()
-{
-// A top-level sizer
-    wxBoxSizer* topSizer = new wxBoxSizer( wxVERTICAL );
-    SetSizer( topSizer );
+void IACFleetUIDialog::CreateControls() {
+    // A top-level sizer
+    wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
+    SetSizer(topSizer);
 
-    wxCollapsiblePane *collpane = new wxCollapsiblePane(this, wxID_ANY, "IACFLeet:");
+    wxCollapsiblePane* collpane = new wxCollapsiblePane(this, wxID_ANY, "IACFLeet:");
     // add the pane with a zero proportion value to the 'sz' sizer which contains it
-    topSizer->Add(collpane, 1, wxGROW|wxALL, 5);
+    topSizer->Add(collpane, 1, wxGROW | wxALL, 5);
     // now add a test label in the collapsible pane using a sizer to layout it:
-    wxWindow *win = collpane->GetPane();
-    wxSizer *paneSz = new wxBoxSizer(wxVERTICAL);
+    wxWindow* win = collpane->GetPane();
+    wxSizer* paneSz = new wxBoxSizer(wxVERTICAL);
 
-//    The Fleetode directory
-    wxStaticBoxSizer* itemStaticBoxSizer11Static = new wxStaticBoxSizer( new wxStaticBox(win, wxID_ANY, _ ( "IACFleet File Directory" ) ), wxHORIZONTAL );
+    //    The Fleetode directory
+    wxStaticBoxSizer* itemStaticBoxSizer11Static =
+        new wxStaticBoxSizer(new wxStaticBox(win, wxID_ANY, _("IACFleet File Directory")), wxHORIZONTAL);
 
-    m_pitemCurrentDirectoryCtrl = new wxTextCtrl( win, -1, _T(""), wxDefaultPosition, wxSize(-1, -1), wxTE_READONLY );
-    itemStaticBoxSizer11Static->Add( m_pitemCurrentDirectoryCtrl, 1, wxALIGN_CENTER_VERTICAL|wxALIGN_LEFT);
+    m_pitemCurrentDirectoryCtrl = new wxTextCtrl(win, -1, _T(""), wxDefaultPosition, wxSize(-1, -1), wxTE_READONLY);
+    itemStaticBoxSizer11Static->Add(m_pitemCurrentDirectoryCtrl, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_LEFT);
 
-    m_pitemCurrentDirectoryCtrl->AppendText( m_currentDir );
+    m_pitemCurrentDirectoryCtrl->AppendText(m_currentDir);
 
-    wxButton* bChooseDir = new wxBitmapButton( win, ID_CHOOSEIACFLEETDIR, *m_pfolder_bitmap );
-    itemStaticBoxSizer11Static->Add( bChooseDir, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
+    wxButton* bChooseDir = new wxBitmapButton(win, ID_CHOOSEIACFLEETDIR, *m_pfolder_bitmap);
+    itemStaticBoxSizer11Static->Add(bChooseDir, 0, wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT | wxALL, 5);
 
-    paneSz->Add( itemStaticBoxSizer11Static, 0, wxALL|wxEXPAND, 5 );
+    paneSz->Add(itemStaticBoxSizer11Static, 0, wxALL | wxEXPAND, 5);
 
     // panels
-    wxNotebook *itemNotebook = new wxNotebook( win, ID_NOTEBOOK, wxDefaultPosition,
-            wxDefaultSize, wxNB_TOP );
-    paneSz->Add(itemNotebook, 1, wxEXPAND|wxALL|wxGROW, 5);
-    itemNotebook->SetMinSize(wxSize(500,200));
+    wxNotebook* itemNotebook = new wxNotebook(win, ID_NOTEBOOK, wxDefaultPosition, wxDefaultSize, wxNB_TOP);
+    paneSz->Add(itemNotebook, 1, wxEXPAND | wxALL | wxGROW, 5);
+    itemNotebook->SetMinSize(wxSize(500, 200));
     // file panel
-    wxPanel *filepanel = new wxPanel( itemNotebook, wxID_ANY,
-            wxDefaultPosition, wxDefaultSize);
+    wxPanel* filepanel = new wxPanel(itemNotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize);
     itemNotebook->AddPage(filepanel, _("Files"));
 
     wxBoxSizer* fpsizer = new wxBoxSizer(wxVERTICAL);
     filepanel->SetSizer(fpsizer);
 
     wxBoxSizer* bSizerSort;
-    bSizerSort = new wxBoxSizer( wxHORIZONTAL );
+    bSizerSort = new wxBoxSizer(wxHORIZONTAL);
 
-    m_stSort = new wxStaticText( filepanel, wxID_ANY, _("Sort by"), wxDefaultPosition, wxDefaultSize, 0 );
-    m_stSort->Wrap( -1 );
-    bSizerSort->Add( m_stSort, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+    m_stSort = new wxStaticText(filepanel, wxID_ANY, _("Sort by"), wxDefaultPosition, wxDefaultSize, 0);
+    m_stSort->Wrap(-1);
+    bSizerSort->Add(m_stSort, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    m_rbSortName = new wxRadioButton( filepanel, wxID_ANY, _("Name"), wxDefaultPosition, wxDefaultSize, 0 );
-    bSizerSort->Add( m_rbSortName, 0, wxALL, 5 );
+    m_rbSortName = new wxRadioButton(filepanel, wxID_ANY, _("Name"), wxDefaultPosition, wxDefaultSize, 0);
+    bSizerSort->Add(m_rbSortName, 0, wxALL, 5);
 
-    m_rbSortTime = new wxRadioButton( filepanel, wxID_ANY, _("File timestamp"), wxDefaultPosition, wxDefaultSize, 0 );
-    bSizerSort->Add( m_rbSortTime, 0, wxALL, 5 );
+    m_rbSortTime = new wxRadioButton(filepanel, wxID_ANY, _("File timestamp"), wxDefaultPosition, wxDefaultSize, 0);
+    bSizerSort->Add(m_rbSortTime, 0, wxALL, 5);
 
-    if( m_sortType == SORT_NAME )
-        m_rbSortName->SetValue( true );
+    if (m_sortType == SORT_NAME)
+        m_rbSortName->SetValue(true);
     else
-        m_rbSortTime->SetValue( true );
+        m_rbSortTime->SetValue(true);
 
-    fpsizer->Add( bSizerSort, 0, wxEXPAND, 5 );
+    fpsizer->Add(bSizerSort, 0, wxEXPAND, 5);
 
-    m_pFileListCtrl = new wxListBox(filepanel,ID_FILESELECTED,
-            wxDefaultPosition,wxDefaultSize,0,
-            NULL,
-            wxLB_EXTENDED|wxLB_HSCROLL|wxLB_NEEDED_SB,
-            wxDefaultValidator,wxListBoxNameStr);
+    m_pFileListCtrl = new wxListBox(filepanel, ID_FILESELECTED, wxDefaultPosition, wxDefaultSize, 0, NULL,
+                                    wxLB_EXTENDED | wxLB_HSCROLL | wxLB_NEEDED_SB, wxDefaultValidator, wxListBoxNameStr);
 
     fpsizer->Add(m_pFileListCtrl, 1, wxGROW);
 
     // Text panel
-    wxPanel *textpanel = new wxPanel( itemNotebook, wxID_ANY,
-            wxDefaultPosition, wxSize(-1, -1));
+    wxPanel* textpanel = new wxPanel(itemNotebook, wxID_ANY, wxDefaultPosition, wxSize(-1, -1));
     itemNotebook->AddPage(textpanel, _("Text"));
 
     wxBoxSizer* tpsizer = new wxBoxSizer(wxVERTICAL);
     textpanel->SetSizer(tpsizer);
 
-    m_pTextCtrl = new wxTextCtrl( textpanel,
-            wxID_ANY, wxEmptyString,
-            wxDefaultPosition,wxDefaultSize,
-            wxTE_MULTILINE|wxTE_READONLY|wxHSCROLL
-                                );
+    m_pTextCtrl = new wxTextCtrl(textpanel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize,
+                                 wxTE_MULTILINE | wxTE_READONLY | wxHSCROLL);
     tpsizer->Add(m_pTextCtrl, 1, wxGROW);
 
     // Raw panel
-    wxPanel *rawpanel = new wxPanel( itemNotebook, wxID_ANY,
-            wxDefaultPosition, wxSize(-1, -1));
+    wxPanel* rawpanel = new wxPanel(itemNotebook, wxID_ANY, wxDefaultPosition, wxSize(-1, -1));
     itemNotebook->AddPage(rawpanel, _("Raw"));
 
     wxBoxSizer* rpsizer = new wxBoxSizer(wxVERTICAL);
     rawpanel->SetSizer(rpsizer);
 
-    m_pRawCtrl = new wxTextCtrl( rawpanel,
-            ID_RAWTEXT, wxEmptyString,
-            wxDefaultPosition,wxDefaultSize,
-            wxTE_MULTILINE|wxHSCROLL
-                               );
+    m_pRawCtrl = new wxTextCtrl(rawpanel, ID_RAWTEXT, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE | wxHSCROLL);
     rpsizer->Add(m_pRawCtrl, 1, wxGROW);
 
     // Downloads panel
-    wxScrolledWindow *dnldpanel = new wxScrolledWindow( itemNotebook, wxID_ANY,
-            wxDefaultPosition, wxDefaultSize, wxHSCROLL|wxVSCROLL);
+    wxScrolledWindow* dnldpanel =
+        new wxScrolledWindow(itemNotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL);
     dnldpanel->SetScrollRate(5, 5);
     itemNotebook->AddPage(dnldpanel, _("Downloads"));
-    //Generated mostly from wxFormBuilder
+    // Generated mostly from wxFormBuilder
     wxBoxSizer* bSizerMain;
-    bSizerMain = new wxBoxSizer( wxVERTICAL );
+    bSizerMain = new wxBoxSizer(wxVERTICAL);
     dnldpanel->SetSizer(bSizerMain);
 
     wxStaticBoxSizer* sbSizerBrazil;
-    sbSizerBrazil = new wxStaticBoxSizer( new wxStaticBox( dnldpanel, wxID_ANY, _("Brazil") ), wxVERTICAL );
+    sbSizerBrazil = new wxStaticBoxSizer(new wxStaticBox(dnldpanel, wxID_ANY, _("Brazil")), wxVERTICAL);
 
     wxBoxSizer* bsBRazil;
-    bsBRazil = new wxBoxSizer( wxHORIZONTAL );
+    bsBRazil = new wxBoxSizer(wxHORIZONTAL);
 
-    m_stDate = new wxStaticText( dnldpanel, wxID_ANY, _("Final date"), wxDefaultPosition, wxDefaultSize, 0 );
-    m_stDate->Wrap( -1 );
-    bsBRazil->Add( m_stDate, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+    m_stDate = new wxStaticText(dnldpanel, wxID_ANY, _("Final date"), wxDefaultPosition, wxDefaultSize, 0);
+    m_stDate->Wrap(-1);
+    bsBRazil->Add(m_stDate, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    m_dpBrazil = new wxDatePickerCtrl( dnldpanel, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT );
-    bsBRazil->Add( m_dpBrazil, 0, wxALL, 5 );
+    m_dpBrazil = new wxDatePickerCtrl(dnldpanel, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT);
+    bsBRazil->Add(m_dpBrazil, 0, wxALL, 5);
     m_dpBrazil->SetValue(wxDateTime::Today());
 
-    m_stHour = new wxStaticText( dnldpanel, wxID_ANY, _("Hour"), wxDefaultPosition, wxDefaultSize, 0 );
-    m_stHour->Wrap( -1 );
-    bsBRazil->Add( m_stHour, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+    m_stHour = new wxStaticText(dnldpanel, wxID_ANY, _("Hour"), wxDefaultPosition, wxDefaultSize, 0);
+    m_stHour->Wrap(-1);
+    bsBRazil->Add(m_stHour, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    wxString m_chHourChoices[] = { _("00"), _("12") };
-    int m_chHourNChoices = sizeof( m_chHourChoices ) / sizeof( wxString );
-    m_chHour = new wxChoice( dnldpanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_chHourNChoices, m_chHourChoices, 0 );
-    m_chHour->SetSelection( 0 );
-    bsBRazil->Add( m_chHour, 0, wxALL, 5 );
+    wxString m_chHourChoices[] = {_("00"), _("12")};
+    int m_chHourNChoices = sizeof(m_chHourChoices) / sizeof(wxString);
+    m_chHour = new wxChoice(dnldpanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_chHourNChoices, m_chHourChoices, 0);
+    m_chHour->SetSelection(0);
+    bsBRazil->Add(m_chHour, 0, wxALL, 5);
 
-    bsBRazil->Add( 0, 0, 1, wxEXPAND, 5 );
+    bsBRazil->Add(0, 0, 1, wxEXPAND, 5);
 
-    m_bBrDownload = new wxButton( dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0 );
-    bsBRazil->Add( m_bBrDownload, 0, wxALL, 5 );
+    m_bBrDownload = new wxButton(dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0);
+    bsBRazil->Add(m_bBrDownload, 0, wxALL, 5);
 
-    sbSizerBrazil->Add( bsBRazil, 0, wxEXPAND, 5 );
+    sbSizerBrazil->Add(bsBRazil, 0, wxEXPAND, 5);
 
     wxBoxSizer* bSizerHistory;
-    bSizerHistory = new wxBoxSizer( wxHORIZONTAL );
+    bSizerHistory = new wxBoxSizer(wxHORIZONTAL);
 
-    m_stHist = new wxStaticText( dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0 );
-    m_stHist->Wrap( -1 );
-    bSizerHistory->Add( m_stHist, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+    m_stHist = new wxStaticText(dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0);
+    m_stHist->Wrap(-1);
+    bSizerHistory->Add(m_stHist, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    m_spHist = new wxSpinCtrl( dnldpanel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50,-1 ), wxSP_ARROW_KEYS, 1, 100, 1 );
-    bSizerHistory->Add( m_spHist, 0, wxALL, 5 );
+    m_spHist = new wxSpinCtrl(dnldpanel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), wxSP_ARROW_KEYS, 1, 100, 1);
+    bSizerHistory->Add(m_spHist, 0, wxALL, 5);
 
-    m_stForecasts = new wxStaticText( dnldpanel, wxID_ANY, _("dataset(s)"), wxDefaultPosition, wxDefaultSize, 0 );
-    m_stForecasts->Wrap( -1 );
-    bSizerHistory->Add( m_stForecasts, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+    m_stForecasts = new wxStaticText(dnldpanel, wxID_ANY, _("dataset(s)"), wxDefaultPosition, wxDefaultSize, 0);
+    m_stForecasts->Wrap(-1);
+    bSizerHistory->Add(m_stForecasts, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    sbSizerBrazil->Add( bSizerHistory, 1, wxEXPAND, 5 );
+    sbSizerBrazil->Add(bSizerHistory, 1, wxEXPAND, 5);
 
-    m_stBrDesc = new wxStaticText( dnldpanel, wxID_ANY, _("The data is available since 2006 and accesible manually from"), wxDefaultPosition, wxDefaultSize, 0 );
-    m_stBrDesc->Wrap( -1 );
-    sbSizerBrazil->Add( m_stBrDesc, 0, wxALL, 5 );
+    m_stBrDesc = new wxStaticText(dnldpanel, wxID_ANY, _("The data is available since 2006 and accesible manually from"),
+                                  wxDefaultPosition, wxDefaultSize, 0);
+    m_stBrDesc->Wrap(-1);
+    sbSizerBrazil->Add(m_stBrDesc, 0, wxALL, 5);
 
-    m_hlBr = new wxHyperlinkCtrl( dnldpanel, wxID_ANY, _("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"), wxT("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"), wxDefaultPosition, wxDefaultSize, wxHL_DEFAULT_STYLE );
-    sbSizerBrazil->Add( m_hlBr, 0, wxALL, 5 );
+    m_hlBr = new wxHyperlinkCtrl(dnldpanel, wxID_ANY, _("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"),
+                                 wxT("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"), wxDefaultPosition, wxDefaultSize,
+                                 wxHL_DEFAULT_STYLE);
+    sbSizerBrazil->Add(m_hlBr, 0, wxALL, 5);
 
+    bSizerMain->Add(sbSizerBrazil, 0, wxALL | wxEXPAND, 5);
 
-    bSizerMain->Add( sbSizerBrazil, 0, wxALL|wxEXPAND, 5 );
+    // NOAA
+    wxStaticBoxSizer* sbSizerNOAA;
+    sbSizerNOAA = new wxStaticBoxSizer(new wxStaticBox(dnldpanel, wxID_ANY, _("NOAA North Atlantic and Europe")), wxVERTICAL);
 
-    //NOAA
-	wxStaticBoxSizer* sbSizerNOAA;
-	sbSizerNOAA = new wxStaticBoxSizer( new wxStaticBox( dnldpanel, wxID_ANY, _("NOAA North Atlantic and Europe") ), wxVERTICAL );
+    wxBoxSizer* bsNOAA;
+    bsNOAA = new wxBoxSizer(wxHORIZONTAL);
 
-	wxBoxSizer* bsNOAA;
-	bsNOAA = new wxBoxSizer( wxHORIZONTAL );
+    m_rbAnalysis = new wxRadioButton(dnldpanel, wxID_ANY, _("Analysis"), wxDefaultPosition, wxDefaultSize, 0);
+    bsNOAA->Add(m_rbAnalysis, 0, wxALL, 5);
 
-	m_rbAnalysis = new wxRadioButton( dnldpanel, wxID_ANY, _("Analysis"), wxDefaultPosition, wxDefaultSize, 0 );
-	bsNOAA->Add( m_rbAnalysis, 0, wxALL, 5 );
+    m_rbForecast = new wxRadioButton(dnldpanel, wxID_ANY, _("24h forecast"), wxDefaultPosition, wxDefaultSize, 0);
+    bsNOAA->Add(m_rbForecast, 0, wxALL, 5);
 
-	m_rbForecast = new wxRadioButton( dnldpanel, wxID_ANY, _("24h forecast"), wxDefaultPosition, wxDefaultSize, 0 );
-	bsNOAA->Add( m_rbForecast, 0, wxALL, 5 );
+    bsNOAA->Add(0, 0, 1, wxEXPAND, 5);
 
+    m_bNoaaDownload = new wxButton(dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0);
+    bsNOAA->Add(m_bNoaaDownload, 0, wxALL, 5);
 
-	bsNOAA->Add( 0, 0, 1, wxEXPAND, 5 );
+    sbSizerNOAA->Add(bsNOAA, 1, wxEXPAND, 5);
 
-	m_bNoaaDownload = new wxButton( dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0 );
-	bsNOAA->Add( m_bNoaaDownload, 0, wxALL, 5 );
+    bSizerMain->Add(sbSizerNOAA, 0, wxALL | wxEXPAND, 5);
 
+    // NADI
+    wxStaticBoxSizer* sbSizerNadi;
+    sbSizerNadi = new wxStaticBoxSizer(
+        new wxStaticBox(dnldpanel, wxID_ANY, _("South Pacific (from Fiji Meteorological Service, Nadi)")), wxVERTICAL);
 
-	sbSizerNOAA->Add( bsNOAA, 1, wxEXPAND, 5 );
+    m_stNadi = new wxStaticText(
+        dnldpanel,
+        wxID_ANY, _("The dataset is available from Saildocs\nSend an e-mail with the text\nfleet.nadi\nand any subject to query@saildocs.com\nWhen you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."),
+        wxDefaultPosition, wxDefaultSize, 0);
+    m_stNadi->Wrap(300);
+    sbSizerNadi->Add(m_stNadi, 0, wxALL, 5);
 
-	bSizerMain->Add( sbSizerNOAA, 0, wxALL|wxEXPAND, 5 );
-
-	//NADI
-	wxStaticBoxSizer* sbSizerNadi;
-	sbSizerNadi = new wxStaticBoxSizer( new wxStaticBox( dnldpanel, wxID_ANY, _("South Pacific (from Fiji Meteorological Service, Nadi)") ), wxVERTICAL );
-
-	m_stNadi = new wxStaticText( dnldpanel, wxID_ANY, _("The dataset is available from Saildocs\nSend an e-mail with the text\nfleet.nadi\nand any subject to query@saildocs.com\nWhen you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."), wxDefaultPosition, wxDefaultSize, 0 );
-	m_stNadi->Wrap( 300 );
-	sbSizerNadi->Add( m_stNadi, 0, wxALL, 5 );
-
-
-	bSizerMain->Add( sbSizerNadi, 0, wxALL|wxEXPAND, 5 );
+    bSizerMain->Add(sbSizerNadi, 0, wxALL | wxEXPAND, 5);
 
     // Connect Events
-    m_bBrDownload->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( IACFleetUIDialog::OnBrDownload ), NULL, this );
-    m_bNoaaDownload->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( IACFleetUIDialog::OnNoaaDownload ), NULL, this );
-    m_rbSortName->Connect( wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler( IACFleetUIDialog::OnSortChange ), NULL, this );
-    m_rbSortTime->Connect( wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler( IACFleetUIDialog::OnSortChange ), NULL, this );
-
+    m_bBrDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
+    m_bNoaaDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnNoaaDownload), NULL, this);
+    m_rbSortName->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
+    m_rbSortTime->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
 
     // the text control that shows the Date and Time
     // of the Fleetcode
     wxBoxSizer* tmsizer = new wxBoxSizer(wxHORIZONTAL);
 
-    wxStaticText *pIssueDate = new wxStaticText( win,
-            wxID_ANY, _("Issue Date: "),
-            wxDefaultPosition,wxDefaultSize,
-            wxALIGN_LEFT
-                                               );
+    wxStaticText* pIssueDate = new wxStaticText(win, wxID_ANY, _("Issue Date: "), wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT);
     tmsizer->Add(pIssueDate, 0, wxALL, 5);
-    m_pFileTime = new wxStaticText( win,
-            wxID_ANY, wxEmptyString,
-            wxDefaultPosition, wxDefaultSize,
-            wxALIGN_LEFT);
-    tmsizer->Add(m_pFileTime, 1, wxALL|wxEXPAND, 5);
+    m_pFileTime = new wxStaticText(win, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT);
+    tmsizer->Add(m_pFileTime, 1, wxALL | wxEXPAND, 5);
     paneSz->Add(tmsizer, 0, wxGROW);
 
     // A horizontal box sizer to contain OK
-    wxBoxSizer* AckBox = new wxBoxSizer ( wxHORIZONTAL );
-    paneSz->Add( AckBox, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+    wxBoxSizer* AckBox = new wxBoxSizer(wxHORIZONTAL);
+    paneSz->Add(AckBox, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 5);
 
     // The OK button
-    wxButton* bOK = new wxButton( win, ID_OK, _( "&Close" ),
-            wxDefaultPosition, wxDefaultSize, 0 );
-    AckBox->Add( bOK, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+    wxButton* bOK = new wxButton(win, ID_OK, _("&Close"), wxDefaultPosition, wxDefaultSize, 0);
+    AckBox->Add(bOK, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
     // The Animate button
-    m_bAnimation = new wxButton( win, ID_ANIMATE, _( "Run as &animation" ),
-            wxDefaultPosition, wxDefaultSize, 0 );
-    AckBox->Add( m_bAnimation, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+    m_bAnimation = new wxButton(win, ID_ANIMATE, _("Run as &animation"), wxDefaultPosition, wxDefaultSize, 0);
+    AckBox->Add(m_bAnimation, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
     m_bAnimation->Disable();
 
-    win->SetSizer(paneSz);                                                                                    
+    win->SetSizer(paneSz);
     paneSz->SetSizeHints(win);
 
     updateFileList();
@@ -507,43 +457,33 @@ void IACFleetUIDialog::CreateControls()
 }
 
 //---------------------------------------------------------
-void IACFleetUIDialog::updateFileList( void )
-{
+void IACFleetUIDialog::updateFileList(void) {
     m_FilenameArray.Empty();
-    if( m_currentDir == wxEmptyString || !wxDirExists( m_currentDir ) )
-        return;
-    wxDir::GetAllFiles(m_currentDir,
-            &m_FilenameArray,
-            wxEmptyString,
-            wxDIR_FILES);
-    for( int i = m_FilenameArray.GetCount() - 1; i >= 0; i-- )
-    {
+    if (m_currentDir == wxEmptyString || !wxDirExists(m_currentDir)) return;
+    wxDir::GetAllFiles(m_currentDir, &m_FilenameArray, wxEmptyString, wxDIR_FILES);
+    for (int i = m_FilenameArray.GetCount() - 1; i >= 0; i--) {
         // remove dirname from file
         wxFileName file(m_FilenameArray[i]);
         wxDateTime access;
         wxDateTime modified;
         wxDateTime created;
         file.GetTimes(&access, &modified, &created);
-        if( m_sortType == SORT_TIME )
-        {
+        if (m_sortType == SORT_TIME) {
             wxString dates = modified.FormatISODate() + modified.FormatISOTime() + wxT(";");
             m_FilenameArray[i] = dates + file.GetFullName();
-        }
-        else
+        } else
             m_FilenameArray[i] = file.GetFullName();
     }
-    if( m_sortType != SORT_NAME ) // sort the filenames according to dates, newest first
+    if (m_sortType != SORT_NAME)  // sort the filenames according to dates, newest first
     {
         m_FilenameArray.Sort(true);
-        for( int i = m_FilenameArray.GetCount() - 1; i >= 0; i-- )
-        {
+        for (int i = m_FilenameArray.GetCount() - 1; i >= 0; i--) {
             // throw away time info
             // Yes i know this is bad code!
             wxString str = m_FilenameArray[i].AfterFirst(';');
             m_FilenameArray[i] = str;
         }
-    }
-    else // sort the filenames alphabetically
+    } else  // sort the filenames alphabetically
         m_FilenameArray.Sort();
 
     m_pFileListCtrl->Set(m_FilenameArray);
@@ -551,43 +491,33 @@ void IACFleetUIDialog::updateFileList( void )
 }
 
 // a new file is selected, read and display this file
-void IACFleetUIDialog::OnFileSelect( wxCommandEvent& event )
-{
-    if( m_timer->IsRunning() )
-    {
+void IACFleetUIDialog::OnFileSelect(wxCommandEvent& event) {
+    if (m_timer->IsRunning()) {
         m_timer->Stop();
         m_bAnimation->SetLabel(_("Run as &animation"));
     }
     wxArrayInt selectedFiles;
     int numberOfSelectedFiles = 0;
     numberOfSelectedFiles = m_pFileListCtrl->GetSelections(selectedFiles);
-    if( numberOfSelectedFiles > 0 )
-    {
+    if (numberOfSelectedFiles > 0) {
         // use the one and only selected file
         int index = selectedFiles[0];
         wxFileName fn(m_currentDir, m_FilenameArray[index]);
         m_currentFileName = fn.GetFullPath();
-        if( numberOfSelectedFiles > 1 )
-        {
+        if (numberOfSelectedFiles > 1) {
             m_bAnimation->Enable();
-        }
-        else
-        {
+        } else {
             m_bAnimation->Disable();
         }
-    }
-    else
-    {
+    } else {
         m_currentFileName = wxEmptyString;
     }
     // read File and redisplay it
     updateIACFleet();
 }
 
-void IACFleetUIDialog::OnRawTextChanged( wxCommandEvent& event )
-{
-    if( m_pRawCtrl->IsModified() )
-    {
+void IACFleetUIDialog::OnRawTextChanged(wxCommandEvent& event) {
+    if (m_pRawCtrl->IsModified()) {
         ::wxBeginBusyCursor();
 
         // the user has modified the text
@@ -598,8 +528,7 @@ void IACFleetUIDialog::OnRawTextChanged( wxCommandEvent& event )
         int numberOfSelectedFiles;
 
         numberOfSelectedFiles = m_pFileListCtrl->GetSelections(selectedFiles);
-        if( numberOfSelectedFiles > 0 )
-        {
+        if (numberOfSelectedFiles > 0) {
             m_pFileListCtrl->Deselect(selectedFiles[0]);
         }
         // make an inputstream from the Raw data in the control
@@ -607,14 +536,12 @@ void IACFleetUIDialog::OnRawTextChanged( wxCommandEvent& event )
         wxMemoryOutputStream ostream;
         // is there an easier way than to loop throughall the chars in
         // the Control?
-        for( size_t Index = 0; Index < rawData.Length(); Index++ )
-        {
+        for (size_t Index = 0; Index < rawData.Length(); Index++) {
             int c = rawData[Index];
             ostream.PutC(c);
         }
         wxMemoryInputStream istream(ostream);
-        if( m_iacfile.Read(istream) )
-        {
+        if (m_iacfile.Read(istream)) {
             updateTextPanel();
         }
         RequestRefresh(pParent);
@@ -625,66 +552,50 @@ void IACFleetUIDialog::OnRawTextChanged( wxCommandEvent& event )
 // if rawdata is not empty use it as input to the
 // IACFleet code
 // otherwise use m_currentFileName
-void IACFleetUIDialog::updateIACFleet( void )
-{
+void IACFleetUIDialog::updateIACFleet(void) {
     bool ok = false;
     ::wxBeginBusyCursor();
 
-    if( m_currentFileName != wxEmptyString )
-    {
-        wxFileInputStream *pStream = m_iacfile.GetStream(m_currentFileName);
-        if( NULL != pStream && pStream->IsOk() )
-        {
-            if( m_iacfile.Read(*pStream) )
-            {
+    if (m_currentFileName != wxEmptyString) {
+        wxFileInputStream* pStream = m_iacfile.GetStream(m_currentFileName);
+        if (NULL != pStream && pStream->IsOk()) {
+            if (m_iacfile.Read(*pStream)) {
                 updateTextPanel();
                 updateRawPanel(m_iacfile.GetRawData());
                 ok = true;
             }
-        }
-        else if( !m_timer->IsRunning() ) //Show error just if we are not running the animation
-            wxMessageBox( wxString::Format(_("Error opening: %s"), m_currentFileName.c_str()), _T("IACFleet") );
-        if( !ok )
-        {
+        } else if (!m_timer->IsRunning())  // Show error just if we are not running the animation
+            wxMessageBox(wxString::Format(_("Error opening: %s"), m_currentFileName.c_str()), _T("IACFleet"));
+        if (!ok) {
             Invalidate();
         }
         RequestRefresh(pParent);
-        delete(pStream);
+        delete (pStream);
     }
     ::wxEndBusyCursor();
 }
 
-void IACFleetUIDialog::updateRawPanel( wxString &rawData )
-{
-    m_pRawCtrl->ChangeValue(rawData);
-}
+void IACFleetUIDialog::updateRawPanel(wxString& rawData) { m_pRawCtrl->ChangeValue(rawData); }
 
-void IACFleetUIDialog::updateTextPanel( void )
-{
+void IACFleetUIDialog::updateTextPanel(void) {
     m_pTextCtrl->ChangeValue(m_iacfile.ToString());
     m_pFileTime->SetLabel(m_iacfile.GetIssueDate());
 }
 
-bool IACFleetUIDialog::RenderOverlay( wxDC *dc, PlugIn_ViewPort *vp )
-{
+bool IACFleetUIDialog::RenderOverlay(wxDC* dc, PlugIn_ViewPort* vp) {
     m_lastViewPortValid = true;
     m_lastViewPort = *vp;
-    return m_iacfile.Draw(dc,vp);
+    return m_iacfile.Draw(dc, vp);
 }
 
-void IACFleetUIDialog::OnBrDownload( wxCommandEvent& event )
-{
+void IACFleetUIDialog::OnBrDownload(wxCommandEvent& event) {
     wxDateTime dt = m_dpBrazil->GetValue();
     long hrs;
-    if( m_chHour->GetString(m_chHour->GetSelection()).ToLong(&hrs) )
-        dt.Add( wxTimeSpan( hrs ) );
-    if( dt > wxDateTime::Now() )
-    {
+    if (m_chHour->GetString(m_chHour->GetSelection()).ToLong(&hrs)) dt.Add(wxTimeSpan(hrs));
+    if (dt > wxDateTime::Now()) {
         wxMessageBox(_("Sorry, you can't download data from the future - they don't exist..."));
         return;
-    }
-    else if( dt < wxDateTime( 1, 9, 2006 ) )
-    {
+    } else if (dt < wxDateTime(1, 9, 2006)) {
         wxMessageBox(_("Sorry, the data is not available before September 1, 2006..."));
         return;
     }
@@ -692,63 +603,52 @@ void IACFleetUIDialog::OnBrDownload( wxCommandEvent& event )
     wxString showfile = wxEmptyString;
     wxString showfilename = wxEmptyString;
 
-    for( int i = 0; i < m_spHist->GetValue(); i++ )
-    {
-        wxString filename = wxString::Format(_T("P%u%02u%02u%02u.iac"),
-                                       dt.GetYear() - 2000, dt.GetMonth() + 1, dt.GetDay(),
-                                       dt.GetHour() );
-        dt.Subtract( wxTimeSpan( 12) );
+    for (int i = 0; i < m_spHist->GetValue(); i++) {
+        wxString filename =
+            wxString::Format(_T("P%u%02u%02u%02u.iac"), dt.GetYear() - 2000, dt.GetMonth() + 1, dt.GetDay(), dt.GetHour());
+        dt.Subtract(wxTimeSpan(12));
         wxString url = _T("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/") + filename;
 
-        wxFileName tfn = wxFileName::CreateTempFileName( _T("iacfleet") );
+        wxFileName tfn = wxFileName::CreateTempFileName(_T("iacfleet"));
         wxFileName fn(m_currentDir, filename);
-        
-        _OCPN_DLStatus ret = OCPN_downloadFile( url, tfn.GetFullPath(),
-                                 _("Downloading file"),
-                                 _("Reading Headers: ") + url, wxNullBitmap, this,
-                                 OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|OCPN_DLDS_AUTO_CLOSE,
-                                 10);
 
-        switch( ret )
-        {
-            case OCPN_DL_NO_ERROR:
-            {
-                if ( wxCopyFile( tfn.GetFullPath(), fn.GetFullPath() ) )
-                {
+        _OCPN_DLStatus ret =
+            OCPN_downloadFile(url, tfn.GetFullPath(), _("Downloading file"), _("Reading Headers: ") + url, wxNullBitmap, this,
+                              OCPN_DLDS_ELAPSED_TIME | OCPN_DLDS_ESTIMATED_TIME | OCPN_DLDS_REMAINING_TIME | OCPN_DLDS_SPEED |
+                                  OCPN_DLDS_SIZE | OCPN_DLDS_URL | OCPN_DLDS_CAN_PAUSE | OCPN_DLDS_CAN_ABORT | OCPN_DLDS_AUTO_CLOSE,
+                              10);
+
+        switch (ret) {
+            case OCPN_DL_NO_ERROR: {
+                if (wxCopyFile(tfn.GetFullPath(), fn.GetFullPath())) {
                     showfile = fn.GetFullPath();
                     showfilename = filename;
-                }
-                else
-                    wxMessageBox(wxString::Format( _("Failed to save: %s "), fn.GetFullPath().c_str() ),
-                            _T("IACFleet"), wxOK | wxICON_ERROR);
+                } else
+                    wxMessageBox(wxString::Format(_("Failed to save: %s "), fn.GetFullPath().c_str()), _T("IACFleet"),
+                                 wxOK | wxICON_ERROR);
                 break;
             }
-            case OCPN_DL_FAILED:
-            {
-                wxMessageBox(wxString::Format( _("Failed to download: %s \nVerify there is a working Internet connection."), url.c_str() ),
-                        _T("IACFleet"), wxOK | wxICON_ERROR);
+            case OCPN_DL_FAILED: {
+                wxMessageBox(
+                    wxString::Format(_("Failed to download: %s \nVerify there is a working Internet connection."), url.c_str()),
+                    _T("IACFleet"), wxOK | wxICON_ERROR);
                 break;
             }
             case OCPN_DL_USER_TIMEOUT:
-            case OCPN_DL_ABORTED:
-            {
+            case OCPN_DL_ABORTED: {
                 break;
             }
             case OCPN_DL_UNKNOWN:
-            case OCPN_DL_STARTED:
-            {
+            case OCPN_DL_STARTED: {
                 break;
             }
-            
-            default:
-                wxASSERT( false );  // This should never happen because we handle all possible cases of ret
 
+            default:
+                wxASSERT(false);  // This should never happen because we handle all possible cases of ret
         }
-        if( wxFileExists( tfn.GetFullPath() ) )
-            wxRemoveFile ( tfn.GetFullPath() );
+        if (wxFileExists(tfn.GetFullPath())) wxRemoveFile(tfn.GetFullPath());
     }
-    if( showfile != wxEmptyString )
-    {
+    if (showfile != wxEmptyString) {
         updateFileList();
         m_pFileListCtrl->SetStringSelection(showfilename);
         m_currentFileName = showfile;
@@ -756,17 +656,15 @@ void IACFleetUIDialog::OnBrDownload( wxCommandEvent& event )
     }
 }
 
-void IACFleetUIDialog::OnSortChange( wxCommandEvent& event )
-{
-    if( m_rbSortName->GetValue() )
+void IACFleetUIDialog::OnSortChange(wxCommandEvent& event) {
+    if (m_rbSortName->GetValue())
         m_sortType = SORT_NAME;
-    else if( m_rbSortTime->GetValue() )
+    else if (m_rbSortTime->GetValue())
         m_sortType = SORT_TIME;
     updateFileList();
 }
 
-void IACFleetUIDialog::OnNoaaDownload( wxCommandEvent& event )
-{
+void IACFleetUIDialog::OnNoaaDownload(wxCommandEvent& event) {
     wxDateTime dt = wxDateTime::Now();
 
     wxString showfile = wxEmptyString;
@@ -775,66 +673,54 @@ void IACFleetUIDialog::OnNoaaDownload( wxCommandEvent& event )
     wxString url;
     wxString prefix;
 
-    if( m_rbAnalysis->GetValue() )
-    {
+    if (m_rbAnalysis->GetValue()) {
         prefix = _T("IAC_NOAA_A");
         url = _T("http://tgftp.nws.noaa.gov/data/raw/as/asxx21.egrr..txt");
-    }
-    else
-    {
+    } else {
         prefix = _T("IAC_NOAA_F");
         url = _T("http://tgftp.nws.noaa.gov/data/raw/fs/fsxx21.egrr..txt");
     }
 
-    wxString filename = wxString::Format(_T("%s_%i-%i-%i_%i-%i.txt"), prefix.c_str(),
-                                       dt.GetYear(), dt.GetMonth() + 1, dt.GetDay(),
-                                       dt.GetHour(), dt.GetMinute() );
-    wxFileName tfn = wxFileName::CreateTempFileName( _T("iacfleet") );
+    wxString filename = wxString::Format(_T("%s_%i-%i-%i_%i-%i.txt"), prefix.c_str(), dt.GetYear(), dt.GetMonth() + 1, dt.GetDay(),
+                                         dt.GetHour(), dt.GetMinute());
+    wxFileName tfn = wxFileName::CreateTempFileName(_T("iacfleet"));
     wxFileName fn(m_currentDir, filename);
 
-    _OCPN_DLStatus ret = OCPN_downloadFile( url, tfn.GetFullPath(),
-                             _("Downloading file"),
-                             _("Reading Headers: ") + url, wxNullBitmap, this,
-                             OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|OCPN_DLDS_AUTO_CLOSE,
-                             10);
-    switch( ret )
-    {
-        case OCPN_DL_NO_ERROR:
-        {
-            if ( wxCopyFile( tfn.GetFullPath(), fn.GetFullPath() ) )
-            {
+    _OCPN_DLStatus ret =
+        OCPN_downloadFile(url, tfn.GetFullPath(), _("Downloading file"), _("Reading Headers: ") + url, wxNullBitmap, this,
+                          OCPN_DLDS_ELAPSED_TIME | OCPN_DLDS_ESTIMATED_TIME | OCPN_DLDS_REMAINING_TIME | OCPN_DLDS_SPEED |
+                              OCPN_DLDS_SIZE | OCPN_DLDS_URL | OCPN_DLDS_CAN_PAUSE | OCPN_DLDS_CAN_ABORT | OCPN_DLDS_AUTO_CLOSE,
+                          10);
+    switch (ret) {
+        case OCPN_DL_NO_ERROR: {
+            if (wxCopyFile(tfn.GetFullPath(), fn.GetFullPath())) {
                 showfile = fn.GetFullPath();
                 showfilename = filename;
-            }
-            else
-                wxMessageBox(wxString::Format( _("Failed to save: %s "), fn.GetFullPath().c_str() ),
-                        _T("IACFleet"), wxOK | wxICON_ERROR);
+            } else
+                wxMessageBox(wxString::Format(_("Failed to save: %s "), fn.GetFullPath().c_str()), _T("IACFleet"),
+                             wxOK | wxICON_ERROR);
             break;
         }
-        case OCPN_DL_FAILED:
-        {
-            wxMessageBox(wxString::Format( _("Failed to download: %s \nVerify there is a working Internet connection."), url.c_str() ),
-                    _T("IACFleet"), wxOK | wxICON_ERROR);
+        case OCPN_DL_FAILED: {
+            wxMessageBox(
+                wxString::Format(_("Failed to download: %s \nVerify there is a working Internet connection."), url.c_str()),
+                _T("IACFleet"), wxOK | wxICON_ERROR);
             break;
         }
         case OCPN_DL_USER_TIMEOUT:
-        case OCPN_DL_ABORTED:
-        {
+        case OCPN_DL_ABORTED: {
             break;
         }
         case OCPN_DL_UNKNOWN:
-        case OCPN_DL_STARTED:
-        {
+        case OCPN_DL_STARTED: {
             break;
         }
-        
+
         default:
-            wxASSERT( false );  // This should never happen because we handle all possible cases of ret
+            wxASSERT(false);  // This should never happen because we handle all possible cases of ret
     }
-    if( wxFileExists( tfn.GetFullPath() ) )
-        wxRemoveFile ( tfn.GetFullPath() );
-    if( showfile != wxEmptyString )
-    {
+    if (wxFileExists(tfn.GetFullPath())) wxRemoveFile(tfn.GetFullPath());
+    if (showfile != wxEmptyString) {
         updateFileList();
         m_pFileListCtrl->SetStringSelection(showfilename);
         m_currentFileName = showfile;

@@ -31,7 +31,7 @@
 #define NUM_GLYPHS (MAX_GLYPH - MIN_GLYPH)
 
 #define COLS_GLYPHS 16
-#define ROWS_GLYPHS ((NUM_GLYPHS / COLS_GLYPHS)+1)
+#define ROWS_GLYPHS ((NUM_GLYPHS / COLS_GLYPHS) + 1)
 
 struct TexGlyphInfo {
     int x, y, width, height;
@@ -39,17 +39,17 @@ struct TexGlyphInfo {
 };
 
 class TexFont {
-public:
+   public:
     TexFont() {}
 
-    void Build( wxFont &font, bool blur = false, bool luminance = false );
+    void Build(wxFont &font, bool blur = false, bool luminance = false);
     void Delete();
 
-    void GetTextExtent( const wxString &string, int *width, int *height);
-    void RenderString( const wxString &string, int x=0, int y=0 );
+    void GetTextExtent(const wxString &string, int *width, int *height);
+    void RenderString(const wxString &string, int x = 0, int y = 0);
 
-private:
-    void RenderGlyph( wchar_t c );
+   private:
+    void RenderGlyph(wchar_t c);
 
     wxFont m_font;
     bool m_blur;

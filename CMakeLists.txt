@@ -51,7 +51,7 @@ src/TexFont.cpp
 src/icon.png
 src/icons.cpp
 src/icons.h
-src/ocpn_plugin.h
+include/ocpn_plugin.h
         )
 
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_IACFLEET})

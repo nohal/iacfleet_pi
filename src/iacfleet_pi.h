@@ -30,32 +30,31 @@
 
 #include "wx/wxprec.h"
 
-#ifndef  WX_PRECOMP
+#ifndef WX_PRECOMP
 #include "wx/wx.h"
-#endif //precompiled headers
+#endif  // precompiled headers
 
 #include "version.h"
 
-#define     MY_API_VERSION_MAJOR    1
-#define     MY_API_VERSION_MINOR    13
+#define MY_API_VERSION_MAJOR 1
+#define MY_API_VERSION_MINOR 13
 
 #include "ocpn_plugin.h"
 
-#define IACFLEET_TOOL_POSITION -1          // Request default positioning of toolbar tool
+#define IACFLEET_TOOL_POSITION -1  // Request default positioning of toolbar tool
 
 //----------------------------------------------------------------------------------------------------------
 //    The PlugIn Class Definition
 //----------------------------------------------------------------------------------------------------------
 class IACFleetUIDialog;
-class iacfleet_pi : public opencpn_plugin_113
-{
-public:
-    iacfleet_pi( void *ppimgr );
+class iacfleet_pi : public opencpn_plugin_113 {
+   public:
+    iacfleet_pi(void *ppimgr);
     ~iacfleet_pi();
 
-//    The required PlugIn Methods
-    int Init( void );
-    bool DeInit( void );
+    //    The required PlugIn Methods
+    int Init(void);
+    bool DeInit(void);
 
     int GetAPIVersionMajor();
     int GetAPIVersionMinor();
@@ -65,54 +64,36 @@ public:
     wxString GetCommonName();
     wxString GetShortDescription();
     wxString GetLongDescription();
-    void SetCursorLatLon( double lat, double lon );
+    void SetCursorLatLon(double lat, double lon);
 
-//    The override PlugIn Methods
-    bool RenderOverlay( wxDC &dc, PlugIn_ViewPort *vp );
-    bool RenderGLOverlay( wxGLContext *pcontext, PlugIn_ViewPort *vp );
-    int GetToolbarToolCount( void );
-    void ShowPreferencesDialog( wxWindow* parent );
-    void OnToolbarToolCallback( int id );
-    void SetDialogX( int x )
-    {
-        m_dialog_x = x;
-    };
-    void SetDialogY( int x )
-    {
-        m_dialog_y = x;
-    }
-    void SetDialogSizeX( int x )
-    {
-        m_dialog_sx = x;
-    }
-    void SetDialogSizeY( int x )
-    {
-        m_dialog_sy = x;
-    }
+    //    The override PlugIn Methods
+    bool RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp);
+    bool RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp);
+    int GetToolbarToolCount(void);
+    void ShowPreferencesDialog(wxWindow *parent);
+    void OnToolbarToolCallback(int id);
+    void SetDialogX(int x) { m_dialog_x = x; };
+    void SetDialogY(int x) { m_dialog_y = x; }
+    void SetDialogSizeX(int x) { m_dialog_sx = x; }
+    void SetDialogSizeY(int x) { m_dialog_sy = x; }
     void OnDialogClose();
-    void SetDir( wxString dir )
-    {
-        m_dir = dir;
-    };
-    void SetSortType( int sort_type )
-    {
-        m_sort_type = sort_type;
-    };
-    
-private:
-    bool LoadConfig( void );
-    bool SaveConfig( void );
+    void SetDir(wxString dir) { m_dir = dir; };
+    void SetSortType(int sort_type) { m_sort_type = sort_type; };
 
-private:
-    wxWindow         *m_parent_window;
-    bool              m_bShowIcon;
-    int               m_leftclick_tool_id;
-    int               m_dialog_x, m_dialog_y;
-    int               m_dialog_sx, m_dialog_sy;
-    int               m_sort_type;
-    wxString          m_dir;
+   private:
+    bool LoadConfig(void);
+    bool SaveConfig(void);
+
+   private:
+    wxWindow *m_parent_window;
+    bool m_bShowIcon;
+    int m_leftclick_tool_id;
+    int m_dialog_x, m_dialog_y;
+    int m_dialog_sx, m_dialog_sy;
+    int m_sort_type;
+    wxString m_dir;
     IACFleetUIDialog *m_pDialog;
-    wxDC             *m_pdc;
+    wxDC *m_pdc;
 };
 
 #endif

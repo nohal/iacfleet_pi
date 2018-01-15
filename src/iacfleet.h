@@ -30,35 +30,34 @@
 
 #include "wx/wxprec.h"
 
-#ifndef  WX_PRECOMP
+#ifndef WX_PRECOMP
 #include "wx/wx.h"
-#endif //precompiled headers
+#endif  // precompiled headers
 
-#include <wx/treectrl.h>
-#include <wx/fileconf.h>
-#include <wx/notebook.h>
-#include <wx/textfile.h>
 #include <wx/arrstr.h>
-#include <wx/timer.h>
-#include <wx/dirctrl.h>
-#include <wx/tipwin.h>
+#include <wx/button.h>
+#include <wx/choice.h>
 #include <wx/datectrl.h>
 #include <wx/dateevt.h>
-#include <wx/choice.h>
-#include <wx/button.h>
+#include <wx/dirctrl.h>
+#include <wx/fileconf.h>
 #include <wx/hyperlink.h>
+#include <wx/notebook.h>
 #include <wx/spinctrl.h>
+#include <wx/textfile.h>
+#include <wx/timer.h>
+#include <wx/tipwin.h>
+#include <wx/treectrl.h>
 
-#include "ocpn_plugin.h"
 #include "iacfile.h"
+#include "ocpn_plugin.h"
 
-#define SORT_NAME           1
-#define SORT_TIME           2
+#define SORT_NAME 1
+#define SORT_TIME 2
 
-#define ANIMATION_FRAME_MS  1000
+#define ANIMATION_FRAME_MS 1000
 
-enum
-{
+enum {
     ID_OK = 11001,
     ID_CHOOSEIACFLEETDIR,
     ID_FILESELECTED,
@@ -70,95 +69,92 @@ enum
 };
 
 class iacfleet_pi;
-class IACFleetUIDialog: public wxDialog
-{
-    DECLARE_CLASS( IACFleetUIDialog )
+class IACFleetUIDialog : public wxDialog {
+    DECLARE_CLASS(IACFleetUIDialog)
     DECLARE_EVENT_TABLE()
-public:
-    //IACFleetUIDialog( void );
-    ~IACFleetUIDialog( void );
-    IACFleetUIDialog( wxWindow *parent = NULL, iacfleet_pi *ppi = NULL, wxWindowID id = wxID_ANY,
-            const wxString& caption = _("IACFleet Display Control"),
-            const wxString initial_dir = wxEmptyString, int sort_type = SORT_NAME,
-            const wxPoint& pos = wxDefaultPosition,
-            const wxSize& size = wxDefaultSize,
+   public:
+    // IACFleetUIDialog( void );
+    ~IACFleetUIDialog(void);
+    IACFleetUIDialog(wxWindow *parent = NULL, iacfleet_pi *ppi = NULL, wxWindowID id = wxID_ANY,
+                     const wxString &caption = _("IACFleet Display Control"), const wxString initial_dir = wxEmptyString,
+                     int sort_type = SORT_NAME, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize,
 #ifdef __WXMAC__
-            long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxSTAY_ON_TOP );
+                     long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxSTAY_ON_TOP);
 #else
-            long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER );
+                     long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
 #endif
     void CreateControls();
-    void OnClose( wxCloseEvent& event );
-    void OnIdOKClick( wxCommandEvent& event );
-    void OnIdAnimateClick( wxCommandEvent& event );
-    void OnTimerAnimation( wxTimerEvent& event );
-    void OnMove( wxMoveEvent& event );
-    void OnSize( wxSizeEvent& event );
-    void OnChooseDirClick( wxCommandEvent& event );
-    void OnFileSelect( wxCommandEvent& event );
-    void OnRawTextChanged( wxCommandEvent& event );
-    void OnTipTimer( wxTimerEvent& event );
-    void SetCursorLatLon( double lat, double lon );
-    bool RenderOverlay( wxDC *dc, PlugIn_ViewPort *vp );
-    void OnBrDownload( wxCommandEvent& event );
-    void OnSortChange( wxCommandEvent& event );
-    void OnNoaaDownload( wxCommandEvent& event );
-    
-private:
-    void Invalidate( void );
-    void updateFileList( void );
-    void updateIACFleet( void );
-    void updateRawPanel( wxString &awData );
-    void updateTextPanel( void );
+    void OnClose(wxCloseEvent &event);
+    void OnIdOKClick(wxCommandEvent &event);
+    void OnIdAnimateClick(wxCommandEvent &event);
+    void OnTimerAnimation(wxTimerEvent &event);
+    void OnMove(wxMoveEvent &event);
+    void OnSize(wxSizeEvent &event);
+    void OnChooseDirClick(wxCommandEvent &event);
+    void OnFileSelect(wxCommandEvent &event);
+    void OnRawTextChanged(wxCommandEvent &event);
+    void OnTipTimer(wxTimerEvent &event);
+    void SetCursorLatLon(double lat, double lon);
+    bool RenderOverlay(wxDC *dc, PlugIn_ViewPort *vp);
+    void OnBrDownload(wxCommandEvent &event);
+    void OnSortChange(wxCommandEvent &event);
+    void OnNoaaDownload(wxCommandEvent &event);
 
-private:
-    wxTimer            m_TooltipTimer;
-    wxWindow          *pParent;
-    iacfleet_pi       *pPlugIn;
-    wxString           m_currentDir;
-    wxString           m_currentFileName;
-    wxBitmap          *m_pfolder_bitmap;
-    wxArrayString      m_FilenameArray;
-    IACFile            m_iacfile;
-    GeoPoint           m_cursorpos;
-    PlugIn_ViewPort    m_lastViewPort;
-    bool               m_lastViewPortValid;
-    int                m_sortType;
-    wxArrayString      m_filesToAnimate;
-    size_t             m_animationCurrentFile;
+   private:
+    void Invalidate(void);
+    void updateFileList(void);
+    void updateIACFleet(void);
+    void updateRawPanel(wxString &awData);
+    void updateTextPanel(void);
+
+   private:
+    wxTimer m_TooltipTimer;
+    wxWindow *pParent;
+    iacfleet_pi *pPlugIn;
+    wxString m_currentDir;
+    wxString m_currentFileName;
+    wxBitmap *m_pfolder_bitmap;
+    wxArrayString m_FilenameArray;
+    IACFile m_iacfile;
+    GeoPoint m_cursorpos;
+    PlugIn_ViewPort m_lastViewPort;
+    bool m_lastViewPortValid;
+    int m_sortType;
+    wxArrayString m_filesToAnimate;
+    size_t m_animationCurrentFile;
 
     // the Contols that will get updated
-    wxTextCtrl        *m_pitemCurrentDirectoryCtrl;
-    wxListBox         *m_pFileListCtrl;
-    wxTextCtrl        *m_pTextCtrl;
-    wxTextCtrl        *m_pRawCtrl;
-    wxStaticText      *m_pFileTime;
-    wxTipWindow       *m_pTipWindow;
-    wxRadioButton     *m_rbSortName;
-    wxRadioButton     *m_rbSortTime;
-    
-    wxButton          *m_bAnimation;
-    
-    //Download panel
-    wxStaticText      *m_stDate;
-    wxDatePickerCtrl  *m_dpBrazil;
-    wxStaticText      *m_stHour;
-    wxChoice          *m_chHour;
-    wxButton          *m_bBrDownload;
-    wxStaticText      *m_stBrDesc;
-    wxHyperlinkCtrl   *m_hlBr;
-    wxStaticText      *m_stSort;
-    wxStaticText      *m_stHist;
-    wxSpinCtrl        *m_spHist;
-    wxStaticText      *m_stForecasts;
-    
-    wxRadioButton     *m_rbAnalysis;
-    wxRadioButton     *m_rbForecast;
-    wxButton          *m_bNoaaDownload;
-    
-    wxStaticText      *m_stNadi;
-    
-    wxTimer           *m_timer;
+    wxTextCtrl *m_pitemCurrentDirectoryCtrl;
+    wxListBox *m_pFileListCtrl;
+    wxTextCtrl *m_pTextCtrl;
+    wxTextCtrl *m_pRawCtrl;
+    wxStaticText *m_pFileTime;
+    wxTipWindow *m_pTipWindow;
+    wxRadioButton *m_rbSortName;
+    wxRadioButton *m_rbSortTime;
+
+    wxButton *m_bAnimation;
+
+    // Download panel
+    wxStaticText *m_stDate;
+    wxDatePickerCtrl *m_dpBrazil;
+    wxStaticText *m_stHour;
+    wxChoice *m_chHour;
+    wxButton *m_bBrDownload;
+    wxStaticText *m_stBrDesc;
+    wxHyperlinkCtrl *m_hlBr;
+    wxStaticText *m_stSort;
+    wxStaticText *m_stHist;
+    wxSpinCtrl *m_spHist;
+    wxStaticText *m_stForecasts;
+
+    wxRadioButton *m_rbAnalysis;
+    wxRadioButton *m_rbForecast;
+    wxButton *m_bNoaaDownload;
+
+    wxStaticText *m_stNadi;
+
+    wxTimer *m_timer;
 };
 
 #endif
