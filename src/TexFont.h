@@ -36,11 +36,13 @@
 struct TexGlyphInfo {
     int x, y, width, height;
     float advance;
+    TexGlyphInfo() : x(0), y(0), width(0), height(0), advance(0.) {}
 };
 
 class TexFont {
    public:
-    TexFont() {}
+    TexFont();
+    ~TexFont();
 
     void Build(wxFont &font, bool blur = false, bool luminance = false);
     void Delete();
