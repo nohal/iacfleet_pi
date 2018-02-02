@@ -77,5 +77,5 @@ The plugin code is licensed under the terms of the GPL v2 or, at your will, late
   * ~~http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm~~
   * ~~http://weather.noaa.gov/pub/data/raw/as/asxx21.egrr..txt~~
 * ~~Automatic download from NOAA and BR~~
-* Refine the GUI to save space
+* ~~Refine the GUI to save space~~
 * Extend beyond IACFleet - at least to data from http://weather.gmdss.org/index.html
