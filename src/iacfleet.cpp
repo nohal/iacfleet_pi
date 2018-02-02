@@ -429,8 +429,8 @@ void IACFleetUIDialog::CreateControls() {
     // of the Fleetcode
     wxBoxSizer* tmsizer = new wxBoxSizer(wxHORIZONTAL);
 
-    wxStaticText* pIssueDate = new wxStaticText(win, wxID_ANY, _("Issue Date: "), wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT);
-    tmsizer->Add(pIssueDate, 0, wxALL, 5);
+    m_pIssueDate = new wxStaticText(win, wxID_ANY, _("Issue Date: "), wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT);
+    tmsizer->Add(m_pIssueDate, 0, wxALL, 5);
     m_pFileTime = new wxStaticText(win, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_LEFT);
     tmsizer->Add(m_pFileTime, 1, wxALL | wxEXPAND, 5);
     paneSz->Add(tmsizer, 0, wxGROW);
@@ -579,7 +579,13 @@ void IACFleetUIDialog::updateRawPanel(wxString& rawData) { m_pRawCtrl->ChangeVal
 
 void IACFleetUIDialog::updateTextPanel(void) {
     m_pTextCtrl->ChangeValue(m_iacfile.ToString());
+    if (m_iacfile.IsForecast())
+        m_pIssueDate->SetLabel(_("Forecast issued at "));
+    else
+        m_pIssueDate->SetLabel(_("Analysis issued at "));
     m_pFileTime->SetLabel(m_iacfile.GetIssueDate());
+    Layout();
+    // Refresh();
 }
 
 bool IACFleetUIDialog::RenderOverlay(wxDC* dc, PlugIn_ViewPort* vp) {

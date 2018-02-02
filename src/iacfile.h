@@ -187,6 +187,7 @@ class IACFile {
 
     wxString ToString(void);
     wxString GetIssueDate(void) { return m_issueDate; }
+    bool IsForecast(void) { return m_RawData.StartsWith(_T("F")); }
 
     bool Read(wxInputStream &stream);
     bool IsOk(void) { return m_isok; }

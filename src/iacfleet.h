@@ -128,6 +128,7 @@ class IACFleetUIDialog : public wxDialog {
     wxListBox *m_pFileListCtrl;
     wxTextCtrl *m_pTextCtrl;
     wxTextCtrl *m_pRawCtrl;
+    wxStaticText *m_pIssueDate;
     wxStaticText *m_pFileTime;
     wxTipWindow *m_pTipWindow;
     wxRadioButton *m_rbSortName;
