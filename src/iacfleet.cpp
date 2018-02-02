@@ -79,7 +79,7 @@ IACFleetUIDialog::IACFleetUIDialog(void):
 IACFleetUIDialog::~IACFleetUIDialog(void) {
     if (m_timer->IsRunning()) m_timer->Stop();
     delete m_timer;
-    m_bBrDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
+    // m_bBrDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
     m_bNoaaDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnNoaaDownload), NULL, this);
     m_rbSortName->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
     m_rbSortTime->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
@@ -323,66 +323,66 @@ void IACFleetUIDialog::CreateControls() {
     wxBoxSizer* bSizerMain;
     bSizerMain = new wxBoxSizer(wxVERTICAL);
     dnldpanel->SetSizer(bSizerMain);
+    /*
+        wxStaticBoxSizer* sbSizerBrazil;
+        sbSizerBrazil = new wxStaticBoxSizer(new wxStaticBox(dnldpanel, wxID_ANY, _("Brazil")), wxVERTICAL);
 
-    wxStaticBoxSizer* sbSizerBrazil;
-    sbSizerBrazil = new wxStaticBoxSizer(new wxStaticBox(dnldpanel, wxID_ANY, _("Brazil")), wxVERTICAL);
+        wxBoxSizer* bsBRazil;
+        bsBRazil = new wxBoxSizer(wxHORIZONTAL);
 
-    wxBoxSizer* bsBRazil;
-    bsBRazil = new wxBoxSizer(wxHORIZONTAL);
+        m_stDate = new wxStaticText(dnldpanel, wxID_ANY, _("Final date"), wxDefaultPosition, wxDefaultSize, 0);
+        m_stDate->Wrap(-1);
+        bsBRazil->Add(m_stDate, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    m_stDate = new wxStaticText(dnldpanel, wxID_ANY, _("Final date"), wxDefaultPosition, wxDefaultSize, 0);
-    m_stDate->Wrap(-1);
-    bsBRazil->Add(m_stDate, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+        m_dpBrazil = new wxDatePickerCtrl(dnldpanel, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT);
+        bsBRazil->Add(m_dpBrazil, 0, wxALL, 5);
+        m_dpBrazil->SetValue(wxDateTime::Today());
 
-    m_dpBrazil = new wxDatePickerCtrl(dnldpanel, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT);
-    bsBRazil->Add(m_dpBrazil, 0, wxALL, 5);
-    m_dpBrazil->SetValue(wxDateTime::Today());
+        m_stHour = new wxStaticText(dnldpanel, wxID_ANY, _("Hour"), wxDefaultPosition, wxDefaultSize, 0);
+        m_stHour->Wrap(-1);
+        bsBRazil->Add(m_stHour, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    m_stHour = new wxStaticText(dnldpanel, wxID_ANY, _("Hour"), wxDefaultPosition, wxDefaultSize, 0);
-    m_stHour->Wrap(-1);
-    bsBRazil->Add(m_stHour, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+        wxString m_chHourChoices[] = {_("00"), _("12")};
+        int m_chHourNChoices = sizeof(m_chHourChoices) / sizeof(wxString);
+        m_chHour = new wxChoice(dnldpanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_chHourNChoices, m_chHourChoices, 0);
+        m_chHour->SetSelection(0);
+        bsBRazil->Add(m_chHour, 0, wxALL, 5);
 
-    wxString m_chHourChoices[] = {_("00"), _("12")};
-    int m_chHourNChoices = sizeof(m_chHourChoices) / sizeof(wxString);
-    m_chHour = new wxChoice(dnldpanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_chHourNChoices, m_chHourChoices, 0);
-    m_chHour->SetSelection(0);
-    bsBRazil->Add(m_chHour, 0, wxALL, 5);
+        bsBRazil->Add(0, 0, 1, wxEXPAND, 5);
 
-    bsBRazil->Add(0, 0, 1, wxEXPAND, 5);
+        m_bBrDownload = new wxButton(dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0);
+        bsBRazil->Add(m_bBrDownload, 0, wxALL, 5);
 
-    m_bBrDownload = new wxButton(dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0);
-    bsBRazil->Add(m_bBrDownload, 0, wxALL, 5);
+        sbSizerBrazil->Add(bsBRazil, 0, wxEXPAND, 5);
 
-    sbSizerBrazil->Add(bsBRazil, 0, wxEXPAND, 5);
+        wxBoxSizer* bSizerHistory;
+        bSizerHistory = new wxBoxSizer(wxHORIZONTAL);
 
-    wxBoxSizer* bSizerHistory;
-    bSizerHistory = new wxBoxSizer(wxHORIZONTAL);
+        m_stHist = new wxStaticText(dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0);
+        m_stHist->Wrap(-1);
+        bSizerHistory->Add(m_stHist, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    m_stHist = new wxStaticText(dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0);
-    m_stHist->Wrap(-1);
-    bSizerHistory->Add(m_stHist, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+        m_spHist = new wxSpinCtrl(dnldpanel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), wxSP_ARROW_KEYS, 1, 100,
+       1); bSizerHistory->Add(m_spHist, 0, wxALL, 5);
 
-    m_spHist = new wxSpinCtrl(dnldpanel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), wxSP_ARROW_KEYS, 1, 100, 1);
-    bSizerHistory->Add(m_spHist, 0, wxALL, 5);
+        m_stForecasts = new wxStaticText(dnldpanel, wxID_ANY, _("dataset(s)"), wxDefaultPosition, wxDefaultSize, 0);
+        m_stForecasts->Wrap(-1);
+        bSizerHistory->Add(m_stForecasts, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
-    m_stForecasts = new wxStaticText(dnldpanel, wxID_ANY, _("dataset(s)"), wxDefaultPosition, wxDefaultSize, 0);
-    m_stForecasts->Wrap(-1);
-    bSizerHistory->Add(m_stForecasts, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+        sbSizerBrazil->Add(bSizerHistory, 1, wxEXPAND, 5);
 
-    sbSizerBrazil->Add(bSizerHistory, 1, wxEXPAND, 5);
+        m_stBrDesc = new wxStaticText(dnldpanel, wxID_ANY, _("The data is available since 2006 and accesible manually from"),
+                                      wxDefaultPosition, wxDefaultSize, 0);
+        m_stBrDesc->Wrap(-1);
+        sbSizerBrazil->Add(m_stBrDesc, 0, wxALL, 5);
 
-    m_stBrDesc = new wxStaticText(dnldpanel, wxID_ANY, _("The data is available since 2006 and accesible manually from"),
-                                  wxDefaultPosition, wxDefaultSize, 0);
-    m_stBrDesc->Wrap(-1);
-    sbSizerBrazil->Add(m_stBrDesc, 0, wxALL, 5);
+        m_hlBr = new wxHyperlinkCtrl(dnldpanel, wxID_ANY, _("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"),
+                                     wxT("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"), wxDefaultPosition, wxDefaultSize,
+                                     wxHL_DEFAULT_STYLE);
+        sbSizerBrazil->Add(m_hlBr, 0, wxALL, 5);
 
-    m_hlBr = new wxHyperlinkCtrl(dnldpanel, wxID_ANY, _("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"),
-                                 wxT("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"), wxDefaultPosition, wxDefaultSize,
-                                 wxHL_DEFAULT_STYLE);
-    sbSizerBrazil->Add(m_hlBr, 0, wxALL, 5);
-
-    bSizerMain->Add(sbSizerBrazil, 0, wxALL | wxEXPAND, 5);
-
+        bSizerMain->Add(sbSizerBrazil, 0, wxALL | wxEXPAND, 5);
+    */
     // NOAA
     wxStaticBoxSizer* sbSizerNOAA;
     sbSizerNOAA = new wxStaticBoxSizer(new wxStaticBox(dnldpanel, wxID_ANY, _("NOAA North Atlantic and Europe")), wxVERTICAL);
@@ -420,7 +420,7 @@ void IACFleetUIDialog::CreateControls() {
     bSizerMain->Add(sbSizerNadi, 0, wxALL | wxEXPAND, 5);
 
     // Connect Events
-    m_bBrDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
+    // m_bBrDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
     m_bNoaaDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnNoaaDownload), NULL, this);
     m_rbSortName->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
     m_rbSortTime->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
