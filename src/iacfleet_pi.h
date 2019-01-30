@@ -37,7 +37,7 @@
 #include "version.h"
 
 #define MY_API_VERSION_MAJOR 1
-#define MY_API_VERSION_MINOR 13
+#define MY_API_VERSION_MINOR 16
 
 #include "ocpn_plugin.h"
 
@@ -47,7 +47,7 @@
 //    The PlugIn Class Definition
 //----------------------------------------------------------------------------------------------------------
 class IACFleetUIDialog;
-class iacfleet_pi : public opencpn_plugin_113 {
+class iacfleet_pi : public opencpn_plugin_116 {
    public:
     iacfleet_pi(void *ppimgr);
     ~iacfleet_pi();
@@ -67,8 +67,8 @@ class iacfleet_pi : public opencpn_plugin_113 {
     void SetCursorLatLon(double lat, double lon);
 
     //    The override PlugIn Methods
-    bool RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp);
-    bool RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp);
+    bool RenderOverlayMultiCanvas(wxDC &dc, PlugIn_ViewPort *vp, int canvasIndex);
+    bool RenderGLOverlayMultiCanvas(wxGLContext *pcontext, PlugIn_ViewPort *vp, int canvasIndex);
     int GetToolbarToolCount(void);
     void ShowPreferencesDialog(wxWindow *parent);
     void OnToolbarToolCallback(int id);

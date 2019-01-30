@@ -59,7 +59,7 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin *p) { delete p; }
 //
 //---------------------------------------------------------------------------------------------------------
 
-iacfleet_pi::iacfleet_pi(void *ppimgr) : opencpn_plugin_113(ppimgr) {
+iacfleet_pi::iacfleet_pi(void *ppimgr) : opencpn_plugin_116(ppimgr) {
     // Set some default private member parameters
     m_dialog_x = 0;
     m_dialog_y = 0;
@@ -163,13 +163,20 @@ void iacfleet_pi::OnDialogClose() {
     m_pDialog = NULL;
     SaveConfig();
 }
-bool iacfleet_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp) {
+
+bool iacfleet_pi::RenderOverlayMultiCanvas(wxDC &dc, PlugIn_ViewPort *vp, int canvasIndex) {
+    if(GetCanvasCount() > canvasIndex + 1) {
+        return false;
+    }
     m_pdc = &dc;
     bool hasDrawn = m_pDialog && m_pDialog->RenderOverlay(m_pdc, vp);
     return hasDrawn;
 }
 
-bool iacfleet_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp) {
+bool iacfleet_pi::RenderGLOverlayMultiCanvas(wxGLContext *pcontext, PlugIn_ViewPort *vp, int canvasIndex) {
+    if(GetCanvasCount() > canvasIndex + 1) {
+        return false;
+    }
     m_pdc = NULL;
     bool hasDrawn = m_pDialog && m_pDialog->RenderOverlay(m_pdc, vp);
     return hasDrawn;
