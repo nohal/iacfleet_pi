@@ -165,7 +165,7 @@ void iacfleet_pi::OnDialogClose() {
 }
 
 bool iacfleet_pi::RenderOverlayMultiCanvas(wxDC &dc, PlugIn_ViewPort *vp, int canvasIndex) {
-    if(GetCanvasCount() > canvasIndex + 1) {
+    if (GetCanvasCount() > canvasIndex + 1) {
         return false;
     }
     m_pdc = &dc;
@@ -174,7 +174,7 @@ bool iacfleet_pi::RenderOverlayMultiCanvas(wxDC &dc, PlugIn_ViewPort *vp, int ca
 }
 
 bool iacfleet_pi::RenderGLOverlayMultiCanvas(wxGLContext *pcontext, PlugIn_ViewPort *vp, int canvasIndex) {
-    if(GetCanvasCount() > canvasIndex + 1) {
+    if (GetCanvasCount() > canvasIndex + 1) {
         return false;
     }
     m_pdc = NULL;
