@@ -288,7 +288,7 @@ void TexFont::RenderString(const wxString &string, int x, int y) {
     glBindTexture(GL_TEXTURE_2D, texobj);
 
     for (unsigned int i = 0; i < string.size(); i++) {
-        wchar_t x = string[i];
+        wchar_t c = string[i];
 
         if (x == '\n') {
             glPopMatrix();
@@ -296,7 +296,7 @@ void TexFont::RenderString(const wxString &string, int x, int y) {
             glPushMatrix();
             continue;
         }
-        RenderGlyph(x);
+        RenderGlyph(c);
     }
 
     glPopMatrix();

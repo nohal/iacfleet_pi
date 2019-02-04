@@ -79,6 +79,7 @@ IACFleetUIDialog::IACFleetUIDialog(void):
 IACFleetUIDialog::~IACFleetUIDialog(void) {
     if (m_timer->IsRunning()) m_timer->Stop();
     delete m_timer;
+    delete m_pfolder_bitmap;
     // m_bBrDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
     m_bNoaaDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnNoaaDownload), NULL, this);
     m_rbSortName->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);

@@ -23,6 +23,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,  USA.         *
  **************************************************************************/
 
+#ifndef __tex_font_h_
+#define __tex_font_h_
+
 /* support ascii plus degree symbol for now pack font in a single texture 16x8 */
 #define DEGREE_GLYPH 127
 #define MIN_GLYPH 32
@@ -59,5 +62,6 @@ class TexFont {
     TexGlyphInfo tgi[MAX_GLYPH];
 
     unsigned int texobj;
-    int tex_w, tex_h;
+    size_t tex_w, tex_h;
 };
+#endif
