@@ -9,11 +9,6 @@ jobs:
       only:
         - master
     steps:
-      - run: pwd
-      - run: ls -la
-      - run: env
-      - run: git clone "https://github.com/nohal/iacfleet_pi.git" work
+      - run: git clone --depth=10 "https://github.com/nohal/iacfleet_pi.git" work
       - run: mkdir work/build
-      - run: cd work/build
-      - run: cmake ..
-      - run: make
+      - run: cd work/build; cmake ..; make
