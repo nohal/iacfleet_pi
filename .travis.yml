@@ -37,11 +37,13 @@ addons:
     build_command_prepend: mkdir -p build; cd build; cmake ..; make clean
     build_command: make
     branch_pattern: coverity_scan
+before_deploy:
+  - export RELEASE_PKG_FILE=$(ls *.pkg)
 deploy:
   provider: releases
   api_key:
     secure: VU95qFxSJuxVzddd23xL3XYUxYVRl50Kov1bhUc5Mq9ClZ+t4P1M45nuTPm8787UREkUXV5+pU+T6vLvcpBb8NkWs2gbU7hgNcTTYRjSY93+Ot+GHDOiYnKlf/td3KzE06jfoJoW8QX5cuNfYkNNdh+PW0eV1ixk60OjK9//MZw=
-  file: "$TRAVIS_BUILD_DIR/build/*.pkg"
+  file: "${RELEASE_PKG_FILE}"
   skip_cleanup: true
   on:
     tags: true
