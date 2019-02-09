@@ -502,7 +502,7 @@ wxString IACFile::ReadToken(wxInputStream &file) {
     while (file.IsOk() && mode != 2) {
         int c = file.GetC();
 
-        if (c != wxEOF) {
+        if (c != wxEOF && c <= 128) {
             if (c == '\n' && m_tokensI > 0) {
                 m_newlineTokens.push_back(m_tokensI + 1);
             }

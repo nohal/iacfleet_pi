@@ -137,17 +137,10 @@ class IACFleetUIDialog : public wxDialog {
     wxButton *m_bAnimation;
 
     // Download panel
-    wxStaticText *m_stDate;
-    wxDatePickerCtrl *m_dpBrazil;
-    wxStaticText *m_stHour;
-    wxChoice *m_chHour;
-    wxButton *m_bBrDownload;
-    wxStaticText *m_stBrDesc;
-    wxHyperlinkCtrl *m_hlBr;
     wxStaticText *m_stSort;
-    wxStaticText *m_stHist;
-    wxSpinCtrl *m_spHist;
-    wxStaticText *m_stForecasts;
+    wxButton *m_bBrDownload;
+
+    wxRadioButton *m_rbAnalysisBrazil;
 
     wxRadioButton *m_rbAnalysis;
     wxRadioButton *m_rbForecast;

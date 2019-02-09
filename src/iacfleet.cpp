@@ -59,28 +59,11 @@ EVT_TIMER(ID_TIP_TIMER, IACFleetUIDialog::OnTipTimer)
 EVT_TIMER(ID_ANIMATION_TIMER, IACFleetUIDialog::OnTimerAnimation)
 END_EVENT_TABLE()
 
-/*
-IACFleetUIDialog::IACFleetUIDialog(void):
-    pParent(NULL),
-    pPlugIn(NULL),
-    m_pfolder_bitmap(NULL),
-    m_lastViewPortValid(false),
-    m_pitemCurrentDirectoryCtrl(NULL),
-    m_pFileListCtrl(NULL),
-    m_pTextCtrl(NULL),
-    m_pRawCtrl(NULL),
-    m_pFileTime(NULL),
-    m_pTipWindow(NULL)
-{
-    //      Init(); privat member of "wxDialog" in dialog.h
-}
-*/
-
 IACFleetUIDialog::~IACFleetUIDialog(void) {
     if (m_timer->IsRunning()) m_timer->Stop();
     delete m_timer;
     delete m_pfolder_bitmap;
-    // m_bBrDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
+    m_bBrDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
     m_bNoaaDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnNoaaDownload), NULL, this);
     m_rbSortName->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
     m_rbSortTime->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
@@ -254,7 +237,7 @@ void IACFleetUIDialog::CreateControls() {
     m_pitemCurrentDirectoryCtrl->AppendText(m_currentDir);
 
     wxButton* bChooseDir = new wxBitmapButton(win, ID_CHOOSEIACFLEETDIR, *m_pfolder_bitmap);
-    itemStaticBoxSizer11Static->Add(bChooseDir, 0, wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT | wxALL, 5);
+    itemStaticBoxSizer11Static->Add(bChooseDir, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
 
     paneSz->Add(itemStaticBoxSizer11Static, 0, wxALL | wxEXPAND, 5);
 
@@ -324,66 +307,26 @@ void IACFleetUIDialog::CreateControls() {
     wxBoxSizer* bSizerMain;
     bSizerMain = new wxBoxSizer(wxVERTICAL);
     dnldpanel->SetSizer(bSizerMain);
-    /*
-        wxStaticBoxSizer* sbSizerBrazil;
-        sbSizerBrazil = new wxStaticBoxSizer(new wxStaticBox(dnldpanel, wxID_ANY, _("Brazil")), wxVERTICAL);
 
-        wxBoxSizer* bsBRazil;
-        bsBRazil = new wxBoxSizer(wxHORIZONTAL);
+    // Brazil from the new website
+    wxStaticBoxSizer* sbSizerBrazil;
+    sbSizerBrazil = new wxStaticBoxSizer(new wxStaticBox(dnldpanel, wxID_ANY, _("Brazil South Atlantic")), wxVERTICAL);
 
-        m_stDate = new wxStaticText(dnldpanel, wxID_ANY, _("Final date"), wxDefaultPosition, wxDefaultSize, 0);
-        m_stDate->Wrap(-1);
-        bsBRazil->Add(m_stDate, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    wxBoxSizer* bsBrazil;
+    bsBrazil = new wxBoxSizer(wxHORIZONTAL);
 
-        m_dpBrazil = new wxDatePickerCtrl(dnldpanel, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT);
-        bsBRazil->Add(m_dpBrazil, 0, wxALL, 5);
-        m_dpBrazil->SetValue(wxDateTime::Today());
+    m_rbAnalysisBrazil = new wxRadioButton(dnldpanel, wxID_ANY, _("Analysis"), wxDefaultPosition, wxDefaultSize, 0);
+    m_rbAnalysisBrazil->SetValue(true);
+    bsBrazil->Add(m_rbAnalysisBrazil, 0, wxALL, 5);
 
-        m_stHour = new wxStaticText(dnldpanel, wxID_ANY, _("Hour"), wxDefaultPosition, wxDefaultSize, 0);
-        m_stHour->Wrap(-1);
-        bsBRazil->Add(m_stHour, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
+    bsBrazil->Add(0, 0, 1, wxEXPAND, 5);
 
-        wxString m_chHourChoices[] = {_("00"), _("12")};
-        int m_chHourNChoices = sizeof(m_chHourChoices) / sizeof(wxString);
-        m_chHour = new wxChoice(dnldpanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_chHourNChoices, m_chHourChoices, 0);
-        m_chHour->SetSelection(0);
-        bsBRazil->Add(m_chHour, 0, wxALL, 5);
+    m_bBrDownload = new wxButton(dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0);
+    bsBrazil->Add(m_bBrDownload, 0, wxALL, 5);
 
-        bsBRazil->Add(0, 0, 1, wxEXPAND, 5);
+    sbSizerBrazil->Add(bsBrazil, 1, wxEXPAND, 5);
 
-        m_bBrDownload = new wxButton(dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0);
-        bsBRazil->Add(m_bBrDownload, 0, wxALL, 5);
-
-        sbSizerBrazil->Add(bsBRazil, 0, wxEXPAND, 5);
-
-        wxBoxSizer* bSizerHistory;
-        bSizerHistory = new wxBoxSizer(wxHORIZONTAL);
-
-        m_stHist = new wxStaticText(dnldpanel, wxID_ANY, _("Download"), wxDefaultPosition, wxDefaultSize, 0);
-        m_stHist->Wrap(-1);
-        bSizerHistory->Add(m_stHist, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
-
-        m_spHist = new wxSpinCtrl(dnldpanel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), wxSP_ARROW_KEYS, 1, 100,
-       1); bSizerHistory->Add(m_spHist, 0, wxALL, 5);
-
-        m_stForecasts = new wxStaticText(dnldpanel, wxID_ANY, _("dataset(s)"), wxDefaultPosition, wxDefaultSize, 0);
-        m_stForecasts->Wrap(-1);
-        bSizerHistory->Add(m_stForecasts, 0, wxALIGN_CENTER_VERTICAL | wxALL, 5);
-
-        sbSizerBrazil->Add(bSizerHistory, 1, wxEXPAND, 5);
-
-        m_stBrDesc = new wxStaticText(dnldpanel, wxID_ANY, _("The data is available since 2006 and accesible manually from"),
-                                      wxDefaultPosition, wxDefaultSize, 0);
-        m_stBrDesc->Wrap(-1);
-        sbSizerBrazil->Add(m_stBrDesc, 0, wxALL, 5);
-
-        m_hlBr = new wxHyperlinkCtrl(dnldpanel, wxID_ANY, _("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"),
-                                     wxT("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"), wxDefaultPosition, wxDefaultSize,
-                                     wxHL_DEFAULT_STYLE);
-        sbSizerBrazil->Add(m_hlBr, 0, wxALL, 5);
-
-        bSizerMain->Add(sbSizerBrazil, 0, wxALL | wxEXPAND, 5);
-    */
+    bSizerMain->Add(sbSizerBrazil, 0, wxALL | wxEXPAND, 5);
     // NOAA
     wxStaticBoxSizer* sbSizerNOAA;
     sbSizerNOAA = new wxStaticBoxSizer(new wxStaticBox(dnldpanel, wxID_ANY, _("NOAA North Atlantic and Europe")), wxVERTICAL);
@@ -421,7 +364,7 @@ void IACFleetUIDialog::CreateControls() {
     bSizerMain->Add(sbSizerNadi, 0, wxALL | wxEXPAND, 5);
 
     // Connect Events
-    // m_bBrDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
+    m_bBrDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
     m_bNoaaDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(IACFleetUIDialog::OnNoaaDownload), NULL, this);
     m_rbSortName->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
     m_rbSortTime->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED, wxCommandEventHandler(IACFleetUIDialog::OnSortChange), NULL, this);
@@ -596,65 +539,58 @@ bool IACFleetUIDialog::RenderOverlay(wxDC* dc, PlugIn_ViewPort* vp) {
 }
 
 void IACFleetUIDialog::OnBrDownload(wxCommandEvent& event) {
-    wxDateTime dt = m_dpBrazil->GetValue();
-    long hrs;
-    if (m_chHour->GetString(m_chHour->GetSelection()).ToLong(&hrs)) dt.Add(wxTimeSpan(hrs));
-    if (dt > wxDateTime::Now()) {
-        wxMessageBox(_("Sorry, you can't download data from the future - they don't exist..."));
-        return;
-    } else if (dt < wxDateTime(1, 9, 2006)) {
-        wxMessageBox(_("Sorry, the data is not available before September 1, 2006..."));
-        return;
-    }
+    wxDateTime dt = wxDateTime::Now();
 
     wxString showfile = wxEmptyString;
     wxString showfilename = wxEmptyString;
 
-    for (int i = 0; i < m_spHist->GetValue(); i++) {
-        wxString filename =
-            wxString::Format(_T("P%u%02u%02u%02u.iac"), dt.GetYear() - 2000, dt.GetMonth() + 1, dt.GetDay(), dt.GetHour());
-        dt.Subtract(wxTimeSpan(12));
-        wxString url = _T("http://www.mar.mil.br/dhn/chm/meteo/prev/iac/") + filename;
+    wxString url;
+    wxString prefix;
 
-        wxFileName tfn = wxFileName::CreateTempFileName(_T("iacfleet"));
-        wxFileName fn(m_currentDir, filename);
-
-        _OCPN_DLStatus ret =
-            OCPN_downloadFile(url, tfn.GetFullPath(), _("Downloading file"), _("Reading Headers: ") + url, wxNullBitmap, this,
-                              OCPN_DLDS_ELAPSED_TIME | OCPN_DLDS_ESTIMATED_TIME | OCPN_DLDS_REMAINING_TIME | OCPN_DLDS_SPEED |
-                                  OCPN_DLDS_SIZE | OCPN_DLDS_URL | OCPN_DLDS_CAN_PAUSE | OCPN_DLDS_CAN_ABORT | OCPN_DLDS_AUTO_CLOSE,
-                              10);
-
-        switch (ret) {
-            case OCPN_DL_NO_ERROR: {
-                if (wxCopyFile(tfn.GetFullPath(), fn.GetFullPath())) {
-                    showfile = fn.GetFullPath();
-                    showfilename = filename;
-                } else
-                    wxMessageBox(wxString::Format(_("Failed to save: %s "), fn.GetFullPath().c_str()), _T("IACFleet"),
-                                 wxOK | wxICON_ERROR);
-                break;
-            }
-            case OCPN_DL_FAILED: {
-                wxMessageBox(
-                    wxString::Format(_("Failed to download: %s \nVerify there is a working Internet connection."), url.c_str()),
-                    _T("IACFleet"), wxOK | wxICON_ERROR);
-                break;
-            }
-            case OCPN_DL_USER_TIMEOUT:
-            case OCPN_DL_ABORTED: {
-                break;
-            }
-            case OCPN_DL_UNKNOWN:
-            case OCPN_DL_STARTED: {
-                break;
-            }
-
-            default:
-                wxASSERT(false);  // This should never happen because we handle all possible cases of ret
-        }
-        if (wxFileExists(tfn.GetFullPath())) wxRemoveFile(tfn.GetFullPath());
+    if (m_rbAnalysisBrazil->GetValue()) {
+        prefix = _T("IAC_BRA_A");
+        url = _T("https://data.navnux.org/br_iac/");
     }
+
+    wxString filename = wxString::Format(_T("%s_%i-%i-%i_%i-%i.txt"), prefix.c_str(), dt.GetYear(), dt.GetMonth() + 1, dt.GetDay(),
+                                         dt.GetHour(), dt.GetMinute());
+    wxFileName tfn = wxFileName::CreateTempFileName(_T("iacfleet"));
+    wxFileName fn(m_currentDir, filename);
+
+    _OCPN_DLStatus ret =
+        OCPN_downloadFile(url, tfn.GetFullPath(), _("Downloading file"), _("Reading Headers: ") + url, wxNullBitmap, this,
+                          OCPN_DLDS_ELAPSED_TIME | OCPN_DLDS_ESTIMATED_TIME | OCPN_DLDS_REMAINING_TIME | OCPN_DLDS_SPEED |
+                              OCPN_DLDS_SIZE | OCPN_DLDS_URL | OCPN_DLDS_CAN_PAUSE | OCPN_DLDS_CAN_ABORT | OCPN_DLDS_AUTO_CLOSE,
+                          10);
+    switch (ret) {
+        case OCPN_DL_NO_ERROR: {
+            if (wxCopyFile(tfn.GetFullPath(), fn.GetFullPath())) {
+                showfile = fn.GetFullPath();
+                showfilename = filename;
+            } else
+                wxMessageBox(wxString::Format(_("Failed to save: %s "), fn.GetFullPath().c_str()), _T("IACFleet"),
+                             wxOK | wxICON_ERROR);
+            break;
+        }
+        case OCPN_DL_FAILED: {
+            wxMessageBox(
+                wxString::Format(_("Failed to download: %s \nVerify there is a working Internet connection."), url.c_str()),
+                _T("IACFleet"), wxOK | wxICON_ERROR);
+            break;
+        }
+        case OCPN_DL_USER_TIMEOUT:
+        case OCPN_DL_ABORTED: {
+            break;
+        }
+        case OCPN_DL_UNKNOWN:
+        case OCPN_DL_STARTED: {
+            break;
+        }
+
+        default:
+            wxASSERT(false);  // This should never happen because we handle all possible cases of ret
+    }
+    if (wxFileExists(tfn.GetFullPath())) wxRemoveFile(tfn.GetFullPath());
     if (showfile != wxEmptyString) {
         updateFileList();
         m_pFileListCtrl->SetStringSelection(showfilename);
