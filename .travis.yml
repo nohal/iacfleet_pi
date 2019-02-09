@@ -11,9 +11,14 @@ install:
   libgtk2.0-dev wx3.0-headers libbz2-dev libtinyxml-dev libportaudio2 portaudio19-dev
   libcurl4-openssl-dev libexpat1-dev libcairo2-dev libarchive-dev liblzma-dev libexif-dev;
   fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cairo libexif libarchive
-  wxmac; export PATH="/usr/local/opt/gettext/bin:$PATH";  echo 'export PATH="/usr/local/opt/gettext/bin:$PATH"'
-  >> ~/.bash_profile; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    brew install cairo libexif libarchive wxmac;
+    export PATH="/usr/local/opt/gettext/bin:$PATH";
+    echo 'export PATH="/usr/local/opt/gettext/bin:$PATH"' >> ~/.bash_profile;
+    wget http://s.sudre.free.fr/Software/files/Packages.dmg;
+    hdiutil attach Packages.dmg;
+    sudo installer -pkg "/Volumes/Packages 1.2.5/Install Packages.pkg" -target "/";
+  fi
 script:
 - mkdir -p build
 - cd build
