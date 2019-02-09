@@ -1,43 +1,44 @@
 language: cpp
-
 os:
-  - linux
-  - osx
-
-#compiler:
-#  - gcc
-#  - clang
-
-branches:
-  only:
-    - master
-
+- linux
+- osx
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew upgrade; fi
-
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew upgrade; fi
 install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install build-essential cmake gettext git-core gpsd gpsd-clients libgps-dev wx-common libwxgtk3.0-dev libglu1-mesa-dev libgtk2.0-dev wx3.0-headers libbz2-dev libtinyxml-dev libportaudio2 portaudio19-dev libcurl4-openssl-dev libexpat1-dev libcairo2-dev libarchive-dev liblzma-dev libexif-dev; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cairo libexif libarchive wxmac; export PATH="/usr/local/opt/gettext/bin:$PATH";  echo 'export PATH="/usr/local/opt/gettext/bin:$PATH"' >> ~/.bash_profile; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install build-essential
+  cmake gettext git-core gpsd gpsd-clients libgps-dev wx-common libwxgtk3.0-dev libglu1-mesa-dev
+  libgtk2.0-dev wx3.0-headers libbz2-dev libtinyxml-dev libportaudio2 portaudio19-dev
+  libcurl4-openssl-dev libexpat1-dev libcairo2-dev libarchive-dev liblzma-dev libexif-dev;
+  fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cairo libexif libarchive
+  wxmac; export PATH="/usr/local/opt/gettext/bin:$PATH";  echo 'export PATH="/usr/local/opt/gettext/bin:$PATH"'
+  >> ~/.bash_profile; fi
 script:
-  - mkdir -p build
-  - cd build
-  - cmake ..
-  - make
-
+- mkdir -p build
+- cd build
+- cmake ..
+- make
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make create-pkg; ls -la; pwd; fi
 env:
   global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "gzuRKPoISDCbjfRdI+KS0H3/9T4CDLybTxLwirUJ660IaFTewNYXj/pyOJOr7miOrBmQaJQw7aKAG4fpfbHpY0kkLQe2JHaJv84uyuev4QuJGtfyim3a2U4FbxtCyyjREyGI15enBra3N1xKtQqNbnkgOCKPtWSAlX4rf1elj5A="
-
+  - secure: gzuRKPoISDCbjfRdI+KS0H3/9T4CDLybTxLwirUJ660IaFTewNYXj/pyOJOr7miOrBmQaJQw7aKAG4fpfbHpY0kkLQe2JHaJv84uyuev4QuJGtfyim3a2U4FbxtCyyjREyGI15enBra3N1xKtQqNbnkgOCKPtWSAlX4rf1elj5A=
 addons:
   coverity_scan:
     project:
-      name: "nohal/iacfleet_pi"
-      description: "Build submitted via Travis CI"
+      name: nohal/iacfleet_pi
+      description: Build submitted via Travis CI
     notification_email: pavel@kalian.cz
-    build_command_prepend: "mkdir -p build; cd build; cmake ..; make clean"
-    build_command:   "make"
+    build_command_prepend: mkdir -p build; cd build; cmake ..; make clean
+    build_command: make
     branch_pattern: coverity_scan
-#    build_script_url: "https://raw.githubusercontent.com/nohal/iacfleet_pi/master/scan_script.sh"
+deploy:
+  provider: releases
+  api_key:
+    secure: VU95qFxSJuxVzddd23xL3XYUxYVRl50Kov1bhUc5Mq9ClZ+t4P1M45nuTPm8787UREkUXV5+pU+T6vLvcpBb8NkWs2gbU7hgNcTTYRjSY93+Ot+GHDOiYnKlf/td3KzE06jfoJoW8QX5cuNfYkNNdh+PW0eV1ixk60OjK9//MZw=
+  file: "$TRAVIS_BUILD_DIR/build/*.pkg"
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    repo: nohal/iacfleet_pi
