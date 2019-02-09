@@ -315,7 +315,7 @@ void IACFleetUIDialog::CreateControls() {
     wxBoxSizer* bsBrazil;
     bsBrazil = new wxBoxSizer(wxHORIZONTAL);
 
-    m_rbAnalysisBrazil = new wxRadioButton(dnldpanel, wxID_ANY, _("Analysis"), wxDefaultPosition, wxDefaultSize, 0);
+    m_rbAnalysisBrazil = new wxRadioButton(dnldpanel, wxID_ANY, _("Analysis"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP);
     m_rbAnalysisBrazil->SetValue(true);
     bsBrazil->Add(m_rbAnalysisBrazil, 0, wxALL, 5);
 
@@ -334,7 +334,7 @@ void IACFleetUIDialog::CreateControls() {
     wxBoxSizer* bsNOAA;
     bsNOAA = new wxBoxSizer(wxHORIZONTAL);
 
-    m_rbAnalysis = new wxRadioButton(dnldpanel, wxID_ANY, _("Analysis"), wxDefaultPosition, wxDefaultSize, 0);
+    m_rbAnalysis = new wxRadioButton(dnldpanel, wxID_ANY, _("Analysis"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP);
     bsNOAA->Add(m_rbAnalysis, 0, wxALL, 5);
 
     m_rbForecast = new wxRadioButton(dnldpanel, wxID_ANY, _("24h forecast"), wxDefaultPosition, wxDefaultSize, 0);
