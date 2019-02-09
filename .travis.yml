@@ -38,7 +38,7 @@ addons:
     build_command: make
     branch_pattern: coverity_scan
 before_deploy:
-  - export RELEASE_PKG_FILE=$(ls *.pkg)
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export RELEASE_PKG_FILE=$(ls *.pkg); fi
 deploy:
   provider: releases
   api_key:
