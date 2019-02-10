@@ -24,7 +24,7 @@ install:
 script:
 - mkdir -p build
 - cd build
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cmake -DwxWidgets_CONFIG_EXECUTABLE=/tmp/wx312_opencpn50_macos109/bin/wx-config -DwxWidgets_CONFIG_OPTIONS="--prefix=/tmp/wx312_opencpn 50_macos109" -DCMAKE_INSTALL_PREFIX=/tmp/opencpn -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 ..; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cmake -DwxWidgets_CONFIG_EXECUTABLE=/tmp/wx312_opencpn50_macos109/bin/wx-config -DwxWidgets_CONFIG_OPTIONS="--prefix=/tmp/wx312_opencpn50_macos109" -DCMAKE_INSTALL_PREFIX=/tmp/opencpn -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 ..; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cmake ..; fi
 - make
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make create-pkg; ls -la; pwd; fi
