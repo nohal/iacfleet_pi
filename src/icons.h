@@ -6,8 +6,8 @@
 #include <wx/wx.h>
 #endif
 
-extern void initialize_images(void);
-extern void deinitialize_images(void);
+extern void initialize_images();
+extern void deinitialize_images();
 
 extern wxBitmap *_img_iacfleet_pi;
 

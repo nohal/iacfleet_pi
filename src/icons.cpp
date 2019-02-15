@@ -15,7 +15,7 @@ wxString _svg_iacfleet_rollover;
 wxString _svg_iacfleet_toggled;
 #endif
 
-void initialize_images(void) {
+void initialize_images() {
     {
         wxMemoryInputStream sm(
             "\211PNG\r\n\032\n\000\000\000\rIHDR\000\000\000 \000\000\000 "
@@ -54,7 +54,7 @@ void initialize_images(void) {
     return;
 }
 
-void deinitialize_images(void) {
+void deinitialize_images() {
     if (NULL != _img_iacfleet_pi) {
         delete (_img_iacfleet_pi);
     }

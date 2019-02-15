@@ -74,7 +74,7 @@ class IACFleetUIDialog : public wxDialog {
     DECLARE_EVENT_TABLE()
    public:
     // IACFleetUIDialog( void );
-    ~IACFleetUIDialog(void);
+    ~IACFleetUIDialog();
     IACFleetUIDialog(wxWindow *parent = NULL, iacfleet_pi *ppi = NULL, wxWindowID id = wxID_ANY,
                      const wxString &caption = _("IACFleet Display Control"), const wxString initial_dir = wxEmptyString,
                      int sort_type = SORT_NAME, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize,
@@ -101,11 +101,11 @@ class IACFleetUIDialog : public wxDialog {
     void OnNoaaDownload(wxCommandEvent &event);
 
    private:
-    void Invalidate(void);
-    void updateFileList(void);
-    void updateIACFleet(void);
+    void Invalidate();
+    void updateFileList();
+    void updateIACFleet();
     void updateRawPanel(wxString &awData);
-    void updateTextPanel(void);
+    void updateTextPanel();
 
    private:
     wxTimer m_TooltipTimer;

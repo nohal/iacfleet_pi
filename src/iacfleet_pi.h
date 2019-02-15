@@ -53,8 +53,8 @@ class iacfleet_pi : public opencpn_plugin_116 {
     ~iacfleet_pi();
 
     //    The required PlugIn Methods
-    int Init(void);
-    bool DeInit(void);
+    int Init();
+    bool DeInit();
 
     int GetAPIVersionMajor();
     int GetAPIVersionMinor();
@@ -69,7 +69,7 @@ class iacfleet_pi : public opencpn_plugin_116 {
     //    The override PlugIn Methods
     bool RenderOverlayMultiCanvas(wxDC &dc, PlugIn_ViewPort *vp, int canvasIndex);
     bool RenderGLOverlayMultiCanvas(wxGLContext *pcontext, PlugIn_ViewPort *vp, int canvasIndex);
-    int GetToolbarToolCount(void);
+    int GetToolbarToolCount();
     void ShowPreferencesDialog(wxWindow *parent);
     void OnToolbarToolCallback(int id);
     void SetDialogX(int x) { m_dialog_x = x; };
@@ -81,8 +81,8 @@ class iacfleet_pi : public opencpn_plugin_116 {
     void SetSortType(int sort_type) { m_sort_type = sort_type; };
 
    private:
-    bool LoadConfig(void);
-    bool SaveConfig(void);
+    bool LoadConfig();
+    bool SaveConfig();
 
    private:
     wxWindow *m_parent_window;
