@@ -30,16 +30,20 @@ script:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make create-pkg; ls -la; pwd; fi
 env:
   global:
-  - secure: gzuRKPoISDCbjfRdI+KS0H3/9T4CDLybTxLwirUJ660IaFTewNYXj/pyOJOr7miOrBmQaJQw7aKAG4fpfbHpY0kkLQe2JHaJv84uyuev4QuJGtfyim3a2U4FbxtCyyjREyGI15enBra3N1xKtQqNbnkgOCKPtWSAlX4rf1elj5A=
+  - secure: "eDH/wZxvJcA26VgDWglJwvr1nMyZjECGUDnjgrOZE/xjSz7i2JNbCFKHOx7kCkJh+hxJwsKWpDHRFTQbaiecze5JjFZfRRZOon1GQEvszBhhy5T0mjIHoWOwi0J/htBqUoYjNO1IYHW2OGJNIHARqddgnnGLG7K5XlPjTUcuv6Y="
+before_install:
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
 addons:
   coverity_scan:
     project:
-      name: nohal/iacfleet_pi
-      description: Build submitted via Travis CI
+      name: "nohal/iacfleet_pi"
+      description: "IAC Fleetcode plugin for OpenCPN"
     notification_email: pavel@kalian.cz
-    build_command_prepend: mkdir -p build; cd build; cmake ..; make clean
-    build_command: make
+    build_command_prepend: "mkdir -p build; cd build; cmake ..; make clean"
+    build_command: "make"
     branch_pattern: coverity_scan
+
 before_deploy:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export RELEASE_PKG_FILE=$(ls *.pkg); fi
 deploy:
