@@ -59,7 +59,7 @@ EVT_TIMER(ID_TIP_TIMER, IACFleetUIDialog::OnTipTimer)
 EVT_TIMER(ID_ANIMATION_TIMER, IACFleetUIDialog::OnTimerAnimation)
 END_EVENT_TABLE()
 
-IACFleetUIDialog::~IACFleetUIDialog(void) {
+IACFleetUIDialog::~IACFleetUIDialog() {
     if (m_timer->IsRunning()) m_timer->Stop();
     delete m_timer;
     delete m_pfolder_bitmap;
@@ -146,7 +146,7 @@ void IACFleetUIDialog::OnClose(wxCloseEvent& event) {
     pPlugIn->OnDialogClose();
 }
 
-void IACFleetUIDialog::Invalidate(void) {
+void IACFleetUIDialog::Invalidate() {
     m_iacfile.Invalidate();
     m_pRawCtrl->Clear();
     m_pTextCtrl->Clear();
@@ -401,7 +401,7 @@ void IACFleetUIDialog::CreateControls() {
 }
 
 //---------------------------------------------------------
-void IACFleetUIDialog::updateFileList(void) {
+void IACFleetUIDialog::updateFileList() {
     m_FilenameArray.Empty();
     if (m_currentDir == wxEmptyString || !wxDirExists(m_currentDir)) return;
     wxDir::GetAllFiles(m_currentDir, &m_FilenameArray, wxEmptyString, wxDIR_FILES);
@@ -496,7 +496,7 @@ void IACFleetUIDialog::OnRawTextChanged(wxCommandEvent& event) {
 // if rawdata is not empty use it as input to the
 // IACFleet code
 // otherwise use m_currentFileName
-void IACFleetUIDialog::updateIACFleet(void) {
+void IACFleetUIDialog::updateIACFleet() {
     bool ok = false;
     ::wxBeginBusyCursor();
 
@@ -521,7 +521,7 @@ void IACFleetUIDialog::updateIACFleet(void) {
 
 void IACFleetUIDialog::updateRawPanel(wxString& rawData) { m_pRawCtrl->ChangeValue(rawData); }
 
-void IACFleetUIDialog::updateTextPanel(void) {
+void IACFleetUIDialog::updateTextPanel() {
     m_pTextCtrl->ChangeValue(m_iacfile.ToString());
     if (m_iacfile.IsForecast())
         m_pIssueDate->SetLabel(_("Forecast issued at "));

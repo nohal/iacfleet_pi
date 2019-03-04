@@ -73,7 +73,7 @@ class IACFleetUIDialog : public wxDialog {
     DECLARE_CLASS(IACFleetUIDialog)
     DECLARE_EVENT_TABLE()
    public:
-    // IACFleetUIDialog( void );
+    // IACFleetUIDialog();
     ~IACFleetUIDialog();
     IACFleetUIDialog(wxWindow *parent = NULL, iacfleet_pi *ppi = NULL, wxWindowID id = wxID_ANY,
                      const wxString &caption = _("IACFleet Display Control"), const wxString initial_dir = wxEmptyString,

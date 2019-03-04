@@ -81,7 +81,7 @@ iacfleet_pi::iacfleet_pi(void *ppimgr) : opencpn_plugin_116(ppimgr) {
 
 iacfleet_pi::~iacfleet_pi() { deinitialize_images(); }
 
-int iacfleet_pi::Init(void) {
+int iacfleet_pi::Init() {
     AddLocaleCatalog(_T("opencpn-iacfleet_pi"));
 
     //    And load the configuration items
@@ -100,7 +100,7 @@ int iacfleet_pi::Init(void) {
             INSTALLS_TOOLBAR_TOOL | WANTS_CONFIG);
 }
 
-bool iacfleet_pi::DeInit(void) {
+bool iacfleet_pi::DeInit() {
     if (m_pDialog) {
         m_pDialog->Close();
     }
@@ -127,7 +127,7 @@ wxString iacfleet_pi::GetLongDescription() {
         "and open it with this\nPlugin to see the decoded text and a graphic overlay\n");
 }
 
-int iacfleet_pi::GetToolbarToolCount(void) { return 1; }
+int iacfleet_pi::GetToolbarToolCount() { return 1; }
 
 void iacfleet_pi::ShowPreferencesDialog(wxWindow *parent) {
     wxDialog *dialog =
@@ -182,7 +182,7 @@ bool iacfleet_pi::RenderGLOverlayMultiCanvas(wxGLContext *pcontext, PlugIn_ViewP
     return hasDrawn;
 }
 
-bool iacfleet_pi::LoadConfig(void) {
+bool iacfleet_pi::LoadConfig() {
     wxFileConfig *pConf = GetOCPNConfigObject();
 
     if (pConf) {
@@ -203,7 +203,7 @@ bool iacfleet_pi::LoadConfig(void) {
         return false;
 }
 
-bool iacfleet_pi::SaveConfig(void) {
+bool iacfleet_pi::SaveConfig() {
     wxFileConfig *pConf = GetOCPNConfigObject();
 
     if (pConf) {

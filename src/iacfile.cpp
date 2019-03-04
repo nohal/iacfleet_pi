@@ -57,16 +57,16 @@ static bool PointInLLBox(PlugIn_ViewPort *vp, double x, double y) {
 //---------------------------------------------
 // IACFile implementation
 //---------------------------------------------
-IACFile::IACFile(void) { Invalidate(); }
+IACFile::IACFile() { Invalidate(); }
 
 IACFile::IACFile(wxInputStream &stream) {
     Invalidate();
     m_isok = Read(stream);
 }
 
-IACFile::~IACFile(void) {}
+IACFile::~IACFile() {}
 
-void IACFile::Invalidate(void) {
+void IACFile::Invalidate() {
     m_tokens.Clear();
     m_tokensI = 0;
     m_isok = false;
@@ -127,7 +127,7 @@ bool IACFile::Read(wxInputStream &stream) {
     return isok;
 }
 
-wxString IACFile::ToString(void) {
+wxString IACFile::ToString() {
     wxString t;
     size_t i;
     t.Append(_T("IAC Fleet Code issued at ") + m_issueDate + _T("\n"));
@@ -157,7 +157,7 @@ wxString IACFile::ToString(void) {
     return t;
 }
 
-bool IACFile::Decode(void) {
+bool IACFile::Decode() {
     // init
     m_tokensI = 0;
     bool res = ReadHeader();
@@ -167,7 +167,7 @@ bool IACFile::Decode(void) {
     return res;
 }
 
-bool IACFile::ReadHeader(void) {
+bool IACFile::ReadHeader() {
     bool data = !tokenFind(_T("10001"), true).IsEmpty();
     if (!data)  // If it is not analysis, lets check for NOAA 24 hour forecast
     {
@@ -311,7 +311,7 @@ bool IACFile::ParseMovement(IACSystem &sys) {
     }
 }
 
-bool IACFile::ParseSections(void) {
+bool IACFile::ParseSections() {
     wxString token;
     do {
         token = tokenFind(_T("999??"), true);
@@ -341,7 +341,7 @@ bool IACFile::ParseSections(void) {
     } while (!token.IsEmpty());
     return true;
 }
-bool IACFile::ParsePressureSection(void) {
+bool IACFile::ParsePressureSection() {
     wxString token;
     for (;;) {
         token = tokenFind(_T("8????"));
@@ -375,7 +375,7 @@ bool IACFile::ParsePressureSection(void) {
     return true;
 }
 
-bool IACFile::ParseFrontalSection(void) {
+bool IACFile::ParseFrontalSection() {
     wxString token;
     for (;;) {
         token = tokenFind(_T("66???"));
@@ -399,7 +399,7 @@ bool IACFile::ParseFrontalSection(void) {
     return true;
 }
 
-bool IACFile::ParseIsobarSection(void) {
+bool IACFile::ParseIsobarSection() {
     wxString token;
     for (;;) {
         token = tokenFind(_T("44???"));
@@ -422,7 +422,7 @@ bool IACFile::ParseIsobarSection(void) {
     return true;
 }
 
-bool IACFile::ParseTropicalSection(void) {
+bool IACFile::ParseTropicalSection() {
     wxString token;
     for (;;) {
         token = tokenFind(_T("55???"));
@@ -485,7 +485,7 @@ wxString IACFile::tokenFind(const wxChar *match, bool skip) {
     return wxEmptyString;
 }
 
-void IACFile::PushbackToken(void) {
+void IACFile::PushbackToken() {
     if (m_tokensI > 0) {
         m_tokensI--;
     }
@@ -724,7 +724,7 @@ void GeoPoint::Set(wxString &token, int coordsys) {
     }
 }
 
-wxString GeoPoint::ToString(void) {
+wxString GeoPoint::ToString() {
     wxString t;
     // latitude
     unsigned int latdeg = floor(fabs(y));
@@ -747,7 +747,7 @@ bool GeoPoint::MatchPosition(GeoPoint &refPos, double deviation) {
 // implementation of IACSystem
 //-----------------------------
 
-IACSystem::IACSystem(void)
+IACSystem::IACSystem()
     : m_positions(), m_type(-1), m_char(-1), m_val(-1), m_int(-1), m_movement(99), m_direction(99), m_speed(99), m_isoLineWidth(2) {
     m_isoLineColor = *wxBLACK;
 }
@@ -893,7 +893,7 @@ wxString IACSystem::GetTab(const wxChar *(tab[10]), size_t index) const {
     }
 }
 
-wxString IACSystem::GetMovement(void) const {
+wxString IACSystem::GetMovement() const {
     static const wxChar *(tab[]) = {
         wxT("-"),       _("stationary"),   _("little change"),    _("stopping"),           _("retarding"), _("curving to left"),
         _("recurving"), _("accelerating"), _("curving to right"), _("expected to recurve")};
@@ -954,7 +954,7 @@ wxString IACSystem::GetShortType(size_t index) const { return (wxEmptyString); }
 
 wxString IACSystem::GetCharacteristic(size_t index) const { return (wxEmptyString); }
 
-wxString IACSystem::PositionsToString(void) const {
+wxString IACSystem::PositionsToString() const {
     wxString t;
     for (size_t i = 0; i < m_positions.Count(); i++) {
         if (i != 0) {
@@ -965,7 +965,7 @@ wxString IACSystem::PositionsToString(void) const {
     return t;
 }
 
-wxString IACPressureSystem::GetValue(void) const {
+wxString IACPressureSystem::GetValue() const {
     wxString t;
     if (m_val >= 0) {
         t.Printf(wxT("%4u hPa"), m_val);
@@ -1022,7 +1022,7 @@ wxString IACFrontalSystem::GetCharacteristic(size_t index) const {
     return (wxString(tab[index]));
 }
 
-wxString IACFrontalSystem::GetIntensity(void) const {
+wxString IACFrontalSystem::GetIntensity() const {
     static const wxChar *(tab[]) = {wxEmptyString,
                                     _("weak, decreasing"),
                                     _("weak, no change"),
@@ -1093,7 +1093,7 @@ wxString IACTropicalSystem::GetCharacteristic(size_t index) const {
     return (GetTab(tab, index));
 }
 
-wxString IACTropicalSystem::GetIntensity(void) const {
+wxString IACTropicalSystem::GetIntensity() const {
     static const wxChar *(tab[]) = {wxT("-"),
                                     _("weak, decreasing"),
                                     _("weak, no change"),
@@ -1111,7 +1111,7 @@ wxString IACTropicalSystem::GetIntensity(void) const {
     }
 }
 
-wxString IACTropicalSystem::GetValue(void) const {
+wxString IACTropicalSystem::GetValue() const {
     wxString t;
     if (m_val >= 0) {
         t.Printf(wxT("%4u hPa"), m_val);
