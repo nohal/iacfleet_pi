@@ -66,6 +66,6 @@ deploy:
       condition: "$TRAVIS_OS_NAME = linux"
       repo: nohal/iacfleet_pi
     oauth_token:
-      secure: GMnCLLPsKu11lMXsUS/R9GgrnXn563NwLzQt+LJlu70XB0w97S9V82CM6cpAXd177k558wO06yLXeZmYd4FARwCBMIcqzsLPkj/+Selzx+Q7ILdZFa2CyBggM84uzlZw4aKWqIB0LSv7MA/M/mcJqtdwtyzfHxC0DL+/PLlSdXI=
+      secure: OKmt3MKJVsOKhG6TDQ5eUQQp9kKeTGxxb3FL6y+o0K6V4iMsXi6N435rZkWA4bcXEMAsofDDxrngxwE+C4QC9XarFtQXCF3B4thty6XJgCWS2FCgx0aHn16N75tG4NalhgJ65y9WXWdUIm4I7qZUP8jJQ7xggxPhL093XZ8zIPw=
     oauth_token_secret:
-      secure: OO1csSLWo/JdZhDyTFg+x0FKVbX81wvlyqJWijKaQ3xbAoZ+MB8ZW5MiLmNWXEDsJe9d0ldDoestzl3Ng4phyDdGwvD44OyP6U+hw+iKG2sD/V47DYlfXaxosYpE8XAHPdK715xr+oU1baTeTHdOk7mGlg2+LEbaHs+/PeKYygY=
+      secure: DbRVCzp1ZFTHSUfwe4VqsLjg/pKvKiSsZ19TSYcHPqiq3SfhLo8ymrbrA2ZdutgaWYjZ2fLu+JeNVB5f+seCR/ZINkD2wUyaBuUm0PIx3g/sfTq2iJx3huu+wkwR4Uhlj9qQL4ZIbYcMH6RKVr4dG91DcF5SUJZZzVe5d9SkXYE=
