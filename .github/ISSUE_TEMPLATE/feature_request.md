@@ -2,7 +2,7 @@
 name: Feature request
 about: Suggest a feature for OpenCPN
 title: ''
-labels: 'feature'
+labels: ''
 assignees: ''
 
 ---
