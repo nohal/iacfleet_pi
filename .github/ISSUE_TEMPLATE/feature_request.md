@@ -1,8 +1,8 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
+about: Suggest a feature for OpenCPN
 title: ''
-labels: ''
+labels: 'feature'
 assignees: ''
 
 ---
