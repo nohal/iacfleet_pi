@@ -1,9 +1,42 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
+name: "OpenCPN - Bug Report"
+description: Report a bug on OpenCPN
+body:
+- type: markdown
+  attributes:
+    value: |
+      Please [search for existing issues](https://github.com/OpenCPN/OpenCPN/issues) before creating a new one.
+
+- type: input
+  attributes:
+    label: OpenCPN version
+    description: |
+      Please have a look at the title of OpenCPN's main window
+    placeholder: "5.2.4"
+  validations:
+    required: true
+
+- type: checkboxes
+  attributes:
+    label: Platform
+    description: |
+      Tell us on which platform(s) you observe the bug
+    options:
+      - label: "Windows"
+      - label: "Linux"
+      - label: "macOS"
+      - label: "Android"
+
+- type: input
+  attributes:
+    label: Distro Version
+    description: |
+      Please tell us what OS distribution and version you are using (if applicable).
+      You can get additional information about the version where possible, e.g. on Debian / Ubuntu, run `lsb_release -r`.
+      In case of Linux we are also particularly interested in your desktop environment.
+    placeholder: "Ubuntu 20.04, Gnome Shell"
+  validations:
+    required: false
 
 ---
 
