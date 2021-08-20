@@ -1,7 +1,7 @@
 site:
   title: AC Fleetcode Plugin Manual
   url:  https://nowhere.net
-  start_page: iacfleet:ROOT:iacfleet.adoc
+  start_page: iacfleet:ROOT:index.adoc
 
 content:
   sources:
