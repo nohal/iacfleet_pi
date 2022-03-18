@@ -13,16 +13,16 @@
 # -------- Options ----------
 
 set(OCPN_TEST_REPO
-    "opencpn/iacfleet-alpha"
+    "nohal/opencpn-plugins"
     CACHE STRING "Default repository for untagged builds"
 )
 set(OCPN_BETA_REPO
-    "opencpn/iacfleet-beta"
+    "nohal/opencpn-plugins"
     CACHE STRING
     "Default repository for tagged builds matching 'beta'"
 )
 set(OCPN_RELEASE_REPO
-    "opencpn/iacfleet-prod"
+    "nohal/opencpn-plugins"
     CACHE STRING
     "Default repository for tagged builds not matching 'beta'"
 )
