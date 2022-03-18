@@ -34,7 +34,7 @@
 #include "wx/wx.h"
 #endif  // precompiled headers
 
-#include "version.h"
+#include "config.h"
 
 #define MY_API_VERSION_MAJOR 1
 #define MY_API_VERSION_MINOR 16

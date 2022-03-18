@@ -41,11 +41,11 @@
 #include <wx/wfstream.h>
 
 #include "TexFont.h"
-
 #include "ocpn_plugin.h"
 #ifdef ocpnUSE_GL
 #ifdef __WXMSW__
 #include <GL/glu.h>
+
 #include "GL/gl.h"  // local copy for Windows
 #else
 
@@ -53,8 +53,9 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #else
-#include "GL/gl_private.h"
-#include "qopengl.h"  // this gives us the qt runtime gles2.h
+#include <qopengl.h>
+
+#include "gl_private.h"
 #endif
 
 #endif

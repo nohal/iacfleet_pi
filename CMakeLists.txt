@@ -1,66 +1,112 @@
-##---------------------------------------------------------------------------
-## Author:      Pavel Kalian
-## Copyright:   2014
-## License:     GPLv2 License
-##---------------------------------------------------------------------------
+# ~~~
+# Summary:      Main plugin build script
+# Copyright (c) 2020-2022 Pavel Kalian
+# License:      GPLv3+
+# ~~~
 
-# define minimum cmake version
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6.2)
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
 
-PROJECT(iacfleet_pi)
+# -------- Cmake setup ---------
+#
+cmake_minimum_required(VERSION 3.12.0)
+include(${CMAKE_SOURCE_DIR}/cmake/CmakeSetup.cmake NO_POLICY_SCOPE)
+message(STATUS "Cmake version: ${CMAKE_VERSION}.")
 
-SET(PACKAGE_NAME iacfleet_pi)
-SET(VERBOSE_NAME IACFleet)
-SET(TITLE_NAME IACFleet)
-SET(CPACK_PACKAGE_CONTACT "Pavel Kalian")
 
-SET(VERSION_MAJOR "0")
-SET(VERSION_MINOR "21")
+# -------- Build setup  --------
+#
+include(PluginOptions)
+if (BUILD_TYPE)
+  message(STATUS "Building: ${BUILD_TYPE}")
+else ()
+  message(STATUS "Configuring")
+endif ()
 
-SET(NAME_SUFFIX "ov50")
+# -------- Plugin setup ----------
+#
+include(Plugin.cmake)
 
-#SET(CMAKE_BUILD_TYPE Debug)
-SET(CMAKE_MACOSX_RPATH "ON")
+# -------- Setup completed, build the plugin --------
+#
+project(${PKG_NAME} VERSION ${PKG_VERSION})
+include(PluginCompiler)
 
-set (CMAKE_CXX_STANDARD 11)
+add_library(${CMAKE_PROJECT_NAME} SHARED EXCLUDE_FROM_ALL ${SRC})
+include_directories(BEFORE ${CMAKE_BINARY_DIR}/include)
 
-# Definitions
-add_definitions (
--D_FILE_OFFSET_BITS=64
--D_LARGEFILE_SOURCE
--DLIBUNRAR_BUILD
--DRARDLL
--DUNRAR
--DSILENT
+add_subdirectory("opencpn-libs/${PKG_API_LIB}")
+target_link_libraries(${CMAKE_PROJECT_NAME} ocpn::api)
+
+set(VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(VERSION_PATCH ${PROJECT_VERSION_PATCH})
+
+set(PACKAGE_NAME ${CMAKE_PROJECT_NAME})
+
+# Create the minimim ocpn version id string like ov50
+string(REGEX REPLACE "\([0-9]\)\.\([0-9]\).*" "ov\\1\\2"
+       OCPN_MIN_VERSION ${API_OCPN_MIN_VERSION})
+
+if (COMMAND late_init)
+  late_init()
+endif ()
+
+# Set up targets. Targets sets up new targets with BUILD_TYPE set to
+# 'flatpak', 'android' or 'tarball'. The initial call without BUILD_TYPE ends
+# here.
+#
+file(GLOB FLATPAK_MANIFEST
+  ${PROJECT_SOURCE_DIR}/flatpak/org.opencpn.OpenCPN.Plugin.*.yaml
+)
+include(Targets)
+create_targets(${FLATPAK_MANIFEST})
+
+if ("${BUILD_TYPE}" STREQUAL "")
+  return ()
+endif ()
+
+if (NOT ${BUILD_TYPE} STREQUAL "flatpak")
+  # Build package as required (flatpak already dealt with).
+  #
+  include(PluginInstall)
+  if (QT_ANDROID)
+    include(AndroidLibs)
+  else ()
+    include(PluginLibs)
+  endif ()
+  include(PluginLocalization)
+
+  include_directories(BEFORE ${CMAKE_BINARY_DIR}/include)
+
+  if (COMMAND add_plugin_libraries)
+    add_plugin_libraries()
+  endif ()
+
+endif ()
+
+configure_file(
+  ${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include//config.h
+  @ONLY
 )
 
-OPTION(IACFLEET_USE_SVG "Use SVG graphics" ON)
+configure_file(
+  # The cloudsmith upload script
+  ${CMAKE_SOURCE_DIR}/ci/upload.sh.in ${CMAKE_BINARY_DIR}/upload.sh
+  @ONLY
+)
+configure_file(
+  # The cloudsmith upload script, windows bat file.
+  ${CMAKE_SOURCE_DIR}/ci/upload.bat.in ${CMAKE_BINARY_DIR}/upload.bat
+  @ONLY
+)
 
-INCLUDE("cmake/PluginConfigure.cmake")
-
-IF(IACFLEET_USE_SVG)
-  ADD_DEFINITIONS(-DIACFLEET_USE_SVG)
-ENDIF(IACFLEET_USE_SVG)
-
-SET(SRC_IACFLEET
-src/folder.xpm
-src/iacfile.cpp
-src/iacfile.h
-src/iacfleet.cpp
-src/iacfleet.h
-src/iacfleet_pi.cpp
-src/iacfleet_pi.h
-src/TexFont.h
-src/TexFont.cpp
-src/icon.png
-src/icons.cpp
-src/icons.h
-include/ocpn_plugin.h
-        )
-
-ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_IACFLEET})
-
-
-INCLUDE("cmake/PluginInstall.cmake")
-INCLUDE("cmake/PluginLocalization.cmake")
-INCLUDE("cmake/PluginPackage.cmake")
+set(checksum "@checksum@")
+configure_file(
+  # The XML metadata file
+  ${CMAKE_SOURCE_DIR}/plugin.xml.in
+  ${CMAKE_BINARY_DIR}/${pkg_displayname}.xml.in
+  @ONLY
+)
