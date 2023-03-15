@@ -31,7 +31,7 @@ set(OCPN_RELEASE_REPO
 #
 # -------  Plugin setup --------
 #
-set(PKG_NAME iacfleet_pi)
+set(PKG_NAME iacfleet)
 set(PKG_VERSION  0.30.1)
 set(PKG_PRERELEASE "beta")  # Empty, or a tag like 'beta'
 
