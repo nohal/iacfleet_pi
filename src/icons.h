@@ -9,7 +9,7 @@
 extern void initialize_images();
 extern void deinitialize_images();
 
-extern wxBitmap *_img_iacfleet_pi;
+extern wxBitmap* _img_iacfleet_pi;
 
 #ifdef IACFLEET_USE_SVG
 extern wxString _svg_iacfleet;

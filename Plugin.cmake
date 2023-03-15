@@ -71,7 +71,7 @@ set(PKG_API_LIB api-16)  #  A dir in opencpn-libs/ e. g., api-17 or api-16
 macro(late_init)
   # Perform initialization after the PACKAGE_NAME library, compilers
   # and ocpn::api is available.
-endmacro ()
+endmacro()
 
 macro(add_plugin_libraries)
   # Add libraries required by this plugin
@@ -90,4 +90,4 @@ macro(add_plugin_libraries)
   # The wxsvg library enables SVG overall in the plugin
   add_subdirectory("${CMAKE_SOURCE_DIR}/opencpn-libs/wxsvg")
   target_link_libraries(${PACKAGE_NAME} ocpn::wxsvg)
-endmacro ()
+endmacro()

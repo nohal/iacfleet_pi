@@ -520,4 +520,3 @@ msgid "Failed to download: %s \n"
 "Verify there is a working Internet connection."
 msgstr "Nedlasting feilet: %s \n"
 "Sjekk din internett forbindelse."
-

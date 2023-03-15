@@ -520,4 +520,3 @@ msgid "Failed to download: %s \n"
 "Verify there is a working Internet connection."
 msgstr "Stahování se nezdařilo: %s \n"
 "Ověř jestli je funkční připojení k Internetu."
-

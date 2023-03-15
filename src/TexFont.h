@@ -26,7 +26,8 @@
 #ifndef __tex_font_h_
 #define __tex_font_h_
 
-/* support ascii plus degree symbol for now pack font in a single texture 16x8 */
+/* support ascii plus degree symbol for now pack font in a single texture 16x8
+ */
 #define DEGREE_GLYPH 127
 #define MIN_GLYPH 32
 #define MAX_GLYPH 128
@@ -39,21 +40,28 @@
 struct TexGlyphInfo {
     int x, y, width, height;
     float advance;
-    TexGlyphInfo() : x(0), y(0), width(0), height(0), advance(0.) {}
+    TexGlyphInfo()
+        : x(0)
+        , y(0)
+        , width(0)
+        , height(0)
+        , advance(0.)
+    {
+    }
 };
 
 class TexFont {
-   public:
+public:
     TexFont();
     ~TexFont();
 
-    void Build(wxFont &font, bool blur = false, bool luminance = false);
+    void Build(wxFont& font, bool blur = false, bool luminance = false);
     void Delete();
 
-    void GetTextExtent(const wxString &string, int *width, int *height);
-    void RenderString(const wxString &string, int x = 0, int y = 0);
+    void GetTextExtent(const wxString& string, int* width, int* height);
+    void RenderString(const wxString& string, int x = 0, int y = 0);
 
-   private:
+private:
     void RenderGlyph(wchar_t c);
 
     wxFont m_font;

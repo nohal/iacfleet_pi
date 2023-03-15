@@ -32,7 +32,7 @@
 
 #ifndef WX_PRECOMP
 #include "wx/wx.h"
-#endif  // precompiled headers
+#endif // precompiled headers
 
 #include "config.h"
 
@@ -41,15 +41,15 @@
 
 #include "ocpn_plugin.h"
 
-#define IACFLEET_TOOL_POSITION -1  // Request default positioning of toolbar tool
+#define IACFLEET_TOOL_POSITION -1 // Request default positioning of toolbar tool
 
 //----------------------------------------------------------------------------------------------------------
 //    The PlugIn Class Definition
 //----------------------------------------------------------------------------------------------------------
 class IACFleetUIDialog;
 class iacfleet_pi : public opencpn_plugin_116 {
-   public:
-    iacfleet_pi(void *ppimgr);
+public:
+    iacfleet_pi(void* ppimgr);
     ~iacfleet_pi();
 
     //    The required PlugIn Methods
@@ -60,17 +60,19 @@ class iacfleet_pi : public opencpn_plugin_116 {
     int GetAPIVersionMinor();
     int GetPlugInVersionMajor();
     int GetPlugInVersionMinor();
-    wxBitmap *GetPlugInBitmap();
+    wxBitmap* GetPlugInBitmap();
     wxString GetCommonName();
     wxString GetShortDescription();
     wxString GetLongDescription();
     void SetCursorLatLon(double lat, double lon);
 
     //    The override PlugIn Methods
-    bool RenderOverlayMultiCanvas(wxDC &dc, PlugIn_ViewPort *vp, int canvasIndex);
-    bool RenderGLOverlayMultiCanvas(wxGLContext *pcontext, PlugIn_ViewPort *vp, int canvasIndex);
+    bool RenderOverlayMultiCanvas(
+        wxDC& dc, PlugIn_ViewPort* vp, int canvasIndex);
+    bool RenderGLOverlayMultiCanvas(
+        wxGLContext* pcontext, PlugIn_ViewPort* vp, int canvasIndex);
     int GetToolbarToolCount();
-    void ShowPreferencesDialog(wxWindow *parent);
+    void ShowPreferencesDialog(wxWindow* parent);
     void OnToolbarToolCallback(int id);
     void SetDialogX(int x) { m_dialog_x = x; };
     void SetDialogY(int x) { m_dialog_y = x; }
@@ -80,20 +82,20 @@ class iacfleet_pi : public opencpn_plugin_116 {
     void SetDir(wxString dir) { m_dir = dir; };
     void SetSortType(int sort_type) { m_sort_type = sort_type; };
 
-   private:
+private:
     bool LoadConfig();
     bool SaveConfig();
 
-   private:
-    wxWindow *m_parent_window;
+private:
+    wxWindow* m_parent_window;
     bool m_bShowIcon;
     int m_leftclick_tool_id;
     int m_dialog_x, m_dialog_y;
     int m_dialog_sx, m_dialog_sy;
     int m_sort_type;
     wxString m_dir;
-    IACFleetUIDialog *m_pDialog;
-    wxDC *m_pdc;
+    IACFleetUIDialog* m_pDialog;
+    wxDC* m_pdc;
 };
 
 #endif

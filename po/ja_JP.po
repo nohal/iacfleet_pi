@@ -506,4 +506,3 @@ msgstr "保存に失敗しました: %s "
 msgid "Failed to download: %s \n"
 "Verify there is a working Internet connection."
 msgstr ""
-

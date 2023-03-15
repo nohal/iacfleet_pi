@@ -98,4 +98,3 @@ if [ "$status_code" != "201" ]; then
   # changed the following
   exit 1
 fi
-
