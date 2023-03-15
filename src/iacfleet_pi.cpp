@@ -85,7 +85,7 @@ iacfleet_pi::iacfleet_pi(void* ppimgr)
     m_logo = GetBitmapFromSVGFile(GetDataDir() + "iacfleet_pi.svg", 32, 32);
 }
 
-iacfleet_pi::~iacfleet_pi() { deinitialize_images(); }
+iacfleet_pi::~iacfleet_pi() { }
 
 int iacfleet_pi::Init()
 {
