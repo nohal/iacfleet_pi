@@ -17,12 +17,12 @@ set(OCPN_TEST_REPO
     CACHE STRING "Default repository for untagged builds"
 )
 set(OCPN_BETA_REPO
-    "nohal/opencpn-plugins"
+    "nohal/iacfleet_pi-beta"
     CACHE STRING
     "Default repository for tagged builds matching 'beta'"
 )
 set(OCPN_RELEASE_REPO
-    "nohal/opencpn-plugins"
+    "nohal/iacfleet_pi-stable"
     CACHE STRING
     "Default repository for tagged builds not matching 'beta'"
 )
