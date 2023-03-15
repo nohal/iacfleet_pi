@@ -97,14 +97,13 @@ int iacfleet_pi::Init()
     //    This PlugIn needs a toolbar icon, so request its insertion if enabled
     //    locally
     wxString _svg_iacfleet = GetDataDir() + "iacfleet_pi.svg";
-    wxString _svg_iacfleet_rollover
-        = GetDataDir() + "iacfleet_pi_rollover.svg";
+    wxString _svg_iacfleet_rollover = GetDataDir() + "iacfleet_pi_rollover.svg";
     wxString _svg_iacfleet_toggled = GetDataDir() + "iacfleet_pi_toggled.svg";
 
-    m_leftclick_tool_id = InsertPlugInToolSVG(_T( "IACFleet" ),
-        _svg_iacfleet_toggled, _svg_iacfleet_rollover, _svg_iacfleet,
-        wxITEM_CHECK, _("IACFleet"), _T( "" ), nullptr,
-        IACFLEET_TOOL_POSITION, 0, this);
+    m_leftclick_tool_id
+        = InsertPlugInToolSVG(_T( "IACFleet" ), _svg_iacfleet_toggled,
+            _svg_iacfleet_rollover, _svg_iacfleet, wxITEM_CHECK, _("IACFleet"),
+            _T( "" ), nullptr, IACFLEET_TOOL_POSITION, 0, this);
 
     return (WANTS_OVERLAY_CALLBACK | WANTS_OPENGL_OVERLAY_CALLBACK
         | WANTS_CURSOR_LATLON | WANTS_TOOLBAR_CALLBACK | INSTALLS_TOOLBAR_TOOL
