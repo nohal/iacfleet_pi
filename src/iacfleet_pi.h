@@ -85,6 +85,11 @@ public:
 private:
     bool LoadConfig();
     bool SaveConfig();
+    wxString GetDataDir()
+    {
+        return GetPluginDataDir("iacfleet_pi") + wxFileName::GetPathSeparator()
+            + "data" + wxFileName::GetPathSeparator();
+    }
 
 private:
     wxWindow* m_parent_window;
@@ -96,6 +101,7 @@ private:
     wxString m_dir;
     IACFleetUIDialog* m_pDialog;
     wxDC* m_pdc;
+    wxBitmap m_logo;
 };
 
 #endif

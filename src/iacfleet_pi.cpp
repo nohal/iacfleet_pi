@@ -82,7 +82,7 @@ iacfleet_pi::iacfleet_pi(void* ppimgr)
     m_parent_window = GetOCPNCanvasWindow();
 
     // Create the PlugIn icons
-    initialize_images();
+    m_logo = GetBitmapFromSVGFile(GetDataDir() + "iacfleet_pi.svg", 32, 32);
 }
 
 iacfleet_pi::~iacfleet_pi() { deinitialize_images(); }
@@ -96,15 +96,15 @@ int iacfleet_pi::Init()
 
     //    This PlugIn needs a toolbar icon, so request its insertion if enabled
     //    locally
-#ifdef IACFLEET_USE_SVG
-    m_leftclick_tool_id = InsertPlugInToolSVG(_T( "IACFleet" ), _svg_iacfleet,
-        _svg_iacfleet_rollover, _svg_iacfleet_toggled, wxITEM_CHECK,
-        _("IACFleet"), _T( "" ), NULL, IACFLEET_TOOL_POSITION, 0, this);
-#else
-    m_leftclick_tool_id = InsertPlugInTool(_T(""), _img_iacfleet_pi,
-        _img_iacfleet_pi, wxITEM_NORMAL, _("IACFleet"), _T(""), NULL,
+    wxString _svg_iacfleet = GetDataDir() + "iacfleet_pi.svg";
+    wxString _svg_iacfleet_rollover
+        = GetDataDir() + "iacfleet_pi_rollover.svg";
+    wxString _svg_iacfleet_toggled = GetDataDir() + "iacfleet_pi_toggled.svg";
+
+    m_leftclick_tool_id = InsertPlugInToolSVG(_T( "IACFleet" ),
+        _svg_iacfleet_toggled, _svg_iacfleet_rollover, _svg_iacfleet,
+        wxITEM_CHECK, _("IACFleet"), _T( "" ), nullptr,
         IACFLEET_TOOL_POSITION, 0, this);
-#endif
 
     return (WANTS_OVERLAY_CALLBACK | WANTS_OPENGL_OVERLAY_CALLBACK
         | WANTS_CURSOR_LATLON | WANTS_TOOLBAR_CALLBACK | INSTALLS_TOOLBAR_TOOL
@@ -127,7 +127,7 @@ int iacfleet_pi::GetPlugInVersionMajor() { return PLUGIN_VERSION_MAJOR; }
 
 int iacfleet_pi::GetPlugInVersionMinor() { return PLUGIN_VERSION_MINOR; }
 
-wxBitmap* iacfleet_pi::GetPlugInBitmap() { return _img_iacfleet_pi; }
+wxBitmap* iacfleet_pi::GetPlugInBitmap() { return &m_logo; }
 wxString iacfleet_pi::GetCommonName() { return _("IACFleet"); }
 
 wxString iacfleet_pi::GetShortDescription()
