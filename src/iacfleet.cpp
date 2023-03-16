@@ -65,8 +65,8 @@ IACFleetUIDialog::~IACFleetUIDialog()
         m_timer->Stop();
     delete m_timer;
     delete m_pfolder_bitmap;
-    //m_bBrDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
-    //    wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
+    // m_bBrDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
+    //     wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
     m_bNoaaDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
         wxCommandEventHandler(IACFleetUIDialog::OnNoaaDownload), NULL, this);
     m_rbSortName->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED,
@@ -424,7 +424,7 @@ void IACFleetUIDialog::CreateControls()
     bSizerMain->Add(sbSizerNadi, 0, wxALL | wxEXPAND, 5);
 
     // Connect Events
-    //m_bBrDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED,
+    // m_bBrDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED,
     //    wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
     m_bNoaaDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED,
         wxCommandEventHandler(IACFleetUIDialog::OnNoaaDownload), NULL, this);

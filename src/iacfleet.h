@@ -99,7 +99,7 @@ public:
     void OnTipTimer(wxTimerEvent& event);
     void SetCursorLatLon(double lat, double lon);
     bool RenderOverlay(wxDC* dc, PlugIn_ViewPort* vp);
-    //void OnBrDownload(wxCommandEvent& event);
+    // void OnBrDownload(wxCommandEvent& event);
     void OnSortChange(wxCommandEvent& event);
     void OnNoaaDownload(wxCommandEvent& event);
 
