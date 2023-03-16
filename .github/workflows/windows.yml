@@ -63,7 +63,7 @@ jobs:
         run: |
           call buildwin/win_deps.bat
           cmake -A win32 -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ${{ matrix.cmake_defines }}
-          cmake --build build
+          cmake --build build --config ${{env.BUILD_TYPE}}
         shell: cmd
       - name: "[Windows] Publish to Cloudsmith"
         if: runner.os == 'Windows'
