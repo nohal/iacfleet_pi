@@ -35,8 +35,8 @@ set(PKG_NAME iacfleet_pi)
 set(PKG_VERSION  0.30.1)
 set(PKG_PRERELEASE "beta")  # Empty, or a tag like 'beta'
 
-set(DISPLAY_NAME IACFleet)    # Dialogs, installer artifacts, ...
-set(PLUGIN_API_NAME iacfleet_pi) # As of GetCommonName() in plugin API
+set(DISPLAY_NAME iacfleet_pi)    # Dialogs, installer artifacts, ...
+set(PLUGIN_API_NAME IACFleet) # As of GetCommonName() in plugin API
 set(PKG_SUMMARY "IAC Fleetcode plugin for OpenCPN")
 set(PKG_DESCRIPTION [=[
 IAC Fleetcode plugin for OpenCPN
