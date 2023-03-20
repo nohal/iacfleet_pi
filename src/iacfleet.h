@@ -102,6 +102,7 @@ public:
     // void OnBrDownload(wxCommandEvent& event);
     void OnSortChange(wxCommandEvent& event);
     void OnNoaaDownload(wxCommandEvent& event);
+    void OnFijiDownload(wxCommandEvent& event);
 
 private:
     void Invalidate();
@@ -149,6 +150,7 @@ private:
     wxRadioButton* m_rbForecast;
     wxButton* m_bNoaaDownload;
 
+    wxButton* m_bFijiDownload;
     wxStaticText* m_stNadi;
 
     wxTimer* m_timer;

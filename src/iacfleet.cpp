@@ -67,6 +67,8 @@ IACFleetUIDialog::~IACFleetUIDialog()
     delete m_pfolder_bitmap;
     // m_bBrDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
     //     wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
+    m_bFijiDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
+        wxCommandEventHandler(IACFleetUIDialog::OnFijiDownload), NULL, this);
     m_bNoaaDownload->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED,
         wxCommandEventHandler(IACFleetUIDialog::OnNoaaDownload), NULL, this);
     m_rbSortName->Disconnect(wxEVT_COMMAND_RADIOBUTTON_SELECTED,
@@ -412,8 +414,12 @@ void IACFleetUIDialog::CreateControls()
             _("South Pacific (from Fiji Meteorological Service, Nadi)")),
         wxVERTICAL);
 
+    m_bFijiDownload = new wxButton(dnldpanel, wxID_ANY, _("Download"),
+        wxDefaultPosition, wxDefaultSize, 0);
+    sbSizerNadi->Add(m_bFijiDownload, 0, wxALL, 5);
     m_stNadi = new wxStaticText(dnldpanel, wxID_ANY,
-        _("The dataset is available from Saildocs\nSend an e-mail with the "
+        _("The dataset is also available from Saildocs\nSend an e-mail with "
+          "the "
           "text\nfleet.nadi\nand any subject to query@saildocs.com\nWhen you "
           "receive the response, copy and paste it to the Raw tab or save as "
           "text and open on the Files tab."),
@@ -426,6 +432,8 @@ void IACFleetUIDialog::CreateControls()
     // Connect Events
     // m_bBrDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED,
     //    wxCommandEventHandler(IACFleetUIDialog::OnBrDownload), NULL, this);
+    m_bFijiDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED,
+        wxCommandEventHandler(IACFleetUIDialog::OnFijiDownload), NULL, this);
     m_bNoaaDownload->Connect(wxEVT_COMMAND_BUTTON_CLICKED,
         wxCommandEventHandler(IACFleetUIDialog::OnNoaaDownload), NULL, this);
     m_rbSortName->Connect(wxEVT_COMMAND_RADIOBUTTON_SELECTED,
@@ -714,11 +722,78 @@ void IACFleetUIDialog::OnNoaaDownload(wxCommandEvent& event)
 
     if (m_rbAnalysis->GetValue()) {
         prefix = _T("IAC_NOAA_A");
-        url = _T("http://tgftp.nws.noaa.gov/data/raw/as/asxx21.egrr..txt");
+        url = _T("https://tgftp.nws.noaa.gov/data/raw/as/asxx21.egrr..txt");
     } else {
         prefix = _T("IAC_NOAA_F");
-        url = _T("http://tgftp.nws.noaa.gov/data/raw/fs/fsxx21.egrr..txt");
+        url = _T("https://tgftp.nws.noaa.gov/data/raw/fs/fsxx21.egrr..txt");
     }
+
+    wxString filename = wxString::Format(_T("%s_%i-%i-%i_%i-%i.txt"),
+        prefix.c_str(), dt.GetYear(), dt.GetMonth() + 1, dt.GetDay(),
+        dt.GetHour(), dt.GetMinute());
+    wxFileName tfn = wxFileName::CreateTempFileName(_T("iacfleet"));
+    wxFileName fn(m_currentDir, filename);
+
+    _OCPN_DLStatus ret = OCPN_downloadFile(url, tfn.GetFullPath(),
+        _("Downloading file"), _("Reading Headers: ") + url, wxNullBitmap, this,
+        OCPN_DLDS_ELAPSED_TIME | OCPN_DLDS_ESTIMATED_TIME
+            | OCPN_DLDS_REMAINING_TIME | OCPN_DLDS_SPEED | OCPN_DLDS_SIZE
+            | OCPN_DLDS_URL | OCPN_DLDS_CAN_PAUSE | OCPN_DLDS_CAN_ABORT
+            | OCPN_DLDS_AUTO_CLOSE,
+        10);
+    switch (ret) {
+    case OCPN_DL_NO_ERROR: {
+        if (wxCopyFile(tfn.GetFullPath(), fn.GetFullPath())) {
+            showfile = fn.GetFullPath();
+            showfilename = filename;
+        } else
+            wxMessageBox(wxString::Format(_("Failed to save: %s "),
+                             fn.GetFullPath().c_str()),
+                _T("IACFleet"), wxOK | wxICON_ERROR);
+        break;
+    }
+    case OCPN_DL_FAILED: {
+        wxMessageBox(wxString::Format(_("Failed to download: %s \nVerify there "
+                                        "is a working Internet connection."),
+                         url.c_str()),
+            _T("IACFleet"), wxOK | wxICON_ERROR);
+        break;
+    }
+    case OCPN_DL_USER_TIMEOUT:
+    case OCPN_DL_ABORTED: {
+        break;
+    }
+    case OCPN_DL_UNKNOWN:
+    case OCPN_DL_STARTED: {
+        break;
+    }
+
+    default:
+        wxASSERT(false); // This should never happen because we handle all
+                         // possible cases of ret
+    }
+    if (wxFileExists(tfn.GetFullPath()))
+        wxRemoveFile(tfn.GetFullPath());
+    if (showfile != wxEmptyString) {
+        updateFileList();
+        m_pFileListCtrl->SetStringSelection(showfilename);
+        m_currentFileName = showfile;
+        updateIACFleet();
+    }
+}
+
+void IACFleetUIDialog::OnFijiDownload(wxCommandEvent& event)
+{
+    wxDateTime dt = wxDateTime::Now();
+
+    wxString showfile = wxEmptyString;
+    wxString showfilename = wxEmptyString;
+
+    wxString url;
+    wxString prefix;
+
+    prefix = _T("IAC_NOAA_FIJI");
+    url = _T("https://tgftp.nws.noaa.gov/data/raw/as/asps20.nffn..txt");
 
     wxString filename = wxString::Format(_T("%s_%i-%i-%i_%i-%i.txt"),
         prefix.c_str(), dt.GetYear(), dt.GetMonth() + 1, dt.GetDay(),
