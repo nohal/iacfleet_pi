@@ -196,6 +196,7 @@ public:
 
     wxString ToString();
     wxString GetIssueDate() { return m_issueDate; }
+    wxString GetDataset() { return m_RawData.AfterFirst(' ').BeforeFirst(' '); }
     bool IsForecast() { return m_RawData.StartsWith(_T("F")); }
 
     bool Read(wxInputStream& stream);

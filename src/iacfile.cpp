@@ -253,24 +253,22 @@ bool IACFile::ParsePositions(IACSystem& sys, int section)
             morepos = false;
         }
 
-        /*
-                // lets be even more strict and limit positions to
-                // SW-Pacific
-                if( !((oct == 6) || (oct == 7)))
-                {
-                    morepos = false;
-                }
+        if (GetDataset()
+            == "NFFN") { // If this is a dataset for Fiji, we can assume all the
+                         // positions are in SW Pacific ocean
+            // lets be even more strict and limit positions to
+            // SW-Pacific
+            if (!((oct == 6) || (oct == 7))) {
+                morepos = false;
+            }
 
-                GeoPoint pos(token); // decode position
-                // Position must be in the area bounded by 0S..35S and 120W/150E
-                if( (pos.y < -35.0) ||
-                        (pos.y > 0.0) ||
-                        ((pos.x > -120.0) && (pos.x < 150))
-                  )
-                {
-                    morepos = false;
-                }
-        */
+            GeoPoint pos(token, m_positionsType); // decode position
+            // Position must be in the area bounded by 0S..35S and 120W/150E
+            if ((pos.y < -35.0) || (pos.y > 0.0)
+                || ((pos.x > -120.0) && (pos.x < 150))) {
+                morepos = false;
+            }
+        }
         if (!token.IsEmpty() && (firsttime || morepos)) {
             // ignore double entries following eachother
             if (token != lasttoken) {
