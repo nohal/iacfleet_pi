@@ -32,7 +32,7 @@ set(OCPN_RELEASE_REPO
 # -------  Plugin setup --------
 #
 set(PKG_NAME iacfleet_pi)
-set(PKG_VERSION  0.30.2)
+set(PKG_VERSION  0.31.0)
 set(PKG_PRERELEASE "")  # Empty, or a tag like 'beta'
 
 set(DISPLAY_NAME iacfleet_pi)    # Dialogs, installer artifacts, ...
