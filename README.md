@@ -1,8 +1,6 @@
 IAC Fleetcode plugin Plugin for OpenCPN
 =======================================
 
-[![Build Status](https://travis-ci.org/nohal/iacfleet_pi.svg?branch=master)](https://travis-ci.org/nohal/iacfleet_pi)
-[![Build status](https://ci.appveyor.com/api/projects/status/405d7cygmln0urfj?svg=true)](https://ci.appveyor.com/project/nohal/iacfleet-pi)
 [![Coverity scan](https://scan.coverity.com/projects/4964/badge.svg)](https://scan.coverity.com/projects/nohal-iacfleet_pi)
 
 Compiling
