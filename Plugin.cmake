@@ -4,41 +4,35 @@
 # License:      GPLv3+
 # ~~~
 
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation; either version 3 of the License, or (at your option) any later
+# version.
 
 # -------- Options ----------
 
 set(OCPN_TEST_REPO
     "nohal/opencpn-plugins"
-    CACHE STRING "Default repository for untagged builds"
-)
+    CACHE STRING "Default repository for untagged builds")
 set(OCPN_BETA_REPO
     "nohal/iacfleet_pi-beta"
-    CACHE STRING
-    "Default repository for tagged builds matching 'beta'"
-)
+    CACHE STRING "Default repository for tagged builds matching 'beta'")
 set(OCPN_RELEASE_REPO
     "nohal/iacfleet_pi-stable"
-    CACHE STRING
-    "Default repository for tagged builds not matching 'beta'"
-)
+    CACHE STRING "Default repository for tagged builds not matching 'beta'")
 
-#
 #
 # -------  Plugin setup --------
 #
 set(PKG_NAME iacfleet_pi)
-set(PKG_VERSION  0.31.0)
-set(PKG_PRERELEASE "")  # Empty, or a tag like 'beta'
+set(PKG_VERSION 0.32.0)
+set(PKG_PRERELEASE "") # Empty, or a tag like 'beta'
 
-set(DISPLAY_NAME iacfleet_pi)    # Dialogs, installer artifacts, ...
+set(DISPLAY_NAME iacfleet_pi) # Dialogs, installer artifacts, ...
 set(PLUGIN_API_NAME IACFleet) # As of GetCommonName() in plugin API
 set(PKG_SUMMARY "IAC Fleetcode plugin for OpenCPN")
-set(PKG_DESCRIPTION [=[
+set(PKG_DESCRIPTION
+    [=[
 IAC Fleetcode plugin for OpenCPN
 ]=])
 
@@ -52,22 +46,21 @@ add_definitions(-DocpnUSE_GL)
 include_directories(include)
 
 set(SRC
-  src/folder.xpm
-  src/iacfile.cpp
-  src/iacfile.h
-  src/iacfleet.cpp
-  src/iacfleet.h
-  src/iacfleet_pi.cpp
-  src/iacfleet_pi.h
-  src/TexFont.h
-  src/TexFont.cpp
-)
+    src/folder.xpm
+    src/iacfile.cpp
+    src/iacfile.h
+    src/iacfleet.cpp
+    src/iacfleet.h
+    src/iacfleet_pi.cpp
+    src/iacfleet_pi.h
+    src/TexFont.h
+    src/TexFont.cpp)
 
-set(PKG_API_LIB api-18)  #  A dir in opencpn-libs/ e. g., api-17 or api-16
+set(PKG_API_LIB api-18) # A dir in opencpn-libs/ e. g., api-17 or api-16
 
 macro(late_init)
-  # Perform initialization after the PACKAGE_NAME library, compilers
-  # and ocpn::api is available.
+  # Perform initialization after the PACKAGE_NAME library, compilers and
+  # ocpn::api is available.
 endmacro()
 
 macro(add_plugin_libraries)
