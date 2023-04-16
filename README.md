@@ -1,7 +1,8 @@
 IAC Fleetcode plugin Plugin for OpenCPN
 =======================================
 
-[![Coverity scan](https://scan.coverity.com/projects/4964/badge.svg)](https://scan.coverity.com/projects/nohal-iacfleet_pi)
+[![Hosted By: Cloudsmith](https://img.shields.io/badge/OSS%20hosting%20by-cloudsmith-blue?logo=cloudsmith&style=flat-square)](https://cloudsmith.com)
+[![Coverity Scan Build Status](https://scan.coverity.com/projects/4964/badge.svg)](https://scan.coverity.com/projects/nohal-iacfleet_pi)
 
 Compiling
 =========
