@@ -45,14 +45,7 @@ add_definitions(-DIACFLEET_USE_SVG)
 add_definitions(-DocpnUSE_GL)
 include_directories(include)
 
-set(SRC
-    src/folder.xpm
-    src/iacfile.cpp
-    src/iacfile.h
-    src/iacfleet.cpp
-    src/iacfleet.h
-    src/iacfleet_pi.cpp
-    src/iacfleet_pi.h)
+set(SRC src/iacfile.cpp src/iacfleet.cpp src/iacfleet_pi.cpp)
 
 set(PKG_API_LIB api-18) # A dir in opencpn-libs/ e. g., api-17 or api-16
 
