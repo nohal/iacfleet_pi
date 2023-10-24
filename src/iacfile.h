@@ -34,6 +34,7 @@
 #include "wx/wx.h"
 #endif // precompiled headers
 
+#include "pidc.h"
 #include <wx/dynarray.h>
 #include <wx/gdicmn.h>
 #include <wx/object.h>
@@ -42,24 +43,6 @@
 
 #include "TexFont.h"
 #include "ocpn_plugin.h"
-#ifdef ocpnUSE_GL
-#ifdef __WXMSW__
-#include <GL/glu.h>
-
-#include "GL/gl.h" // local copy for Windows
-#else
-
-#ifndef __OCPN__ANDROID__
-#include <GL/gl.h>
-#include <GL/glu.h>
-#else
-#include <qopengl.h>
-
-#include "gl_private.h"
-#endif
-
-#endif
-#endif
 
 #include <algorithm>
 #include <vector>
