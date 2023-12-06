@@ -101,7 +101,7 @@ public:
     // void SetMovement(unsigned int m, unsigned int d, unsigned int s);
     virtual wxString ToString(bool includePosition = true) const;
     virtual bool Draw(
-        wxDC* dc, PlugIn_ViewPort* vp, TexFont& numfont, TexFont& sysfont);
+        wxDC* dc, PlugIn_ViewPort* vp, TexFontPI& numfont, TexFontPI& sysfont);
     wxString GetTab(const wxChar*(tab[]), size_t index) const;
     wxString PositionsToString() const;
     bool DrawPositions(wxDC* dc, PlugIn_ViewPort* vp);
@@ -143,14 +143,14 @@ private:
     wxString GetCharacteristic(size_t index) const;
     wxString GetIntensity() const;
     bool Draw(
-        wxDC* dc, PlugIn_ViewPort* vp, TexFont& numfont, TexFont& sysfont);
+        wxDC* dc, PlugIn_ViewPort* vp, TexFontPI& numfont, TexFontPI& sysfont);
 };
 
 class IACIsobarSystem : public IACSystem {
 public:
     wxString ToString(bool includePosition = true) const;
     bool Draw(
-        wxDC* dc, PlugIn_ViewPort* vp, TexFont& numfont, TexFont& sysfont);
+        wxDC* dc, PlugIn_ViewPort* vp, TexFontPI& numfont, TexFontPI& sysfont);
 };
 
 class IACTropicalSystem : public IACSystem {
@@ -162,7 +162,7 @@ private:
     wxString GetCharacteristic(size_t index) const;
     wxString GetValue() const;
     bool Draw(
-        wxDC* dc, PlugIn_ViewPort* vp, TexFont& numfont, TexFont& sysfont);
+        wxDC* dc, PlugIn_ViewPort* vp, TexFontPI& numfont, TexFontPI& sysfont);
 };
 
 WX_DECLARE_OBJARRAY(IACSystem, IACSystems);
@@ -222,8 +222,8 @@ private:
     IACFrontalSystems m_frontal;
     IACIsobarSystems m_isobars;
     IACTropicalSystems m_tropical;
-    TexFont m_TexFontNumbers;
-    TexFont m_TexFontSystems;
+    TexFontPI m_TexFontNumbers;
+    TexFontPI m_TexFontSystems;
     double m_minlat;
     double m_maxlat;
     double m_minlone;

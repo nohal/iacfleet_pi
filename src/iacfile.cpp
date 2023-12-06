@@ -817,7 +817,7 @@ IACSystem::IACSystem()
 IACSystem::~IACSystem() { }
 
 bool IACSystem::Draw(
-    wxDC* dc, PlugIn_ViewPort* vp, TexFont& numfont, TexFont& sysfont)
+    wxDC* dc, PlugIn_ViewPort* vp, TexFontPI& numfont, TexFontPI& sysfont)
 {
     bool hasDrawn = false;
     if (dc) {
@@ -1116,7 +1116,7 @@ wxString IACFrontalSystem::GetIntensity() const
 }
 
 bool IACFrontalSystem::Draw(
-    wxDC* dc, PlugIn_ViewPort* vp, TexFont& numfont, TexFont& sysfont)
+    wxDC* dc, PlugIn_ViewPort* vp, TexFontPI& numfont, TexFontPI& sysfont)
 {
     bool hasDrawn = false;
     wxColour colour;
@@ -1193,7 +1193,7 @@ wxString IACTropicalSystem::GetValue() const
 }
 
 bool IACTropicalSystem::Draw(
-    wxDC* dc, PlugIn_ViewPort* vp, TexFont& numfont, TexFont& sysfont)
+    wxDC* dc, PlugIn_ViewPort* vp, TexFontPI& numfont, TexFontPI& sysfont)
 {
     bool hasDrawn = false;
     if (dc) {
@@ -1279,7 +1279,7 @@ wxString IACIsobarSystem::ToString(bool includePosition) const
 }
 
 bool IACIsobarSystem::Draw(
-    wxDC* dc, PlugIn_ViewPort* vp, TexFont& numfont, TexFont& sysfont)
+    wxDC* dc, PlugIn_ViewPort* vp, TexFontPI& numfont, TexFontPI& sysfont)
 {
     bool hasDrawn = false;
     // draw isobar text at a random position of the isoline to prevent
