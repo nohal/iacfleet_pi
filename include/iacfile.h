@@ -164,13 +164,6 @@ private:
     bool Draw(
         wxDC* dc, PlugIn_ViewPort* vp, TexFontPI& numfont, TexFontPI& sysfont);
 };
-
-WX_DECLARE_OBJARRAY(IACSystem, IACSystems);
-WX_DECLARE_OBJARRAY(IACPressureSystem, IACPressureSystems);
-WX_DECLARE_OBJARRAY(IACFrontalSystem, IACFrontalSystems);
-WX_DECLARE_OBJARRAY(IACIsobarSystem, IACIsobarSystems);
-WX_DECLARE_OBJARRAY(IACTropicalSystem, IACTropicalSystems);
-
 class IACFile {
 public:
     IACFile();
@@ -194,7 +187,8 @@ public:
     IACSystem* FindSystem(GeoPoint& pos, double deviation);
 
 private:
-    IACSystem* FindSystem(IACSystems& systems, GeoPoint& pos, double deviation);
+    IACSystem* FindSystem(
+        std::vector<IACSystem*>& systems, GeoPoint& pos, double deviation);
     wxString ReadToken(wxInputStream& file);
     wxString tokenFind(const wxChar* match = wxT("?????"), bool skip = false);
     void PushbackToken();
@@ -210,7 +204,8 @@ private:
     bool ParseIsobarSection();
     bool ParseTropicalSection();
     GeoPoint ParsePosition();
-    bool DrawSystems(wxDC* dc, PlugIn_ViewPort* vp, IACSystems& iacsystem);
+    bool DrawSystems(
+        wxDC* dc, PlugIn_ViewPort* vp, std::vector<IACSystem*>& iacsystem);
 
     bool m_isok;
     wxArrayString m_tokens;
@@ -218,10 +213,10 @@ private:
     wxString m_filename;
     wxString m_RawData;
     wxString m_issueDate;
-    IACPressureSystems m_pressure;
-    IACFrontalSystems m_frontal;
-    IACIsobarSystems m_isobars;
-    IACTropicalSystems m_tropical;
+    std::vector<IACSystem*> m_pressure;
+    std::vector<IACSystem*> m_frontal;
+    std::vector<IACSystem*> m_isobars;
+    std::vector<IACSystem*> m_tropical;
     TexFontPI m_TexFontNumbers;
     TexFontPI m_TexFontSystems;
     double m_minlat;

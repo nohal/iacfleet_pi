@@ -36,11 +36,6 @@
 
 #include "iacfile.h"
 
-WX_DEFINE_OBJARRAY(IACSystems);
-WX_DEFINE_OBJARRAY(IACPressureSystems);
-WX_DEFINE_OBJARRAY(IACFrontalSystems);
-WX_DEFINE_OBJARRAY(IACIsobarSystems);
-WX_DEFINE_OBJARRAY(IACTropicalSystems);
 WX_DEFINE_OBJARRAY(GeoPoints);
 
 // Is the given point in the vp ??
@@ -75,10 +70,22 @@ void IACFile::Invalidate()
     m_tokensI = 0;
     m_isok = false;
     m_RawData.Clear();
-    m_pressure.Clear();
-    m_frontal.Clear();
-    m_isobars.Clear();
-    m_tropical.Clear();
+    for (size_t i = 0; i < m_pressure.size(); i++) {
+        delete m_pressure[i];
+    }
+    m_pressure.clear();
+    for (size_t i = 0; i < m_frontal.size(); i++) {
+        delete m_frontal[i];
+    }
+    m_frontal.clear();
+    for (size_t i = 0; i < m_isobars.size(); i++) {
+        delete m_isobars[i];
+    }
+    m_isobars.clear();
+    for (size_t i = 0; i < m_tropical.size(); i++) {
+        delete m_tropical[i];
+    }
+    m_tropical.clear();
 
     m_minlat = 999.9;
     m_maxlat = -999.9;
@@ -144,24 +151,24 @@ wxString IACFile::ToString()
     // Pressure Systems
     t.Append(_("\n\nPressure systems:"));
     t.Append(wxT("\n================="));
-    for (i = 0; i < m_pressure.Count(); i++) {
-        t.Append(wxT("\n\n") + m_pressure[i].ToString());
+    for (i = 0; i < m_pressure.size(); i++) {
+        t.Append(wxT("\n\n") + m_pressure[i]->ToString());
     }
     t.Append(_("\n\nFrontal systems:"));
     t.Append(wxT("\n================"));
-    for (i = 0; i < m_frontal.Count(); i++) {
-        t.Append(wxT("\n\n") + m_frontal[i].ToString());
+    for (i = 0; i < m_frontal.size(); i++) {
+        t.Append(wxT("\n\n") + m_frontal[i]->ToString());
     }
     t.Append(_("\n\nTropical systems:"));
     t.Append(wxT("\n================="));
-    for (i = 0; i < m_tropical.Count(); i++) {
-        t.Append(wxT("\n\n") + m_tropical[i].ToString());
+    for (i = 0; i < m_tropical.size(); i++) {
+        t.Append(wxT("\n\n") + m_tropical[i]->ToString());
     }
 
     t.Append(_("\n\nIsobars:"));
     t.Append(wxT("\n================="));
-    for (i = 0; i < m_isobars.Count(); i++) {
-        t.Append(wxT("\n\n") + m_isobars[i].ToString());
+    for (i = 0; i < m_isobars.size(); i++) {
+        t.Append(wxT("\n\n") + m_isobars[i]->ToString());
     }
     return t;
 }
@@ -380,26 +387,26 @@ bool IACFile::ParsePressureSection()
             //            m_newlineTokens.end(), m_tokensI) ==
             //            m_newlineTokens.end() )
             //                wxMessageBox(_T("FP: ") + token);
-            IACPressureSystem sys;
-            sys.m_type = TokenNumber(token, 1, 1);
-            sys.m_char = TokenNumber(token, 2, 1);
-            sys.m_val = TokenNumber(token, 3, 2);
-            sys.m_int = -1;
+            IACPressureSystem* sys = new IACPressureSystem();
+            sys->m_type = TokenNumber(token, 1, 1);
+            sys->m_char = TokenNumber(token, 2, 1);
+            sys->m_val = TokenNumber(token, 3, 2);
+            sys->m_int = -1;
             // guess pressure offset
-            if (sys.m_type == 1 && sys.m_val > 30) {
-                sys.m_val += 900;
-            } else if (sys.m_type == 5 && sys.m_val < 70) {
-                sys.m_val += 1000;
-            } else if (sys.m_val > 50) {
-                sys.m_val += 900;
+            if (sys->m_type == 1 && sys->m_val > 30) {
+                sys->m_val += 900;
+            } else if (sys->m_type == 5 && sys->m_val < 70) {
+                sys->m_val += 1000;
+            } else if (sys->m_val > 50) {
+                sys->m_val += 900;
             } else {
-                sys.m_val += 1000;
+                sys->m_val += 1000;
             }
 
-            ParsePositions(sys, SECTION_PRESSURE);
+            ParsePositions(*sys, SECTION_PRESSURE);
             if (!m_tokens[m_tokensI].StartsWith(_T("8")))
-                ParseMovement(sys);
-            m_pressure.Add(sys);
+                ParseMovement(*sys);
+            m_pressure.push_back(sys);
         } else {
             PushbackToken();
             break;
@@ -415,15 +422,15 @@ bool IACFile::ParseFrontalSection()
         token = tokenFind(_T("66???"));
         if (!token.IsEmpty()) {
             // parse pressure system token
-            IACFrontalSystem sys;
-            sys.m_type = TokenNumber(token, 2, 1);
-            sys.m_val = -1;
-            sys.m_int = TokenNumber(token, 3, 1);
-            sys.m_char = TokenNumber(token, 4, 1);
+            IACFrontalSystem* sys = new IACFrontalSystem();
+            sys->m_type = TokenNumber(token, 2, 1);
+            sys->m_val = -1;
+            sys->m_int = TokenNumber(token, 3, 1);
+            sys->m_char = TokenNumber(token, 4, 1);
 
-            ParsePositions(sys, SECTION_FRONTAL);
-            ParseMovement(sys);
-            m_frontal.Add(sys);
+            ParsePositions(*sys, SECTION_FRONTAL);
+            ParseMovement(*sys);
+            m_frontal.push_back(sys);
         } else {
             // no more frontal systems.
             PushbackToken();
@@ -439,15 +446,15 @@ bool IACFile::ParseIsobarSection()
     for (;;) {
         token = tokenFind(_T("44???"));
         if (!token.IsEmpty()) {
-            IACIsobarSystem sys;
-            sys.m_val = TokenNumber(token, 2, 3);
-            if (sys.m_val < 500) {
-                sys.m_val += 1000;
+            IACIsobarSystem* sys = new IACIsobarSystem();
+            sys->m_val = TokenNumber(token, 2, 3);
+            if (sys->m_val < 500) {
+                sys->m_val += 1000;
             }
 
             // Position
-            ParsePositions(sys, SECTION_ISOBAR);
-            m_isobars.Add(sys);
+            ParsePositions(*sys, SECTION_ISOBAR);
+            m_isobars.push_back(sys);
         } else {
             // no more frontal systems.
             PushbackToken();
@@ -464,10 +471,10 @@ bool IACFile::ParseTropicalSection()
         token = tokenFind(_T("55???"));
         if (!token.IsEmpty()) {
             // parse pressure system token
-            IACTropicalSystem sys;
-            sys.m_type = TokenNumber(token, 2, 1);
-            sys.m_int = TokenNumber(token, 3, 1);
-            sys.m_char = TokenNumber(token, 4, 1);
+            IACTropicalSystem* sys = new IACTropicalSystem();
+            sys->m_type = TokenNumber(token, 2, 1);
+            sys->m_int = TokenNumber(token, 3, 1);
+            sys->m_char = TokenNumber(token, 4, 1);
 
             // tropical system token MAY be followed by 555PP pressure token
             // in this case it is a tropical LOW or cyclone
@@ -476,17 +483,17 @@ bool IACFile::ParseTropicalSection()
                 // no, push back token - it is a position
                 PushbackToken();
             } else {
-                sys.m_val = TokenNumber(token, 3, 2);
+                sys->m_val = TokenNumber(token, 3, 2);
                 // guess pressure offset
-                if (sys.m_val > 50) {
-                    sys.m_val += 900;
+                if (sys->m_val > 50) {
+                    sys->m_val += 900;
                 } else {
-                    sys.m_val += 1000;
+                    sys->m_val += 1000;
                 }
             }
-            ParsePositions(sys, SECTION_TROPICAL);
-            ParseMovement(sys);
-            m_tropical.Add(sys);
+            ParsePositions(*sys, SECTION_TROPICAL);
+            ParseMovement(*sys);
+            m_tropical.push_back(sys);
         } else {
             PushbackToken();
             break;
@@ -640,20 +647,21 @@ bool IACFile::Draw(wxDC* dc, PlugIn_ViewPort* vp)
         // I love this kind of crazy code - it is like in the good
         // old days of programming where everything was allowed.
         srand(77);
-        retval |= DrawSystems(dc, vp, (IACSystems&)m_pressure);
-        retval |= DrawSystems(dc, vp, (IACSystems&)m_frontal);
-        retval |= DrawSystems(dc, vp, (IACSystems&)m_isobars);
-        retval |= DrawSystems(dc, vp, (IACSystems&)m_tropical);
+        retval |= DrawSystems(dc, vp, m_pressure);
+        retval |= DrawSystems(dc, vp, m_frontal);
+        retval |= DrawSystems(dc, vp, m_isobars);
+        retval |= DrawSystems(dc, vp, m_tropical);
     }
     return retval;
 }
 
-bool IACFile::DrawSystems(wxDC* dc, PlugIn_ViewPort* vp, IACSystems& iacsystem)
+bool IACFile::DrawSystems(
+    wxDC* dc, PlugIn_ViewPort* vp, std::vector<IACSystem*>& iacsystem)
 {
     bool retval = false;
     // loop over all systems
-    for (size_t Index = 0; Index < iacsystem.GetCount(); Index++) {
-        retval |= iacsystem[Index].Draw(
+    for (size_t Index = 0; Index < iacsystem.size(); Index++) {
+        retval |= iacsystem[Index]->Draw(
             dc, vp, m_TexFontNumbers, m_TexFontSystems);
     }
     return retval;
@@ -662,24 +670,24 @@ bool IACFile::DrawSystems(wxDC* dc, PlugIn_ViewPort* vp, IACSystems& iacsystem)
 IACSystem* IACFile::FindSystem(GeoPoint& pos, double deviation)
 {
     IACSystem* pIACSystem = NULL;
-    pIACSystem = FindSystem((IACSystems&)m_pressure, pos, deviation);
+    pIACSystem = FindSystem(m_pressure, pos, deviation);
     if (NULL == pIACSystem) {
-        pIACSystem = FindSystem((IACSystems&)m_frontal, pos, deviation);
+        pIACSystem = FindSystem(m_frontal, pos, deviation);
         if (NULL == pIACSystem) {
-            pIACSystem = FindSystem((IACSystems&)m_tropical, pos, deviation);
+            pIACSystem = FindSystem(m_tropical, pos, deviation);
         }
     }
     return pIACSystem;
 }
 
 IACSystem* IACFile::FindSystem(
-    IACSystems& systems, GeoPoint& pos, double deviation)
+    std::vector<IACSystem*>& systems, GeoPoint& pos, double deviation)
 {
     IACSystem* pSystem = NULL;
-    for (size_t i = systems.GetCount(); i != 0; i--) {
-        if (systems[i - 1].FindAtPos(pos, deviation)) {
+    for (size_t i = systems.size(); i != 0; i--) {
+        if (systems[i - 1]->FindAtPos(pos, deviation)) {
             // found system
-            pSystem = &(systems[i - 1]);
+            pSystem = systems[i - 1];
         }
     }
     return pSystem;
