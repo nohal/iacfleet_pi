@@ -979,7 +979,7 @@ wxString IACSystem::GetTab(const wxChar*(tab[10]), size_t index) const
 
 wxString IACSystem::GetMovement() const
 {
-    static const wxChar*(tab[]) = { wxT("-"), _("stationary"),
+    static const wxChar* tab[] = { wxT("-"), _("stationary"),
         _("little change"), _("stopping"), _("retarding"), _("curving to left"),
         _("recurving"), _("accelerating"), _("curving to right"),
         _("expected to recurve") };
@@ -1068,7 +1068,7 @@ wxString IACPressureSystem::GetValue() const
 
 wxString IACPressureSystem::GetType(size_t index) const
 {
-    static const wxChar*(tab[]) = { _("Complex Low"), _("Low"),
+    static const wxChar* tab[] = { _("Complex Low"), _("Low"),
         _("Secondary Low"), _("Trough"), _("Wave"), _("High"),
         _("Uniform pressure"), _("Ridge"), _("Col"), _("Tropical Storm") };
     return (wxString(tab[index]));
@@ -1076,14 +1076,14 @@ wxString IACPressureSystem::GetType(size_t index) const
 
 wxString IACPressureSystem::GetShortType(size_t index) const
 {
-    static const wxChar*(tab[]) = { wxT("L"), wxT("L"), wxT("L"), wxT("T"),
+    static const wxChar* tab[] = { wxT("L"), wxT("L"), wxT("L"), wxT("T"),
         wxT("W"), wxT("H"), wxT("U"), wxT("R"), wxT("C"), wxT("TS") };
     return (wxString(tab[index]));
 }
 
 wxString IACPressureSystem::GetCharacteristic(size_t index) const
 {
-    static const wxChar*(tab[]) = { wxEmptyString, _("weakening"),
+    static const wxChar* tab[] = { wxEmptyString, _("weakening"),
         _("little change"), _("intensifying"), _("complex"), _("forming"),
         _("weakening but not disappearing"), _("general rise"),
         _("general fall"), _("position doubtful") };
@@ -1092,7 +1092,7 @@ wxString IACPressureSystem::GetCharacteristic(size_t index) const
 
 wxString IACFrontalSystem::GetType(size_t index) const
 {
-    static const wxChar*(tab[])
+    static const wxChar* tab[]
         = { _("Quasistationary at surface"), _("Quasistationary above surface"),
               _("Warm surface"), _("Warm above surface"), _("Cold surface"),
               _("Cold above surface"), _("Occlusion"), _("Instability line"),
@@ -1102,7 +1102,7 @@ wxString IACFrontalSystem::GetType(size_t index) const
 
 wxString IACFrontalSystem::GetCharacteristic(size_t index) const
 {
-    static const wxChar*(tab[]) = { wxEmptyString, _("frontal area decreasing"),
+    static const wxChar* tab[] = { wxEmptyString, _("frontal area decreasing"),
         _("little change"), _("frontal area increasing"), _("intertropical"),
         _("forming"), _("quasistationary"), _("with waves"), _("diffuse"),
         _("strong, increasing") };
@@ -1111,7 +1111,7 @@ wxString IACFrontalSystem::GetCharacteristic(size_t index) const
 
 wxString IACFrontalSystem::GetIntensity() const
 {
-    static const wxChar*(tab[]) = { wxEmptyString, _("weak, decreasing"),
+    static const wxChar* tab[] = { wxEmptyString, _("weak, decreasing"),
         _("weak, no change"), _("weak, increasing"), _("moderate, decreasing"),
         _("moderate, no change"), _("moderate, increasing"),
         _("strong, decreasing"), _("strong, no change"),
@@ -1152,7 +1152,7 @@ bool IACFrontalSystem::Draw(
 
 wxString IACTropicalSystem::GetType(size_t index) const
 {
-    static const wxChar*(tab[]) = { _("Intertropical convergence zone"),
+    static const wxChar* tab[] = { _("Intertropical convergence zone"),
         _("Shear line"), _("Line or Zone of convergence"),
         _("Axis of doldrum belt"), _("Through in westerlies"),
         _("Through in easterlies"), _("LOW area"), _("Surge line"),
@@ -1162,14 +1162,14 @@ wxString IACTropicalSystem::GetType(size_t index) const
 
 wxString IACTropicalSystem::GetShortType(size_t index) const
 {
-    static const wxChar*(tab[]) = { _T("ICZ"), _T("SL"), _T("LC"), _T("ADB"),
+    static const wxChar* tab[] = { _T("ICZ"), _T("SL"), _T("LC"), _T("ADB"),
         _T("TW"), _T("TE"), _T("TL"), _T("SU"), _T("LD"), _T("TC") };
     return (wxString(tab[index]));
 }
 
 wxString IACTropicalSystem::GetCharacteristic(size_t index) const
 {
-    static const wxChar*(tab[]) = { wxEmptyString, _("diffuse"),
+    static const wxChar* tab[] = { wxEmptyString, _("diffuse"),
         _("sharply defines"), _("quasistationary"), _("existance certain"),
         _("existance uncertain"), _("formation expected"),
         _("position certain"), _("position uncertain"),
@@ -1179,7 +1179,7 @@ wxString IACTropicalSystem::GetCharacteristic(size_t index) const
 
 wxString IACTropicalSystem::GetIntensity() const
 {
-    static const wxChar*(tab[]) = { wxT("-"), _("weak, decreasing"),
+    static const wxChar* tab[] = { wxT("-"), _("weak, decreasing"),
         _("weak, no change"), _("weak, increasing"), _("moderate, decreasing"),
         _("moderate, no change"), _("moderate, increasing"),
         _("strong, decreasing"), _("strong, no change"),
