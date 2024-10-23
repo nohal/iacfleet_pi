@@ -924,7 +924,7 @@ bool IACSystem::DrawPositions(wxDC* dc, PlugIn_ViewPort* vp)
     bool hasDrawn = false;
     if (dc) {
         for (size_t pointIndex = 0; pointIndex < m_positions.GetCount() - 1;
-             pointIndex++) {
+            pointIndex++) {
             GeoPoint& startP = m_positions[pointIndex];
             GeoPoint& endP = m_positions[pointIndex + 1];
             if (PointInLLBox(vp, startP.x, startP.y)
@@ -951,7 +951,7 @@ bool IACSystem::DrawPositions(wxDC* dc, PlugIn_ViewPort* vp)
         wxPoint startpl;
         wxPoint endpl;
         for (size_t pointIndex = 0; pointIndex < m_positions.GetCount() - 1;
-             pointIndex++) {
+            pointIndex++) {
             GeoPoint& startP = m_positions[pointIndex];
             GeoPoint& endP = m_positions[pointIndex + 1];
             if (PointInLLBox(vp, startP.x, startP.y)
