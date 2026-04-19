@@ -3,17 +3,17 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 09:12-0300\n"
-"PO-Revision-Date: 2023-10-04 18:33\n"
+"PO-Revision-Date: 2025-01-28 18:02\n"
 "Last-Translator: \n"
-"Language-Team: Galician\n"
-"Language: gl_ES\n"
+"Language-Team: Icelandic\n"
+"Language: is_IS\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: opencpn\n"
 "X-Crowdin-Project-ID: 49843\n"
-"X-Crowdin-Language: gl\n"
+"X-Crowdin-Language: is\n"
 "X-Crowdin-File: /plugins/iacfleet_pi/po/iacfleet_pi.pot\n"
 "X-Crowdin-File-ID: 167\n"
 
@@ -39,11 +39,11 @@ msgstr ""
 
 #: src/iacfile.cpp:216
 msgid "Day "
-msgstr ""
+msgstr "Dagur "
 
 #: src/iacfile.cpp:217
 msgid " Hour "
-msgstr ""
+msgstr " Tími "
 
 #: src/iacfile.cpp:1112
 msgid "stationary"
@@ -224,7 +224,7 @@ msgstr ""
 
 #: src/iacfile.cpp:1269
 msgid "with waves"
-msgstr ""
+msgstr "með öldum"
 
 #: src/iacfile.cpp:1269 src/iacfile.cpp:1348
 msgid "diffuse"
@@ -345,7 +345,7 @@ msgstr ""
 
 #: src/iacfleet_pi.cpp:163
 msgid "IACFleet PlugIn for OpenCPN"
-msgstr ""
+msgstr "IACFleet viðbót fyrir OpenCPN"
 
 #: src/iacfleet_pi.cpp:169
 msgid "IACFleet PlugIn for OpenCPN\n"
@@ -382,7 +382,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:287
 msgid "Files"
-msgstr ""
+msgstr "Skrár"
 
 #: src/iacfleet.cpp:295
 msgid "Sort by"
@@ -398,7 +398,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:323
 msgid "Text"
-msgstr ""
+msgstr "Texti"
 
 #: src/iacfleet.cpp:338
 msgid "Raw"
@@ -410,7 +410,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:361
 msgid "Brazil"
-msgstr ""
+msgstr "Brasilía"
 
 #: src/iacfleet.cpp:366
 msgid "Final date"
@@ -418,7 +418,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:374
 msgid "Hour"
-msgstr ""
+msgstr "Tími"
 
 #: src/iacfleet.cpp:378
 msgid "00"
@@ -430,7 +430,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:386 src/iacfleet.cpp:394 src/iacfleet.cpp:433
 msgid "Download"
-msgstr ""
+msgstr "Sækja"
 
 #: src/iacfleet.cpp:401
 msgid "dataset(s)"
@@ -454,7 +454,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:427
 msgid "24h forecast"
-msgstr ""
+msgstr "24t spá"
 
 #: src/iacfleet.cpp:443
 msgid "South Pacific (from Fiji Meteorological Service, Nadi)"
@@ -474,7 +474,7 @@ msgstr ""
 
 #: src/iacfleet.cpp:481
 msgid "&Close"
-msgstr ""
+msgstr "&Loka"
 
 #: src/iacfleet.cpp:631
 #, c-format

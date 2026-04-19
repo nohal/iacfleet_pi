@@ -3,349 +3,353 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-05 09:12-0300\n"
-"PO-Revision-Date: 2023-10-04 18:33\n"
+"PO-Revision-Date: 2025-06-02 10:04\n"
 "Last-Translator: \n"
-"Language-Team: Galician\n"
-"Language: gl_ES\n"
+"Language-Team: Filipino\n"
+"Language: fil_PH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Crowdin-Project: opencpn\n"
 "X-Crowdin-Project-ID: 49843\n"
-"X-Crowdin-Language: gl\n"
+"X-Crowdin-Language: fil\n"
 "X-Crowdin-File: /plugins/iacfleet_pi/po/iacfleet_pi.pot\n"
 "X-Crowdin-File-ID: 167\n"
 
 #: src/iacfile.cpp:157
 msgid "\n\n"
 "Pressure systems:"
-msgstr ""
+msgstr "\n\n"
+"Mga sistema ng presyon:"
 
 #: src/iacfile.cpp:163
 msgid "\n\n"
 "Frontal systems:"
-msgstr ""
+msgstr "\n\n"
+"Mga sistema ng pangharap:"
 
 #: src/iacfile.cpp:169
 msgid "\n\n"
 "Tropical systems:"
-msgstr ""
+msgstr "\n\n"
+"Mga sistema ng pangtropiko:"
 
 #: src/iacfile.cpp:176
 msgid "\n\n"
 "Isobars:"
-msgstr ""
+msgstr "\n\n"
+"Isobar:"
 
 #: src/iacfile.cpp:216
 msgid "Day "
-msgstr ""
+msgstr "Araw "
 
 #: src/iacfile.cpp:217
 msgid " Hour "
-msgstr ""
+msgstr " Oras "
 
 #: src/iacfile.cpp:1112
 msgid "stationary"
-msgstr ""
+msgstr "nakatigil"
 
 #: src/iacfile.cpp:1112 src/iacfile.cpp:1244 src/iacfile.cpp:1267
 msgid "little change"
-msgstr ""
+msgstr "maliit na pagbabago"
 
 #: src/iacfile.cpp:1112
 msgid "stopping"
-msgstr ""
+msgstr "pagtigil"
 
 #: src/iacfile.cpp:1112
 msgid "retarding"
-msgstr ""
+msgstr "tagalan"
 
 #: src/iacfile.cpp:1113
 msgid "curving to left"
-msgstr ""
+msgstr "paliko sa kaliwa"
 
 #: src/iacfile.cpp:1113
 msgid "recurving"
-msgstr ""
+msgstr "palikong muli"
 
 #: src/iacfile.cpp:1113
 msgid "accelerating"
-msgstr ""
+msgstr "pagpatulin"
 
 #: src/iacfile.cpp:1114
 msgid "curving to right"
-msgstr ""
+msgstr "paliko sa kanan"
 
 #: src/iacfile.cpp:1114
 msgid "expected to recurve"
-msgstr ""
+msgstr "inaasahang lilikong muli"
 
 #: src/iacfile.cpp:1120
 msgid "Movement: "
-msgstr ""
+msgstr "Paggalaw: "
 
 #: src/iacfile.cpp:1128
 msgid "with unknown speed"
-msgstr ""
+msgstr "na may hindi batid na bilis"
 
 #: src/iacfile.cpp:1132
 #, c-format
 msgid "with %uknots"
-msgstr ""
+msgstr "na %uknot"
 
 #: src/iacfile.cpp:1224
 msgid "Complex Low"
-msgstr ""
+msgstr "Kumplikadong mababa"
 
 #: src/iacfile.cpp:1224
 msgid "Low"
-msgstr ""
+msgstr "Mababa"
 
 #: src/iacfile.cpp:1224
 msgid "Secondary Low"
-msgstr ""
+msgstr "Pangalawang mababa"
 
 #: src/iacfile.cpp:1224
 msgid "Trough"
-msgstr ""
+msgstr "Sabsaban"
 
 #: src/iacfile.cpp:1224
 msgid "Wave"
-msgstr ""
+msgstr "Alon"
 
 #: src/iacfile.cpp:1225
 msgid "High"
-msgstr ""
+msgstr "Mataas"
 
 #: src/iacfile.cpp:1225
 msgid "Uniform pressure"
-msgstr ""
+msgstr "Magkakatulod na presyon"
 
 #: src/iacfile.cpp:1225
 msgid "Ridge"
-msgstr ""
+msgstr "Gulod"
 
 #: src/iacfile.cpp:1225
 msgid "Col"
-msgstr ""
+msgstr "Kol"
 
 #: src/iacfile.cpp:1225
 msgid "Tropical Storm"
-msgstr ""
+msgstr "Tropikong Bagyo"
 
 #: src/iacfile.cpp:1244
 msgid "weakening"
-msgstr ""
+msgstr "nagpapahina"
 
 #: src/iacfile.cpp:1244
 msgid "intensifying"
-msgstr ""
+msgstr "pagpapalala"
 
 #: src/iacfile.cpp:1244
 msgid "complex"
-msgstr ""
+msgstr "magulo"
 
 #: src/iacfile.cpp:1245 src/iacfile.cpp:1268
 msgid "forming"
-msgstr ""
+msgstr "pagbabalangkas"
 
 #: src/iacfile.cpp:1245
 msgid "weakening but not disappearing"
-msgstr ""
+msgstr "nagpapahina ngunit hindi nagpapalaho"
 
 #: src/iacfile.cpp:1245
 msgid "general rise"
-msgstr ""
+msgstr "pangkalahatang pagtaas"
 
 #: src/iacfile.cpp:1246
 msgid "general fall"
-msgstr ""
+msgstr "pangkalahatang pagbaba"
 
 #: src/iacfile.cpp:1246
 msgid "position doubtful"
-msgstr ""
+msgstr "duda sa posisyon"
 
 #: src/iacfile.cpp:1255
 msgid "Quasistationary at surface"
-msgstr ""
+msgstr "Parang nakatigil sa karayagan"
 
 #: src/iacfile.cpp:1255
 msgid "Quasistationary above surface"
-msgstr ""
+msgstr "Parang nakatigil sa itaas na karayagan"
 
 #: src/iacfile.cpp:1256
 msgid "Warm surface"
-msgstr ""
+msgstr "Mainit na karayagan"
 
 #: src/iacfile.cpp:1256
 msgid "Warm above surface"
-msgstr ""
+msgstr "Mainit sa ibabaw na karayagan"
 
 #: src/iacfile.cpp:1257
 msgid "Cold surface"
-msgstr ""
+msgstr "Malamig na karayagan"
 
 #: src/iacfile.cpp:1257
 msgid "Cold above surface"
-msgstr ""
+msgstr "Malamig sa ibabaw na karayagan"
 
 #: src/iacfile.cpp:1257
 msgid "Occlusion"
-msgstr ""
+msgstr "Hadlang"
 
 #: src/iacfile.cpp:1258
 msgid "Instability line"
-msgstr ""
+msgstr "Linya ng karupukan"
 
 #: src/iacfile.cpp:1258
 msgid "Intertropical"
-msgstr ""
+msgstr "Intertropiko"
 
 #: src/iacfile.cpp:1258
 msgid "Convergence line"
-msgstr ""
+msgstr "Linya ng tagpo"
 
 #: src/iacfile.cpp:1267
 msgid "frontal area decreasing"
-msgstr ""
+msgstr "ang pangharap na lugar ay lumiliit"
 
 #: src/iacfile.cpp:1267
 msgid "frontal area increasing"
-msgstr ""
+msgstr "ang pangharap na lugar ay lumalaki"
 
 #: src/iacfile.cpp:1268
 msgid "intertropical"
-msgstr ""
+msgstr "intertropiko"
 
 #: src/iacfile.cpp:1268 src/iacfile.cpp:1348
 msgid "quasistationary"
-msgstr ""
+msgstr "parang nakatigil"
 
 #: src/iacfile.cpp:1269
 msgid "with waves"
-msgstr ""
+msgstr "kasama ang mga alon"
 
 #: src/iacfile.cpp:1269 src/iacfile.cpp:1348
 msgid "diffuse"
-msgstr ""
+msgstr "nagkakalat"
 
 #: src/iacfile.cpp:1269 src/iacfile.cpp:1281 src/iacfile.cpp:1361
 msgid "strong, increasing"
-msgstr ""
+msgstr "malalakas, lumalaki"
 
 #: src/iacfile.cpp:1279 src/iacfile.cpp:1359
 msgid "weak, decreasing"
-msgstr ""
+msgstr "mahihana, lumiliit"
 
 #: src/iacfile.cpp:1279 src/iacfile.cpp:1359
 msgid "weak, no change"
-msgstr ""
+msgstr "mahihina, walang pagbabago"
 
 #: src/iacfile.cpp:1279 src/iacfile.cpp:1359
 msgid "weak, increasing"
-msgstr ""
+msgstr "mahihina, lumalaki"
 
 #: src/iacfile.cpp:1280 src/iacfile.cpp:1360
 msgid "moderate, decreasing"
-msgstr ""
+msgstr "katamtaman, lumiliit"
 
 #: src/iacfile.cpp:1280 src/iacfile.cpp:1360
 msgid "moderate, no change"
-msgstr ""
+msgstr "katamtaman, walang pagbabago"
 
 #: src/iacfile.cpp:1280 src/iacfile.cpp:1360
 msgid "moderate, increasing"
-msgstr ""
+msgstr "katamtaman, lumalaki"
 
 #: src/iacfile.cpp:1281 src/iacfile.cpp:1361
 msgid "strong, decreasing"
-msgstr ""
+msgstr "malalakas, lumiliit"
 
 #: src/iacfile.cpp:1281 src/iacfile.cpp:1361
 msgid "strong, no change"
-msgstr ""
+msgstr "malalakas, walang pagbabago"
 
 #: src/iacfile.cpp:1326
 msgid "Intertropical convergence zone"
-msgstr ""
+msgstr "Sona ng tagpo ng intertropiko"
 
 #: src/iacfile.cpp:1326
 msgid "Shear line"
-msgstr ""
+msgstr "Paggugupit ng linya"
 
 #: src/iacfile.cpp:1327
 msgid "Line or Zone of convergence"
-msgstr ""
+msgstr "Linya o Sona ng tagpo"
 
 #: src/iacfile.cpp:1327
 msgid "Axis of doldrum belt"
-msgstr ""
+msgstr "Aksis ng sinturon na doldrum"
 
 #: src/iacfile.cpp:1328
 msgid "Through in westerlies"
-msgstr ""
+msgstr "Sa pamamagitan ng mga hanging pakanluran"
 
 #: src/iacfile.cpp:1328
 msgid "Through in easterlies"
-msgstr ""
+msgstr "Sa pamamagitan ng mga hanging pasilangan"
 
 #: src/iacfile.cpp:1328
 msgid "LOW area"
-msgstr ""
+msgstr "MABABANG lugar"
 
 #: src/iacfile.cpp:1329
 msgid "Surge line"
-msgstr ""
+msgstr "Linya ng daluyong"
 
 #: src/iacfile.cpp:1329
 msgid "Divergence zone"
-msgstr ""
+msgstr "Sona ng pagkakalayo"
 
 #: src/iacfile.cpp:1329
 msgid "Tropical cyclone"
-msgstr ""
+msgstr "Tropikal na bagyo"
 
 #: src/iacfile.cpp:1348
 msgid "sharply defines"
-msgstr ""
+msgstr "ganap na tumutukoy"
 
 #: src/iacfile.cpp:1349
 msgid "existance certain"
-msgstr ""
+msgstr "paglitaw na tiyak"
 
 #: src/iacfile.cpp:1349
 msgid "existance uncertain"
-msgstr ""
+msgstr "paglitaw na paglitaw"
 
 #: src/iacfile.cpp:1349
 msgid "formation expected"
-msgstr ""
+msgstr "inaasahang pamumuo"
 
 #: src/iacfile.cpp:1350
 msgid "position certain"
-msgstr ""
+msgstr "posisyong tiyak"
 
 #: src/iacfile.cpp:1350
 msgid "position uncertain"
-msgstr ""
+msgstr "posisyong hindi tiyak"
 
 #: src/iacfile.cpp:1350
 msgid "movement doubtful"
-msgstr ""
+msgstr "duda sa paggalaw"
 
 #: src/iacfile.cpp:1473
 #, c-format
 msgid "Isobar (%4uhPa):\n"
-msgstr ""
+msgstr "Isobar (naka-%4uhPa):\n"
 
 #: src/iacfleet_pi.cpp:107 src/iacfleet_pi.cpp:110 src/iacfleet_pi.cpp:158
 msgid "IACFleet"
-msgstr ""
+msgstr "IACFleet"
 
 #: src/iacfleet_pi.cpp:163
 msgid "IACFleet PlugIn for OpenCPN"
-msgstr ""
+msgstr "Plugin na IACFleet para sa OpenCPN"
 
 #: src/iacfleet_pi.cpp:169
 msgid "IACFleet PlugIn for OpenCPN\n"
@@ -354,71 +358,76 @@ msgid "IACFleet PlugIn for OpenCPN\n"
 "\"Send fleet.nadi\" to \"query@saildocs.com\"\n"
 "Save the EMail you get as response and open it with this\n"
 "Plugin to see the decoded text and a graphic overlay\n"
-msgstr ""
+msgstr "Plugin na IACFleet para sa OpenCPN\n"
+"Dini-displey ang impormasyon ng Kodigo ng Iskuwadra na IAC na ibinigay ng NADI.\n"
+"Ang impormasyon ay maaaring matanggap ng email sa pamamagitan ng pagpapadala ng email na mga nilalaman\n"
+"\" Ipadala ang fleet.nadi\" sa \"query@saildocs.com\"\n"
+"I-save ang EMail sa oras na makakuha ng tugon at buksan ito gamit itong\n"
+"Plugin upang makita ang na-decode na teksto at ang pangkalahatang-ideya ng grapiko\n"
 
 #: src/iacfleet_pi.cpp:179
 msgid "IACFleet Preferences"
-msgstr ""
+msgstr "Mga Preperensiya sa IACFleet"
 
 #: src/iacfleet_pi.cpp:207 src/iacfleet.h:81
 msgid "IACFleet Display Control"
-msgstr ""
+msgstr "Kontrol sa Displey ng IACFleet"
 
 #: src/iacfleet.cpp:193 src/iacfleet.cpp:486 src/iacfleet.cpp:544
 msgid "Run as &animation"
-msgstr ""
+msgstr "Paganahin bilang &animasyon"
 
 #: src/iacfleet.cpp:209
 msgid "Stop &animation"
-msgstr ""
+msgstr "Ihinto ang &animasyon"
 
 #: src/iacfleet.cpp:245
 msgid "Select IACFleet Directory"
-msgstr ""
+msgstr "Piliin ang Direktoryo ng IACFleet"
 
 #: src/iacfleet.cpp:267
 msgid "IACFleet File Directory"
-msgstr ""
+msgstr "Direktoryo ng Taklasan ng IACFleet"
 
 #: src/iacfleet.cpp:287
 msgid "Files"
-msgstr ""
+msgstr "Mga taklasan"
 
 #: src/iacfleet.cpp:295
 msgid "Sort by"
-msgstr ""
+msgstr "Isaayos sa pamamagitan ng"
 
 #: src/iacfleet.cpp:299
 msgid "Name"
-msgstr ""
+msgstr "Pangalan"
 
 #: src/iacfleet.cpp:302
 msgid "File timestamp"
-msgstr ""
+msgstr "Nakatatak na oras ng taklasan"
 
 #: src/iacfleet.cpp:323
 msgid "Text"
-msgstr ""
+msgstr "Teksto"
 
 #: src/iacfleet.cpp:338
 msgid "Raw"
-msgstr ""
+msgstr "Hilaw"
 
 #: src/iacfleet.cpp:354
 msgid "Downloads"
-msgstr ""
+msgstr "Mga na-download"
 
 #: src/iacfleet.cpp:361
 msgid "Brazil"
-msgstr ""
+msgstr "Brasil"
 
 #: src/iacfleet.cpp:366
 msgid "Final date"
-msgstr ""
+msgstr "Huling Petsa"
 
 #: src/iacfleet.cpp:374
 msgid "Hour"
-msgstr ""
+msgstr "Oras"
 
 #: src/iacfleet.cpp:378
 msgid "00"
@@ -430,15 +439,15 @@ msgstr ""
 
 #: src/iacfleet.cpp:386 src/iacfleet.cpp:394 src/iacfleet.cpp:433
 msgid "Download"
-msgstr ""
+msgstr "Mag-download"
 
 #: src/iacfleet.cpp:401
 msgid "dataset(s)"
-msgstr ""
+msgstr "(mga) pangkat ng datos"
 
 #: src/iacfleet.cpp:407
 msgid "The data is available since 2006 and accesible manually from"
-msgstr ""
+msgstr "Ang datos ay maaaring gamitin mula pa noong 2006 at maaaring ma-access ng manwal mula sa"
 
 #: src/iacfleet.cpp:411
 msgid "http://www.mar.mil.br/dhn/chm/meteo/prev/iac/iac.htm"
@@ -446,19 +455,19 @@ msgstr ""
 
 #: src/iacfleet.cpp:419
 msgid "NOAA North Atlantic and Europe"
-msgstr ""
+msgstr "NOAA Hilagang Atlantika at Europa"
 
 #: src/iacfleet.cpp:424
 msgid "Analysis"
-msgstr ""
+msgstr "Analisis"
 
 #: src/iacfleet.cpp:427
 msgid "24h forecast"
-msgstr ""
+msgstr "hula na 24 oras"
 
 #: src/iacfleet.cpp:443
 msgid "South Pacific (from Fiji Meteorological Service, Nadi)"
-msgstr ""
+msgstr "Timog Pasipiko (mula Serbisyong Meteorolohiko ng Fiji, Nadi)"
 
 #: src/iacfleet.cpp:445
 msgid "The dataset is available from Saildocs\n"
@@ -466,44 +475,49 @@ msgid "The dataset is available from Saildocs\n"
 "fleet.nadi\n"
 "and any subject to query@saildocs.com\n"
 "When you receive the response, copy and paste it to the Raw tab or save as text and open on the Files tab."
-msgstr ""
+msgstr "Ang pangkat ng datos ay makuha mula sa Saildocs\n"
+"Magpadala ng e-mail na may tekstong\n\n"
+"fleet.nadi\n"
+"na may anumang paksa sa query@saildocs.com\n"
+"Kapag nakatanggap ka ng tugon, kopyahin at i-paste sa ungos na Hilaw o i-save bilang teksto at buksan sa ungos ng mga Taklasan."
 
 #: src/iacfleet.cpp:464
 msgid "Issue Date: "
-msgstr ""
+msgstr "Petsa ng Paglathala: "
 
 #: src/iacfleet.cpp:481
 msgid "&Close"
-msgstr ""
+msgstr "&Isarado"
 
 #: src/iacfleet.cpp:631
 #, c-format
 msgid "Error opening: %s"
-msgstr ""
+msgstr "May pagkakamali sa pagbubukas: %s"
 
 #: src/iacfleet.cpp:668
 msgid "Sorry, you can't download data from the future - they don't exist..."
-msgstr ""
+msgstr "Paumanhin, hindi mo maaaring i-download ang mga datos na mula sa hinaharao - hindi si umiiral..."
 
 #: src/iacfleet.cpp:673
 msgid "Sorry, the data is not available before September 1, 2006..."
-msgstr ""
+msgstr "Paumanhin, ang datos ay wala pa bago ang ika-1 ng Septiyembre, 2006..."
 
 #: src/iacfleet.cpp:692 src/iacfleet.cpp:781
 msgid "Downloading file"
-msgstr ""
+msgstr "Dina-download na ang taklasan"
 
 #: src/iacfleet.cpp:693 src/iacfleet.cpp:782
 msgid "Reading Headers: "
-msgstr ""
+msgstr "Pamagat ng Binabasa: "
 
 #: src/iacfleet.cpp:707 src/iacfleet.cpp:795
 #, c-format
 msgid "Failed to save: %s "
-msgstr ""
+msgstr "Nabigo sa pag-save: %s "
 
 #: src/iacfleet.cpp:713 src/iacfleet.cpp:801
 #, c-format
 msgid "Failed to download: %s \n"
 "Verify there is a working Internet connection."
-msgstr ""
+msgstr "Nabigo sa pag-download: %s \n"
+"Alamin kung mayroong gumagana na koneksyon sa internet."
